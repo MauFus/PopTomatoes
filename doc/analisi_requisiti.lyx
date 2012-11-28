@@ -1,0 +1,1953 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options false
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 0
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Indice
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 4
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\series bold
+\size huge
+PopTomatoes 
+\begin_inset Newline newline
+\end_inset
+
+Analisi dei requisiti 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+
+\size large
+Rev.
+ n: 1.0
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Storia delle revisioni
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features tabularvalignment="middle" tabularwidth="100col%">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rev.
+ n
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Data
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Autori
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Descrizione
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dd/12/2012
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fustinoni Mauro, Ronchi Matteo
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Versione iniziale
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduzione
+\end_layout
+
+\begin_layout Subsection
+Scopo del documento
+\end_layout
+
+\begin_layout Standard
+Lo scopo di questo documento è quello di fornire una breve analisi dei requisiti
+ per l'applicazione PopTomatoes, in corso di sviluppo nell'ambito del progetto
+ riferito al corso di Informatica III B.
+\end_layout
+
+\begin_layout Standard
+Il documento comprende le specifiche funzionali da implementare, nonché
+ alcune specifiche non funzionali che si ritengono essere fondamentali per
+ la corretta messa in attività dell'applicazione.
+\end_layout
+
+\begin_layout Standard
+Vengono inoltre definite le classi principali di utilizzatori che avranno
+ accesso alle varie funzionalità messe a disposizione, determinando ed analizzan
+do per ciascuno di essi i casi d'uso più rilevanti.
+\end_layout
+
+\begin_layout Standard
+Sono infine riportati alcuni vincoli tecnici da rispettare in fase di implementa
+zione e di distribuzione.
+\end_layout
+
+\begin_layout Subsection
+Scopo dell'applicazione
+\end_layout
+
+\begin_layout Standard
+PopTomatoes è stato pensato come un software per la gestione completa delle
+ principali funzionalità di un cinema multisala; comprendendo, oltre alle
+ attività 
+\begin_inset Quotes eld
+\end_inset
+
+core
+\begin_inset Quotes erd
+\end_inset
+
+ di tale business, anche una serie di attività collaterali che hanno un
+ forte impatto sul corretto funzionamento di tutta la struttura.
+\end_layout
+
+\begin_layout Standard
+L'applicazione, quindi, si occupa di coprire le funzioni legate alla programmazi
+one degli spettacoli e alla vendita dei biglietti per gli stessi, ma anche
+ di fornire un supporto al coordinamento delle attività di manutenzione
+ ordinaria e straordinaria.
+ Sono inoltre previste la costruzione e il mantenimento di un database delle
+ pellicole proiettate e la possibilità di generazione di statistiche in
+ merito all'attività del cinema multisala.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Specifiche funzionali
+\end_layout
+
+\begin_layout Standard
+Visto il business per cui è intesa la costruzione di PopTomatoes, sono state
+ individuate una serie di funzionalità che riteniamo debbano essere implementate
+ perché l'applicazione possa coprire pienamente le attività richieste dalla
+ gestione di un cinema multisala.
+\end_layout
+
+\begin_layout Subsection
+Elenco e descrizione delle funzioni
+\end_layout
+
+\begin_layout Standard
+Di seguito, sono riportate le specifiche funzionali dell'applicazione, raggruppa
+te per campo di utilizzo.
+\end_layout
+
+\begin_layout Paragraph
+Vendita e prenotazione biglietti
+\end_layout
+
+\begin_layout Enumerate
+Prenotazione biglietti
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+permette la prenotazione di posti in sala prima dell'attivazione della vendita
+ e continua fino a poco prima dell'inizio dello spettacolo.
+ Corrisponde a riservare il posto senza richiedere l'immediata stampa del
+ biglietto.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Ritiro biglietti prenotati
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+data una prenotazione per uno spettacolo deve essere possibile stampare
+ il relativo biglietto.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Acquisto biglietti
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+consente l'acquisto del biglietto per un dato spettacolo nelle ore precedenti
+ lo stesso (lasso di tempo da definire) e ne richiede la stampa.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Stampa biglietti
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+si occupa di stampare il biglietto in conseguenza di un acquisto o del ritiro
+ di una prenotazione.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Cancellazione prenotazioni non ritirate
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+il sistema deve cancellare le prenotazioni per un dato spettacolo non ritirate
+ entro un tempo limite, per consentire la rimessa in vendita dei posti inutilmen
+te riservati.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Suggerimento per l'assegnamento dei posti in sala
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+l'applicazione mette a disposizione un algoritmo che suggerisce alcune opzioni
+ in merito al posto da assegnare per un dato acquisto.
+ Ossia, in base alle posizioni già occupate, determina le migliori soluzioni
+ per il riempimento della sala.
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+Comunicazioni ai clienti
+\end_layout
+
+\begin_layout Enumerate
+Visualizzazione prossime proiezioni e posti rimanenti
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+deve essere reso disponibile al cliente un elenco dei prossimi spettacoli
+ e delle relative informazioni ( sala di proiezione, posti liberi rimanenti,
+ prezzo)
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+Scheduling proiezioni
+\end_layout
+
+\begin_layout Enumerate
+Mantenimento Database dei film
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+deve essere possibile l'inserimento in Database e la modifica dei film acquistat
+i dal cinema multisala.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Mantenimento lista film in programmazione
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+viene elaborata e mantenuta aggiornata una lista dei film inseriti nella
+ programmazione settimanale.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Generazione scheduling delle proiezioni
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+permette la definizione della programmazione delle proiezioni relative alla
+ settimana attuale e a quelle future.
+ La funzione comprende un'evoluta customizzazione dello scheduling.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Suggerimento automatico programmazione
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+funzione che data la lista dei film in programmazione suggerisce uno scheduling
+ delle proiezioni sala per sala.
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+Analisi di dati statistici
+\end_layout
+
+\begin_layout Enumerate
+Estrapolazione di dati statistici
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+permette di ricavare dati statistici dalle varie attività del cinema (posti
+ venduti, tempi di risposta alle segnalazioni, etc...).
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Generazione e stampa report
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+date le richieste da parte dell'utente genera e stampa report statistici.
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+Segnalazione guasti e gestione richieste di manutenzione
+\end_layout
+
+\begin_layout Enumerate
+Segnalazione guasti al sistema di acquisto e prenotazione
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+l'addetto allo sportello deve poter segnalare malfunzionamenti alla sua
+ postazione.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Segnalazione richieste di interventi in sala
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+è necessario poter segnalare l'inizio dell'eventuale intervallo e la fine
+ della fine della proiezione per poter attivare i servizi di pulizia/vendita
+ snack e bevande.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Visualizzazione e aggiornamento stato delle segnalazioni
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+il responsabile del personale ha necessità di mantenere aggiornato lo stato
+ delle segnalazioni relative a guasti o servizi.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Memorizzazione log degli interventi
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+è necessario salvare un log dei cambiamenti di stato relativi alle segnalazioni
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Generazione report delle attività del personale
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+genera report relativi a statistiche ai tempi di intervento del personale
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+Configurazione e gestione del sistema
+\end_layout
+
+\begin_layout Enumerate
+Configurazione caratteristiche cinema multisala
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+si deve poter inserire le caratteristiche relative al numero e tipo di sale
+ ed ai posti disponibili per ciascuna di esse.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Configurazione privilegi associati agli utenti
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+deve essere possibile gestire in autonomia il controllo degli accessi alle
+ diverse funzioni componenti l'applicazione.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Descrizione delle classi di utilizzatori
+\end_layout
+
+\begin_layout Standard
+Sono state inoltre individuate le classi di utilizzatori e le principali
+ necessità e funzionalità richieste all'applicazione per ciascuna di esse.
+\end_layout
+
+\begin_layout Enumerate
+Responsabile configurazione e accessi al sistema
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+è la figura professionale eletta al mantenimento dell'applicazione.
+ Devono essergli fornite un'interfaccia per la configurazione iniziale delle
+ caratteristiche del cinema ed un'altra per la gestione del controllo degli
+ accessi al sistema da parte di tutti gli utenti.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Tecnico per lo scheduling delle proiezioni
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+si occupa di realizzare la programmazione settimanale degli spettacoli sala
+ per sala.
+ Necessita di un ambiente molto interattivo e comprensibile che gli faciliti
+ il lavoro, in quanto esso consiste in un'attività chiave per il corretto
+ funzionamento del cinema nel suo complesso.
+ Egli deve aver modo di poter gestire e mantenere facilmente un'elevata
+ quantità di dati relativa alle pellicole acquistate per la riproduzione
+ nel multisala.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Data analyst
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+corrisponde alla figura professionale che si occupa dell'analisi di dati
+ derivanti dalla normale attività del cinema multisala.
+ In particolare, deve poter richiedere e ottenere report personalizzati
+ in base a richieste specifiche.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Responsabile del personale
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+è colui che coordina gli interventi del personale; ha bisogno di poter tenere
+ traccia della totalità delle richieste di intervento, di visualizzarle
+ e di aggiornare lo stato delle stesse in base alle comunicazioni dei dipendenti.
+ Egli ha inoltre a disposizione uno strumento per l'osservazione delle statistic
+he relative agli interventi svolti.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Responsabile di sala
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+necessita solamente di un'interfaccia per la segnalazione al responsabile
+ del personale dello stato della proiezione in corso, permettendo quindi
+ l'intervento, nel momento appropriato, del personale addetto alla pulizia
+ della sala o alla vendita di snack e bevande.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Addetto allo sportello
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+è colui che si interfaccia con i cliente allo sportello e assolve le funzioni
+ di vendita e prenotazione dei biglietti.
+ Necessita di un'interfaccia che suggerisca soluzioni di assegnamento posti
+ in base alle richieste dei singoli clienti.
+ Egli accetta anche le prenotazioni per spettacoli non ancora aperti alla
+ vendita al pubblico.
+ Gli è inoltre messa a disposizione la possibilità di segnalare malfunzionamenti
+ alla propria postazione.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Cliente
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+l'interazione del cliente con il sistema si limita alla visualizzazione
+ su dei monitor delle informazioni relative ai prossimi spettacoli in programmaz
+ione.
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Specifiche non funzionali
+\end_layout
+
+\begin_layout Standard
+Oltre alle specifiche funzionali riportate nella sezione precedente, vi
+ sono una serie di requisiti non strettamente funzionali, ma la cui implementazi
+one si rende necessaria per lo sviluppo di un'applicazione con caratteristiche
+ di qualità più elevata.
+\end_layout
+
+\begin_layout Description
+Affidabilità Di grande importanza è il ripristino in tempi brevi delle funzioni
+ di acquisto e di prenotazione dei biglietti vista la criticità di questo
+ servizio.
+\end_layout
+
+\begin_layout Description
+Usabilità Creazione di interfacce grafiche leggere e user-friendly, ponendo
+ particolare attenzione alla realizzazione di un ambiente grafico di supporto
+ alla funzione di scheduling.
+\end_layout
+
+\begin_layout Description
+Efficienza Necessità di brevi elaborazioni in termini di tempo per attività
+ legate al pubblico e alla segnalazione di criticità.
+\end_layout
+
+\begin_layout Description
+Manutenibilità Possibilità di poter facilmente aggiungere opzioni o nuove
+ funzionalità e di modificare l'interfaccia grafica indipendentemente dalle
+ funzioni dell'applicazione.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Scenari / casi d'uso
+\end_layout
+
+\begin_layout Standard
+Si intende ora, in questa sezione, analizzare i più rilevanti casi d'uso
+ facendo riferimento alle classi di utilizzatori precedentemente descritte
+ e alle principali attività che ciascuna di esse ha necessità di poter svolgere.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Configurazione
+\begin_inset space \space{}
+\end_inset
+
+iniziale
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Responsabile configurazione.
+\end_layout
+
+\begin_layout Description
+pre-condizioni: Il software deve essere installato ma non ancora configurato.
+\end_layout
+
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+immissione credenziali di accesso standard.
+\end_layout
+
+\begin_layout Enumerate
+obbligo di ridefinizione delle credenziali di accesso standard.
+\end_layout
+
+\begin_layout Enumerate
+inserimento dati tecnici relativi al multisala.
+ (numero di sale, numero di posti per sala, caratteristiche tecniche delle
+ singole sale, orari di apertura, eventuali altri parametri).
+\end_layout
+
+\begin_layout Enumerate
+predisposizione dei livelli di accesso da assegnare agli utenti.
+\end_layout
+
+\begin_layout Enumerate
+salvataggio della configurazione.
+\end_layout
+
+\begin_layout Enumerate
+memorizzazione dell'avvenuta prima configurazione.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali: 
+\end_layout
+
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili:
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Modifica
+\begin_inset space \space{}
+\end_inset
+
+classe
+\begin_inset space \space{}
+\end_inset
+
+di
+\begin_inset space \space{}
+\end_inset
+
+privilegi
+\begin_inset space \space{}
+\end_inset
+
+per
+\begin_inset space \space{}
+\end_inset
+
+il
+\begin_inset space \space{}
+\end_inset
+
+singolo
+\begin_inset space \space{}
+\end_inset
+
+utente
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Responsabile degli accessi di sistema.
+\end_layout
+
+\begin_layout Description
+pre-condizioni: avvenuta configurazione dei profili utente.
+\end_layout
+
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+immissione delle credenziali da amministratore.
+\end_layout
+
+\begin_layout Enumerate
+selezione del soggetto a cui modificare i privilegi.
+\end_layout
+
+\begin_layout Enumerate
+modifica dei privilegi per l'accesso.
+\end_layout
+
+\begin_layout Enumerate
+salvataggio delle modifiche.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali: 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+2b.
+ inserimento dell'utente se non esistente.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili: modifica di una classe di privilegi.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Inserimento
+\begin_inset space \space{}
+\end_inset
+
+pellicola
+\begin_inset space \space{}
+\end_inset
+
+in
+\begin_inset space \space{}
+\end_inset
+
+Database
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Tecnico per lo scheduling
+\end_layout
+
+\begin_layout Description
+pre-condizioni: 
+\end_layout
+
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+immissione delle credenziali di accesso da parte del Tecnico dello scheduling.
+\end_layout
+
+\begin_layout Enumerate
+inserimento in un form dei dati relativi alla pellicola (titolo, durata,
+ risoluzione video, restrizioni d'età, varie ed eventuali).
+\end_layout
+
+\begin_layout Enumerate
+controllo duplicati.
+\end_layout
+
+\begin_layout Enumerate
+salvataggio nel Database.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+3b.
+ messaggio di errore relativo alla presenza di duplicati nel Database.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili: modifica pellicole in Database (richiede la ricerca dei dati precedentem
+ente inseriti).
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Definizione
+\begin_inset space \space{}
+\end_inset
+
+lista
+\begin_inset space \space{}
+\end_inset
+
+dei
+\begin_inset space \space{}
+\end_inset
+
+film
+\begin_inset space \space{}
+\end_inset
+
+in
+\begin_inset space \space{}
+\end_inset
+
+programmazione
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Tecnico per lo scheduling.
+\end_layout
+
+\begin_layout Description
+pre-condizioni: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Database delle pellicole non vuoto.
+\end_layout
+
+\begin_layout Itemize
+login già effettuato da parte dell'utente.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+caricamento delle lista corrente
+\end_layout
+
+\begin_layout Enumerate
+modifica della lista con l'inserimento e/o la cancellazione di nuovi film.
+\end_layout
+
+\begin_layout Enumerate
+salvataggio della lista modificata.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+2b.
+ creazione della lista nel caso in cui sia inesistente.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili:
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Realizzazione
+\begin_inset space \space{}
+\end_inset
+
+scheduling
+\begin_inset space \space{}
+\end_inset
+
+settimanale
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Tecnico per lo scheduling.
+\end_layout
+
+\begin_layout Description
+pre-condizioni: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Database delle pellicole non vuoto
+\end_layout
+
+\begin_layout Itemize
+lista dei film in programmazione già definita.
+\end_layout
+
+\begin_layout Itemize
+login già effettuato da parte dell'utente.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+selezione della settimana per cui definire la programmazione
+\end_layout
+
+\begin_layout Enumerate
+caricamento della lista dei film in programmazione per la settimana selezionata.
+\end_layout
+
+\begin_layout Enumerate
+[opzionale] generazione automatica dello scheduling.
+\end_layout
+
+\begin_layout Enumerate
+generazione/modifica manuale dello scheduling.
+\end_layout
+
+\begin_layout Enumerate
+convalida della programmazione giorno per giorno.
+\end_layout
+
+\begin_layout Enumerate
+convalida della programmazione settimanale.
+\end_layout
+
+\begin_layout Enumerate
+salvataggio dello scheduling.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+4b.
+ annullamento convalida e modifica di scheduling già definiti.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili: modifica di scheduling settimanali precedentemente salvati.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Generazione
+\begin_inset space \space{}
+\end_inset
+
+report
+\begin_inset space \space{}
+\end_inset
+
+di
+\begin_inset space \space{}
+\end_inset
+
+statistiche
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Data analyst
+\end_layout
+
+\begin_layout Description
+pre-condizioni:
+\end_layout
+
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+immissione dati d'accesso dell'utente.
+\end_layout
+
+\begin_layout Enumerate
+selezione parametri in base ai quali generare le statistiche.
+\end_layout
+
+\begin_layout Enumerate
+generazione e formattazione del report richiesto.
+\end_layout
+
+\begin_layout Enumerate
+stampa report.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali:
+\end_layout
+
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili: generazione statistiche relative agli interventi del personale (attore:
+ Responsabile del personale).
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Segnalazione
+\begin_inset space \space{}
+\end_inset
+
+di
+\begin_inset space \space{}
+\end_inset
+
+una
+\begin_inset space \space{}
+\end_inset
+
+richiesta
+\begin_inset space \space{}
+\end_inset
+
+al
+\begin_inset space \space{}
+\end_inset
+
+personale
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Addetto allo sportello, Responsabile di sala
+\end_layout
+
+\begin_layout Description
+pre-condizioni: l'utente deve aver già effettuato il login nel sistema.
+\end_layout
+
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+immissione causale e dettagli riguardanti l'intervento richiesto.
+\end_layout
+
+\begin_layout Enumerate
+invio della segnalazione.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali:
+\end_layout
+
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili: 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Gestione
+\begin_inset space \space{}
+\end_inset
+
+di
+\begin_inset space \space{}
+\end_inset
+
+una
+\begin_inset space \space{}
+\end_inset
+
+segnalazione
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Responsabile del personale
+\end_layout
+
+\begin_layout Description
+pre-condizioni: presenza di una segnalazione generata dall'Addetto allo
+ sportello e/o dal Responsabile di sala.
+\end_layout
+
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+visualizzazione della segnalazione.
+\end_layout
+
+\begin_layout Enumerate
+attribuzione di un livello di priorità.
+\end_layout
+
+\begin_layout Enumerate
+scrittura nel log delle segnalazioni.
+\end_layout
+
+\begin_layout Enumerate
+modifica stato in 
+\begin_inset Quotes eld
+\end_inset
+
+Presa in carico
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+scrittura nel log.
+\end_layout
+
+\begin_layout Enumerate
+modifica stato in 
+\begin_inset Quotes eld
+\end_inset
+
+Risolto
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+scrittura nel log.
+\end_layout
+
+\begin_layout Enumerate
+salvataggio statistiche di intervento (causale, tempo, nome addetto, etc)
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+5b.
+ modifica stato in 
+\begin_inset Quotes eld
+\end_inset
+
+Problema persistente
+\begin_inset Quotes erd
+\end_inset
+
+, che richiede interventi eccezionali da effettuarsi in un secondo momento.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili: Risoluzione segnalazione etichettata come 
+\begin_inset Quotes eld
+\end_inset
+
+Problema persistente
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Vendita
+\begin_inset space \space{}
+\end_inset
+
+biglietto
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Addetto allo sportello.
+\end_layout
+
+\begin_layout Description
+pre-condizioni: apertura vendita biglietti.
+\end_layout
+
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+selezione proiezione, numero posti ed eventuali richieste particolari dal
+ cliente.
+\end_layout
+
+\begin_layout Enumerate
+verifica disponibilità.
+\end_layout
+
+\begin_layout Enumerate
+generazione automatica di opzioni di assegnamento posti.
+\end_layout
+
+\begin_layout Enumerate
+selezione alternativa proposta al cliente.
+\end_layout
+
+\begin_layout Enumerate
+salvataggio posti venduti.
+\end_layout
+
+\begin_layout Enumerate
+stampa biglietti.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+2b.
+ segnalazione posti insufficienti.
+\end_layout
+
+\begin_layout Standard
+3b.
+ segnalazione anomalia nell'assegnazione dei posti (posti adiacenti non
+ sufficienti o scarse alternative disponibili).
+\end_layout
+
+\begin_layout Standard
+4b.
+ rifiuto delle opzioni da parte del cliente.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili: Prenotazione biglietto (specificato in seguito).
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Prenotazione
+\begin_inset space \space{}
+\end_inset
+
+biglietto
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Addetto allo sportello.
+\end_layout
+
+\begin_layout Description
+pre-condizioni: apertura prenotazione spettacoli.
+\end_layout
+
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+selezione proiezione, numero posti ed eventuali richieste particolari dal
+ cliente.
+\end_layout
+
+\begin_layout Enumerate
+verifica disponibilità.
+\end_layout
+
+\begin_layout Enumerate
+generazione automatica di opzioni di assegnamento posti.
+\end_layout
+
+\begin_layout Enumerate
+selezione alternativa proposta al cliente.
+\end_layout
+
+\begin_layout Enumerate
+salvataggio posti prenotati.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+2b.
+ segnalazione posti insufficienti.
+\end_layout
+
+\begin_layout Standard
+3b.
+ segnalazione anomalia nell'assegnazione dei posti (posti adiacenti non
+ sufficienti o scarse alternative disponibili).
+\end_layout
+
+\begin_layout Standard
+4b.
+ rifiuto delle opzioni da parte del cliente.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili: Vendita biglietto.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Ritiro
+\begin_inset space \space{}
+\end_inset
+
+prenotazione
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+attori: Addetto allo sportello.
+\end_layout
+
+\begin_layout Description
+pre-condizioni: apertura vendita biglietti
+\end_layout
+
+\begin_layout Description
+passi
+\begin_inset space \space{}
+\end_inset
+
+principali: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+inserimento nominativo e proiezione.
+\end_layout
+
+\begin_layout Enumerate
+verifica esistenza della prenotazione.
+\end_layout
+
+\begin_layout Enumerate
+cambio stato della prenotazione selezionata in 
+\begin_inset Quotes eld
+\end_inset
+
+Venduto/Ritirato
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+stampa biglietto
+\end_layout
+
+\end_deeper
+\begin_layout Description
+situazioni
+\begin_inset space \space{}
+\end_inset
+
+eccezionali:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+2b.
+ segnalazione mancata prenotazione o prenotazione scaduta.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+casi
+\begin_inset space \space{}
+\end_inset
+
+d'uso
+\begin_inset space \space{}
+\end_inset
+
+simili:
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Vincoli
+\end_layout
+
+\begin_layout Standard
+L'ambito di sviluppo dell'applicazione (progetto di Informatica III B) impone
+ alcuni vincoli tecnici, dei quali è necessario tener conto in fase di progettaz
+ione e di implementazione.
+\end_layout
+
+\begin_layout Itemize
+Vincoli di implementazione
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Implementazione in linguaggio Java 
+\end_layout
+
+\begin_layout Itemize
+Interfaccia grafica
+\end_layout
+
+\begin_layout Itemize
+Architettura client-server
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Vincoli di distribuzione
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Installazione stand-alone
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
