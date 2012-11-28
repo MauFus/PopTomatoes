@@ -306,25 +306,27 @@ Scopo del documento
 
 \begin_layout Standard
 Lo scopo di questo documento è quello di fornire una breve analisi dei requisiti
- per l'applicazione PopTomatoes, in corso di sviluppo nell'ambito del progetto
+ per l'applicazione PopTomatoes, in fase di sviluppo nell'ambito del progetto
  riferito al corso di Informatica III B.
 \end_layout
 
 \begin_layout Standard
 Il documento comprende le specifiche funzionali da implementare, nonché
- alcune specifiche non funzionali che si ritengono essere fondamentali per
- la corretta messa in attività dell'applicazione.
+ alcuni requisiti non funzionali che si ritengono fondamentali per la corretta
+ messa in attività dell'applicazione.
 \end_layout
 
 \begin_layout Standard
-Vengono inoltre definite le classi principali di utilizzatori che avranno
+Vengono inoltre definite le principali classi di utilizzatori che avranno
  accesso alle varie funzionalità messe a disposizione, determinando ed analizzan
-do per ciascuno di essi i casi d'uso più rilevanti.
+do per ciascuna di esse i casi d'uso più rilevanti.
+ In particolare si intendono analizzare nel dettaglio le situazioni che
+ prevedono un interazione tra l'utente e il software.
 \end_layout
 
 \begin_layout Standard
-Sono infine riportati alcuni vincoli tecnici da rispettare in fase di implementa
-zione e di distribuzione.
+Sono infine riportati alcuni vincoli tecnici da rispettare in fase di progettazi
+one e di implementazione.
 \end_layout
 
 \begin_layout Subsection
@@ -342,18 +344,24 @@ core
 \begin_inset Quotes erd
 \end_inset
 
- di tale business, anche una serie di attività collaterali che hanno un
- forte impatto sul corretto funzionamento di tutta la struttura.
+ di tale business, anche una serie di funzioni secondarie che si ritiene
+ abbiano un deciso impatto sul buon funzionamento di tutta la struttura.
 \end_layout
 
 \begin_layout Standard
-L'applicazione, quindi, si occupa di coprire le funzioni legate alla programmazi
-one degli spettacoli e alla vendita dei biglietti per gli stessi, ma anche
- di fornire un supporto al coordinamento delle attività di manutenzione
+L'applicazione, quindi, si occupa di supportare le mansioni legate alla
+ programmazione degli spettacoli e alla vendita dei biglietti per gli stessi;
+ ma anche di fornire un sostegno al coordinamento delle attività di manutenzione
  ordinaria e straordinaria.
  Sono inoltre previste la costruzione e il mantenimento di un database delle
- pellicole proiettate e la possibilità di generazione di statistiche in
- merito all'attività del cinema multisala.
+ pellicole proiettate e la possibilità di generare statistiche in merito
+ all'attività del cinema multisala.
+\end_layout
+
+\begin_layout Standard
+In sostanza PopTomatoes si pone l'obiettivo di fornire una base tecnica
+ per la gestione dei molteplici aspetti che costituiscono un'attività complessa
+ al pari di quella presa in esame.
 \end_layout
 
 \begin_layout Standard
@@ -368,10 +376,22 @@ Specifiche funzionali
 \end_layout
 
 \begin_layout Standard
-Visto il business per cui è intesa la costruzione di PopTomatoes, sono state
- individuate una serie di funzionalità che riteniamo debbano essere implementate
- perché l'applicazione possa coprire pienamente le attività richieste dalla
+In fase di analisi dei requisiti per la progettazione dell'applicazione
+ PopTomatoes, sono state individuate una serie di funzionalità ritenute
+ necessarie per la copertura completa delle varie attività richieste dalla
  gestione di un cinema multisala.
+\end_layout
+
+\begin_layout Standard
+Sono inoltre descritte le caratteristiche delle figure professionali per
+ le quali è previsto l'utilizzo del software in sviluppo.
+ 
+\end_layout
+
+\begin_layout Standard
+Questa sezione si occupa quindi di mostrare nel complesso come le classi
+ di utilizzatori si interfacciano con l'applicazione per assolvere alle
+ mansioni peculiari dell'attività in esame.
 \end_layout
 
 \begin_layout Subsection
@@ -428,8 +448,12 @@ Stampa biglietti
 
 \begin_deeper
 \begin_layout Standard
-si occupa di stampare il biglietto in conseguenza di un acquisto o del ritiro
+si occupa di stampare il biglietto in conseguenza ad un acquisto o al ritiro
  di una prenotazione.
+\begin_inset VSpace smallskip
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -439,9 +463,9 @@ Cancellazione prenotazioni non ritirate
 
 \begin_deeper
 \begin_layout Standard
-il sistema deve cancellare le prenotazioni per un dato spettacolo non ritirate
- entro un tempo limite, per consentire la rimessa in vendita dei posti inutilmen
-te riservati.
+il sistema deve cancellare automaticamente le prenotazioni per un dato spettacol
+o non ritirate entro un tempo limite, per consentire la rimessa in vendita
+ dei posti inutilmente riservati.
 \end_layout
 
 \end_deeper
@@ -468,9 +492,10 @@ Visualizzazione prossime proiezioni e posti rimanenti
 
 \begin_deeper
 \begin_layout Standard
-deve essere reso disponibile al cliente un elenco dei prossimi spettacoli
- e delle relative informazioni ( sala di proiezione, posti liberi rimanenti,
- prezzo)
+deve essere reso disponibile al cliente, mediante visualizzazione su schermi,
+ un elenco degli spettacoli imminenti e delle relative informazioni (orario,
+ sala di proiezione, posti liberi rimanenti, prezzo, ulteriori specifiche
+ tecniche).
 \end_layout
 
 \end_deeper
@@ -479,13 +504,13 @@ Scheduling proiezioni
 \end_layout
 
 \begin_layout Enumerate
-Mantenimento Database dei film
+Mantenimento database dei film
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-deve essere possibile l'inserimento in Database e la modifica dei film acquistat
-i dal cinema multisala.
+deve essere possibile l'inserimento e la modifica in un database dei film
+ acquistati dal cinema multisala.
 \end_layout
 
 \end_deeper
@@ -496,7 +521,7 @@ Mantenimento lista film in programmazione
 \begin_deeper
 \begin_layout Standard
 viene elaborata e mantenuta aggiornata una lista dei film inseriti nella
- programmazione settimanale.
+ programmazione delle settimane successive.
 \end_layout
 
 \end_deeper
@@ -518,8 +543,8 @@ Suggerimento automatico programmazione
 
 \begin_deeper
 \begin_layout Standard
-funzione che data la lista dei film in programmazione suggerisce uno scheduling
- delle proiezioni sala per sala.
+funzione che, data la lista dei film in programmazione, suggerisce uno schedulin
+g delle proiezioni sala per sala, ottimizzando l'utilizzo delle stesse.
 \end_layout
 
 \end_deeper
@@ -534,7 +559,7 @@ Estrapolazione di dati statistici
 \begin_deeper
 \begin_layout Standard
 permette di ricavare dati statistici dalle varie attività del cinema (posti
- venduti, tempi di risposta alle segnalazioni, etc...).
+ venduti, tempi di risposta alle segnalazioni, etc).
 \end_layout
 
 \end_deeper
@@ -558,7 +583,7 @@ Segnalazione guasti al sistema di acquisto e prenotazione
 
 \begin_deeper
 \begin_layout Standard
-l'addetto allo sportello deve poter segnalare malfunzionamenti alla sua
+l'addetto allo sportello deve poter segnalare malfunzionamenti alla propria
  postazione.
  
 \end_layout
@@ -570,9 +595,9 @@ Segnalazione richieste di interventi in sala
 
 \begin_deeper
 \begin_layout Standard
-è necessario poter segnalare l'inizio dell'eventuale intervallo e la fine
- della fine della proiezione per poter attivare i servizi di pulizia/vendita
- snack e bevande.
+è necessario poter segnalare l'inizio dell'eventuale intervallo o la fine
+ della proiezione per poter attivare i servizi di pulizia/vendita snack
+ e bevande.
 \end_layout
 
 \end_deeper
@@ -583,7 +608,7 @@ Visualizzazione e aggiornamento stato delle segnalazioni
 \begin_deeper
 \begin_layout Standard
 il responsabile del personale ha necessità di mantenere aggiornato lo stato
- delle segnalazioni relative a guasti o servizi.
+ delle segnalazioni relative a guasti o servizi richiesti.
 \end_layout
 
 \end_deeper
@@ -593,7 +618,7 @@ Memorizzazione log degli interventi
 
 \begin_deeper
 \begin_layout Standard
-è necessario salvare un log dei cambiamenti di stato relativi alle segnalazioni
+è necessario salvare un log dei cambiamenti di stato relativi alle segnalazioni.
 \end_layout
 
 \end_deeper
@@ -603,7 +628,8 @@ Generazione report delle attività del personale
 
 \begin_deeper
 \begin_layout Standard
-genera report relativi a statistiche ai tempi di intervento del personale
+genera report relativi a statistiche riguardanti i tempi di intervento del
+ personale.
 \end_layout
 
 \end_deeper
@@ -617,8 +643,8 @@ Configurazione caratteristiche cinema multisala
 
 \begin_deeper
 \begin_layout Standard
-si deve poter inserire le caratteristiche relative al numero e tipo di sale
- ed ai posti disponibili per ciascuna di esse.
+si devono poter inserire le caratteristiche relative al numero ed al tipo
+ di sale oltre ai posti disponibili per ciascuna di esse.
 \end_layout
 
 \end_deeper
@@ -638,8 +664,8 @@ Descrizione delle classi di utilizzatori
 \end_layout
 
 \begin_layout Standard
-Sono state inoltre individuate le classi di utilizzatori e le principali
- necessità e funzionalità richieste all'applicazione per ciascuna di esse.
+Sono qui di seguito riportate le descrizioni delle classi di utilizzatori
+ che necessitano dell'utilizzo dell'applicazione.
 \end_layout
 
 \begin_layout Enumerate
@@ -651,7 +677,7 @@ Responsabile configurazione e accessi al sistema
 è la figura professionale eletta al mantenimento dell'applicazione.
  Devono essergli fornite un'interfaccia per la configurazione iniziale delle
  caratteristiche del cinema ed un'altra per la gestione del controllo degli
- accessi al sistema da parte di tutti gli utenti.
+ accessi di tutti gli utenti al sistema.
 \end_layout
 
 \end_deeper
@@ -666,7 +692,7 @@ si occupa di realizzare la programmazione settimanale degli spettacoli sala
  Necessita di un ambiente molto interattivo e comprensibile che gli faciliti
  il lavoro, in quanto esso consiste in un'attività chiave per il corretto
  funzionamento del cinema nel suo complesso.
- Egli deve aver modo di poter gestire e mantenere facilmente un'elevata
+ Egli deve inoltre aver modo di poter gestire e mantenere facilmente un'elevata
  quantità di dati relativa alle pellicole acquistate per la riproduzione
  nel multisala.
 \end_layout
@@ -691,11 +717,12 @@ Responsabile del personale
 
 \begin_deeper
 \begin_layout Standard
-è colui che coordina gli interventi del personale; ha bisogno di poter tenere
- traccia della totalità delle richieste di intervento, di visualizzarle
- e di aggiornare lo stato delle stesse in base alle comunicazioni dei dipendenti.
- Egli ha inoltre a disposizione uno strumento per l'osservazione delle statistic
-he relative agli interventi svolti.
+è colui che coordina gli interventi del personale.
+ Egli ha bisogno di poter tener traccia della totalità delle richieste di
+ intervento, di visualizzarle e di aggiornarne lo stato in base alle comunicazio
+ni dei dipendenti.
+ Il responsabile del personale avrà inoltre a disposizione uno strumento
+ per l'osservazione delle statistiche relative agli interventi svolti.
 \end_layout
 
 \end_deeper
@@ -705,7 +732,7 @@ Responsabile di sala
 
 \begin_deeper
 \begin_layout Standard
-necessita solamente di un'interfaccia per la segnalazione al responsabile
+necessita esclusivamente di un'interfaccia per la segnalazione al responsabile
  del personale dello stato della proiezione in corso, permettendo quindi
  l'intervento, nel momento appropriato, del personale addetto alla pulizia
  della sala o alla vendita di snack e bevande.
@@ -718,7 +745,7 @@ Addetto allo sportello
 
 \begin_deeper
 \begin_layout Standard
-è colui che si interfaccia con i cliente allo sportello e assolve le funzioni
+è colui che si interfaccia con il cliente allo sportello e assolve le funzioni
  di vendita e prenotazione dei biglietti.
  Necessita di un'interfaccia che suggerisca soluzioni di assegnamento posti
  in base alle richieste dei singoli clienti.
@@ -735,8 +762,8 @@ Cliente
 
 \begin_deeper
 \begin_layout Standard
-l'interazione del cliente con il sistema si limita alla visualizzazione
- su dei monitor delle informazioni relative ai prossimi spettacoli in programmaz
+l'interazione del cliente con il sistema si limita alla visualizzazione,
+ su monitor, delle informazioni relative agli imminenti spettacoli in programmaz
 ione.
 \end_layout
 
@@ -747,32 +774,38 @@ Specifiche non funzionali
 
 \begin_layout Standard
 Oltre alle specifiche funzionali riportate nella sezione precedente, vi
- sono una serie di requisiti non strettamente funzionali, ma la cui implementazi
-one si rende necessaria per lo sviluppo di un'applicazione con caratteristiche
+ sono una serie di requisiti, non strettamente funzionali, la cui implementazion
+e si rende necessaria per lo sviluppo di un'applicazione con caratteristiche
  di qualità più elevata.
+ Si analizzano tali requisiti raggruppandoli in tipiche classi di specifiche
+ che misurano il grado di bontà del software.
 \end_layout
 
 \begin_layout Description
 Affidabilità Di grande importanza è il ripristino in tempi brevi delle funzioni
- di acquisto e di prenotazione dei biglietti vista la criticità di questo
+ di acquisto e di prenotazione dei biglietti data la criticità di questo
  servizio.
 \end_layout
 
 \begin_layout Description
 Usabilità Creazione di interfacce grafiche leggere e user-friendly, ponendo
  particolare attenzione alla realizzazione di un ambiente grafico di supporto
- alla funzione di scheduling.
+ alla complessa funzione di scheduling, implementando un sistema basato
+ su timeline grafiche.
 \end_layout
 
 \begin_layout Description
-Efficienza Necessità di brevi elaborazioni in termini di tempo per attività
- legate al pubblico e alla segnalazione di criticità.
+Efficienza Necessità di brevi elaborazioni, in termini di tempo, per attività
+ legate al pubblico e alla segnalazione di criticità; infatti, tempi eccessivame
+nte lunghi si tradurrebbero in un disservizio.
 \end_layout
 
 \begin_layout Description
-Manutenibilità Possibilità di poter facilmente aggiungere opzioni o nuove
- funzionalità e di modificare l'interfaccia grafica indipendentemente dalle
- funzioni dell'applicazione.
+Manutenibilità Possibilità di poter facilmente aggiungere nuove opzioni
+ o funzionalità richieste dall'utente finale, qualora sorgessero nuove necessità.
+ Si ritiene inoltre molto importante poter modificare l'interfaccia grafica,
+ indipendentemente dalle funzioni dell'applicazione, per soddisfare eventuali
+ richieste dell'utilizzatore.
 \end_layout
 
 \begin_layout Standard
@@ -787,9 +820,34 @@ Scenari / casi d'uso
 \end_layout
 
 \begin_layout Standard
-Si intende ora, in questa sezione, analizzare i più rilevanti casi d'uso
+Si intende ora, in questa sezione, analizzare i più rilevanti casi d'uso,
  facendo riferimento alle classi di utilizzatori precedentemente descritte
  e alle principali attività che ciascuna di esse ha necessità di poter svolgere.
+\end_layout
+
+\begin_layout Standard
+Ogni scenario è descritto schematizzando le informazioni ad esso associate;
+ sono innanzitutto indicati gli attori coinvolti nell'evoluzione dello stesso
+ e, una volta determinate le precondizioni necessarie all'avvio del caso
+ in esame, vengono descritti i passi che compongono la progressione dell'attivit
+à considerata.
+\end_layout
+
+\begin_layout Standard
+Per eventuali variazioni eccezionali ai singoli scenari è previsto un campo
+ adibito alla descrizione delle procedure alternative a quelle già considerate.
+\end_layout
+
+\begin_layout Standard
+Sono infine riportate casistiche simili a quelle singolarmente analizzate
+ contenenti punti di contatto con queste ultime.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -815,7 +873,7 @@ iniziale
 
 \begin_deeper
 \begin_layout Description
-attori: Responsabile configurazione.
+attori: Responsabile configurazione
 \end_layout
 
 \begin_layout Description
@@ -840,9 +898,9 @@ obbligo di ridefinizione delle credenziali di accesso standard.
 \end_layout
 
 \begin_layout Enumerate
-inserimento dati tecnici relativi al multisala.
- (numero di sale, numero di posti per sala, caratteristiche tecniche delle
- singole sale, orari di apertura, eventuali altri parametri).
+inserimento dati tecnici relativi al multisala (numero di sale, numero di
+ posti per sala, caratteristiche tecniche delle singole sale, orari di apertura,
+ eventuali altri parametri).
 \end_layout
 
 \begin_layout Enumerate
@@ -863,7 +921,7 @@ situazioni
 \begin_inset space \space{}
 \end_inset
 
-eccezionali: 
+eccezionali: -
 \end_layout
 
 \begin_layout Description
@@ -875,7 +933,7 @@ d'uso
 \begin_inset space \space{}
 \end_inset
 
-simili:
+simili: -
 \end_layout
 
 \end_deeper
@@ -886,6 +944,13 @@ offset "0.5ex"
 width "100col%"
 height "1pt"
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace smallskip
 \end_inset
 
 
@@ -925,7 +990,7 @@ utente
 
 \begin_deeper
 \begin_layout Description
-attori: Responsabile degli accessi di sistema.
+attori: Responsabile degli accessi di sistema
 \end_layout
 
 \begin_layout Description
@@ -1020,7 +1085,7 @@ attori: Tecnico per lo scheduling
 \end_layout
 
 \begin_layout Description
-pre-condizioni: 
+pre-condizioni: -
 \end_layout
 
 \begin_layout Description
@@ -1046,7 +1111,7 @@ controllo duplicati.
 \end_layout
 
 \begin_layout Enumerate
-salvataggio nel Database.
+salvataggio nel database.
 \end_layout
 
 \end_deeper
@@ -1061,7 +1126,7 @@ eccezionali:
 \begin_deeper
 \begin_layout Standard
 3b.
- messaggio di errore relativo alla presenza di duplicati nel Database.
+ messaggio di errore relativo alla presenza di duplicati nel database.
 \end_layout
 
 \end_deeper
@@ -1074,7 +1139,7 @@ d'uso
 \begin_inset space \space{}
 \end_inset
 
-simili: modifica pellicole in Database (richiede la ricerca dei dati precedentem
+simili: modifica pellicole in database (richiede la ricerca dei dati precedentem
 ente inseriti).
 \end_layout
 
@@ -1117,7 +1182,7 @@ programmazione
 
 \begin_deeper
 \begin_layout Description
-attori: Tecnico per lo scheduling.
+attori: Tecnico per lo scheduling
 \end_layout
 
 \begin_layout Description
@@ -1144,7 +1209,7 @@ principali:
 
 \begin_deeper
 \begin_layout Enumerate
-caricamento delle lista corrente
+caricamento delle lista corrente.
 \end_layout
 
 \begin_layout Enumerate
@@ -1180,7 +1245,7 @@ d'uso
 \begin_inset space \space{}
 \end_inset
 
-simili:
+simili: -
 \end_layout
 
 \end_deeper
@@ -1210,7 +1275,7 @@ settimanale
 
 \begin_deeper
 \begin_layout Description
-attori: Tecnico per lo scheduling.
+attori: Tecnico per lo scheduling
 \end_layout
 
 \begin_layout Description
@@ -1219,7 +1284,7 @@ pre-condizioni:
 
 \begin_deeper
 \begin_layout Itemize
-Database delle pellicole non vuoto
+database delle pellicole non vuoto.
 \end_layout
 
 \begin_layout Itemize
@@ -1241,7 +1306,7 @@ principali:
 
 \begin_deeper
 \begin_layout Enumerate
-selezione della settimana per cui definire la programmazione
+selezione della settimana per cui definire la programmazione.
 \end_layout
 
 \begin_layout Enumerate
@@ -1331,7 +1396,7 @@ attori: Data analyst
 \end_layout
 
 \begin_layout Description
-pre-condizioni:
+pre-condizioni: -
 \end_layout
 
 \begin_layout Description
@@ -1365,7 +1430,7 @@ situazioni
 \begin_inset space \space{}
 \end_inset
 
-eccezionali:
+eccezionali: -
 \end_layout
 
 \begin_layout Description
@@ -1450,7 +1515,7 @@ situazioni
 \begin_inset space \space{}
 \end_inset
 
-eccezionali:
+eccezionali: -
 \end_layout
 
 \begin_layout Description
@@ -1462,7 +1527,7 @@ d'uso
 \begin_inset space \space{}
 \end_inset
 
-simili: 
+simili: -
 \end_layout
 
 \end_deeper
@@ -1473,6 +1538,13 @@ offset "0.5ex"
 width "100col%"
 height "1pt"
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
 \end_inset
 
 
@@ -1500,8 +1572,8 @@ attori: Responsabile del personale
 \end_layout
 
 \begin_layout Description
-pre-condizioni: presenza di una segnalazione generata dall'Addetto allo
- sportello e/o dal Responsabile di sala.
+pre-condizioni: presenza di una segnalazione generata dall'addetto allo
+ sportello e/o dal responsabile di sala.
 \end_layout
 
 \begin_layout Description
@@ -1558,7 +1630,7 @@ scrittura nel log.
 \end_layout
 
 \begin_layout Enumerate
-salvataggio statistiche di intervento (causale, tempo, nome addetto, etc)
+salvataggio statistiche di intervento (causale, tempo, nome addetto, etc).
 \end_layout
 
 \end_deeper
@@ -1628,7 +1700,7 @@ biglietto
 
 \begin_deeper
 \begin_layout Description
-attori: Addetto allo sportello.
+attori: Addetto allo sportello
 \end_layout
 
 \begin_layout Description
@@ -1731,7 +1803,7 @@ biglietto
 
 \begin_deeper
 \begin_layout Description
-attori: Addetto allo sportello.
+attori: Addetto allo sportello
 \end_layout
 
 \begin_layout Description
@@ -1820,6 +1892,13 @@ height "1pt"
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Description
 Ritiro
 \begin_inset space \space{}
@@ -1830,11 +1909,11 @@ prenotazione
 
 \begin_deeper
 \begin_layout Description
-attori: Addetto allo sportello.
+attori: Addetto allo sportello
 \end_layout
 
 \begin_layout Description
-pre-condizioni: apertura vendita biglietti
+pre-condizioni: apertura vendita biglietti.
 \end_layout
 
 \begin_layout Description
@@ -1859,7 +1938,7 @@ cambio stato della prenotazione selezionata in
 \begin_inset Quotes eld
 \end_inset
 
-Venduto/Ritirato
+Ritirato
 \begin_inset Quotes erd
 \end_inset
 
@@ -1867,7 +1946,7 @@ Venduto/Ritirato
 \end_layout
 
 \begin_layout Enumerate
-stampa biglietto
+stampa biglietto.
 \end_layout
 
 \end_deeper
@@ -1895,22 +1974,10 @@ d'uso
 \begin_inset space \space{}
 \end_inset
 
-simili:
+simili: -
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Vincoli
 \end_layout
