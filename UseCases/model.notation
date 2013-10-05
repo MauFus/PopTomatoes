@@ -53,6 +53,25 @@
       </eAnnotations>
       <children xmi:type="notation:DecorationNode" xmi:id="_Bd2klinoEeOVQroNt_U4gw" type="5025"/>
       <children xmi:type="notation:DecorationNode" xmi:id="_Bd2klynoEeOVQroNt_U4gw" type="7013">
+        <children xmi:type="notation:Shape" xmi:id="_9a90YCnbEeOVQroNt_U4gw" type="2013" fontName="Segoe UI" lineColor="0">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9a-bcCnbEeOVQroNt_U4gw" source="ShadowFigure">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_9a-bcSnbEeOVQroNt_U4gw" key="ShadowFigure_Value" value="false"/>
+          </eAnnotations>
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9a-bcinbEeOVQroNt_U4gw" source="displayNameLabelIcon">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_9a-bcynbEeOVQroNt_U4gw" key="displayNameLabelIcon_value" value="false"/>
+          </eAnnotations>
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9a-bdCnbEeOVQroNt_U4gw" source="QualifiedName">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_9a-bdSnbEeOVQroNt_U4gw" key="QualifiedNameDepth" value="1000"/>
+          </eAnnotations>
+          <children xmi:type="notation:DecorationNode" xmi:id="_9a-bdinbEeOVQroNt_U4gw" type="5016"/>
+          <children xmi:type="notation:DecorationNode" xmi:id="_9a-bdynbEeOVQroNt_U4gw" type="7009">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_9a-beCnbEeOVQroNt_U4gw"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_9a-beSnbEeOVQroNt_U4gw"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9a-beinbEeOVQroNt_U4gw"/>
+          </children>
+          <element xmi:type="uml:UseCase" href="model.uml#_9a6KACnbEeOVQroNt_U4gw"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9a90YSnbEeOVQroNt_U4gw" x="63" y="84"/>
+        </children>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bd2kmCnoEeOVQroNt_U4gw"/>
       </children>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_Bd19gSnoEeOVQroNt_U4gw"/>
@@ -217,25 +236,6 @@
       </children>
       <element xmi:type="uml:UseCase" href="model.uml#_qWJfoCnbEeOVQroNt_U4gw"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qWNKASnbEeOVQroNt_U4gw" x="225" y="315"/>
-    </children>
-    <children xmi:type="notation:Shape" xmi:id="_9a90YCnbEeOVQroNt_U4gw" type="2013" fontName="Segoe UI" lineColor="0">
-      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9a-bcCnbEeOVQroNt_U4gw" source="ShadowFigure">
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_9a-bcSnbEeOVQroNt_U4gw" key="ShadowFigure_Value" value="false"/>
-      </eAnnotations>
-      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9a-bcinbEeOVQroNt_U4gw" source="displayNameLabelIcon">
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_9a-bcynbEeOVQroNt_U4gw" key="displayNameLabelIcon_value" value="false"/>
-      </eAnnotations>
-      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9a-bdCnbEeOVQroNt_U4gw" source="QualifiedName">
-        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_9a-bdSnbEeOVQroNt_U4gw" key="QualifiedNameDepth" value="1000"/>
-      </eAnnotations>
-      <children xmi:type="notation:DecorationNode" xmi:id="_9a-bdinbEeOVQroNt_U4gw" type="5016"/>
-      <children xmi:type="notation:DecorationNode" xmi:id="_9a-bdynbEeOVQroNt_U4gw" type="7009">
-        <styles xmi:type="notation:SortingStyle" xmi:id="_9a-beCnbEeOVQroNt_U4gw"/>
-        <styles xmi:type="notation:FilteringStyle" xmi:id="_9a-beSnbEeOVQroNt_U4gw"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9a-beinbEeOVQroNt_U4gw"/>
-      </children>
-      <element xmi:type="uml:UseCase" href="model.uml#_9a6KACnbEeOVQroNt_U4gw"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9a90YSnbEeOVQroNt_U4gw" x="210" y="395"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_DKm3wCncEeOVQroNt_U4gw" type="2013" fontName="Segoe UI" lineColor="0">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_DKne0CncEeOVQroNt_U4gw" source="ShadowFigure">

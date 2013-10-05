@@ -9,7 +9,6 @@
   <packagedElement xmi:type="uml:UseCase" xmi:id="_k_Ph0CnaEeOVQroNt_U4gw" name="Permission management"/>
   <packagedElement xmi:type="uml:Actor" xmi:id="_mbeZ0CnbEeOVQroNt_U4gw" name="Scheuling Manager"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_qWJfoCnbEeOVQroNt_U4gw" name="Movie DB update"/>
-  <packagedElement xmi:type="uml:UseCase" xmi:id="_9a6KACnbEeOVQroNt_U4gw" name="weekly scheduling definition"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_DKimUCncEeOVQroNt_U4gw" name="Movie list definition"/>
   <packagedElement xmi:type="uml:Actor" xmi:id="_MHvx4CncEeOVQroNt_U4gw" name="Data Analyst"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_helzoCncEeOVQroNt_U4gw" name="Ecception/Emergency Handler"/>
@@ -214,7 +213,9 @@
   <packagedElement xmi:type="uml:Package" xmi:id="_O0PzYCnnEeOVQroNt_U4gw" name="Statistical Analysis"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_OrrHMCncEeOVQroNt_U4gw" name="Statistical reports"/>
   <packagedElement xmi:type="uml:Package" xmi:id="_sCRMwCnnEeOVQroNt_U4gw" name="Sistem Deployment &amp; Configuration"/>
-  <packagedElement xmi:type="uml:Package" xmi:id="_BdszkCnoEeOVQroNt_U4gw" name="package"/>
-  <packagedElement xmi:type="uml:Package" xmi:id="_gQvC8CnoEeOVQroNt_U4gw" name="Tiketing"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_BdszkCnoEeOVQroNt_U4gw" name="Scheduling">
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_9a6KACnbEeOVQroNt_U4gw" name="weekly scheduling"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_gQvC8CnoEeOVQroNt_U4gw" name="Ticketing"/>
   <packagedElement xmi:type="uml:Package" xmi:id="_orqA0CnoEeOVQroNt_U4gw" name="Maintenance Support"/>
 </uml:Model>
