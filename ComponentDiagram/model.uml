@@ -24,8 +24,8 @@
   <packagedElement xmi:type="uml:Interface" xmi:id="_pUsasC9iEeOtfoUUZnhYVQ" name="Emergency Int."/>
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_pU4A4C9iEeOtfoUUZnhYVQ" name="Realization4" client="_gjPzMC9iEeOtfoUUZnhYVQ" supplier="_pUsasC9iEeOtfoUUZnhYVQ" contract="_pUsasC9iEeOtfoUUZnhYVQ"/>
   <packagedElement xmi:type="uml:Usage" xmi:id="_tU12YC9iEeOtfoUUZnhYVQ" name="Usage5" client="_1uISAC9hEeOtfoUUZnhYVQ" supplier="_pUsasC9iEeOtfoUUZnhYVQ"/>
-  <packagedElement xmi:type="uml:Component" xmi:id="__qqXIC9iEeOtfoUUZnhYVQ" clientDependency="_q1zyti9jEeOtfoUUZnhYVQ" name="Stats Analisys"/>
-  <packagedElement xmi:type="uml:Component" xmi:id="_BRGJcC9jEeOtfoUUZnhYVQ" clientDependency="_tMUXEC9jEeOtfoUUZnhYVQ _7gzwYC9jEeOtfoUUZnhYVQ" name="Movie List Definition"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="__qqXIC9iEeOtfoUUZnhYVQ" clientDependency="_q1zyti9jEeOtfoUUZnhYVQ _SI9k0C9rEeOtfoUUZnhYVQ" name="Stats Analisys"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_BRGJcC9jEeOtfoUUZnhYVQ" clientDependency="_tMUXEC9jEeOtfoUUZnhYVQ _7gzwYC9jEeOtfoUUZnhYVQ _BdEPQC9rEeOtfoUUZnhYVQ" name="Movie List Definition"/>
   <packagedElement xmi:type="uml:Interface" xmi:id="_q1mX2y9jEeOtfoUUZnhYVQ" name="Stats Report"/>
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_q1zyti9jEeOtfoUUZnhYVQ" name="Realization5" client="__qqXIC9iEeOtfoUUZnhYVQ" supplier="_q1mX2y9jEeOtfoUUZnhYVQ" contract="_q1mX2y9jEeOtfoUUZnhYVQ"/>
   <packagedElement xmi:type="uml:Usage" xmi:id="_tMUXEC9jEeOtfoUUZnhYVQ" name="Usage6" client="_BRGJcC9jEeOtfoUUZnhYVQ" supplier="_q1mX2y9jEeOtfoUUZnhYVQ"/>
@@ -37,7 +37,7 @@
   <packagedElement xmi:type="uml:Interface" xmi:id="_SEZ5IC9kEeOtfoUUZnhYVQ" name="Scheduling Int."/>
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_SEmtcC9kEeOtfoUUZnhYVQ" name="Realization7" client="_AoifMC9kEeOtfoUUZnhYVQ" supplier="_SEZ5IC9kEeOtfoUUZnhYVQ" contract="_SEZ5IC9kEeOtfoUUZnhYVQ"/>
   <packagedElement xmi:type="uml:Usage" xmi:id="_aqEHYC9kEeOtfoUUZnhYVQ" name="Usage8" client="_-qL8IC9jEeOtfoUUZnhYVQ" supplier="_SEZ5IC9kEeOtfoUUZnhYVQ"/>
-  <packagedElement xmi:type="uml:Component" xmi:id="_rt9tQC9kEeOtfoUUZnhYVQ" clientDependency="_zm70oC9kEeOtfoUUZnhYVQ _06B0MC9kEeOtfoUUZnhYVQ _9lSCMC9mEeOtfoUUZnhYVQ" name="Showtimes Manager"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_rt9tQC9kEeOtfoUUZnhYVQ" clientDependency="_zm70oC9kEeOtfoUUZnhYVQ _06B0MC9kEeOtfoUUZnhYVQ _9lSCMC9mEeOtfoUUZnhYVQ _DRGYsC9rEeOtfoUUZnhYVQ" name="Showtimes Manager"/>
   <packagedElement xmi:type="uml:Interface" xmi:id="_zmtyMC9kEeOtfoUUZnhYVQ" name="Showtimes List Int."/>
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_zm70oC9kEeOtfoUUZnhYVQ" name="Realization8" client="_rt9tQC9kEeOtfoUUZnhYVQ" supplier="_zmtyMC9kEeOtfoUUZnhYVQ" contract="_zmtyMC9kEeOtfoUUZnhYVQ"/>
   <packagedElement xmi:type="uml:Interface" xmi:id="_051m8C9kEeOtfoUUZnhYVQ" name="Showtimes Int."/>
@@ -70,4 +70,7 @@
   <packagedElement xmi:type="uml:Component" xmi:id="_DCus4C9oEeOtfoUUZnhYVQ" name="Reservation Withdrawal">
     <generalization xmi:type="uml:Generalization" xmi:id="_N21IoC9oEeOtfoUUZnhYVQ" general="_2mgSMC9mEeOtfoUUZnhYVQ"/>
   </packagedElement>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_BdEPQC9rEeOtfoUUZnhYVQ" name="Usage10111111" client="_BRGJcC9jEeOtfoUUZnhYVQ" supplier="_bgEUkC9fEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_DRGYsC9rEeOtfoUUZnhYVQ" name="Usage101111111" client="_rt9tQC9kEeOtfoUUZnhYVQ" supplier="_bgEUkC9fEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_SI9k0C9rEeOtfoUUZnhYVQ" name="Usage1011111111" client="__qqXIC9iEeOtfoUUZnhYVQ" supplier="_bgEUkC9fEeOtfoUUZnhYVQ"/>
 </uml:Model>

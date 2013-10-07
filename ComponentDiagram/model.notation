@@ -223,7 +223,7 @@
       <styles xmi:type="notation:DescriptionStyle" xmi:id="_AopM4S9kEeOtfoUUZnhYVQ"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_AopM4i9kEeOtfoUUZnhYVQ"/>
       <element xmi:type="uml:Component" href="model.uml#_AoifMC9kEeOtfoUUZnhYVQ"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AopM4y9kEeOtfoUUZnhYVQ" x="1145" y="515"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AopM4y9kEeOtfoUUZnhYVQ" x="1150" y="515"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_SEgm0C9kEeOtfoUUZnhYVQ" type="2003" fontName="Segoe UI">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_SEhN4C9kEeOtfoUUZnhYVQ" source="ShadowFigure">
@@ -646,7 +646,7 @@
       <element xmi:type="uml:Generalization" href="model.uml#_N21IoC9oEeOtfoUUZnhYVQ"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_N4ZO4i9oEeOtfoUUZnhYVQ" points="[10, 0, -190, -117]$[200, 0, 0, -117]$[200, 112, 0, -5]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_N5lhsC9oEeOtfoUUZnhYVQ" id="(0.9333333333333333,0.4714285714285714)"/>
-      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_N5lhsS9oEeOtfoUUZnhYVQ" id="(0.5333333333333333,0.014285714285714285)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_N5lhsS9oEeOtfoUUZnhYVQ" id="(0.5666666666666667,0.07142857142857142)"/>
     </edges>
     <edges xmi:type="notation:Connector" xmi:id="_Spm7IC9oEeOtfoUUZnhYVQ" type="4003" source="_CAM44C9oEeOtfoUUZnhYVQ" target="_2mmY0C9mEeOtfoUUZnhYVQ" lineColor="0">
       <children xmi:type="notation:DecorationNode" xmi:id="_SpniMC9oEeOtfoUUZnhYVQ" type="2">
@@ -667,6 +667,24 @@
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WkvT8i9oEeOtfoUUZnhYVQ" points="[16, 0, -194, -321]$[210, 0, 0, -321]$[210, 308, 0, -13]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WkzlYC9oEeOtfoUUZnhYVQ" id="(0.8933333333333333,0.45714285714285713)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WkzlYS9oEeOtfoUUZnhYVQ" id="(0.54,0.02857142857142857)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_BdIgsC9rEeOtfoUUZnhYVQ" type="4001" source="_BRLpAC9jEeOtfoUUZnhYVQ" target="_bgImAC9fEeOtfoUUZnhYVQ" lineColor="0">
+      <styles xmi:type="notation:FontStyle" xmi:id="_BdIgsS9rEeOtfoUUZnhYVQ" fontName="Segoe UI"/>
+      <element xmi:type="uml:Usage" href="model.uml#_BdEPQC9rEeOtfoUUZnhYVQ"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BdIgsi9rEeOtfoUUZnhYVQ" points="[-13, 0, 90, 233]$[-54, 0, 49, 233]$[-54, -233, 49, 0]$[-93, -233, 10, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_BdLkAC9rEeOtfoUUZnhYVQ" id="(0.08666666666666667,0.5428571428571428)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_DRKqIC9rEeOtfoUUZnhYVQ" type="4001" source="_ruEa8C9kEeOtfoUUZnhYVQ" target="_bgImAC9fEeOtfoUUZnhYVQ" lineColor="0">
+      <styles xmi:type="notation:FontStyle" xmi:id="_DRKqIS9rEeOtfoUUZnhYVQ" fontName="Segoe UI"/>
+      <element xmi:type="uml:Usage" href="model.uml#_DRGYsC9rEeOtfoUUZnhYVQ"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_DRKqIi9rEeOtfoUUZnhYVQ" points="[-9, 0, 90, 338]$[-50, 0, 49, 338]$[-50, -338, 49, 0]$[-89, -338, 10, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_DRNtcC9rEeOtfoUUZnhYVQ" id="(0.06,0.32857142857142857)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_SJB2QC9rEeOtfoUUZnhYVQ" type="4001" source="__qwdwC9iEeOtfoUUZnhYVQ" target="_bgImAC9fEeOtfoUUZnhYVQ" lineColor="0">
+      <styles xmi:type="notation:FontStyle" xmi:id="_SJB2QS9rEeOtfoUUZnhYVQ" fontName="Segoe UI"/>
+      <element xmi:type="uml:Usage" href="model.uml#_SI9k0C9rEeOtfoUUZnhYVQ"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_SJB2Qi9rEeOtfoUUZnhYVQ" points="[-2, 0, 90, 129]$[-43, 0, 49, 129]$[-43, -129, 49, 0]$[-82, -129, 10, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SJE5kC9rEeOtfoUUZnhYVQ" id="(0.013333333333333334,0.4857142857142857)"/>
     </edges>
   </notation:Diagram>
   <notation:Diagram xmi:id="_LCq28C1PEeOZWM5Oevj-KQ" type="PapyrusUMLDeploymentDiagram" name="CD Diagram" measurementUnit="Pixel">
