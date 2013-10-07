@@ -3,4 +3,71 @@
   <packageImport xmi:type="uml:PackageImport" xmi:id="_LCX8RC1PEeOZWM5Oevj-KQ">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
+  <packagedElement xmi:type="uml:Component" xmi:id="_zPH9IC9aEeOtfoUUZnhYVQ" clientDependency="_5aVlYC9eEeOtfoUUZnhYVQ" name="Cinema DB"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_bNWpYC9eEeOtfoUUZnhYVQ" clientDependency="_qUXEwC9eEeOtfoUUZnhYVQ _3gz38C9eEeOtfoUUZnhYVQ _8Nsd0C9eEeOtfoUUZnhYVQ _Z8YUQC9fEeOtfoUUZnhYVQ _bgPTsC9fEeOtfoUUZnhYVQ" name="Persistence Module"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_qUXEwC9eEeOtfoUUZnhYVQ" name="Usage0" client="_bNWpYC9eEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_3gz38C9eEeOtfoUUZnhYVQ" name="Realization0" client="_bNWpYC9eEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_5aL0YC9eEeOtfoUUZnhYVQ" name="JDBC"/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_5aVlYC9eEeOtfoUUZnhYVQ" name="Realization1" client="_zPH9IC9aEeOtfoUUZnhYVQ" supplier="_5aL0YC9eEeOtfoUUZnhYVQ" contract="_5aL0YC9eEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_8Nsd0C9eEeOtfoUUZnhYVQ" name="Usage1" client="_bNWpYC9eEeOtfoUUZnhYVQ" supplier="_5aL0YC9eEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_Z8OjQC9fEeOtfoUUZnhYVQ" name="Movie Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_Z8YUQC9fEeOtfoUUZnhYVQ" name="Realization2" client="_bNWpYC9eEeOtfoUUZnhYVQ" supplier="_Z8OjQC9fEeOtfoUUZnhYVQ" contract="_Z8OjQC9fEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_bgEUkC9fEeOtfoUUZnhYVQ" name="Mgmt Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_bgPTsC9fEeOtfoUUZnhYVQ" name="Realization3" client="_bNWpYC9eEeOtfoUUZnhYVQ" supplier="_bgEUkC9fEeOtfoUUZnhYVQ" contract="_bgEUkC9fEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_4prIAC9fEeOtfoUUZnhYVQ" clientDependency="_AumAsC9gEeOtfoUUZnhYVQ" name="System &amp; Account Config."/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_AumAsC9gEeOtfoUUZnhYVQ" name="Usage2" client="_4prIAC9fEeOtfoUUZnhYVQ" supplier="_Z8OjQC9fEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_Hs4ogC9gEeOtfoUUZnhYVQ" clientDependency="_Mu5J0C9gEeOtfoUUZnhYVQ" name="Movie DB insert"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_Mu5J0C9gEeOtfoUUZnhYVQ" name="Usage3" client="_Hs4ogC9gEeOtfoUUZnhYVQ" supplier="_bgEUkC9fEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_1uISAC9hEeOtfoUUZnhYVQ" clientDependency="_9gnW4C9hEeOtfoUUZnhYVQ _tU12YC9iEeOtfoUUZnhYVQ" name="Intervention Mgmt"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_9gnW4C9hEeOtfoUUZnhYVQ" name="Usage4" client="_1uISAC9hEeOtfoUUZnhYVQ" supplier="_Z8OjQC9fEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_gjPzMC9iEeOtfoUUZnhYVQ" clientDependency="_pU4A4C9iEeOtfoUUZnhYVQ" name="Emergency"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_pUsasC9iEeOtfoUUZnhYVQ" name="Emergency Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_pU4A4C9iEeOtfoUUZnhYVQ" name="Realization4" client="_gjPzMC9iEeOtfoUUZnhYVQ" supplier="_pUsasC9iEeOtfoUUZnhYVQ" contract="_pUsasC9iEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_tU12YC9iEeOtfoUUZnhYVQ" name="Usage5" client="_1uISAC9hEeOtfoUUZnhYVQ" supplier="_pUsasC9iEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="__qqXIC9iEeOtfoUUZnhYVQ" clientDependency="_q1zyti9jEeOtfoUUZnhYVQ" name="Stats Analisys"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_BRGJcC9jEeOtfoUUZnhYVQ" clientDependency="_tMUXEC9jEeOtfoUUZnhYVQ _7gzwYC9jEeOtfoUUZnhYVQ" name="Movie List Definition"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_q1mX2y9jEeOtfoUUZnhYVQ" name="Stats Report"/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_q1zyti9jEeOtfoUUZnhYVQ" name="Realization5" client="__qqXIC9iEeOtfoUUZnhYVQ" supplier="_q1mX2y9jEeOtfoUUZnhYVQ" contract="_q1mX2y9jEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_tMUXEC9jEeOtfoUUZnhYVQ" name="Usage6" client="_BRGJcC9jEeOtfoUUZnhYVQ" supplier="_q1mX2y9jEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_7gm8EC9jEeOtfoUUZnhYVQ" name="List Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_7gzwYC9jEeOtfoUUZnhYVQ" name="Realization6" client="_BRGJcC9jEeOtfoUUZnhYVQ" supplier="_7gm8EC9jEeOtfoUUZnhYVQ" contract="_7gm8EC9jEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_-qL8IC9jEeOtfoUUZnhYVQ" clientDependency="_CqMN4C9kEeOtfoUUZnhYVQ _aqEHYC9kEeOtfoUUZnhYVQ" name="Scheduler"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_AoifMC9kEeOtfoUUZnhYVQ" clientDependency="_SEmtcC9kEeOtfoUUZnhYVQ" name="Scheduling Algorithm"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_CqMN4C9kEeOtfoUUZnhYVQ" name="Usage7" client="_-qL8IC9jEeOtfoUUZnhYVQ" supplier="_7gm8EC9jEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_SEZ5IC9kEeOtfoUUZnhYVQ" name="Scheduling Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_SEmtcC9kEeOtfoUUZnhYVQ" name="Realization7" client="_AoifMC9kEeOtfoUUZnhYVQ" supplier="_SEZ5IC9kEeOtfoUUZnhYVQ" contract="_SEZ5IC9kEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_aqEHYC9kEeOtfoUUZnhYVQ" name="Usage8" client="_-qL8IC9jEeOtfoUUZnhYVQ" supplier="_SEZ5IC9kEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_rt9tQC9kEeOtfoUUZnhYVQ" clientDependency="_zm70oC9kEeOtfoUUZnhYVQ _06B0MC9kEeOtfoUUZnhYVQ _9lSCMC9mEeOtfoUUZnhYVQ" name="Showtimes Manager"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_zmtyMC9kEeOtfoUUZnhYVQ" name="Showtimes List Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_zm70oC9kEeOtfoUUZnhYVQ" name="Realization8" client="_rt9tQC9kEeOtfoUUZnhYVQ" supplier="_zmtyMC9kEeOtfoUUZnhYVQ" contract="_zmtyMC9kEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_051m8C9kEeOtfoUUZnhYVQ" name="Showtimes Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_06B0MC9kEeOtfoUUZnhYVQ" name="Realization9" client="_rt9tQC9kEeOtfoUUZnhYVQ" supplier="_051m8C9kEeOtfoUUZnhYVQ" contract="_051m8C9kEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_IfWN8C9lEeOtfoUUZnhYVQ" clientDependency="_WoONIC9lEeOtfoUUZnhYVQ" name="Showtimes Viewer"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_WoONIC9lEeOtfoUUZnhYVQ" name="Usage9" client="_IfWN8C9lEeOtfoUUZnhYVQ" supplier="_zmtyMC9kEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_2mgSMC9mEeOtfoUUZnhYVQ" clientDependency="_LtUT4C9nEeOtfoUUZnhYVQ _hAYB0C9nEeOtfoUUZnhYVQ _tmxhoC9nEeOtfoUUZnhYVQ" name="Ticketing "/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_9lHDEC9mEeOtfoUUZnhYVQ" name="Selling int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_9lSCMC9mEeOtfoUUZnhYVQ" name="Realization10" client="_rt9tQC9kEeOtfoUUZnhYVQ" supplier="_9lHDEC9mEeOtfoUUZnhYVQ" contract="_9lHDEC9mEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_LtUT4C9nEeOtfoUUZnhYVQ" name="Usage10" client="_2mgSMC9mEeOtfoUUZnhYVQ" supplier="_9lHDEC9mEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_NZjzQC9nEeOtfoUUZnhYVQ" clientDependency="_W3wzEC9nEeOtfoUUZnhYVQ _eR960C9nEeOtfoUUZnhYVQ _ksHTwC9nEeOtfoUUZnhYVQ" name="Seats Allocator"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_Qq62UC9nEeOtfoUUZnhYVQ" clientDependency="_VIemwC9nEeOtfoUUZnhYVQ" name="Seats Algorithm"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_VISZgC9nEeOtfoUUZnhYVQ" name="Seats Alg. Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_VIemwC9nEeOtfoUUZnhYVQ" name="Realization101" client="_Qq62UC9nEeOtfoUUZnhYVQ" supplier="_VISZgC9nEeOtfoUUZnhYVQ" contract="_VISZgC9nEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_W3wzEC9nEeOtfoUUZnhYVQ" name="Usage101" client="_NZjzQC9nEeOtfoUUZnhYVQ" supplier="_VISZgC9nEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_eRxtkC9nEeOtfoUUZnhYVQ" name="Seats Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_eR960C9nEeOtfoUUZnhYVQ" name="Realization1011" client="_NZjzQC9nEeOtfoUUZnhYVQ" supplier="_eRxtkC9nEeOtfoUUZnhYVQ" contract="_eRxtkC9nEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_hAYB0C9nEeOtfoUUZnhYVQ" name="Usage1011" client="_2mgSMC9mEeOtfoUUZnhYVQ" supplier="_eRxtkC9nEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_ksHTwC9nEeOtfoUUZnhYVQ" name="Usage10111" client="_NZjzQC9nEeOtfoUUZnhYVQ" supplier="_051m8C9kEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_oajUYC9nEeOtfoUUZnhYVQ" clientDependency="_sQuUsC9nEeOtfoUUZnhYVQ" name="Print Ticket"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_sQjVkC9nEeOtfoUUZnhYVQ" name="Print Int."/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_sQuUsC9nEeOtfoUUZnhYVQ" name="Realization10111" client="_oajUYC9nEeOtfoUUZnhYVQ" supplier="_sQjVkC9nEeOtfoUUZnhYVQ" contract="_sQjVkC9nEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_tmxhoC9nEeOtfoUUZnhYVQ" name="Usage101111" client="_2mgSMC9mEeOtfoUUZnhYVQ" supplier="_sQjVkC9nEeOtfoUUZnhYVQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_AfUU8C9oEeOtfoUUZnhYVQ" name="Ticket Selling">
+    <generalization xmi:type="uml:Generalization" xmi:id="_Wkus4C9oEeOtfoUUZnhYVQ" general="_2mgSMC9mEeOtfoUUZnhYVQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_CAIAYC9oEeOtfoUUZnhYVQ" name="Ticket Reservation">
+    <generalization xmi:type="uml:Generalization" xmi:id="_SpltAC9oEeOtfoUUZnhYVQ" general="_2mgSMC9mEeOtfoUUZnhYVQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_DCus4C9oEeOtfoUUZnhYVQ" name="Reservation Withdrawal">
+    <generalization xmi:type="uml:Generalization" xmi:id="_N21IoC9oEeOtfoUUZnhYVQ" general="_2mgSMC9mEeOtfoUUZnhYVQ"/>
+  </packagedElement>
 </uml:Model>
