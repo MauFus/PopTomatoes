@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_ckJwcDBfEeOBu5nRNs3vBg" name="model">
+  <packagedElement xmi:type="uml:Node" xmi:id="_7Kv4wDB_EeOJ9vDsJcBKEQ" name="Server">
+    <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_PRcEwDCBEeOJ9vDsJcBKEQ" clientDependency="_jzKcYDCBEeOJ9vDsJcBKEQ" name="Persistence Module"/>
+    <nestedNode xmi:type="uml:Device" xmi:id="_gD7xkDCBEeOJ9vDsJcBKEQ" name="Database"/>
+    <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_poLSgDCCEeOJ9vDsJcBKEQ" clientDependency="_HgF2EDCGEeOJ9vDsJcBKEQ" name="Application Services"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Node" xmi:id="_LQyIMDCAEeOJ9vDsJcBKEQ" name="Scheduler Client">
+    <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_e1a6kDCCEeOJ9vDsJcBKEQ" clientDependency="_pYLx4DCGEeOJ9vDsJcBKEQ _0HOHcDCGEeOJ9vDsJcBKEQ" name="Scheduling System"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Node" xmi:id="_NyX7MDCAEeOJ9vDsJcBKEQ" name="Ticketing Client">
+    <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_qMrjMDCBEeOJ9vDsJcBKEQ" clientDependency="_KSByMDCGEeOJ9vDsJcBKEQ" name="Ticketing System"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_prCrMDCAEeOJ9vDsJcBKEQ" name="JDBC"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_jzKcYDCBEeOJ9vDsJcBKEQ" name="JDBC" client="_PRcEwDCBEeOJ9vDsJcBKEQ" supplier="_gD7xkDCBEeOJ9vDsJcBKEQ"/>
+  <packagedElement xmi:type="uml:Node" xmi:id="_n4gPMDCDEeOJ9vDsJcBKEQ" name="Admin Client">
+    <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_qT1CIDCDEeOJ9vDsJcBKEQ" clientDependency="_wXshsDCGEeOJ9vDsJcBKEQ" name="Configuration"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Node" xmi:id="_XCQ_8DCFEeOJ9vDsJcBKEQ" name="Maintainance Client">
+    <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_ZxhbgDCFEeOJ9vDsJcBKEQ" clientDependency="_P2VvUDCGEeOJ9vDsJcBKEQ _iaDiIDCGEeOJ9vDsJcBKEQ" name="Event Handler"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_HgF2EDCGEeOJ9vDsJcBKEQ" name="" client="_poLSgDCCEeOJ9vDsJcBKEQ" supplier="_PRcEwDCBEeOJ9vDsJcBKEQ"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_KSByMDCGEeOJ9vDsJcBKEQ" name="RMI" client="_qMrjMDCBEeOJ9vDsJcBKEQ" supplier="_poLSgDCCEeOJ9vDsJcBKEQ"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_P2VvUDCGEeOJ9vDsJcBKEQ" name="RMI" client="_ZxhbgDCFEeOJ9vDsJcBKEQ" supplier="_PRcEwDCBEeOJ9vDsJcBKEQ"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_iaDiIDCGEeOJ9vDsJcBKEQ" name="RMI" client="_ZxhbgDCFEeOJ9vDsJcBKEQ" supplier="_poLSgDCCEeOJ9vDsJcBKEQ"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_pYLx4DCGEeOJ9vDsJcBKEQ" name="RMI" client="_e1a6kDCCEeOJ9vDsJcBKEQ" supplier="_poLSgDCCEeOJ9vDsJcBKEQ"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_wXshsDCGEeOJ9vDsJcBKEQ" name="RMI" client="_qT1CIDCDEeOJ9vDsJcBKEQ" supplier="_PRcEwDCBEeOJ9vDsJcBKEQ"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_0HOHcDCGEeOJ9vDsJcBKEQ" name="RMI" client="_e1a6kDCCEeOJ9vDsJcBKEQ" supplier="_PRcEwDCBEeOJ9vDsJcBKEQ"/>
+</uml:Model>
