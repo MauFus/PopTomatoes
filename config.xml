@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cinema name="Febbraro's Multisalsa">
+    <hall id="01" name="sala MELLA" specialseat="4">
+        <row number="01"> 12 </row>
+        <row number="02"> 16 </row>
+        <row number="03"> 16 </row>
+        <row number="04"> 16 </row>
+        <row number="05"> 18 </row>
+        <row number="06"> 18 </row>
+        <row number="07"> 18 </row>
+        <row number="08"> 18 </row>
+        <row number="09"> 20 </row>
+        <row number="10"> 20 </row>
+        <row number="11"> 20 </row>
+        <row number="12"> 20 </row>
+        <row number="13"> 22 </row>
+        <row number="14"> 22 </row>
+        <row number="15"> 22 </row>
+        <row number="16"> 22 </row>
+        <row number="17"> 24 </row>
+        <row number="18"> 24 </row>
+        <row number="19"> 24 </row>
+        <row number="20"> 24 </row>
+    </hall>
+    <hall id="02" name="sala MANDRA" specialseat="4">
+        <row number="01"> 10 </row>
+        <row number="02"> 14 </row>
+        <row number="03"> 14 </row>
+        <row number="04"> 14 </row>
+        <row number="05"> 14 </row>
+        <row number="06"> 16 </row>
+        <row number="07"> 16 </row>
+        <row number="08"> 16 </row>
+        <row number="09"> 16 </row>
+        <row number="10"> 16 </row>
+        <row number="11"> 18 </row>
+        <row number="12"> 18 </row>
+        <row number="13"> 18 </row>
+        <row number="14"> 18 </row>
+        <row number="15"> 18 </row>
+    </hall>
+    <hall id="03" name="sala MOIA" specialseat="4">
+        <row number="01"> 10 </row>
+        <row number="02"> 14 </row>
+        <row number="03"> 14 </row>
+        <row number="04"> 14 </row>
+        <row number="05"> 14 </row>
+        <row number="06"> 16 </row>
+        <row number="07"> 16 </row>
+        <row number="08"> 16 </row>
+        <row number="09"> 16 </row>
+        <row number="10"> 16 </row>
+        <row number="11"> 18 </row>
+        <row number="12"> 18 </row>
+        <row number="13"> 18 </row>
+        <row number="14"> 18 </row>
+        <row number="15"> 18 </row>
+    </hall>
+    <hall id="04" name="sala TINO" specialseat="2">
+        <row number="01"> 10 </row>
+        <row number="02"> 12 </row>
+        <row number="03"> 12 </row>
+        <row number="04"> 12 </row>
+        <row number="05"> 12 </row>
+        <row number="06"> 14 </row>
+        <row number="07"> 14 </row>
+        <row number="08"> 14 </row>
+        <row number="09"> 16 </row>
+        <row number="10"> 16 </row>
+    </hall>
+    <hall id="05" name="sala TORE" specialseat="2">
+        <row number="01"> 10 </row>
+        <row number="02"> 12 </row>
+        <row number="03"> 12 </row>
+        <row number="04"> 12 </row>
+        <row number="05"> 12 </row>
+        <row number="06"> 14 </row>
+        <row number="07"> 14 </row>
+        <row number="08"> 14 </row>
+        <row number="09"> 16 </row>
+        <row number="10"> 16 </row>
+    </hall>
+</cinema>
