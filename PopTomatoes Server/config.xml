@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cinema name="Febbraro's Multisalsa">
-    <hall id="01" name="sala MELLA" specialseat="4">
+    <hall id="A" name="Sala MELLA" specialseat="4">
         <row number="01"> 12 </row>
         <row number="02"> 16 </row>
         <row number="03"> 16 </row>
@@ -22,7 +22,7 @@
         <row number="19"> 24 </row>
         <row number="20"> 24 </row>
     </hall>
-    <hall id="02" name="sala MANDRA" specialseat="4">
+    <hall id="B" name="Sala MANDRA" specialseat="4">
         <row number="01"> 10 </row>
         <row number="02"> 14 </row>
         <row number="03"> 14 </row>
@@ -39,7 +39,7 @@
         <row number="14"> 18 </row>
         <row number="15"> 18 </row>
     </hall>
-    <hall id="03" name="sala MOIA" specialseat="4">
+    <hall id="C" name="Sala MOIA" specialseat="4">
         <row number="01"> 10 </row>
         <row number="02"> 14 </row>
         <row number="03"> 14 </row>
@@ -56,7 +56,7 @@
         <row number="14"> 18 </row>
         <row number="15"> 18 </row>
     </hall>
-    <hall id="04" name="sala TINO" specialseat="2">
+    <hall id="D" name="Sala TINO" specialseat="2">
         <row number="01"> 10 </row>
         <row number="02"> 12 </row>
         <row number="03"> 12 </row>
@@ -68,7 +68,7 @@
         <row number="09"> 16 </row>
         <row number="10"> 16 </row>
     </hall>
-    <hall id="05" name="sala TORE" specialseat="2">
+    <hall id="E" name="Sala TORE" specialseat="2">
         <row number="01"> 10 </row>
         <row number="02"> 12 </row>
         <row number="03"> 12 </row>
