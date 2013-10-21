@@ -11,6 +11,11 @@ public class MySQLAccess {
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 
+	/**
+	 * Permette di caricare i driver MySQL ed aprire la connessione con il DB
+	 *  
+	 * @throws Exception
+	 */
 	public void readDB() throws Exception {
 		try {
 			// load the MySQL Driver
@@ -25,6 +30,16 @@ public class MySQLAccess {
 
 	}
 
+	/**
+	 * Permette l'inserimento in DB di una Cinema Hall
+	 * 
+	 * @param ch_id Cinema Hall ID
+	 * @param ch_name Cinema Hall Name
+	 * @param ch_rows Cinema Hall Rows
+	 * @param ch_seats Cinema Hall Seats 
+	 * @param ch_specialseats Cinema Hall Special Seats
+	 * @throws Exception
+	 */
 	public void insertCinemaHall(char ch_id, String ch_name, int ch_rows,
 			int ch_seats, int ch_specialseats) throws Exception {
 		try {
@@ -49,7 +64,15 @@ public class MySQLAccess {
 			throw e;
 		}
 	}
-
+	
+	/**
+	 * Permette l'inserimento in DB di una nuova Row
+	 * 
+	 * @param idCinemaHall Cinema Hall ID
+	 * @param r_number Numero Row
+	 * @param r_seats Seats Row
+	 * @throws Exception
+	 */
 	public void insertRow(char idCinemaHall, int r_number, int r_seats)
 			throws Exception {
 		try {
@@ -86,7 +109,12 @@ public class MySQLAccess {
 		}
 
 	}
-
+	
+	/**
+	 * stampa a video i risultati riguardanti l'inserimento di sala cinematografica
+	 * @param resultSet
+	 * @throws SQLException
+	 */
 	private void writeResultSetHall(ResultSet resultSet) throws SQLException { 
 		// ResultSet is initially before the first data set
 		while (resultSet.next()) {
@@ -107,6 +135,11 @@ public class MySQLAccess {
 		}
 	}
 	
+	/**
+	 * stampa a video i risultati riguardanti l'inserimento di una Riga
+	 * @param resultSet
+	 * @throws SQLException
+	 */
 	private void writeResultSetRow(ResultSet resultSet) throws SQLException { 
 		// ResultSet is initially before the first data set
 		while (resultSet.next()) {
@@ -122,7 +155,10 @@ public class MySQLAccess {
 			System.out.println("Seats: " + seats);
 		}
 	}
-
+	
+	/**
+	 * Chiude la connessione con il DB
+	 */
 	public void closeDB() {
 		try {
 			if (resultSet != null) {
