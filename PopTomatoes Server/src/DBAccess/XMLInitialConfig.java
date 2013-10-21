@@ -6,7 +6,7 @@
  * @author Fustinoni Mauro & Matteo Ronchi
  * @date october 2013
  */
-package XMLPackage;
+package DBAccess;
 
 import java.io.*;
 
