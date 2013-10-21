@@ -15,8 +15,6 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
-import DBAccess.*;
-
 public class XMLInitialConfig {
 
 	public XMLInitialConfig() {
