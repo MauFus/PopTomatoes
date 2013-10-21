@@ -7,6 +7,8 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import DBAccess.*;
+
 public class XMLInitialConfig {
 
 	public XMLInitialConfig() {
@@ -68,8 +70,10 @@ public class XMLInitialConfig {
 	 */
 	public static void readInitialConfig() {
 		// Lettura del file config.xml
+		MySQLAccess msa = new MySQLAccess();
 		XMLInitialConfig reader = new XMLInitialConfig();
 		Document config = reader.loadDocument("config.xml");
+		
 		// Creazione della lista di sale
 		NodeList cinemaHalls = findCinemaHall(config);
 		for (int i = 0; i < cinemaHalls.getLength(); i++) {
@@ -86,6 +90,7 @@ public class XMLInitialConfig {
 			NodeList rows = readRows((Element) cinemaHalls.item(i));
 			// Numero file della sala i
 			int n_rows = rows.getLength();
+			
 			// Numero posti totali
 			int seats = 0;
 			for (int j = 0; j < n_rows; j++) {
@@ -96,6 +101,20 @@ public class XMLInitialConfig {
 				int r_seats = Integer.parseInt(rows.item(j).getTextContent()
 						.toString().trim());
 				seats += r_seats;
+				
+				// Invoca l'inserimento in DB
+				try {
+					msa.insertRow(id, number, r_seats);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			// Invoca l'inserimento in DB
+			try {
+				msa.insertCinemaHall(id, name, n_rows, seats, specialSeats);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
