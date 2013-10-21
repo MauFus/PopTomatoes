@@ -1,3 +1,12 @@
+/**
+ * PopTomatoes - Progetto Informatica III B
+ * 
+ * Classe atta alla comunicazione con il DB.
+ * 
+ * @author Matteo Ronchi & Fustinoni Mauro
+ * @date october 2013
+ */
+
 package DBAccess;
 
 import java.sql.Connection;
@@ -96,6 +105,11 @@ public class MySQLAccess {
 		}
 	}
 
+	/**
+	 * test *
+	 * @param resultSet
+	 * @throws SQLException
+	 */
 	private void writeMetaData(ResultSet resultSet) throws SQLException {
 		// Now get some metadata from the database
 		// Result set get the result of the SQL query
@@ -111,6 +125,7 @@ public class MySQLAccess {
 	}
 	
 	/**
+	 * test *
 	 * stampa a video i risultati riguardanti l'inserimento di sala cinematografica
 	 * @param resultSet
 	 * @throws SQLException
@@ -136,6 +151,7 @@ public class MySQLAccess {
 	}
 	
 	/**
+	 * test *
 	 * stampa a video i risultati riguardanti l'inserimento di una Riga
 	 * @param resultSet
 	 * @throws SQLException

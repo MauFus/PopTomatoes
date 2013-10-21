@@ -1,3 +1,11 @@
+/**
+ * PopTomatoes - Progetto Informatica III B
+ * 
+ * Classe atta alla lettura ed al salvataggio della configurazione iniziale.
+ * 
+ * @author Fustinoni Mauro & Matteo Ronchi
+ * @date october 2013
+ */
 package XMLPackage;
 
 import java.io.*;
@@ -67,13 +75,16 @@ public class XMLInitialConfig {
 	/**
 	 * Metodo per la lettura e il salvataggio in DB dei dati relativi alla prima
 	 * configurazione del cinema multisala
+	 * 
+	 * @throws Exception
 	 */
-	public static void readInitialConfig() {
+	public static void readInitialConfig() throws Exception {
 		// Lettura del file config.xml
 		MySQLAccess msa = new MySQLAccess();
+		msa.readDB();
 		XMLInitialConfig reader = new XMLInitialConfig();
 		Document config = reader.loadDocument("config.xml");
-		
+
 		// Creazione della lista di sale
 		NodeList cinemaHalls = findCinemaHall(config);
 		for (int i = 0; i < cinemaHalls.getLength(); i++) {
@@ -90,9 +101,19 @@ public class XMLInitialConfig {
 			NodeList rows = readRows((Element) cinemaHalls.item(i));
 			// Numero file della sala i
 			int n_rows = rows.getLength();
-			
+
 			// Numero posti totali
 			int seats = 0;
+			for (int j = 0; j < n_rows; j++) {
+				// Numero posti della fila j
+				int r_seats = Integer.parseInt(rows.item(j).getTextContent()
+						.toString().trim());
+				seats += r_seats;
+			}
+
+			// Invoca l'inserimento in DB
+			msa.insertCinemaHall(id, name, n_rows, seats, specialSeats);
+
 			for (int j = 0; j < n_rows; j++) {
 				NamedNodeMap r_attr = rows.item(j).getAttributes();
 				s = r_attr.getNamedItem("number").toString().split("\"");
@@ -100,22 +121,10 @@ public class XMLInitialConfig {
 				// Numero posti della fila j
 				int r_seats = Integer.parseInt(rows.item(j).getTextContent()
 						.toString().trim());
-				seats += r_seats;
-				
-				// Invoca l'inserimento in DB
-				try {
-					msa.insertRow(id, number, r_seats);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				msa.insertRow(id, number, r_seats);
 			}
-			
-			// Invoca l'inserimento in DB
-			try {
-				msa.insertCinemaHall(id, name, n_rows, seats, specialSeats);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+
 		}
+		msa.closeDB();
 	}
 }
