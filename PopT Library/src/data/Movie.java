@@ -7,6 +7,8 @@
  * @date october 2013
  */
 
+package data;
+
 import java.util.Date;
 
 enum Genre {
