@@ -10,6 +10,7 @@
 package popt.dbaccess;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +23,7 @@ public class MySQLAccess {
 
 	/**
 	 * Permette di caricare i driver MySQL ed aprire la connessione con il DB
-	 *  
+	 * 
 	 * @throws Exception
 	 */
 	public void readDB() throws Exception {
@@ -42,14 +43,19 @@ public class MySQLAccess {
 	/**
 	 * Permette l'inserimento in DB di una Cinema Hall
 	 * 
-	 * @param ch_id Cinema Hall ID
-	 * @param ch_name Cinema Hall Name
-	 * @param ch_rows Cinema Hall Rows
-	 * @param ch_seats Cinema Hall Seats 
-	 * @param ch_specialseats Cinema Hall Special Seats
+	 * @param ch_id
+	 *            Cinema Hall ID
+	 * @param ch_name
+	 *            Cinema Hall Name
+	 * @param ch_rows
+	 *            Cinema Hall Rows
+	 * @param ch_seats
+	 *            Cinema Hall Seats
+	 * @param ch_specialseats
+	 *            Cinema Hall Special Seats
 	 * @throws Exception
 	 */
-	public boolean insertCinemaHall(char ch_id, String ch_name, int ch_rows,
+	public void insertCinemaHall(char ch_id, String ch_name, int ch_rows,
 			int ch_seats, int ch_specialseats) throws Exception {
 		try {
 			preparedStatement = connect
@@ -68,23 +74,24 @@ public class MySQLAccess {
 					.executeQuery("select * from POPTOMATOESDB.CINEMAHALL");
 			writeMetaData(resultSet);
 			writeResultSetHall(resultSet);
-			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			throw e;
 		}
 	}
-	
+
 	/**
 	 * Permette l'inserimento in DB di una nuova Row
 	 * 
-	 * @param idCinemaHall Cinema Hall ID
-	 * @param r_number Numero Row
-	 * @param r_seats Seats Row
+	 * @param idCinemaHall
+	 *            Cinema Hall ID
+	 * @param r_number
+	 *            Numero Row
+	 * @param r_seats
+	 *            Seats Row
 	 * @throws Exception
 	 */
-	public boolean insertRow(char idCinemaHall, int r_number, int r_seats)
+	public void insertRow(char idCinemaHall, int r_number, int r_seats)
 			throws Exception {
 		try {
 			preparedStatement = connect
@@ -101,16 +108,52 @@ public class MySQLAccess {
 					.executeQuery("select * from POPTOMATOESDB.ROW");
 			writeMetaData(resultSet);
 			writeResultSetRow(resultSet);
-			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			throw e;
+		}
+	}
+
+	/**
+	 * Permette di inserire in DB un nuovo Movie
+	 * 
+	 * @param mv_title
+	 *            titolo del film
+	 * @param mv_duration
+	 *            durata in minuti
+	 * @param mv_date
+	 *            data di rilascio
+	 * @param mv_genre
+	 *            genere del film
+	 * @param mv_pg
+	 *            soggetto a rating pg
+	 * @return
+	 * @throws Exception
+	 */
+	public void insertMovie(String mv_title, int mv_duration, Date mv_date,
+			String mv_genre, boolean mv_pg) throws Exception {
+		try {
+			preparedStatement = connect
+					.prepareStatement("insert into POPTOMATOESDB.MOVIE values (?,?,?,?,?)");
+			preparedStatement.setString(1, mv_title);
+			preparedStatement.setInt(2, mv_duration);
+			preparedStatement.setDate(3, mv_date);
+			preparedStatement.setString(4, mv_genre);
+
+			// Test
+			resultSet = preparedStatement
+					.executeQuery("select * from POPTOMATOESDB.MOVIE");
+			writeMetaData(resultSet);
+			writeResultSetMovie(resultSet);
+			preparedStatement.setBoolean(5, mv_pg);
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 
 	/**
 	 * test *
+	 * 
 	 * @param resultSet
 	 * @throws SQLException
 	 */
@@ -127,14 +170,15 @@ public class MySQLAccess {
 		}
 
 	}
-	
+
 	/**
-	 * test *
-	 * stampa a video i risultati riguardanti l'inserimento di sala cinematografica
+	 * test * stampa a video i risultati riguardanti l'inserimento di sala
+	 * cinematografica
+	 * 
 	 * @param resultSet
 	 * @throws SQLException
 	 */
-	private void writeResultSetHall(ResultSet resultSet) throws SQLException { 
+	private void writeResultSetHall(ResultSet resultSet) throws SQLException {
 		// ResultSet is initially before the first data set
 		while (resultSet.next()) {
 			// It is possible to get the columns via name
@@ -153,14 +197,14 @@ public class MySQLAccess {
 			System.out.println("SpecialSeats: " + specialseats);
 		}
 	}
-	
+
 	/**
-	 * test *
-	 * stampa a video i risultati riguardanti l'inserimento di una Riga
+	 * test * stampa a video i risultati riguardanti l'inserimento di una Riga
+	 * 
 	 * @param resultSet
 	 * @throws SQLException
 	 */
-	private void writeResultSetRow(ResultSet resultSet) throws SQLException { 
+	private void writeResultSetRow(ResultSet resultSet) throws SQLException {
 		// ResultSet is initially before the first data set
 		while (resultSet.next()) {
 			// It is possible to get the columns via name
@@ -175,7 +219,32 @@ public class MySQLAccess {
 			System.out.println("Seats: " + seats);
 		}
 	}
-	
+
+	/**
+	 * test * stampa a video i risultati riguardanti l'inserimento di un movie
+	 * 
+	 * @param resultSet
+	 * @throws SQLException
+	 */
+	private void writeResultSetMovie(ResultSet resultSet) throws SQLException {
+		while (resultSet.next()) {
+			// It is possible to get the columns via name
+			// also possible to get the columns via the column number
+			// which starts at 1
+			// e.g.resultSet.getSTring(2);
+			String title = resultSet.getString("Title");
+			int duration = resultSet.getInt("Duration");
+			Date releaseDate = resultSet.getDate("ReleaseDate");
+			String genre = resultSet.getString("Genre");
+			boolean pg = resultSet.getBoolean("PG");
+			System.out.println("Title:" + title);
+			System.out.println("Duration:" + duration);
+			System.out.println("Realease Date:" + releaseDate);
+			System.out.println("Genre:" + genre);
+			System.out.println("PG:" + pg);
+		}
+	}
+
 	/**
 	 * Chiude la connessione con il DB
 	 */
