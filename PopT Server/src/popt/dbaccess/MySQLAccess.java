@@ -7,7 +7,7 @@
  * @date october 2013
  */
 
-package DBAccess;
+package popt.dbaccess;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

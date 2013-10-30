@@ -6,7 +6,8 @@
  * @author Fustinoni Mauro & Matteo Ronchi
  * @date october 2013
  */
-package DBAccess;
+
+package popt.dbaccess;
 
 import java.io.*;
 
