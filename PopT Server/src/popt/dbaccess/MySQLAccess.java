@@ -49,7 +49,7 @@ public class MySQLAccess {
 	 * @param ch_specialseats Cinema Hall Special Seats
 	 * @throws Exception
 	 */
-	public void insertCinemaHall(char ch_id, String ch_name, int ch_rows,
+	public boolean insertCinemaHall(char ch_id, String ch_name, int ch_rows,
 			int ch_seats, int ch_specialseats) throws Exception {
 		try {
 			preparedStatement = connect
@@ -68,9 +68,11 @@ public class MySQLAccess {
 					.executeQuery("select * from POPTOMATOESDB.CINEMAHALL");
 			writeMetaData(resultSet);
 			writeResultSetHall(resultSet);
+			return true;
 
 		} catch (Exception e) {
-			throw e;
+			e.printStackTrace();
+			return false;
 		}
 	}
 	
@@ -82,7 +84,7 @@ public class MySQLAccess {
 	 * @param r_seats Seats Row
 	 * @throws Exception
 	 */
-	public void insertRow(char idCinemaHall, int r_number, int r_seats)
+	public boolean insertRow(char idCinemaHall, int r_number, int r_seats)
 			throws Exception {
 		try {
 			preparedStatement = connect
@@ -99,9 +101,11 @@ public class MySQLAccess {
 					.executeQuery("select * from POPTOMATOESDB.ROW");
 			writeMetaData(resultSet);
 			writeResultSetRow(resultSet);
+			return true;
 
 		} catch (Exception e) {
-			throw e;
+			e.printStackTrace();
+			return false;
 		}
 	}
 

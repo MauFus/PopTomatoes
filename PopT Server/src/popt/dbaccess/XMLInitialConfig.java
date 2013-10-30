@@ -111,7 +111,10 @@ public class XMLInitialConfig {
 			}
 
 			// Invoca l'inserimento in DB
-			msa.insertCinemaHall(id, name, n_rows, seats, specialSeats);
+			boolean success = msa.insertCinemaHall(id, name, n_rows, seats, specialSeats);
+			if (!success)
+				// TODO gestire fallimento inserimento
+				;
 
 			for (int j = 0; j < n_rows; j++) {
 				NamedNodeMap r_attr = rows.item(j).getAttributes();
@@ -120,7 +123,10 @@ public class XMLInitialConfig {
 				// Numero posti della fila j
 				int r_seats = Integer.parseInt(rows.item(j).getTextContent()
 						.toString().trim());
-				msa.insertRow(id, number, r_seats);
+				success = msa.insertRow(id, number, r_seats);
+				if (!success)
+					// TODO gestire fallimento inserimento
+					;
 			}
 
 		}
