@@ -7,7 +7,7 @@
  * @date october 2013
  */
 
-package data;
+package popt.data;
 
 import java.util.Date;
 
