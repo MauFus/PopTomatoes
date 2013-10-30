@@ -11,12 +11,6 @@ package popt.data;
 
 import java.util.Date;
 
-enum Genre {
-	ACTION, ADVENTURE, ANIMATION, BIOGRAPHY, COMEDY, CRIME, DOCUMENTARY, 
-	DRAMA, FANTASY, NOIR, HISTORY, HORROR, MUSICAL, MYSTERY, ROMANCE, 
-	SCI_FI, SPORT, THRILLER, WAR, WESTERN
-}
-
 public class Movie {
 
 	private int id;
