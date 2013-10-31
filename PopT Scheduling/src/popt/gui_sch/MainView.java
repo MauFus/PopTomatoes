@@ -1,112 +1,113 @@
 package popt.gui_sch;
 
+//Imports are listed in full to show what's being used
+//could just import javax.swing.* and java.awt.* etc..
+
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
 
 import javax.swing.JFrame;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JTextPane;
-
-import java.awt.Font;
-import java.awt.Color;
-
 public class MainView {
+	JFrame guiFrame;
+	CardLayout cards;
+	JPanel cardPanel;
 
-	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
+
+			@Override
 			public void run() {
-				try {
-					MainView window = new MainView();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+
+				new MainView();
 			}
 		});
+
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public MainView() {
-		initialize();
-	}
+		guiFrame = new JFrame();
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+		// make sure the program exits when the frame closes
+		guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		guiFrame.setTitle("PopTomatoes");
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment()
+				.getDefaultScreenDevice();
+		if (gd.isFullScreenSupported()) {
+			gd.setFullScreenWindow(guiFrame);
+			guiFrame.requestFocusInWindow();
+		}
 
-		frame = new JFrame();
+		// This will center the JFrame in the middle of the screen
+		// guiFrame.setLocationRelativeTo(null);
+		guiFrame.getContentPane().setLayout(new BorderLayout());
+
+		JPanel tabsPanel = new JPanel();
+		tabsPanel.setPreferredSize(new Dimension(guiFrame.getWidth(), 100));
+		tabsPanel.setBackground(new Color(100, 100, 100));
+
 		
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();		
-		Rectangle res = ge.getMaximumWindowBounds();
-		frame.setBounds(res);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel panel = new JPanel();
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(627, Short.MAX_VALUE))
-		);
-		
-		JTextPane txtpnPoptomatoes = new JTextPane();
-		txtpnPoptomatoes.setForeground(Color.WHITE);
-		txtpnPoptomatoes.setBackground(new Color(100,100,100));
-		txtpnPoptomatoes.setFont(new Font("Calibri", Font.BOLD, 39));
-		txtpnPoptomatoes.setText("PopTomatoes");
-		
-		JButton btnNewButton = new JButton("Bye-Bye");
-		panel.setBackground(new Color(100,100,100));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton switchCards = new JButton("Insert Movie");
+		switchCards.setBackground(new Color(200,0,0));
+		switchCards.setActionCommand("Switch Card");
+		switchCards.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				//cards.next(cardPanel);
+				cards.show(cardPanel, "IM");
 			}
 		});
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(txtpnPoptomatoes, GroupLayout.PREFERRED_SIZE, 509, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 721, Short.MAX_VALUE)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtpnPoptomatoes, GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		panel.setLayout(gl_panel);
-		frame.getContentPane().setLayout(groupLayout);
+		tabsPanel.add(switchCards);
+
+		cards = new CardLayout();
+		cardPanel = new JPanel();
+		cardPanel.setLayout(cards);
+		cards.show(cardPanel, "Main");
+
+		JPanel mainCard = new JPanel();
+		mainCard.setBackground(Color.BLACK);
+		
+		InsertMovieView imv = new InsertMovieView();
+		imv.setBackground(Color.ORANGE);
+
+		JPanel firstCard = new JPanel();
+		firstCard.setBackground(Color.GREEN);
+		addButton(firstCard, "APPLES");
+		addButton(firstCard, "ORANGES");
+		addButton(firstCard, "BANANAS");
+
+		JPanel secondCard = new JPanel();
+		secondCard.setBackground(Color.BLUE);
+		addButton(secondCard, "LEEKS");
+		addButton(secondCard, "TOMATOES");
+		addButton(secondCard, "PEAS");
+
+		cardPanel.add(mainCard, "Main");
+		cardPanel.add(imv,"IM");
+		cardPanel.add(firstCard, "Fruits");
+		cardPanel.add(secondCard, "Veggies");
+
+		guiFrame.getContentPane().add(tabsPanel, BorderLayout.NORTH);
+		guiFrame.getContentPane().add(cardPanel, BorderLayout.CENTER);
+		guiFrame.setVisible(true);
+	}
+
+	// All the buttons are following the same pattern
+	// so create them all in one place.
+	private void addButton(JPanel parent, String name) {
+		JButton but = new JButton(name);
+		but.setActionCommand(name);
+		parent.add(but);
 	}
 }
