@@ -19,11 +19,10 @@ import popt.rmi.DBReceiver;
 public class DBReceiverImpl extends UnicastRemoteObject implements DBReceiver {
 
 	private static final long serialVersionUID = -3198085858632777108L;
-	public static final String SERVICE_NAME = "DBReceiver";
 	private boolean isWorking;
 	private String statusMessage;
 	
-	protected DBReceiverImpl() throws RemoteException{
+	public DBReceiverImpl() throws RemoteException{
 		super();
 		statusMessage = "";
 		isWorking = false;

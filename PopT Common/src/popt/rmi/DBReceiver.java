@@ -16,6 +16,8 @@ import popt.data.Movie;
 
 public interface DBReceiver extends Remote {
 
+	public static final String SERVICE_NAME = "DBReceiver";
+	
 	/**
 	 * Invoca l'inserimento in DB del film
 	 * @param movie
