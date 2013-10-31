@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.26-bin.jar"/>
 	<classpathentry kind="lib" path="lib/popt-library.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PopT Common"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
