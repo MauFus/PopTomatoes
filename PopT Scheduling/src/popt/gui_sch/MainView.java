@@ -58,17 +58,31 @@ public class MainView {
 		tabsPanel.setBackground(new Color(100, 100, 100));
 
 		
-		JButton switchCards = new JButton("Insert Movie");
-		switchCards.setBackground(new Color(200,0,0));
-		switchCards.setActionCommand("Switch Card");
-		switchCards.addActionListener(new ActionListener() {
+		JButton insertMovieButt = new JButton("Insert Movie");
+		insertMovieButt.setBackground(new Color(200,0,0));
+		insertMovieButt.setActionCommand("Switch Card");
+		insertMovieButt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				//cards.next(cardPanel);
 				cards.show(cardPanel, "IM");
 			}
 		});
-		tabsPanel.add(switchCards);
+		tabsPanel.add(insertMovieButt);
+		
+		JButton schedulingButt = new JButton("Scheduling");
+		schedulingButt.setBackground(new Color(0,200,0));
+		schedulingButt.setActionCommand("Switch Card");
+		schedulingButt.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				//cards.next(cardPanel);
+				cards.show(cardPanel, "Fruits");
+			}
+		});
+		tabsPanel.add(schedulingButt);
+		
+		
 
 		cards = new CardLayout();
 		cardPanel = new JPanel();

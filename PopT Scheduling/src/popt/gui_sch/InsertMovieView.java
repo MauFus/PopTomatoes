@@ -11,12 +11,13 @@ import java.awt.Insets;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
-import javax.swing.JList;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
+import popt.data.*;
+import javax.swing.JButton;
 
 public class InsertMovieView extends JPanel {
 
@@ -29,8 +30,8 @@ public class InsertMovieView extends JPanel {
 	 * Create the panel.
 	 */
 	JPanel insertMoviePanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textTitle;
+	private JTextField textDuration;
 	
 	public InsertMovieView() {
 		
@@ -42,10 +43,10 @@ public class InsertMovieView extends JPanel {
 		Insets m = new Insets(5, 50, 0, 0);
 		txtpnInsertMovie.setMargin(m);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setText("Title:");
-		textPane.setFont(new Font("Calibri", Font.PLAIN, 15));
-		textPane.setBackground(Color.ORANGE);
+		JTextPane txtpnTitle = new JTextPane();
+		txtpnTitle.setText("Title:");
+		txtpnTitle.setFont(new Font("Calibri", Font.PLAIN, 15));
+		txtpnTitle.setBackground(Color.ORANGE);
 		
 		JTextPane txtpnReleaseDate = new JTextPane();
 		txtpnReleaseDate.setText("Release date:");
@@ -67,28 +68,31 @@ public class InsertMovieView extends JPanel {
 		txtpnPg.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txtpnPg.setBackground(Color.ORANGE);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Calibri", Font.PLAIN, 15));
-		textField.setBorder(null);
-		textField.setColumns(10);
+		textTitle = new JTextField();
+		textTitle.setFont(new Font("Calibri", Font.PLAIN, 15));
+		textTitle.setBorder(null);
+		textTitle.setColumns(10);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setFont(new Font("Calibri", Font.PLAIN, 15));
-		formattedTextField.setBorder(null);
+		JFormattedTextField textDate = new JFormattedTextField();
+		textDate.setFont(new Font("Calibri", Font.PLAIN, 15));
+		textDate.setBorder(null);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Calibri", Font.PLAIN, 15));
-		textField_1.setBorder(null);
-		textField_1.setColumns(10);
+		textDuration = new JTextField();
+		textDuration.setFont(new Font("Calibri", Font.PLAIN, 15));
+		textDuration.setBorder(null);
+		textDuration.setColumns(10);
 		
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("v.m.18");
-		chckbxNewCheckBox.setFont(new Font("Calibri", Font.BOLD, 11));
-		chckbxNewCheckBox.setBorder(null);
-		chckbxNewCheckBox.setBackground(Color.ORANGE);
+		JCheckBox checkPG = new JCheckBox("v.m.18");
+		checkPG.setFont(new Font("Calibri", Font.BOLD, 11));
+		checkPG.setBorder(null);
+		checkPG.setBackground(Color.ORANGE);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Genre1", "Genre2", "Genre3", "Genre4", "Genre5", "Genre6"}));
+		JComboBox comboBoxGenre = new JComboBox();
+		comboBoxGenre.setModel(new DefaultComboBoxModel(Genre.values()));
+		
+		JButton buttonInsert = new JButton("Insert!");
+		buttonInsert.setBackground(new Color(250,50,0));
 		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -100,25 +104,32 @@ public class InsertMovieView extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtpnTitle, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
 								.addComponent(txtpnDuration, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
 							.addGap(206)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(textDuration, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textTitle, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+									.addComponent(txtpnGenre, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+									.addComponent(txtpnPg, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
+								.addComponent(txtpnReleaseDate, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED, 337, Short.MAX_VALUE)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(comboBoxGenre, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(textDate, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-									.addComponent(txtpnReleaseDate, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-									.addGap(337))
-								.addComponent(txtpnGenre, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtpnPg, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(comboBox, 0, 171, Short.MAX_VALUE)
-								.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-								.addComponent(chckbxNewCheckBox))))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(checkPG)))))
 					.addContainerGap(131, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(318)
+					.addComponent(buttonInsert)
+					.addContainerGap(399, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -126,28 +137,27 @@ public class InsertMovieView extends JPanel {
 					.addComponent(txtpnInsertMovie, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
 					.addGap(90)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(textField)
-						.addComponent(textPane, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-					.addGap(14)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(formattedTextField)
-						.addComponent(txtpnReleaseDate, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+						.addComponent(textTitle)
+						.addComponent(txtpnTitle, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(textField_1)
+						.addComponent(textDate)
+						.addComponent(txtpnReleaseDate, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+					.addGap(15)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(textDuration)
 						.addComponent(txtpnDuration, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(comboBox)
+						.addComponent(comboBoxGenre)
 						.addComponent(txtpnGenre, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
 					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(txtpnPg, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-							.addGap(149))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(chckbxNewCheckBox, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(checkPG, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(txtpnPg, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+					.addGap(37)
+					.addComponent(buttonInsert, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addGap(75))
 		);
 		setLayout(groupLayout);
 		
