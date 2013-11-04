@@ -32,6 +32,10 @@ public class InsertMovieView extends JPanel {
 	JPanel insertMoviePanel = new JPanel();
 	private JTextField textTitle;
 	private JTextField textDuration;
+	private JFormattedTextField textDate;
+	private JComboBox comboBoxGenre;
+	private JCheckBox checkPG;
+	private JButton buttonInsert;
 	
 	public InsertMovieView() {
 		
@@ -73,7 +77,7 @@ public class InsertMovieView extends JPanel {
 		textTitle.setBorder(null);
 		textTitle.setColumns(10);
 		
-		JFormattedTextField textDate = new JFormattedTextField();
+		textDate = new JFormattedTextField();
 		textDate.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textDate.setBorder(null);
 		
@@ -83,17 +87,16 @@ public class InsertMovieView extends JPanel {
 		textDuration.setColumns(10);
 		
 		
-		JCheckBox checkPG = new JCheckBox("v.m.18");
+		checkPG = new JCheckBox("v.m.18");
 		checkPG.setFont(new Font("Calibri", Font.BOLD, 11));
 		checkPG.setBorder(null);
 		checkPG.setBackground(Color.ORANGE);
 		
-		JComboBox comboBoxGenre = new JComboBox();
+		comboBoxGenre = new JComboBox();
 		comboBoxGenre.setModel(new DefaultComboBoxModel(Genre.values()));
 		
-		JButton buttonInsert = new JButton("Insert!");
-		buttonInsert.setBackground(new Color(250,50,0));
-		
+		buttonInsert = new JButton("Insert!");
+		buttonInsert.setBackground(new Color(250,50,0));		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -161,5 +164,29 @@ public class InsertMovieView extends JPanel {
 		);
 		setLayout(groupLayout);
 		
+	}
+	
+	public JButton getButtonInsert() {
+		return buttonInsert;
+	}
+	
+	public JTextField getTextTitle() {
+		return textTitle;
+	}
+
+	public JTextField getTextDuration() {
+		return textDuration;
+	}
+
+	public JFormattedTextField getTextDate() {
+		return textDate;
+	}
+	
+	public JComboBox getComboBoxGenre() {
+		return comboBoxGenre;
+	}
+
+	public JCheckBox getCheckPG() {
+		return checkPG;
 	}
 }
