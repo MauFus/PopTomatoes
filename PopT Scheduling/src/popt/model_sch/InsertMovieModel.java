@@ -4,7 +4,7 @@
  * Modello per l'interfaccia di Insert Movie
  * 
  * @author Fustinoni Mauro & Matteo Ronchi
- * @date october 2013
+ * @date November 2013
  */
 
 package popt.model_sch;
