@@ -18,6 +18,7 @@ import java.util.Date;
 
 import popt.data.Genre;
 import popt.gui_sch.InsertMovieView;
+import popt.main_sch.Main;
 import popt.model_sch.InsertMovieModel;
 
 public class InsertMovieController {
@@ -110,16 +111,39 @@ public class InsertMovieController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Inserire controllo prima di modificare il model
+				try {
+					if (!view.getTextTitle().getText().isEmpty()
+							&& (!view.getTextDuration().getText().isEmpty() && Integer
+									.parseInt(view.getTextDuration().getText()) > 0)
+							&& !view.getTextDate().getText().isEmpty()
+							/* TODO && Data è una data*/) {
 
-				model.getMovie().setTitle(view.getTextTitle().getText());
-				model.getMovie().setDuration(
-						Integer.parseInt(view.getTextDuration().getText()));
-				// TODO controllare se Data e Genere funzionano correttamente
-				model.getMovie().setDate(new Date(Long.parseLong(view.getTextDate().getText())));
-				model.getMovie().setGenre(
-						(Genre) view.getComboBoxGenre().getSelectedItem());
-				model.getMovie().setPG(view.getCheckPG().isSelected());
+						model.getMovie()
+								.setTitle(view.getTextTitle().getText());
+						model.getMovie().setDuration(
+								Integer.parseInt(view.getTextDuration()
+										.getText()));
+						// TODO controllare se Data e Genere funzionano
+						// correttamente
+						model.getMovie().setDate(
+								new Date(Long.parseLong(view.getTextDate()
+										.getText())));
+						model.getMovie().setGenre(
+								(Genre) view.getComboBoxGenre()
+										.getSelectedItem());
+						model.getMovie().setPG(view.getCheckPG().isSelected());
+					}
+					// TODO invocazione e gestione dell'insert
+					boolean success = Main.RequestInsert(model.getMovie());
+					if (success) {
+						// TODO stampare operazione riuscita o getStatus()
+					} else {
+						// TODO chiedere errore e stamparlo
+					}
+
+				} catch (NumberFormatException nfe) {
+					// TODO segnalare che Duration non è un numero
+				}
 			}
 		});
 	}
