@@ -22,6 +22,9 @@ public class MainView {
 	JFrame guiFrame;
 	CardLayout cards;
 	JPanel cardPanel;
+	
+	// View per il modulo InsertMovie
+	InsertMovieView imv;
 
 	public static void main(String[] args) {
 
@@ -92,7 +95,7 @@ public class MainView {
 		JPanel mainCard = new JPanel();
 		mainCard.setBackground(Color.BLACK);
 		
-		InsertMovieView imv = new InsertMovieView();
+		imv = new InsertMovieView();
 		imv.setBackground(Color.ORANGE);
 
 		JPanel firstCard = new JPanel();
@@ -115,6 +118,14 @@ public class MainView {
 		guiFrame.getContentPane().add(tabsPanel, BorderLayout.NORTH);
 		guiFrame.getContentPane().add(cardPanel, BorderLayout.CENTER);
 		guiFrame.setVisible(true);
+	}
+	
+	/**
+	 * Getter per l'InsertMovieView
+	 * @return il riferimento alla view
+	 */
+	public InsertMovieView getInsertMovieView() {
+		return imv;
 	}
 
 	// All the buttons are following the same pattern
