@@ -111,8 +111,8 @@ public class InsertMovieController {
 					if (!view.getTextTitle().getText().isEmpty()
 							&& (!view.getTextDuration().getText().isEmpty() && Integer
 									.parseInt(view.getTextDuration().getText()) > 0)
-							&& !view.getTextDate().getText().isEmpty()
-							/* TODO && Data è una data*/) {
+							&& (!view.getTextDate().getText().isEmpty() && isDate(view
+									.getTextDate().getText()))) {
 
 						model.getMovie()
 								.setTitle(view.getTextTitle().getText());
@@ -139,5 +139,27 @@ public class InsertMovieController {
 				}
 			}
 		});
+	}
+
+	private boolean isDate(String d) {
+		String[] tokens = d.split("-");
+		try {
+			int g = Integer.parseInt(tokens[0]);
+			int m = Integer.parseInt(tokens[1]);
+			int a = Integer.parseInt(tokens[2]);
+			
+			//check su mese, anno e giorno
+			if (g < 1 || g > 31 || m < 1 || m > 12 || a < 1900)
+				return false;
+			if ((m == 4 || m == 6 || m == 9 || m == 11) && g > 30)
+				return false;
+			if (m == 2 && g >29)
+				return false;
+			
+			return true;
+			
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
 	}
 }
