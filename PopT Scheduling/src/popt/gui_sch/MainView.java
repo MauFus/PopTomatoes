@@ -76,6 +76,7 @@ public class MainView {
 		JButton schedulingButt = new JButton("Scheduling");
 		schedulingButt.setBackground(new Color(0,200,0));
 		schedulingButt.setActionCommand("Switch Card");
+		// TODO spostare in un controller
 		schedulingButt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {

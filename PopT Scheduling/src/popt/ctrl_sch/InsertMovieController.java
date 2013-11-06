@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Calendar;
 import java.util.Date;
 
 import popt.data.Genre;
@@ -29,14 +30,12 @@ public class InsertMovieController {
 	public InsertMovieController(InsertMovieView v, InsertMovieModel m) {
 		view = v;
 		model = m;
-
-		initListeners();
 	}
 
 	/**
 	 * Initialize all the listeners on InsertMovieView
 	 */
-	private void initListeners() {
+	public void initListeners() {
 
 		/**
 		 * Focus Listener on Title TextBox
@@ -93,7 +92,6 @@ public class InsertMovieController {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 

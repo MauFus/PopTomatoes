@@ -29,6 +29,7 @@ public class Main {
 		// Create the Controllers
 		InsertMovieController im_ctrl = new InsertMovieController(
 				mainView.getInsertMovieView(), im_model);
+		im_ctrl.initListeners();
 
 	}
 
