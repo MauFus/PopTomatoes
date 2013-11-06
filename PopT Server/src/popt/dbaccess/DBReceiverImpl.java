@@ -11,7 +11,6 @@ package popt.dbaccess;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Date;
 
 import popt.data.*;
 import popt.rmi.DBReceiver;
@@ -37,8 +36,7 @@ public class DBReceiverImpl extends UnicastRemoteObject implements DBReceiver {
 			
 			dba.readDB();
 			dba.insertMovie(movie.getTitle(), movie.getDuration(),
-					(Date) movie.getDate(), movie.getGenre().toString(),
-					movie.isPG());
+					movie.getDate(), movie.getGenre().toString(), movie.isPG());
 			dba.closeDB();
 			
 			statusMessage = "Inserimento in DB eseguito con successo!\n";

@@ -9,14 +9,12 @@
 
 package popt.data;
 
-import java.util.Date;
-
 public class Movie {
 
 	private int id;
 	private String title;
 	private int duration;
-	private Date date;
+	private String date;
 	private Genre genre;
 	private boolean pg;
 
@@ -24,7 +22,7 @@ public class Movie {
 
 	}
 
-	public Movie(String name, int dur, Date d, Genre g, boolean pg) {
+	public Movie(String name, int dur, String d, Genre g, boolean pg) {
 		setID(0);
 		setTitle(name);
 		setDuration(dur);
@@ -78,14 +76,14 @@ public class Movie {
 	/**
 	 * @return the date
 	 */
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

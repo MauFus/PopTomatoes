@@ -130,14 +130,14 @@ public class MySQLAccess {
 	 * @return
 	 * @throws Exception
 	 */
-	public void insertMovie(String mv_title, int mv_duration, Date mv_date,
+	public void insertMovie(String mv_title, int mv_duration, String mv_date,
 			String mv_genre, boolean mv_pg) throws Exception {
 		try {
 			preparedStatement = connect
 					.prepareStatement("insert into POPTOMATOESDB.MOVIE values (?,?,?,?,?)");
 			preparedStatement.setString(1, mv_title);
 			preparedStatement.setInt(2, mv_duration);
-			preparedStatement.setDate(3, mv_date);
+			preparedStatement.setString(3, mv_date);
 			preparedStatement.setString(4, mv_genre);
 
 			// Test

@@ -14,8 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.Calendar;
-import java.util.Date;
 
 import popt.data.Genre;
 import popt.gui_sch.InsertMovieView;
@@ -121,11 +119,8 @@ public class InsertMovieController {
 						model.getMovie().setDuration(
 								Integer.parseInt(view.getTextDuration()
 										.getText()));
-						// TODO controllare se Data e Genere funzionano
-						// correttamente
-						model.getMovie().setDate(
-								new Date(Long.parseLong(view.getTextDate()
-										.getText())));
+						// TODO controllare se Genere funziona correttamente
+						model.getMovie().setDate(view.getTextDate().getText());
 						model.getMovie().setGenre(
 								(Genre) view.getComboBoxGenre()
 										.getSelectedItem());
