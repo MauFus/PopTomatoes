@@ -63,7 +63,7 @@ CREATE  TABLE IF NOT EXISTS `poptomatoesdb`.`Showtime` (
   `ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `Movie_ID` INT(11) NOT NULL ,
   `Cinemahall_ID` INT(11) NOT NULL ,
-  `Date` DATE NOT NULL ,
+  `Date` VARCHAR(10) NOT NULL ,
   `Time` TIME NOT NULL ,
   `Auditors` INT(10) UNSIGNED NOT NULL DEFAULT '0' ,
   `3D` BINARY(1) NOT NULL DEFAULT '0' ,
