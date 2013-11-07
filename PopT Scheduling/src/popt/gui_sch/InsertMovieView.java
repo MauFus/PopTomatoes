@@ -82,11 +82,13 @@ public class InsertMovieView extends JPanel {
 		textTitle = new JTextField();
 		textTitle.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textTitle.setBorder(null);
+		textTitle.setHorizontalAlignment(JTextField.RIGHT);
 		textTitle.setColumns(10);
 		
 		textDuration = new JTextField();
 		textDuration.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textDuration.setBorder(null);
+		textDuration.setHorizontalAlignment(JTextField.RIGHT);
 		textDuration.setColumns(10);
 		
 		
@@ -111,6 +113,9 @@ public class InsertMovieView extends JPanel {
 		textDate = new JTextField();
 		textDate.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textDate.setBorder(null);
+		textDate.setHorizontalAlignment(JTextField.RIGHT);
+		textDate.setText("gg-mm-aaaa");
+		textDate.setForeground(Color.GRAY);
 		textDate.setColumns(10);
 		
 		GroupLayout groupLayout = new GroupLayout(this);

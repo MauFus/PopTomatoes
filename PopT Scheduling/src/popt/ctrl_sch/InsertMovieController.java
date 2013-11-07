@@ -65,11 +65,11 @@ public class InsertMovieController {
 				try {
 					if (Integer.parseInt(view.getTextDuration().getText()) <= 0) {
 						view.getTextDuration().setText(
-								"Duration must be a positive value");
+								"Not Positive");
 						view.getTextDuration().setForeground(Color.RED);
 					}
 				} catch (NumberFormatException nfe) {
-					view.getTextDuration().setText("Not a Number");
+					view.getTextDuration().setText("NaN");
 					view.getTextDuration().setForeground(Color.RED);
 				}
 
@@ -90,15 +90,15 @@ public class InsertMovieController {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (!isDate(view.getTextDate().getText())) {
-					view.getTextDate().setText("Please insert a correct date (gg-mm-aaaa)");
+					view.getTextDate().setText("Invalid Date!");
 					view.getTextDate().setForeground(Color.RED);
 				}
 			}
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				view.getTextDuration().setText("");
-				view.getTextDuration().setForeground(Color.BLACK);
+				view.getTextDate().setText("");
+				view.getTextDate().setForeground(Color.BLACK);
 			}
 		});
 
@@ -138,10 +138,12 @@ public class InsertMovieController {
 							view.getCheckPG().setSelected(false);
 						}
 						view.getTextAlert().setText(Main.getServerStatus());
+					} else {
+						view.getTextAlert().setText("Errore: Alcuni campi non sono completati correttamente!");
 					}
 
 				} catch (NumberFormatException nfe) {
-					view.getTextDuration().setText("Not a Number");
+					view.getTextDuration().setText("NaN");
 					view.getTextDuration().setForeground(Color.RED);
 				}
 			}
