@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 
 import popt.ctrl_sch.InsertMovieController;
 import popt.data.Movie;
@@ -15,7 +16,7 @@ import popt.rmi.DBReceiver;
 public class Main {
 
 	public static final String POLICY_FILE_NAME = "security.policy";
-	public static final String SERVER_IP = "192.168.106.1"; // TODO settare con file
+	public static final String SERVER_IP = "server_ip.file";
 	private static DBReceiver dbr;
 
 	public static void main(String[] args) {
@@ -38,22 +39,26 @@ public class Main {
 	 */
 	private static void initRmiConnection() {
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(POLICY_FILE_NAME));
+			BufferedReader br = new BufferedReader(new FileReader(SERVER_IP));
 			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();
 			while (line != null) {
-				sb.append(line);
+				sb.append(line + "\n");
 				line = br.readLine();
 			}
-			String policy = sb.toString();
+			String ipServer = sb.toString();
 			br.close();
 
-			System.setProperty("java.security.policy", policy);
+			LocateRegistry.getRegistry();
+			System.setProperty("java.security.policy", POLICY_FILE_NAME);
+			// Nel file ipServer vi c'e' "<IP>/xampp"
+			System.setProperty("java.rmi.server.codebase", "http://" + ipServer
+					+ "/popt-common.jar");
 			if (System.getSecurityManager() == null)
 				System.setSecurityManager(new RMISecurityManager());
-			dbr = (DBReceiver) Naming.lookup("rmi://" + SERVER_IP + "/"
+			dbr = (DBReceiver) Naming.lookup("rmi://" + ipServer + "/"
 					+ DBReceiver.SERVICE_NAME);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

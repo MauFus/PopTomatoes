@@ -9,9 +9,8 @@
 
 package popt.init;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.rmi.RemoteException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -19,6 +18,8 @@ import popt.dbaccess.DBReceiverImpl;
 import popt.rmi.DBReceiver;
 
 public class RmiStarter {
+
+	public static final String SERVER_IP = "server_ip.file";
 
 	public RmiStarter() {
 
@@ -30,19 +31,26 @@ public class RmiStarter {
 	public static void start() {
 
 		try {
+			BufferedReader br = new BufferedReader(new FileReader(SERVER_IP));
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+			while (line != null) {
+				sb.append(line + "\n");
+				line = br.readLine();
+			}
+			String ipServer = sb.toString();
+			br.close();
+			
+			
 			// Set hostname and codebase
-			InetAddress ia;
-			ia = InetAddress.getLocalHost();
-			System.setProperty("java.rmi.server.hostname", ia.getHostAddress());
+			System.setProperty("java.rmi.server.hostname", ipServer.split("/")[0]);
 			System.setProperty("java.rmi.server.codebase",
-					"http://" + ia.getHostAddress() + "/popt-common.jar");
+					"http://" + ipServer + "/popt-common.jar");
 
 			// Register services
 			Registry reg = LocateRegistry.createRegistry(1099);
 			reg.rebind(DBReceiver.SERVICE_NAME, new DBReceiverImpl());
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
