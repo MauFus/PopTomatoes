@@ -32,7 +32,7 @@ public class XMLInitialConfig {
 	private Document loadDocument(String path) {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		// dbf.setValidating(true);
-		// dbf.setNamespaceAware(false);
+		dbf.setNamespaceAware(false);
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document d = db.parse(new File(path));
