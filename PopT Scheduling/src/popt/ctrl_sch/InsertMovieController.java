@@ -52,7 +52,6 @@ public class InsertMovieController {
 			public void focusGained(FocusEvent e) {
 				view.getTextTitle().setText("");
 				view.getTextTitle().setForeground(Color.BLACK);
-
 			}
 		});
 
@@ -90,13 +89,16 @@ public class InsertMovieController {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-
+				if (!isDate(view.getTextDate().getText())) {
+					view.getTextDate().setText("Please insert a correct date (gg-mm-aaaa)");
+					view.getTextDate().setForeground(Color.RED);
+				}
 			}
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				// TODO Auto-generated method stub
-
+				view.getTextDuration().setText("");
+				view.getTextDuration().setForeground(Color.BLACK);
 			}
 		});
 
@@ -119,23 +121,28 @@ public class InsertMovieController {
 						model.getMovie().setDuration(
 								Integer.parseInt(view.getTextDuration()
 										.getText()));
-						// TODO controllare se Genere funziona correttamente
 						model.getMovie().setDate(view.getTextDate().getText());
+						// TODO controllare se Genere funziona correttamente
 						model.getMovie().setGenre(
 								(Genre) view.getComboBoxGenre()
 										.getSelectedItem());
 						model.getMovie().setPG(view.getCheckPG().isSelected());
-					}
-					// TODO invocazione e gestione dell'insert
-					boolean success = Main.RequestInsert(model.getMovie());
-					if (success) {
-						// TODO stampare operazione riuscita o getStatus()
-					} else {
-						// TODO chiedere errore e stamparlo
+
+						// Invocazione e gestione dell'insert
+						boolean success = Main.requestInsert(model.getMovie());
+						if (success) {
+							view.getTextTitle().setText("");
+							view.getTextDuration().setText("");
+							view.getTextDate().setText("");
+							view.getComboBoxGenre().setSelectedIndex(0);
+							view.getCheckPG().setSelected(false);
+						}
+						view.getTextAlert().setText(Main.getServerStatus());
 					}
 
 				} catch (NumberFormatException nfe) {
-					// TODO segnalare che Duration non è un numero
+					view.getTextDuration().setText("Not a Number");
+					view.getTextDuration().setForeground(Color.RED);
 				}
 			}
 		});
@@ -158,7 +165,7 @@ public class InsertMovieController {
 			
 			return true;
 			
-		} catch (NumberFormatException nfe) {
+		} catch (Exception e) {
 			return false;
 		}
 	}

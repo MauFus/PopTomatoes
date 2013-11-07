@@ -2,10 +2,9 @@ package popt.main_sch;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
+import java.rmi.RemoteException;
 
 import popt.ctrl_sch.InsertMovieController;
 import popt.data.Movie;
@@ -17,6 +16,7 @@ public class Main {
 
 	public static final String POLICY_FILE_NAME = "security.policy";
 	public static final String SERVER_IP = "192.168.106.1"; // TODO settare con file
+	private static DBReceiver dbr;
 
 	public static void main(String[] args) {
 
@@ -30,7 +30,33 @@ public class Main {
 		InsertMovieController im_ctrl = new InsertMovieController(
 				mainView.getInsertMovieView(), im_model);
 		im_ctrl.initListeners();
+		initRmiConnection();
+	}
+	
+	/**
+	 * Inizializza RMI lato Client ed istanzia DBReceiver
+	 */
+	private static void initRmiConnection() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(POLICY_FILE_NAME));
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+			while (line != null) {
+				sb.append(line);
+				line = br.readLine();
+			}
+			String policy = sb.toString();
+			br.close();
 
+			System.setProperty("java.security.policy", policy);
+			if (System.getSecurityManager() == null)
+				System.setSecurityManager(new RMISecurityManager());
+			dbr = (DBReceiver) Naming.lookup("rmi://" + SERVER_IP + "/"
+					+ DBReceiver.SERVICE_NAME);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -40,32 +66,31 @@ public class Main {
 	 *            - Movie to be inserted in DB
 	 * @return success
 	 */
-	public static boolean RequestInsert(Movie m) {
+	public static boolean requestInsert(Movie m) {
+
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(POLICY_FILE_NAME));
-			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-			while (line != null) {
-				sb.append(line + "\n");
-				line = br.readLine();
+			// Se il server sta processando altre richieste: abort
+			if (!dbr.isAvailable())
+				return false;
+			else {
+				return dbr.insertMovie(m);
 			}
-			String policy = sb.toString();
-			br.close();
-
-			System.setProperty("java.security.policy", policy);
-			if (System.getSecurityManager() == null)
-				System.setSecurityManager(new RMISecurityManager());
-			DBReceiver dbr = (DBReceiver) Naming.lookup("rmi://" + SERVER_IP + "/" + DBReceiver.SERVICE_NAME);
-			
-			return dbr.insertMovie(m);
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (RemoteException e) {
 			e.printStackTrace();
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return false;
 		}
-		return false;
+	}
+	
+	/**
+	 * Chiede al server il suo stato corrente
+	 * @return un messaggio sullo stato del server
+	 */
+	public static String getServerStatus() {
+		try {
+			return dbr.getStatus();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return "Server non raggiungibile";
+		}
 	}
 }
