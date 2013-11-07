@@ -134,18 +134,20 @@ public class MySQLAccess {
 			String mv_genre, boolean mv_pg) throws Exception {
 		try {
 			preparedStatement = connect
-					.prepareStatement("insert into POPTOMATOESDB.MOVIE values (?,?,?,?,?)");
+					.prepareStatement("insert into POPTOMATOESDB.MOVIE values (ID,?,?,?,?,?)");
 			preparedStatement.setString(1, mv_title);
 			preparedStatement.setInt(2, mv_duration);
 			preparedStatement.setString(3, mv_date);
 			preparedStatement.setString(4, mv_genre);
+			preparedStatement.setBoolean(5, mv_pg);
+			preparedStatement.executeUpdate();
 
 			// Test
 			resultSet = preparedStatement
 					.executeQuery("select * from POPTOMATOESDB.MOVIE");
 			writeMetaData(resultSet);
 			writeResultSetMovie(resultSet);
-			preparedStatement.setBoolean(5, mv_pg);
+			
 		} catch (Exception e) {
 			throw e;
 		}
