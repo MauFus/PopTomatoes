@@ -9,8 +9,11 @@
 
 package popt.data;
 
-public class Movie {
+import java.io.Serializable;
 
+public class Movie implements Serializable {
+
+	private static final long serialVersionUID = 2457416670738433172L;
 	private int id;
 	private String title;
 	private int duration;
