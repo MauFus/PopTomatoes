@@ -83,12 +83,16 @@ public class InsertMovieView extends JPanel {
 		textTitle.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textTitle.setBorder(null);
 		textTitle.setHorizontalAlignment(JTextField.RIGHT);
+		textTitle.setText("Insert here your movie title  ");
+		textTitle.setForeground(Color.GRAY);
 		textTitle.setColumns(10);
 		
 		textDuration = new JTextField();
 		textDuration.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textDuration.setBorder(null);
 		textDuration.setHorizontalAlignment(JTextField.RIGHT);
+		textDuration.setText("minutes  ");
+		textDuration.setForeground(Color.GRAY);
 		textDuration.setColumns(10);
 		
 		
@@ -114,7 +118,7 @@ public class InsertMovieView extends JPanel {
 		textDate.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textDate.setBorder(null);
 		textDate.setHorizontalAlignment(JTextField.RIGHT);
-		textDate.setText("gg-mm-aaaa");
+		textDate.setText("gg-mm-aaaa  ");
 		textDate.setForeground(Color.GRAY);
 		textDate.setColumns(10);
 		
