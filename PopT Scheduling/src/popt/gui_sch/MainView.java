@@ -63,6 +63,8 @@ public class MainView {
 		
 		JButton insertMovieButt = new JButton("Insert Movie");
 		insertMovieButt.setBackground(new Color(200,0,0));
+		insertMovieButt.setFocusable(false);
+		insertMovieButt.setBorderPainted(false);
 		insertMovieButt.setActionCommand("Switch Card");
 		insertMovieButt.addActionListener(new ActionListener() {
 			@Override
@@ -75,6 +77,8 @@ public class MainView {
 		
 		JButton schedulingButt = new JButton("Scheduling");
 		schedulingButt.setBackground(new Color(0,200,0));
+		schedulingButt.setFocusable(false);
+		schedulingButt.setBorderPainted(false);
 		schedulingButt.setActionCommand("Switch Card");
 		// TODO spostare in un controller
 		schedulingButt.addActionListener(new ActionListener() {

@@ -48,36 +48,42 @@ public class InsertMovieView extends JPanel {
 		txtpnInsertMovie.setText("Insert Movie");
 		Insets m = new Insets(5, 50, 0, 0);
 		txtpnInsertMovie.setMargin(m);
+		txtpnInsertMovie.setFocusable(false);
 		
 		JTextPane txtpnTitle = new JTextPane();
 		txtpnTitle.setEditable(false);
 		txtpnTitle.setText("Title:");
 		txtpnTitle.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txtpnTitle.setBackground(Color.ORANGE);
+		txtpnTitle.setFocusable(false);
 		
 		JTextPane txtpnReleaseDate = new JTextPane();
 		txtpnReleaseDate.setEditable(false);
 		txtpnReleaseDate.setText("Release date:");
 		txtpnReleaseDate.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txtpnReleaseDate.setBackground(Color.ORANGE);
+		txtpnReleaseDate.setFocusable(false);
 		
 		JTextPane txtpnDuration = new JTextPane();
 		txtpnDuration.setEditable(false);
 		txtpnDuration.setText("Duration:");
 		txtpnDuration.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txtpnDuration.setBackground(Color.ORANGE);
+		txtpnDuration.setFocusable(false);
 		
 		JTextPane txtpnGenre = new JTextPane();
 		txtpnGenre.setEditable(false);
 		txtpnGenre.setText("Genre:");
 		txtpnGenre.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txtpnGenre.setBackground(Color.ORANGE);
+		txtpnGenre.setFocusable(false);
 		
 		JTextPane txtpnPg = new JTextPane();
 		txtpnPg.setEditable(false);
 		txtpnPg.setText("PG:");
 		txtpnPg.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txtpnPg.setBackground(Color.ORANGE);
+		txtpnPg.setFocusable(false);
 		
 		textTitle = new JTextField();
 		textTitle.setFont(new Font("Calibri", Font.PLAIN, 15));
@@ -106,7 +112,9 @@ public class InsertMovieView extends JPanel {
 		
 		buttonInsert = new JButton("Insert!");
 		buttonInsert.setForeground(new Color(255, 255, 255));
-		buttonInsert.setBackground(new Color(128,128,128));		
+		buttonInsert.setBackground(new Color(128,128,128));
+		buttonInsert.setBorderPainted(false);
+		buttonInsert.setFocusable(false);
 		
 		textAlert = new JTextPane();
 		textAlert.setEditable(false);
