@@ -110,7 +110,7 @@ public class InsertMovieController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (!view.getTextTitle().getText().isEmpty()
+					if ((!view.getTextTitle().getText().isEmpty() && view.getTextTitle().getForeground() != Color.GRAY)
 							&& (!view.getTextDuration().getText().isEmpty() && Integer
 									.parseInt(view.getTextDuration().getText()) > 0)
 							&& (!view.getTextDate().getText().isEmpty() && isDate(view
@@ -143,9 +143,9 @@ public class InsertMovieController {
 					}
 
 				} catch (NumberFormatException nfe) {
-					view.getTextDuration().setText("NaN");
-					view.getTextDuration().setForeground(Color.RED);
+					view.getTextAlert().setText("ERRORE - Non tutti i campi sono stati inseriti");
 				}
+				view.getButtonInsert().setBackground(new Color(255,0,0));
 			}
 		});
 	}
