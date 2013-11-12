@@ -21,10 +21,6 @@ public class RmiStarter {
 
 	public static final String SERVER_IP = "server_ip.file";
 
-	public RmiStarter() {
-
-	}
-
 	/**
 	 * Start the RMI services
 	 */
