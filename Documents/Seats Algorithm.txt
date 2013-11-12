@@ -1,0 +1,45 @@
+I = Insieme file di poltrone
+P(i) = Posti nella fila i
+K(i) = sum[K(p) in P(i)]
+K(p) = "valore" del posto p
+K(p) = 0 per posti già assegnati
+
+N = posti da assegnare
+n = N (counter)
+S = {} -> conterrà la soluzione
+
+
+1.	// Scelta di una fila tra quelle non ancora analizzate
+	Scelgo [i in I | max[K(i)]];
+		if [K(i) == 0]
+			FAIL; // non ci sono file con posti disponibili
+		else
+			I = I - i;
+			
+2.			// Scelta di un primo posto tra quelli non ancora considerati
+			Scelgo [p in P(i) | max[K(p)]];
+			P(i) = P(i) - p;
+			S = S + p;
+			n--;
+			
+3.			// Controllo su numero di posti da trovare ancora
+			if [n == 0]
+				RETURN S; -> soluzione
+			else
+				// Scelta di un ennesimo posto tra quelli adiacenti a quelli già selezionati
+				Scelgo [q in P(i) | ((q = p + 1) || (q = p - 1)) && (p in S) && max[K(q)]];
+				
+				if [K(q) > 0]
+					P(i) = P(i) - q;
+					S = S + q;
+					n--;
+					GOTO 3;
+				else
+					S = 0;
+					n = N;
+					
+					if [P(i) != 0]
+						GOTO 2;
+					else
+						GOTO 1;
+						
