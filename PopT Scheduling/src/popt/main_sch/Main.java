@@ -33,7 +33,6 @@ public class Main {
 		im_ctrl.initListeners();
 		initRmiConnection();
 	}
-	
 	/**
 	 * Inizializza RMI lato Client ed istanzia DBReceiver
 	 */

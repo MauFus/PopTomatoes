@@ -62,7 +62,7 @@ public class MainView {
 
 		
 		JButton insertMovieButt = new JButton("Insert Movie");
-		insertMovieButt.setBackground(new Color(200,0,0));
+		insertMovieButt.setBackground(Color.ORANGE);
 		insertMovieButt.setFocusable(false);
 		insertMovieButt.setBorderPainted(false);
 		insertMovieButt.setActionCommand("Switch Card");
