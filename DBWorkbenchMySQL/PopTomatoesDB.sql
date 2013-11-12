@@ -9,7 +9,7 @@ USE `poptomatoesdb` ;
 -- Table `poptomatoesdb`.`Cinemahall`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `poptomatoesdb`.`Cinemahall` (
-  `ID` CHAR NOT NULL ,
+  `ID` INT(11) NOT NULL ,
   `Name` VARCHAR(50) NOT NULL ,
   `Rows` INT(10) UNSIGNED NOT NULL ,
   `Seats` INT(10) UNSIGNED NOT NULL ,
@@ -42,7 +42,7 @@ COMMENT = 'Movies table';
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `poptomatoesdb`.`Row` (
   `Number` INT(10) UNSIGNED NOT NULL ,
-  `Cinemahall_ID` CHAR NOT NULL ,
+  `Cinemahall_ID` INT(11) NOT NULL ,
   `Seats` INT(10) UNSIGNED NOT NULL ,
   PRIMARY KEY (`Number`, `Cinemahall_ID`) ,
   INDEX `fk_Row_Cinemahall1_idx` (`Cinemahall_ID` ASC) ,
@@ -63,7 +63,7 @@ CREATE  TABLE IF NOT EXISTS `poptomatoesdb`.`Showtime` (
   `ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `Movie_ID` INT(11) NOT NULL ,
   `Cinemahall_ID` INT(11) NOT NULL ,
-  `Date` DATE NOT NULL ,
+  `Date` VARCHAR(10) NOT NULL ,
   `Time` TIME NOT NULL ,
   `Auditors` INT(10) UNSIGNED NOT NULL DEFAULT '0' ,
   `3D` BINARY(1) NOT NULL DEFAULT '0' ,
