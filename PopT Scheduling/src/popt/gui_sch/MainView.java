@@ -116,7 +116,7 @@ public class MainView {
 		imv.setBackground(Color.ORANGE);
 		
 		mlv = new MovieListView();
-		mlv.setBackground(Color.BLUE);
+		mlv.setBackground(new Color(100,100,100));
 
 		JPanel firstCard = new JPanel();
 		firstCard.setBackground(Color.GREEN);
