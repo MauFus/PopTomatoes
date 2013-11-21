@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
 
 public class MovieListView extends JPanel {
 
@@ -30,17 +32,42 @@ public class MovieListView extends JPanel {
 		txtpnMovieList.setEditable(false);
 		txtpnMovieList.setBackground(Color.GRAY);
 		
+		//panel che contiene il pulsante per aprire il dialog per la ricerca dei film
+		JPanel MovieInsertControl = new JPanel();
+		MovieInsertControl.setBackground(new Color(100,100,100));
+		//prova per vedere come viene gestito l'inserimento di un panel Movie nella Lista!
+		JPanel MovieListContainer = new JPanel();
+		MoviePanel mp = new MoviePanel();
+		MoviePanel mp1 = new MoviePanel();
+		MovieListContainer.add(mp1);
+		MovieListContainer.add(mp);
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(txtpnMovieList, GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
+				.addComponent(txtpnMovieList, GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(MovieInsertControl, GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(MovieListContainer, GroupLayout.PREFERRED_SIZE, 824, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(txtpnMovieList, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(234, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(MovieInsertControl, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(MovieListContainer, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+					.addContainerGap())
 		);
+		
+		JButton btnNewButton = new JButton("New button");
+		MovieInsertControl.add(btnNewButton);
 		setLayout(groupLayout);
 		
 		
