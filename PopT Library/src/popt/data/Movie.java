@@ -11,7 +11,7 @@ package popt.data;
 
 import java.io.Serializable;
 
-public class Movie implements Serializable {
+public class Movie implements Serializable, Comparable<Movie> {
 
 	private static final long serialVersionUID = 2457416670738433172L;
 	private int id;
@@ -116,5 +116,19 @@ public class Movie implements Serializable {
 	 */
 	public void setPG(boolean pg) {
 		this.pg = pg;
+	}
+	
+	/**
+	 * 
+	 * @param m il film da confrontare
+	 * @return true se sono lo stesso film
+	 */
+	public boolean equals(Movie m) {
+		return this.getID() == m.getID();
+	}
+
+	@Override
+	public int compareTo(Movie m) {
+		return this.getTitle().compareTo(m.getTitle());
 	}
 }
