@@ -12,12 +12,14 @@ public final class DBReceiverImpl_Stub
     private static java.lang.reflect.Method $method_getStatus_0;
     private static java.lang.reflect.Method $method_insertMovie_1;
     private static java.lang.reflect.Method $method_isAvailable_2;
+    private static java.lang.reflect.Method $method_searchMovie_3;
     
     static {
 	try {
 	    $method_getStatus_0 = popt.rmi.DBReceiver.class.getMethod("getStatus", new java.lang.Class[] {});
 	    $method_insertMovie_1 = popt.rmi.DBReceiver.class.getMethod("insertMovie", new java.lang.Class[] {popt.data.Movie.class});
 	    $method_isAvailable_2 = popt.rmi.DBReceiver.class.getMethod("isAvailable", new java.lang.Class[] {});
+	    $method_searchMovie_3 = popt.rmi.DBReceiver.class.getMethod("searchMovie", new java.lang.Class[] {popt.data.Movie.class});
 	} catch (java.lang.NoSuchMethodException e) {
 	    throw new java.lang.NoSuchMethodError(
 		"stub class initialization failed");
@@ -70,6 +72,22 @@ public final class DBReceiverImpl_Stub
 	try {
 	    Object $result = ref.invoke(this, $method_isAvailable_2, null, -4336976199642666352L);
 	    return ((java.lang.Boolean) $result).booleanValue();
+	} catch (java.lang.RuntimeException e) {
+	    throw e;
+	} catch (java.rmi.RemoteException e) {
+	    throw e;
+	} catch (java.lang.Exception e) {
+	    throw new java.rmi.UnexpectedException("undeclared checked exception", e);
+	}
+    }
+    
+    // implementation of searchMovie(Movie)
+    public java.util.LinkedList searchMovie(popt.data.Movie $param_Movie_1)
+	throws java.rmi.RemoteException
+    {
+	try {
+	    Object $result = ref.invoke(this, $method_searchMovie_3, new java.lang.Object[] {$param_Movie_1}, -4265207580459390093L);
+	    return ((java.util.LinkedList) $result);
 	} catch (java.lang.RuntimeException e) {
 	    throw e;
 	} catch (java.rmi.RemoteException e) {

@@ -9,12 +9,10 @@
 
 package popt.dbaccess;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.LinkedList;
+
+import popt.data.*;
 
 public class MySQLAccess {
 	private Connection connect = null;
@@ -148,6 +146,33 @@ public class MySQLAccess {
 			writeMetaData(resultSet);
 			writeResultSetMovie(resultSet);
 			
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	public LinkedList<Movie> searchMovie(int mv_id, String mv_title, int mv_duration,
+			String mv_date, String mv_genre, boolean mv_pg) throws Exception {
+		try {
+			preparedStatement = connect
+					.prepareStatement("select * from POPTOMATOESDB.MOVIE where ? and ? and ? and ? and ? and ?");
+			preparedStatement.setString(1, mv_id == -1 ? "true" : "ID = " + mv_id);
+			preparedStatement.setString(2, mv_title == null ? "true" : "Title = " + mv_title);
+			preparedStatement.setString(3, mv_duration == -1 ? "true" : "Duration = " + mv_duration);
+			preparedStatement.setString(4, mv_date == null ? "true" : "ReleaseDate = " + mv_date);
+			preparedStatement.setString(5, mv_genre == null ? "true" : "Genre = " + mv_genre);
+			preparedStatement.setString(6, !mv_pg ? "true" : "PG = " + mv_pg);
+			
+			ResultSet result = preparedStatement.executeQuery();
+			LinkedList<Movie> selectedMovies = new LinkedList<>();
+			do {
+				Movie m = new Movie(result.getInt("ID"), result.getString("Title"), result.getInt("Duration"), 
+						result.getString("ReleaseDate"), Genre.valueOf(result.getString("Genre")), result.getBoolean("PG"));
+				selectedMovies.push(m);
+				result.next();
+			} while (result != null);
+			
+			return selectedMovies;
 		} catch (Exception e) {
 			throw e;
 		}
