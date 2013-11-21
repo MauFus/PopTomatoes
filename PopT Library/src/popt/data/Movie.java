@@ -26,7 +26,16 @@ public class Movie implements Serializable, Comparable<Movie> {
 	}
 
 	public Movie(String name, int dur, String d, Genre g, boolean pg) {
-		setID(0);
+		setID(-1);
+		setTitle(name);
+		setDuration(dur);
+		setDate(d);
+		setGenre(g);
+		setPG(pg);
+	}
+
+	public Movie(int id, String name, int dur, String d, Genre g, boolean pg) {
+		setID(id);
 		setTitle(name);
 		setDuration(dur);
 		setDate(d);
