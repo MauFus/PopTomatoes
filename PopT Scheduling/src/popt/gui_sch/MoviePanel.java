@@ -25,7 +25,7 @@ public class MoviePanel extends JPanel {
 	private JTextField txtpnPg;
 	private JTextPane txtpnId;
 	private JTextPane txtpnReleaseDate;
-	//TODO aggiungere il campo per la durata
+	private JTextPane txtpnDuration;
 
 	public MoviePanel() {
 		setBackground(Color.GRAY);
@@ -156,6 +156,10 @@ public class MoviePanel extends JPanel {
 
 	public JTextPane getTxtpnReleaseDate() {
 		return txtpnReleaseDate;
+	}
+
+	public JTextPane getTxtpnDuration() {
+		return txtpnDuration;
 	}
 
 }
