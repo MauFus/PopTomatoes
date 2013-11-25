@@ -51,10 +51,8 @@ public class MovieListController {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					MoviePanel mp_temp = ((MoviePanel)view.getMovieListContainer().getComponent(j));
-					Movie m = new Movie(Integer.parseInt(mp_temp.getTxtpnId().getText()), mp_temp.getTxtpnMovieTitle().getText(), 
-							Integer.parseInt(mp_temp.getTxtpnDuration().getText()), "", Genre.valueOf(mp_temp.getTxtpnGenre().getText()), 
-							Boolean.parseBoolean(mp_temp.getTxtpnPg().getText()));
+					Movie m = new Movie();
+					m.setID(Integer.parseInt(((MoviePanel)view.getMovieListContainer().getComponent(j)).getTxtpnId().getText()));
 					model.removeMovie(m);
 					((JPanel)view.getMovieListContainer()).remove(j);
 					
@@ -117,11 +115,10 @@ public class MovieListController {
 		
 		for (Movie m : model.getMovieList()) {
 			MoviePanel mp = new MoviePanel();
-			mp.getTxtpnMovieTitle().setText(m.getTitle());
+			mp.getTxtpnMovieTitle().setText(m.getTitle() + " (" + m.getDate().split("-")[2] + ")");
 			mp.getTxtpnGenre().setText("Genre: " + m.getGenre().toString());
 			mp.getTxtpnId().setText("ID: " + m.getID());
 			mp.getTxtpnDuration().setText("Duration: " + m.getDuration());
-			mp.getTxtpnReleaseDate().setText("Release Date: " + m.getDate());
 			mp.getTxtpnPg().setText(m.isPG() ? "PG-18" : "");
 			view.getMovieListContainer().add(mp);
 		}
