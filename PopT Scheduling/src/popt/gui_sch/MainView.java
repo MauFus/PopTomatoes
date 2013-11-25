@@ -171,6 +171,14 @@ public class MainView {
 	public InsertMovieView getInsertMovieView() {
 		return imv;
 	}
+	
+	/**
+	 * Getter per il MovieListView
+	 * @return il riferimento alla view
+	 */
+	public MovieListView getMovieListView() {
+		return mlv;
+	}
 
 	// All the buttons are following the same pattern
 	// so create them all in one place.
