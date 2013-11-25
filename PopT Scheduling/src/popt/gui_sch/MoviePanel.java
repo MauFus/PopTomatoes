@@ -25,6 +25,7 @@ public class MoviePanel extends JPanel {
 	private JTextField txtpnPg;
 	private JTextPane txtpnId;
 	private JTextPane txtpnReleaseDate;
+	//TODO aggiungere il campo per la durata
 
 	public MoviePanel() {
 		setBackground(Color.GRAY);
@@ -132,29 +133,29 @@ public class MoviePanel extends JPanel {
 		setLayout(groupLayout);
 
 	}
-	
-	public void setTxtpnMovieTitle(JTextPane txtpnMovieTitle) {
-		this.txtpnMovieTitle = txtpnMovieTitle;
+
+	public JTextPane getTxtpnMovieTitle() {
+		return txtpnMovieTitle;
 	}
 
-	public void setTxtpnGenre(JTextField txtpnGenre) {
-		this.txtpnGenre = txtpnGenre;
+	public JTextField getTxtpnGenre() {
+		return txtpnGenre;
 	}
 
-	public void setBtnCloseMovie(JButton btnCloseMovie) {
-		this.btnCloseMovie = btnCloseMovie;
+	public JButton getBtnCloseMovie() {
+		return btnCloseMovie;
 	}
 
-	public void setTxtpnPg(JTextField txtpnPg) {
-		this.txtpnPg = txtpnPg;
+	public JTextField getTxtpnPg() {
+		return txtpnPg;
 	}
 
-	public void setTxtpnId(JTextPane txtpnId) {
-		this.txtpnId = txtpnId;
+	public JTextPane getTxtpnId() {
+		return txtpnId;
 	}
 
-	public void setTxtpnReleaseDate(JTextPane txtpnReleaseDate) {
-		this.txtpnReleaseDate = txtpnReleaseDate;
+	public JTextPane getTxtpnReleaseDate() {
+		return txtpnReleaseDate;
 	}
 
 }
