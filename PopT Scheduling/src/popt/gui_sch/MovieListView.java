@@ -18,6 +18,8 @@ public class MovieListView extends JPanel {
 	 */
 	private static final long serialVersionUID = 4042558951286756671L;
 
+	private JPanel MovieListContainer;
+
 	/**
 	 * Create the panel.
 	 */
@@ -36,7 +38,7 @@ public class MovieListView extends JPanel {
 		JPanel MovieInsertControl = new JPanel();
 		MovieInsertControl.setBackground(new Color(100,100,100));
 		//prova per vedere come viene gestito l'inserimento di un panel Movie nella Lista!
-		JPanel MovieListContainer = new JPanel();
+		MovieListContainer = new JPanel();
 		MoviePanel mp = new MoviePanel();
 		MoviePanel mp1 = new MoviePanel();
 		MovieListContainer.add(mp1);
@@ -80,5 +82,9 @@ public class MovieListView extends JPanel {
 		txtpnInsertMovie.setMargin(m);
 		txtpnInsertMovie.setFocusable(false);*/
 
+	}
+	
+	public JPanel getMovieListContainer() {
+		return MovieListContainer;
 	}
 }

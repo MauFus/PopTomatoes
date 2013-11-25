@@ -1,8 +1,11 @@
 package popt.ctrl_sch;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.LinkedList;
 
+import javax.swing.JPanel;
 import javax.xml.parsers.*;
 
 import org.w3c.dom.*;
@@ -10,26 +13,55 @@ import org.w3c.dom.ls.*;
 import org.xml.sax.SAXException;
 
 import popt.data.*;
+import popt.gui_sch.MovieListView;
+import popt.gui_sch.MoviePanel;
 import popt.model_sch.MovieListModel;
 
 public class MovieListController {
 
-	// TODO uncomment everything related to MovieListView when it is implemented
 	private MovieListModel model;
-	// private MovieListView view;
+	private MovieListView view;
 
 	public static final String MOVIE_LIST = "movielist.xml";
 
-	public MovieListController(MovieListModel m/* , MovieListView v */) {
+	public MovieListController(MovieListView v, MovieListModel m) {
 		model = m;
-		// view = v;
+		view = v;
+		
+		initListeners();
+		
+		try {
+			uploadListInModel();
+		} catch (Exception e) {
+			//TODO segnalare errore alla view
+			e.printStackTrace();
+		}
+		
+		updateMovieListView();
 	}
 	
 	/**
 	 * it initializes all the listeners on the view
 	 */
 	private void initListeners() {
-		// TODO implementare i listener sull'interfaccia qui
+		int n_movie = view.getMovieListContainer().getComponentCount();
+		for (int i = 0; i < n_movie; i++) {
+			final int j = i;
+			((MoviePanel)view.getMovieListContainer().getComponent(i)).getBtnCloseMovie().addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					MoviePanel mp_temp = ((MoviePanel)view.getMovieListContainer().getComponent(j));
+					Movie m = new Movie(Integer.parseInt(mp_temp.getTxtpnId().getText()), mp_temp.getTxtpnMovieTitle().getText(), 
+							Integer.parseInt(mp_temp.getTxtpnDuration().getText()), "", Genre.valueOf(mp_temp.getTxtpnGenre().getText()), 
+							Boolean.parseBoolean(mp_temp.getTxtpnPg().getText()));
+					model.removeMovie(m);
+					((JPanel)view.getMovieListContainer()).remove(j);
+					
+					writeMovieList();
+				}
+			});
+		}
 	}
 
 	/**
@@ -76,6 +108,24 @@ public class MovieListController {
 			return false;
 		}
 	}
+	
+	/**
+	 * Aggiorna la view con la lista di film contanuta nel model
+	 */
+	private void updateMovieListView() {
+		view.getMovieListContainer().removeAll();
+		
+		for (Movie m : model.getMovieList()) {
+			MoviePanel mp = new MoviePanel();
+			mp.getTxtpnMovieTitle().setText(m.getTitle());
+			mp.getTxtpnGenre().setText("Genre: " + m.getGenre().toString());
+			mp.getTxtpnId().setText("ID: " + m.getID());
+			mp.getTxtpnDuration().setText("Duration: " + m.getDuration());
+			mp.getTxtpnReleaseDate().setText("Release Date: " + m.getDate());
+			mp.getTxtpnPg().setText(m.isPG() ? "PG-18" : "");
+			view.getMovieListContainer().add(mp);
+		}
+	}
 
 	/**
 	 * Carica un file XML e ne restituisce un riferimento per DOM
@@ -109,6 +159,11 @@ public class MovieListController {
 		return d;
 	}
 	
+	/**
+	 * 
+	 * @param d the document to be saved
+	 * @param w the writer to save the document
+	 */
 	private void saveDocument(Document d, Writer w) {
         
         DOMImplementationLS ls = (DOMImplementationLS)d.getImplementation();

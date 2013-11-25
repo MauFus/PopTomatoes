@@ -8,9 +8,11 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 import popt.ctrl_sch.InsertMovieController;
+import popt.ctrl_sch.MovieListController;
 import popt.data.Movie;
 import popt.gui_sch.*;
 import popt.model_sch.InsertMovieModel;
+import popt.model_sch.MovieListModel;
 import popt.rmi.DBReceiver;
 
 public class Main {
@@ -26,11 +28,12 @@ public class Main {
 
 		// Create the models
 		InsertMovieModel im_model = new InsertMovieModel();
+		MovieListModel ml_model = new MovieListModel();
 
 		// Create the Controllers
-		InsertMovieController im_ctrl = new InsertMovieController(
-				mainView.getInsertMovieView(), im_model);
-		im_ctrl.initListeners();
+		new InsertMovieController(mainView.getInsertMovieView(), im_model);
+		new MovieListController(mainView.getMovieListView(), ml_model);
+		
 		initRmiConnection();
 	}
 	
