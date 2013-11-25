@@ -19,6 +19,7 @@ public class MovieListView extends JPanel {
 	private static final long serialVersionUID = 4042558951286756671L;
 
 	private JPanel MovieListContainer;
+	private JButton btnInsert;
 
 	/**
 	 * Create the panel.
@@ -51,12 +52,12 @@ public class MovieListView extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(MovieListContainer, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-						.addComponent(MovieInsertControl, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE))
+						.addComponent(MovieListContainer, Alignment.CENTER, 0, 0, Short.MAX_VALUE)
+						.addComponent(MovieInsertControl, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE))
 					.addGap(10))
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.CENTER)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(txtpnMovieList, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -66,8 +67,14 @@ public class MovieListView extends JPanel {
 					.addContainerGap())
 		);
 		
-		JButton btnNewButton = new JButton("New button");
-		MovieInsertControl.add(btnNewButton);
+		btnInsert = new JButton("Insert in List!");
+		btnInsert.setFont(new Font("Calibri", Font.PLAIN, 15));
+		btnInsert.setForeground(Color.WHITE);
+		btnInsert.setBackground(Color.GRAY);
+		btnInsert.setBorderPainted(false);
+		btnInsert.setFocusable(false);
+		
+		MovieInsertControl.add(btnInsert);
 		setLayout(groupLayout);
 		
 		
