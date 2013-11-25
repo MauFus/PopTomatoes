@@ -24,7 +24,6 @@ public class MoviePanel extends JPanel {
 	private JButton btnCloseMovie;
 	private JTextField txtpnPg;
 	private JTextPane txtpnId;
-	private JTextPane txtpnReleaseDate;
 	private JTextPane txtpnDuration;
 
 	public MoviePanel() {
@@ -79,13 +78,13 @@ public class MoviePanel extends JPanel {
 		txtpnId.setText("ID: 000001");
 		txtpnId.setBackground(Color.GRAY);
 		
-		txtpnReleaseDate = new JTextPane();
-		txtpnReleaseDate.setText("Release Date: 21/12/2012");
-		txtpnReleaseDate.setMargin(new Insets(5, 10, 0, 0));
-		txtpnReleaseDate.setForeground(Color.WHITE);
-		txtpnReleaseDate.setFont(new Font("Calibri", Font.BOLD, 15));
-		txtpnReleaseDate.setEditable(false);
-		txtpnReleaseDate.setBackground(Color.GRAY);
+		txtpnDuration = new JTextPane();
+		txtpnDuration.setText("Duration: 180 minutes");
+		txtpnDuration.setMargin(new Insets(5, 10, 0, 0));
+		txtpnDuration.setForeground(Color.WHITE);
+		txtpnDuration.setFont(new Font("Calibri", Font.BOLD, 15));
+		txtpnDuration.setEditable(false);
+		txtpnDuration.setBackground(Color.GRAY);
 		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -97,7 +96,7 @@ public class MoviePanel extends JPanel {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(txtpnId, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(txtpnReleaseDate, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))
+							.addComponent(txtpnDuration, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))
 						.addComponent(txtpnMovieTitle, GroupLayout.PREFERRED_SIZE, 401, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
@@ -118,7 +117,7 @@ public class MoviePanel extends JPanel {
 									.addComponent(txtpnMovieTitle, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
 									.addGap(7)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(txtpnReleaseDate, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtpnDuration, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 										.addComponent(txtpnId, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(8)
@@ -152,10 +151,6 @@ public class MoviePanel extends JPanel {
 
 	public JTextPane getTxtpnId() {
 		return txtpnId;
-	}
-
-	public JTextPane getTxtpnReleaseDate() {
-		return txtpnReleaseDate;
 	}
 
 	public JTextPane getTxtpnDuration() {
