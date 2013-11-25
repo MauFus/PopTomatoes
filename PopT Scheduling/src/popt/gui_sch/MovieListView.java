@@ -44,16 +44,14 @@ public class MovieListView extends JPanel {
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(txtpnMovieList, GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(MovieInsertControl, GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
-					.addContainerGap())
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addComponent(txtpnMovieList, GroupLayout.DEFAULT_SIZE, 1635, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(MovieListContainer, GroupLayout.PREFERRED_SIZE, 824, Short.MAX_VALUE)
-					.addContainerGap())
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(MovieListContainer, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+						.addComponent(MovieInsertControl, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE))
+					.addGap(10))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -62,7 +60,7 @@ public class MovieListView extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(MovieInsertControl, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(MovieListContainer, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+					.addComponent(MovieListContainer, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		
