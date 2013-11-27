@@ -38,12 +38,7 @@ public class MovieListView extends JPanel {
 		//panel che contiene il pulsante per aprire il dialog per la ricerca dei film
 		JPanel MovieInsertControl = new JPanel();
 		MovieInsertControl.setBackground(new Color(100,100,100));
-		//prova per vedere come viene gestito l'inserimento di un panel Movie nella Lista!
 		MovieListContainer = new JPanel();
-		MoviePanel mp = new MoviePanel();
-		MoviePanel mp1 = new MoviePanel();
-		MovieListContainer.add(mp1);
-		MovieListContainer.add(mp);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
