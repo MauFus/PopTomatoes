@@ -155,11 +155,11 @@ public class MySQLAccess {
 			String mv_date, String mv_genre, boolean mv_pg) throws Exception {
 		try {
 			preparedStatement = connect
-					.prepareStatement("select * from POPTOMATOESDB.MOVIE where ? and ? and ? and ? and ? and ?");
+					.prepareStatement("select * from POPTOMATOESDB.MOVIE where (?) and (?) and (?) and (?) and (?) and (?)");
 			preparedStatement.setString(1, mv_id == -1 ? "true" : "ID = " + mv_id);
-			preparedStatement.setString(2, mv_title == null ? "true" : "Title = " + mv_title);
+			preparedStatement.setString(2, mv_title == null ? "true" : "lower(Title) like " + "lower('%" + mv_title + "%')");
 			preparedStatement.setString(3, mv_duration == -1 ? "true" : "Duration = " + mv_duration);
-			preparedStatement.setString(4, mv_date == null ? "true" : "ReleaseDate = " + mv_date);
+			preparedStatement.setString(4, mv_date == null ? "true" : "lower(ReleaseDate) like " + "lower('%" + mv_date + "')");
 			preparedStatement.setString(5, mv_genre == null ? "true" : "Genre = " + mv_genre);
 			preparedStatement.setString(6, !mv_pg ? "true" : "PG = " + mv_pg);
 			
