@@ -34,9 +34,11 @@ public class MovieListModel {
 	 * @param m the movie to be removed from the list
 	 */
 	public void removeMovie(Movie m) {
-		for (Movie e : movieList) {
-			if (e.equals(m))
-				movieList.remove(e);
+		for (int k = 0; k < movieList.size(); k++) {
+			if (movieList.get(k).equals(m)) {
+				movieList.remove(movieList.get(k));
+				break;
+			}
 		}
 	}
 }

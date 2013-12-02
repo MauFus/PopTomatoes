@@ -44,22 +44,7 @@ public class MovieListController {
 	 * it initializes all the listeners on the view
 	 */
 	private void initListeners() {
-		int n_movie = view.getMovieListContainer().getComponentCount();
-		for (int i = 0; i < n_movie; i++) {
-			final int j = i;
-			((MoviePanel)view.getMovieListContainer().getComponent(i)).getBtnCloseMovie().addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Movie m = new Movie();
-					m.setID(Integer.parseInt(((MoviePanel)view.getMovieListContainer().getComponent(j)).getTxtpnId().getText()));
-					model.removeMovie(m);
-					((JPanel)view.getMovieListContainer()).remove(j);
-					
-					writeMovieList();
-				}
-			});
-		}
+		
 	}
 
 	/**
@@ -72,6 +57,7 @@ public class MovieListController {
 			Document d;
 			d = createDocument();
 			Element radice = d.createElement("MovieList");
+			d.appendChild(radice);
 
 			for (Movie m : movies) {
 				Element mChild = createMovieElement(d, m);
@@ -114,13 +100,27 @@ public class MovieListController {
 		view.getMovieListContainer().removeAll();
 		
 		for (Movie m : model.getMovieList()) {
-			MoviePanel mp = new MoviePanel();
+			final MoviePanel mp = new MoviePanel();
 			mp.getTxtpnMovieTitle().setText(m.getTitle() + " (" + m.getDate().split("-")[2] + ")");
 			mp.getTxtpnGenre().setText("Genre: " + m.getGenre().toString());
 			mp.getTxtpnId().setText("ID: " + m.getID());
-			mp.getTxtpnDuration().setText("Duration: " + m.getDuration());
+			mp.getTxtpnDuration().setText("Duration: " + m.getDuration() + " min.");
 			mp.getTxtpnPg().setText(m.isPG() ? "PG-18" : "");
 			view.getMovieListContainer().add(mp);
+			
+			mp.getBtnCloseMovie().addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Movie m = new Movie();
+					m.setID(Integer.parseInt(mp.getTxtpnId().getText().split(":")[1].trim()));
+					model.removeMovie(m);
+					((JPanel)view.getMovieListContainer()).remove(mp);
+					((JPanel)view.getMovieListContainer()).repaint();
+					updateMovieListView();
+					writeMovieList();
+				}
+			});;
 		}
 	}
 
@@ -185,6 +185,9 @@ public class MovieListController {
 		movie.setAttribute("id", Integer.toString(m.getID()));
 		if (m.isPG())
 			movie.setAttribute("pg", "true");
+		else
+			movie.setAttribute("pg", "false");
+			
 		
 		Element title = d.createElement("title");
 		title.setTextContent(m.getTitle());
@@ -215,7 +218,7 @@ public class MovieListController {
 		e.setDate(item.getElementsByTagName("releaseDate").item(0).getTextContent());
 		e.setDuration(Integer.parseInt(item.getElementsByTagName("duration").item(0).getTextContent()));
 		e.setGenre(Genre.valueOf(item.getElementsByTagName("genre").item(0).getTextContent()));
-		e.setPG(item.getAttribute("pg") != null);
+		e.setPG(Boolean.valueOf(item.getAttribute("pg")));
 		return e;
 	}
 
