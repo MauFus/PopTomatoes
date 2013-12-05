@@ -15,12 +15,14 @@ import org.xml.sax.SAXException;
 import popt.data.*;
 import popt.gui_sch.MovieListView;
 import popt.gui_sch.MoviePanel;
+import popt.gui_sch.SearchMovieDialog;
 import popt.model_sch.MovieListModel;
 
 public class MovieListController {
 
 	private MovieListModel model;
 	private MovieListView view;
+	private SearchMovieDialog searchDialog;
 
 	public static final String MOVIE_LIST = "movielist.xml";
 
@@ -44,7 +46,14 @@ public class MovieListController {
 	 * it initializes all the listeners on the view
 	 */
 	private void initListeners() {
-		
+		view.getBtnInsert().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				searchDialog = new SearchMovieDialog();
+				searchDialog.setVisible(true);
+			}
+		});
 	}
 
 	/**

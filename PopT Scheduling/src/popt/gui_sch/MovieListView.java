@@ -86,6 +86,10 @@ public class MovieListView extends JPanel {
 
 	}
 	
+	public JButton getBtnInsert() {
+		return btnInsert;
+	}
+
 	public JPanel getMovieListContainer() {
 		return MovieListContainer;
 	}
