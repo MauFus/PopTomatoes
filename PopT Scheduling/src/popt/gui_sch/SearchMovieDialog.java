@@ -27,6 +27,7 @@ public class SearchMovieDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = -6781443339082226427L;
 	private final JPanel contentPanel = new JPanel();
+	private JPanel pnQueryResults;
 	private JTextField textID;
 	private JTextField textTitle;
 	private JTextField textYear;
@@ -83,7 +84,7 @@ public class SearchMovieDialog extends JDialog {
 		txtMovieSearchResult.setFocusable(false);
 		txtMovieSearchResult.setEditable(false);
 
-		JPanel pnQueryResults = new JPanel();
+		pnQueryResults = new JPanel();
 		pnQueryResults.setBackground(Color.ORANGE);
 		
 		
@@ -297,6 +298,10 @@ public class SearchMovieDialog extends JDialog {
 
 	public JButton getSearchButton() {
 		return searchButton;
+	}
+
+	public JPanel getPnQueryResults() {
+		return pnQueryResults;
 	}
 
 }

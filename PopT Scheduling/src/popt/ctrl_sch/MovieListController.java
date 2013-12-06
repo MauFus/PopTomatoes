@@ -10,6 +10,7 @@ import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.xml.parsers.*;
 
 import org.w3c.dom.*;
@@ -162,6 +163,12 @@ public class MovieListController {
 				
 				// it start the search
 				model.setSearchList(Main.searchMovie(toSearch));
+				
+				JPanel panel = searchDialog.getPnQueryResults();
+				for (Movie m : model.getSearchList()) {
+					panel.add(new JRadioButton("ID: " + m.getID() + " - " + m.getTitle()
+							+ " (" + m.getDate().split("-")[2] + ")"));
+				}
 			}
 		});
 	}
