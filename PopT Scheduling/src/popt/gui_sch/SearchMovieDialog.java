@@ -9,6 +9,7 @@ import java.awt.Insets;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -38,24 +39,12 @@ public class SearchMovieDialog extends JDialog {
 	private JButton cancelButton;
 	private JButton searchButton;
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			SearchMovieDialog dialog = new SearchMovieDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * Create the dialog.
 	 */
-	public SearchMovieDialog() {
+	
+	public SearchMovieDialog (JFrame parent) {
+		super(parent,true);
 		setTitle("Movie Search");
 		setBounds(100, 100, 600, 500);
 		getContentPane().setLayout(new BorderLayout());

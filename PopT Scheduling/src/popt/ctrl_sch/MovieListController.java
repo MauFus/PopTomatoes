@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.xml.parsers.*;
@@ -54,7 +55,7 @@ public class MovieListController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				searchDialog = new SearchMovieDialog();
+				searchDialog = new SearchMovieDialog(MainView.getGuiFrame());
 				searchDialog.setVisible(true);
 				initDialogListeners();
 			}

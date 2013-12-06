@@ -22,7 +22,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainView {
-	JFrame guiFrame;
+	static JFrame guiFrame;
 	CardLayout cards;
 	JPanel cardPanel;
 	
@@ -187,4 +187,9 @@ public class MainView {
 		but.setActionCommand(name);
 		parent.add(but);
 	}
+	
+	public static JFrame getGuiFrame() {
+		return guiFrame;
+	}
+
 }
