@@ -6,6 +6,7 @@ import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.LinkedList;
 
 import popt.ctrl_sch.InsertMovieController;
 import popt.ctrl_sch.MovieListController;
@@ -86,6 +87,21 @@ public class Main {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public static LinkedList<Movie> searchMovie(Movie m) {
+		
+		try {
+			// Se il server sta processando altre richieste: abort
+			if (!dbr.isAvailable())
+				return null;
+			else {
+				return dbr.searchMovie(m);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	

@@ -7,6 +7,7 @@ import popt.data.Movie;
 public class MovieListModel {
 
 	private LinkedList<Movie> movieList;
+	private LinkedList<Movie> searchList;
 	
 	public MovieListModel() {
 		movieList = new LinkedList<>();
@@ -15,7 +16,15 @@ public class MovieListModel {
 	public LinkedList<Movie> getMovieList() {
 		return movieList;
 	}
+
+	public LinkedList<Movie> getSearchList() {
+		return searchList;
+	}
 	
+	public void setSearchList(LinkedList<Movie> searchList) {
+		this.searchList = searchList;
+	}
+
 	/**
 	 * 
 	 * @param m the movie to be inserted
