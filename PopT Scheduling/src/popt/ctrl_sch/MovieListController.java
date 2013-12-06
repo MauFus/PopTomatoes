@@ -1,10 +1,14 @@
 package popt.ctrl_sch;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.*;
 import java.util.LinkedList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.xml.parsers.*;
 
@@ -13,9 +17,8 @@ import org.w3c.dom.ls.*;
 import org.xml.sax.SAXException;
 
 import popt.data.*;
-import popt.gui_sch.MovieListView;
-import popt.gui_sch.MoviePanel;
-import popt.gui_sch.SearchMovieDialog;
+import popt.gui_sch.*;
+import popt.main_sch.Main;
 import popt.model_sch.MovieListModel;
 
 public class MovieListController {
@@ -52,6 +55,113 @@ public class MovieListController {
 			public void actionPerformed(ActionEvent e) {
 				searchDialog = new SearchMovieDialog();
 				searchDialog.setVisible(true);
+				initDialogListeners();
+			}
+		});
+	}
+	
+	private void initDialogListeners() {
+		searchDialog.getTextID().addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				try {
+					Integer.parseInt(searchDialog.getTextID().getText());
+				} catch (NumberFormatException nfe) {
+					if (!searchDialog.getTextID().getText().equals(""))
+						searchDialog.getTextID().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				searchDialog.getTextID().setBorder(BorderFactory.createEmptyBorder());
+			}
+		});
+		
+		searchDialog.getTextDuration().addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				try {
+					Integer.parseInt(searchDialog.getTextDuration().getText());
+				} catch (NumberFormatException nfe) {
+					if (!searchDialog.getTextDuration().getText().equals(""))
+						searchDialog.getTextDuration().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				searchDialog.getTextDuration().setBorder(BorderFactory.createEmptyBorder());
+			}
+		});
+		
+		searchDialog.getTextYear().addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				try {
+					int anno = Integer.parseInt(searchDialog.getTextYear().getText());
+					if (anno < 1900)
+						throw new NumberFormatException();
+				} catch (NumberFormatException nfe) {
+					if (!searchDialog.getTextYear().getText().equals(""))
+						searchDialog.getTextYear().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				searchDialog.getTextYear().setBorder(BorderFactory.createEmptyBorder());
+			}
+		});
+		
+		searchDialog.getCancelButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				searchDialog.setVisible(false);
+				searchDialog = null;				
+			}
+		});
+		
+		searchDialog.getSearchButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Movie toSearch = new Movie();
+				try {
+					if (!searchDialog.getTextID().equals(""))
+						toSearch.setID(Integer.parseInt(searchDialog.getTextID().getText()));
+					else 
+						toSearch.setID(-1);
+					
+					if (!searchDialog.getTextDuration().equals(""))
+						toSearch.setDuration(Integer.parseInt(searchDialog.getTextDuration().getText()));
+					else
+						toSearch.setDuration(-1);
+					
+					if (!searchDialog.getTextYear().equals("")) {
+						Integer a = Integer.parseInt(searchDialog.getTextYear().getText());
+						toSearch.setDate(a.toString());
+					} 					
+				} catch (NumberFormatException nfe) {
+					// the search is aborted
+					return;
+				}
+				
+				if (!searchDialog.getTextTitle().equals(""))
+					toSearch.setTitle(searchDialog.getTextTitle().getText());
+				
+				if (searchDialog.getComboGenre().getSelectedIndex() != 0)
+					toSearch.setGenre(Genre.valueOf(searchDialog.getComboGenre().getSelectedItem().toString()));
+				
+				toSearch.setPG(searchDialog.getCheckBoxPG().isSelected());
+				
+				// it start the search
+				model.setSearchList(Main.searchMovie(toSearch));
 			}
 		});
 	}
