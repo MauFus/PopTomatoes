@@ -34,14 +34,13 @@ public class RmiStarter {
 				sb.append(line + "\n");
 				line = br.readLine();
 			}
-			String ipServer = sb.toString();
+			String ipServer = sb.toString().trim();
 			br.close();
 			
 			
 			// Set hostname and codebase
 			System.setProperty("java.rmi.server.hostname", ipServer.split("/")[0]);
-			System.setProperty("java.rmi.server.codebase",
-					"http://" + ipServer + "/popt-common.jar");
+			System.setProperty("java.rmi.server.codebase", "http://" + ipServer + "/popt-common.jar");
 
 			// Register services
 			Registry reg = LocateRegistry.createRegistry(1099);

@@ -50,18 +50,18 @@ public class Main {
 				sb.append(line + "\n");
 				line = br.readLine();
 			}
-			String ipServer = sb.toString();
+			String ipServer = sb.toString().trim();
 			br.close();
 
 			LocateRegistry.getRegistry();
 			System.setProperty("java.security.policy", POLICY_FILE_NAME);
-			// Nel file ipServer vi c'e' "<IP>/xampp"
-			System.setProperty("java.rmi.server.codebase", "http://" + ipServer
-					+ "/popt-common.jar");
+			// Nel file ipServer c'e' "<IP>/xampp"
+			System.setProperty("java.rmi.server.codebase", "http://" + ipServer + "/popt-common.jar");
 			if (System.getSecurityManager() == null)
 				System.setSecurityManager(new RMISecurityManager());
-			dbr = (DBReceiver) Naming.lookup("rmi://" + ipServer + "/"
-					+ DBReceiver.SERVICE_NAME);
+			// considera solo l'IP
+			dbr = (DBReceiver) Naming.lookup("rmi://" + ipServer.substring(0, ipServer.indexOf("/")) 
+					+ "/" + DBReceiver.SERVICE_NAME);
 
 		} catch (Exception e) {
 			e.printStackTrace();
