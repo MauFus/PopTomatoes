@@ -9,9 +9,8 @@ import java.io.*;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
 import javax.xml.parsers.*;
 
 import org.w3c.dom.*;
@@ -135,40 +134,66 @@ public class MovieListController {
 				
 				Movie toSearch = new Movie();
 				try {
-					if (!searchDialog.getTextID().equals(""))
+					if (!searchDialog.getTextID().getText().equals(""))
 						toSearch.setID(Integer.parseInt(searchDialog.getTextID().getText()));
 					else 
 						toSearch.setID(-1);
 					
-					if (!searchDialog.getTextDuration().equals(""))
+					if (!searchDialog.getTextDuration().getText().equals(""))
 						toSearch.setDuration(Integer.parseInt(searchDialog.getTextDuration().getText()));
 					else
 						toSearch.setDuration(-1);
 					
-					if (!searchDialog.getTextYear().equals("")) {
+					if (!searchDialog.getTextYear().getText().equals("")) {
 						Integer a = Integer.parseInt(searchDialog.getTextYear().getText());
 						toSearch.setDate(a.toString());
-					} 					
+					} else
+						toSearch.setDate("");
 				} catch (NumberFormatException nfe) {
-					// the search is aborted
 					return;
 				}
 				
-				if (!searchDialog.getTextTitle().equals(""))
-					toSearch.setTitle(searchDialog.getTextTitle().getText());
+				toSearch.setTitle(searchDialog.getTextTitle().getText());
 				
 				if (searchDialog.getComboGenre().getSelectedIndex() != 0)
 					toSearch.setGenre(Genre.valueOf(searchDialog.getComboGenre().getSelectedItem().toString()));
+				else
+					toSearch.setGenre(null);
 				
 				toSearch.setPG(searchDialog.getCheckBoxPG().isSelected());
 				
 				// it start the search
 				model.setSearchList(Main.searchMovie(toSearch));
-				
-				JPanel panel = searchDialog.getPnQueryResults();
-				for (Movie m : model.getSearchList()) {
-					panel.add(new JRadioButton("ID: " + m.getID() + " - " + m.getTitle()
-							+ " (" + m.getDate().split("-")[2] + ")"));
+
+				if (model.getSearchList() != null) {
+					for (Movie m : model.getSearchList()) {
+						searchDialog.getPnQueryResults().add(new JRadioButtonMenuItem("ID: " + m.getID()
+									+ " : " + m.getTitle() + " (" + m.getDate().split("-")[2] + ")"));
+					}
+				}
+			}
+		});
+		
+		searchDialog.getInsertButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String ID = null;
+				for (int k = 0;	k < searchDialog.getPnQueryResults().getComponentCount(); k++) {
+					if (((JRadioButtonMenuItem) searchDialog.getPnQueryResults().getComponent(k)).isSelected()) {
+						ID = ((JRadioButtonMenuItem) searchDialog.getPnQueryResults().getComponent(k)).getText().split(":")[1].trim();
+						break;
+					}
+				}
+
+				if (ID != null && model.getSearchList() != null) {
+					Movie selected = null;
+					for (Movie m : model.getSearchList()) {
+						if (m.getID() == Integer.parseInt(ID))
+							selected = m;
+					}
+					if (selected != null)
+						model.insertMovie(selected);
 				}
 			}
 		});
