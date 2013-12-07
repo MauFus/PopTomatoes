@@ -154,23 +154,37 @@ public class MySQLAccess {
 	public LinkedList<Movie> searchMovie(int mv_id, String mv_title, int mv_duration,
 			String mv_date, String mv_genre, boolean mv_pg) throws Exception {
 		try {
-			preparedStatement = connect
-					.prepareStatement("select * from POPTOMATOESDB.MOVIE where (?) and (?) and (?) and (?) and (?) and (?)");
-			preparedStatement.setString(1, mv_id == -1 ? "true" : "ID = " + mv_id);
-			preparedStatement.setString(2, mv_title == null ? "true" : "lower(Title) like " + "lower('%" + mv_title + "%')");
-			preparedStatement.setString(3, mv_duration == -1 ? "true" : "Duration = " + mv_duration);
-			preparedStatement.setString(4, mv_date == null ? "true" : "lower(ReleaseDate) like " + "lower('%" + mv_date + "')");
-			preparedStatement.setString(5, mv_genre == null ? "true" : "Genre = " + mv_genre);
-			preparedStatement.setString(6, !mv_pg ? "true" : "PG = " + mv_pg);
+			// create the sql query
+			String query = "SELECT * FROM POPTOMATOESDB.MOVIE WHERE";
+			if (mv_pg)
+				query.concat(" PG = 1");
+			else
+				query.concat("PG = 0");
 			
+			if (mv_id > 0)
+				query.concat(" AND ID = " + mv_id);
+			
+			if (!mv_title.equals(""))
+				query.concat(" AND lower(Title) LIKE lower('%" + mv_title+ "%')");
+
+			if (mv_duration > 0)
+				query.concat(" AND Duration = " + mv_duration);
+
+			if (!mv_date.equals(""))
+				query.concat(" AND lower(ReleaseDate) LIKE lower('%" + mv_date+ "')");
+
+			if (mv_genre != null)
+				query.concat(" AND lower(Genre) LIKE lower('" + mv_genre + "')");
+			
+			preparedStatement = connect.prepareStatement(query);
 			ResultSet result = preparedStatement.executeQuery();
 			LinkedList<Movie> selectedMovies = new LinkedList<>();
-			do {
+			while (result != null) {
 				Movie m = new Movie(result.getInt("ID"), result.getString("Title"), result.getInt("Duration"), 
 						result.getString("ReleaseDate"), Genre.valueOf(result.getString("Genre")), result.getBoolean("PG"));
 				selectedMovies.push(m);
 				result.next();
-			} while (result != null);
+			}
 			
 			return selectedMovies;
 		} catch (Exception e) {
