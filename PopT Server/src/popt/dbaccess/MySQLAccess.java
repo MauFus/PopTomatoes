@@ -157,35 +157,37 @@ public class MySQLAccess {
 			// create the sql query
 			String query = "SELECT * FROM POPTOMATOESDB.MOVIE WHERE";
 			if (mv_pg)
-				query.concat(" PG = 1");
+				query = query.concat(" PG = 1");
 			else
-				query.concat("PG = 0");
+				query = query.concat(" PG = 0");
 			
 			if (mv_id > 0)
-				query.concat(" AND ID = " + mv_id);
+				query = query.concat(" AND ID = " + mv_id);
 			
 			if (!mv_title.equals(""))
-				query.concat(" AND lower(Title) LIKE lower('%" + mv_title+ "%')");
+				query = query.concat(" AND lower(Title) LIKE lower('%" + mv_title+ "%')");
 
 			if (mv_duration > 0)
-				query.concat(" AND Duration = " + mv_duration);
+				query = query.concat(" AND Duration = " + mv_duration);
 
 			if (!mv_date.equals(""))
-				query.concat(" AND lower(ReleaseDate) LIKE lower('%" + mv_date+ "')");
+				query = query.concat(" AND lower(ReleaseDate) LIKE lower('%" + mv_date+ "')");
 
 			if (mv_genre != null)
-				query.concat(" AND lower(Genre) LIKE lower('" + mv_genre + "')");
+				query = query.concat(" AND lower(Genre) LIKE lower('" + mv_genre + "')");
 			
-			preparedStatement = connect.prepareStatement(query);
-			ResultSet result = preparedStatement.executeQuery();
+			query = query.concat(";");
+			System.out.println(query);
+			Statement statement = connect.createStatement();
+			ResultSet result = statement.executeQuery(query);
 			LinkedList<Movie> selectedMovies = new LinkedList<>();
-			while (result != null) {
-				Movie m = new Movie(result.getInt("ID"), result.getString("Title"), result.getInt("Duration"), 
-						result.getString("ReleaseDate"), Genre.valueOf(result.getString("Genre")), result.getBoolean("PG"));
-				selectedMovies.push(m);
-				result.next();
+			if (result.first()) {
+				do {
+					Movie m = new Movie(result.getInt("ID"), result.getString("Title"), result.getInt("Duration"), 
+							result.getString("ReleaseDate"), Genre.valueOf(result.getString("Genre")), result.getBoolean("PG"));
+					selectedMovies.push(m);
+				} while (result.next());
 			}
-			
 			return selectedMovies;
 		} catch (Exception e) {
 			throw e;
