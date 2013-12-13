@@ -152,7 +152,7 @@ public class MySQLAccess {
 	}
 
 	public LinkedList<Movie> searchMovie(int mv_id, String mv_title, int mv_duration,
-			String mv_date, String mv_genre, boolean mv_pg) throws Exception {
+			String mv_date, Genre mv_genre, boolean mv_pg) throws Exception {
 		try {
 			// create the sql query
 			String query = "SELECT * FROM POPTOMATOESDB.MOVIE WHERE";
