@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
@@ -20,6 +22,9 @@ import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 
 import popt.data.Genre;
+
+import javax.swing.border.LineBorder;
+import javax.swing.ScrollPaneConstants;
 
 public class SearchMovieDialog extends JDialog {
 
@@ -29,6 +34,7 @@ public class SearchMovieDialog extends JDialog {
 	private static final long serialVersionUID = -6781443339082226427L;
 	private final JPanel contentPanel = new JPanel();
 	private JPanel pnQueryResults;
+	private ButtonGroup radioGroup;
 	private JTextField textID;
 	private JTextField textTitle;
 	private JTextField textYear;
@@ -75,20 +81,21 @@ public class SearchMovieDialog extends JDialog {
 
 		pnQueryResults = new JPanel();
 		pnQueryResults.setBackground(Color.ORANGE);
-		
+		JScrollPane scrb = new JScrollPane(pnQueryResults);
+		radioGroup = new ButtonGroup();		
 		
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
-			gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(txtMovieSearch, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+				.addComponent(txtMovieSearch, GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(pnSearchMovie, GroupLayout.PREFERRED_SIZE, 564, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(11, Short.MAX_VALUE))
 				.addComponent(txtMovieSearchResult, GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
-				.addGroup(Alignment.TRAILING, gl_contentPanel.createSequentialGroup()
+				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(pnQueryResults, GroupLayout.PREFERRED_SIZE, 565, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrb, GroupLayout.PREFERRED_SIZE, 565, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		gl_contentPanel.setVerticalGroup(
@@ -99,8 +106,8 @@ public class SearchMovieDialog extends JDialog {
 					.addComponent(pnSearchMovie, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(txtMovieSearchResult, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(pnQueryResults, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(scrb, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		
@@ -112,6 +119,7 @@ public class SearchMovieDialog extends JDialog {
 
 		textID = new JTextField();
 		textID.setColumns(10);
+		textID.setBorder(null);
 		
 		JTextPane txtpnTitle = new JTextPane();
 		txtpnTitle.setEditable(false);
@@ -121,6 +129,7 @@ public class SearchMovieDialog extends JDialog {
 
 		textTitle = new JTextField();
 		textTitle.setColumns(10);
+		textTitle.setBorder(null);
 		
 		JTextPane txtpnReleaseDate = new JTextPane();
 		txtpnReleaseDate.setEditable(false);
@@ -130,6 +139,7 @@ public class SearchMovieDialog extends JDialog {
 
 		textYear = new JTextField();
 		textYear.setColumns(10);
+		textYear.setBorder(null);
 		
 		JTextPane txtpnPg = new JTextPane();
 		txtpnPg.setEditable(false);
@@ -139,6 +149,7 @@ public class SearchMovieDialog extends JDialog {
 
 		checkBoxPG = new JCheckBox("");
 		checkBoxPG.setBackground(Color.ORANGE);
+		checkBoxPG.setBorder(null);
 		
 		JTextPane txtpnGenre = new JTextPane();
 		txtpnGenre.setEditable(false);
@@ -151,6 +162,7 @@ public class SearchMovieDialog extends JDialog {
 				Genre.DOCUMENTARY, Genre.DRAMA, Genre.FANTASY, Genre.NOIR, Genre.HISTORY, Genre.HORROR, Genre.MUSICAL, Genre.MYSTERY, 
 				Genre.ROMANCE, Genre.SCI_FI, Genre.SPORT, Genre.THRILLER, Genre.WAR, Genre.WESTERN};
 		comboGenre.setModel(new DefaultComboBoxModel<Genre>(genreSet));
+		comboGenre.setBorder(null);
 
 		JTextPane txtpnDuration = new JTextPane();
 		txtpnDuration.setEditable(false);
@@ -159,7 +171,8 @@ public class SearchMovieDialog extends JDialog {
 		txtpnDuration.setFont(new Font("Calibri", Font.PLAIN, 15));
 
 		textDuration = new JTextField();
-		textDuration.setColumns(10);		
+		textDuration.setColumns(10);
+		textDuration.setBorder(null);
 		
 		searchButton = new JButton("Search");
 		GroupLayout gl_pnSearchMovie = new GroupLayout(pnSearchMovie);
@@ -251,6 +264,10 @@ public class SearchMovieDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	public ButtonGroup getRadioGroup() {
+		return radioGroup;
 	}
 
 	public JTextField getTextID() {
