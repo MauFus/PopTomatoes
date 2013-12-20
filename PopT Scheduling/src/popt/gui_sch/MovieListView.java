@@ -1,15 +1,24 @@
 package popt.gui_sch;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
+import javax.swing.plaf.ComponentUI;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
 
 public class MovieListView extends JPanel {
 
@@ -39,16 +48,29 @@ public class MovieListView extends JPanel {
 		JPanel MovieInsertControl = new JPanel();
 		MovieInsertControl.setBackground(new Color(100,100,100));
 		MovieListContainer = new JPanel();
+		Dimension size = new Dimension(MoviePanel.getMaxWidth()+100,MovieListContainer.getMaximumSize().height);
+		MovieListContainer.setSize(size);
+		JScrollPane scrb = new JScrollPane(MovieListContainer);
+		
+		MovieListContainer.setLayout(new GridLayout(0, 1, 0, 10));
+		MovieListContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 25));
+		scrb.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		System.out.println(size.height);
+		System.out.println(size.width);
+		scrb.setSize(size);
+		
+		//add(scrb, BorderLayout.CENTER);
+		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addComponent(txtpnMovieList, GroupLayout.DEFAULT_SIZE, 1635, Short.MAX_VALUE)
+				.addComponent(txtpnMovieList, GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(MovieListContainer, Alignment.CENTER, 0, 0, Short.MAX_VALUE)
-						.addComponent(MovieInsertControl, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE))
+						.addComponent(scrb, Alignment.CENTER, GroupLayout.PREFERRED_SIZE, 822, GroupLayout.PREFERRED_SIZE)
+						.addComponent(MovieInsertControl, Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE))
 					.addGap(10))
 		);
 		groupLayout.setVerticalGroup(
@@ -58,7 +80,7 @@ public class MovieListView extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(MovieInsertControl, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(MovieListContainer, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+					.addComponent(scrb, GroupLayout.DEFAULT_SIZE, 377, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		

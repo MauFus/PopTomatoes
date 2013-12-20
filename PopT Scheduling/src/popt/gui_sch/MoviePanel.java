@@ -156,6 +156,10 @@ public class MoviePanel extends JPanel {
 	public JTextPane getTxtpnDuration() {
 		return txtpnDuration;
 	}
+	
+	public static int getMaxWidth(){
+		return 800;
+	}
 
 }
 
