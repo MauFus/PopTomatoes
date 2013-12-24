@@ -6,11 +6,14 @@ import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.LinkedList;
 
 import popt.ctrl_sch.InsertMovieController;
+import popt.ctrl_sch.MovieListController;
 import popt.data.Movie;
 import popt.gui_sch.*;
 import popt.model_sch.InsertMovieModel;
+import popt.model_sch.MovieListModel;
 import popt.rmi.DBReceiver;
 
 public class Main {
@@ -26,11 +29,12 @@ public class Main {
 
 		// Create the models
 		InsertMovieModel im_model = new InsertMovieModel();
+		MovieListModel ml_model = new MovieListModel();
 
 		// Create the Controllers
-		InsertMovieController im_ctrl = new InsertMovieController(
-				mainView.getInsertMovieView(), im_model);
-		im_ctrl.initListeners();
+		new InsertMovieController(mainView.getInsertMovieView(), im_model);
+		new MovieListController(mainView.getMovieListView(), ml_model);
+		
 		initRmiConnection();
 	}
 	
@@ -46,18 +50,18 @@ public class Main {
 				sb.append(line + "\n");
 				line = br.readLine();
 			}
-			String ipServer = sb.toString();
+			String ipServer = sb.toString().trim();
 			br.close();
 
 			LocateRegistry.getRegistry();
 			System.setProperty("java.security.policy", POLICY_FILE_NAME);
-			// Nel file ipServer vi c'e' "<IP>/xampp"
-			System.setProperty("java.rmi.server.codebase", "http://" + ipServer
-					+ "/popt-common.jar");
+			// Nel file ipServer c'e' "<IP>/xampp"
+			System.setProperty("java.rmi.server.codebase", "http://" + ipServer + "/popt-common.jar");
 			if (System.getSecurityManager() == null)
 				System.setSecurityManager(new RMISecurityManager());
-			dbr = (DBReceiver) Naming.lookup("rmi://" + ipServer + "/"
-					+ DBReceiver.SERVICE_NAME);
+			// considera solo l'IP
+			dbr = (DBReceiver) Naming.lookup("rmi://" + ipServer.substring(0, ipServer.indexOf("/")) 
+					+ "/" + DBReceiver.SERVICE_NAME);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,6 +87,21 @@ public class Main {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public static LinkedList<Movie> searchMovie(Movie m) {
+		
+		try {
+			// Se il server sta processando altre richieste: abort
+			if (!dbr.isAvailable())
+				return null;
+			else {
+				return dbr.searchMovie(m);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	

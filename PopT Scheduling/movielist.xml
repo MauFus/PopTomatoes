@@ -1,0 +1,26 @@
+<MovieList>
+	<Movie id = '205616'>
+		<title>Batman! Batman...</title>
+		<releaseDate>12-12-2012</releaseDate>
+		<duration>125</duration>
+		<genre>ACTION</genre>
+	</Movie>
+	<Movie id = '564312'>
+		<title>Te Brucio col Thè</title>
+		<releaseDate>5-3-2005</releaseDate>
+		<duration>15</duration>
+		<genre>DOCUMENTARY</genre>
+	</Movie>
+	<Movie id = '456378' pg = 'true'>
+		<title>Dafuq is dat!?</title>
+		<releaseDate>23-10-2013</releaseDate>
+		<duration>122</duration>
+		<genre>ACTION</genre>
+	</Movie>
+	<Movie id = '643455' pg = 'true'>
+		<title>Thor</title>
+		<releaseDate>22-12-2011</releaseDate>
+		<duration>98</duration>
+		<genre>HORROR</genre>
+	</Movie>
+</MovieList>
