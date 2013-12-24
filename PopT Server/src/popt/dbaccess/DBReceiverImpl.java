@@ -11,6 +11,7 @@ package popt.dbaccess;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.LinkedList;
 
 import popt.data.*;
 import popt.rmi.DBReceiver;
@@ -54,6 +55,33 @@ public class DBReceiverImpl extends UnicastRemoteObject implements DBReceiver {
 	}
 
 	@Override
+	public LinkedList<Movie> searchMovie(Movie movie) throws RemoteException {
+		MySQLAccess dba = new MySQLAccess();
+		try {
+			isWorking = true;
+			statusMessage = "Ricerca in DB in corso...";
+			LinkedList<Movie> result = new LinkedList<>();
+
+			dba.readDB();
+			result = dba.searchMovie(movie.getID(), movie.getTitle(), movie.getDuration(),
+					movie.getDate(), movie.getGenre(), movie.isPG());
+			dba.closeDB();
+			
+			statusMessage = "Ricerca in DB eseguita con successo!\n";
+			isWorking = false;
+			return result;
+			
+		} catch (Exception e) {
+			dba.closeDB();
+			
+			statusMessage = "Errore: Ricerca in DB fallita\n";
+			isWorking = false;
+			return null;
+		}
+	}
+
+
+	@Override
 	public boolean isAvailable() throws RemoteException {
 		return !(isWorking);
 	}
@@ -62,5 +90,4 @@ public class DBReceiverImpl extends UnicastRemoteObject implements DBReceiver {
 	public String getStatus() throws RemoteException {
 		return statusMessage;
 	}
-
 }

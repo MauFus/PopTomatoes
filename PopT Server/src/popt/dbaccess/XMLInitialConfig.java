@@ -18,6 +18,8 @@ import org.xml.sax.SAXException;
 
 public class XMLInitialConfig {
 
+	public static final String CONFIG_FILE = "config.xml";
+	
 	public XMLInitialConfig() {
 
 	}
@@ -29,9 +31,8 @@ public class XMLInitialConfig {
 	 *            - path to xml file
 	 * @return reference to xml document
 	 */
-	private Document loadDocument(String path) {
+	private static Document loadDocument(String path) {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		// dbf.setValidating(true);
 		dbf.setNamespaceAware(false);
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -81,8 +82,7 @@ public class XMLInitialConfig {
 		// Lettura del file config.xml
 		MySQLAccess msa = new MySQLAccess();
 		msa.readDB();
-		XMLInitialConfig reader = new XMLInitialConfig();
-		Document config = reader.loadDocument("config.xml");
+		Document config = loadDocument(CONFIG_FILE);
 
 		// Creazione della lista di sale
 		NodeList cinemaHalls = findCinemaHall(config);

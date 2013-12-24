@@ -17,14 +17,18 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainView {
-	JFrame guiFrame;
+	static JFrame guiFrame;
 	CardLayout cards;
 	JPanel cardPanel;
 	
 	// View per il modulo InsertMovie
 	InsertMovieView imv;
+	MovieListView mlv;
 
 	public static void main(String[] args) {
 
@@ -73,7 +77,17 @@ public class MainView {
 				cards.show(cardPanel, "IM");
 			}
 		});
-		tabsPanel.add(insertMovieButt);
+		
+		JButton movieListButt = new JButton("Movie List");
+		movieListButt.setBackground(Color.BLUE);
+		movieListButt.setFocusable(false);
+		movieListButt.setBorderPainted(false);
+		movieListButt.setActionCommand("Switch Card");
+		movieListButt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cards.show(cardPanel, "ML");
+			}
+		});
 		
 		JButton schedulingButt = new JButton("Scheduling");
 		schedulingButt.setBackground(new Color(0,200,0));
@@ -88,8 +102,6 @@ public class MainView {
 				cards.show(cardPanel, "Fruits");
 			}
 		});
-		tabsPanel.add(schedulingButt);
-		
 		
 
 		cards = new CardLayout();
@@ -102,6 +114,9 @@ public class MainView {
 		
 		imv = new InsertMovieView();
 		imv.setBackground(Color.ORANGE);
+		
+		mlv = new MovieListView();
+		mlv.setBackground(new Color(100,100,100));
 
 		JPanel firstCard = new JPanel();
 		firstCard.setBackground(Color.GREEN);
@@ -117,10 +132,34 @@ public class MainView {
 
 		cardPanel.add(mainCard, "Main");
 		cardPanel.add(imv,"IM");
+		cardPanel.add(mlv,"ML");
 		cardPanel.add(firstCard, "Fruits");
 		cardPanel.add(secondCard, "Veggies");
 
 		guiFrame.getContentPane().add(tabsPanel, BorderLayout.NORTH);
+		GroupLayout gl_tabsPanel = new GroupLayout(tabsPanel);
+		gl_tabsPanel.setHorizontalGroup(
+			gl_tabsPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_tabsPanel.createSequentialGroup()
+					.addContainerGap(155, Short.MAX_VALUE)
+					.addComponent(insertMovieButt, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(movieListButt, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(schedulingButt, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_tabsPanel.setVerticalGroup(
+			gl_tabsPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_tabsPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_tabsPanel.createParallelGroup(Alignment.BASELINE, false)
+						.addComponent(schedulingButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+						.addComponent(movieListButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+						.addComponent(insertMovieButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		tabsPanel.setLayout(gl_tabsPanel);
 		guiFrame.getContentPane().add(cardPanel, BorderLayout.CENTER);
 		guiFrame.setVisible(true);
 	}
@@ -132,6 +171,14 @@ public class MainView {
 	public InsertMovieView getInsertMovieView() {
 		return imv;
 	}
+	
+	/**
+	 * Getter per il MovieListView
+	 * @return il riferimento alla view
+	 */
+	public MovieListView getMovieListView() {
+		return mlv;
+	}
 
 	// All the buttons are following the same pattern
 	// so create them all in one place.
@@ -140,4 +187,9 @@ public class MainView {
 		but.setActionCommand(name);
 		parent.add(but);
 	}
+	
+	public static JFrame getGuiFrame() {
+		return guiFrame;
+	}
+
 }

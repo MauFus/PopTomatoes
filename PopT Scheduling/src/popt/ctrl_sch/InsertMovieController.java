@@ -28,12 +28,14 @@ public class InsertMovieController {
 	public InsertMovieController(InsertMovieView v, InsertMovieModel m) {
 		view = v;
 		model = m;
+		
+		initListeners();
 	}
 
 	/**
 	 * Initialize all the listeners on InsertMovieView
 	 */
-	public void initListeners() {
+	private void initListeners() {
 
 		/**
 		 * Focus Listener on Title TextBox

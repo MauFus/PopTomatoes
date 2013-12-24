@@ -11,6 +11,7 @@ package popt.rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.LinkedList;
 
 import popt.data.Movie;
 
@@ -25,6 +26,14 @@ public interface DBReceiver extends Remote {
 	 * @throws RemoteException
 	 */
 	public boolean insertMovie(Movie movie) throws RemoteException;
+	
+	/**
+	 * Avvia la ricerca in DB di un dato film
+	 * @param movie oggetto contenente parametri del film da ricercare
+	 * @return una list di film compatibili con la ricerca
+	 * @throws RemoteException
+	 */
+	public LinkedList<Movie> searchMovie(Movie movie) throws RemoteException;
 
 	/**
 	 * Comunica se il DBReceiver è occupato o disponibile
