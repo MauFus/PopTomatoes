@@ -150,7 +150,60 @@ public class MySQLAccess {
 			throw e;
 		}
 	}
+	
+	/**
+	 * Find the Cinema Hall that fits the passed ID
+	 * @param ch_id
+	 * @return
+	 * @throws Exception
+	 */
+	public CinemaHall searchHall(char ch_id) throws Exception {
+		String query = "SELECT * FROM POPTOMATOESDB.CINEMAHALL WHERE ID = " + (int)ch_id + ";";
+		Statement statement = connect.createStatement();
+		ResultSet result = statement.executeQuery(query);
+		if (result.first())
+			return new CinemaHall(ch_id, result.getString("Name"), result.getInt("Rows"), result.getInt("Seats"), result.getInt("SpecialSeats"));
+		else
+			return null;
+	}
+	
+	/**
+	 * Find Rows Details of the selected Hall
+	 * @param rw_id
+	 * @return
+	 * @throws Exception
+	 */
+	public LinkedList<Row> searchHallSeats(char rw_id) throws Exception {
+		
+		CinemaHall hall = searchHall(rw_id);
+		String query = "SELECT * FROM POPTOMATOESDB.ROW WHERE Cinemahall_ID = " + (int)rw_id + " ORDER BY Number;";
+		Statement statement = connect.createStatement();
+		ResultSet result = statement.executeQuery(query);
+		LinkedList<Row> selectedRows = new LinkedList<>();
+		if (result.first()) {
+			do {
+				Row r = new Row(result.getInt("Number"), result.getInt("Seats"));
+				selectedRows.add(r);
+				
+			} while (result.next());
+		}
+		if (selectedRows.size() == hall.getnRows())
+			return selectedRows;
+		else
+			return null;
+	}
 
+	/**
+	 * Find Movie that fit parameters (no parameter is mandatory)
+	 * @param mv_id
+	 * @param mv_title
+	 * @param mv_duration
+	 * @param mv_date
+	 * @param mv_genre
+	 * @param mv_pg
+	 * @return
+	 * @throws Exception
+	 */
 	public LinkedList<Movie> searchMovie(int mv_id, String mv_title, int mv_duration,
 			String mv_date, Genre mv_genre, boolean mv_pg) throws Exception {
 		try {
@@ -177,7 +230,6 @@ public class MySQLAccess {
 				query = query.concat(" AND lower(Genre) LIKE lower('" + mv_genre + "')");
 			
 			query = query.concat(";");
-			System.out.println(query);
 			Statement statement = connect.createStatement();
 			ResultSet result = statement.executeQuery(query);
 			LinkedList<Movie> selectedMovies = new LinkedList<>();
@@ -189,6 +241,71 @@ public class MySQLAccess {
 				} while (result.next());
 			}
 			return selectedMovies;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/**
+	 * Find Showtimes that fit parameters (no parameter is mandatory)
+	 * @param id
+	 * @param movie
+	 * @param hall
+	 * @param date
+	 * @param time
+	 * @return
+	 * @throws Exception
+	 */
+	public LinkedList<Showtime> searchShowtimes(long id, Movie movie, int hall,
+			String date, String time) throws Exception {
+
+		LinkedList<Showtime> selectedShowtimes = new LinkedList<>();
+		
+		try {
+			String query = "SELECT * FROM POPTOMATOESDB.SHOWTIME WHERE";
+			if (id > 0)
+				query = query.concat(" ID = " + id);
+			
+			if (movie != null) {
+				if (!query.endsWith("WHERE"))
+					query = query.concat(" AND");
+				query = query.concat(" Movie_ID = " + movie.getID());
+			}
+			
+			if (hall > 0) {
+				if (!query.endsWith("WHERE"))
+					query = query.concat(" AND");
+				query = query.concat(" Cinemahall_ID = " + hall);
+			}
+			
+			if (!date.equals("")) {
+				if (!query.endsWith("WHERE"))
+					query = query.concat(" AND");
+				query = query.concat(" lower(Date) LIKE lower('" + date + "')");
+			}
+			
+			if (!time.equals("")) {
+				if (!query.endsWith("WHERE"))
+					query = query.concat(" AND");
+				// TODO Controllare se questa istruzione è corretta
+				query = query.concat(" lower(Time) LIKE lower('" + time + "')");
+			}
+
+			if (!query.endsWith("WHERE")) {
+				query = query.concat(";");
+				Statement statement = connect.createStatement();
+				ResultSet result = statement.executeQuery(query);
+				if (result.first()) {
+					do {
+						LinkedList<Movie> sh_movie = searchMovie(result.getInt("Movie_ID"), "", 0, "", null, false);
+						CinemaHall sh_hall = searchHall((char)result.getInt("Cinemahall_ID"));
+						Showtime sh = new Showtime((long) result.getInt("ID"),sh_movie.getFirst(), sh_hall, 
+								result.getString("Date"), result.getTime("Time").toString(), result.getInt("Auditors"));
+						selectedShowtimes.push(sh);
+					} while (result.next());
+				}
+			}
+			return selectedShowtimes;
 		} catch (Exception e) {
 			throw e;
 		}
