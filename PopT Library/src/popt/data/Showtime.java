@@ -13,20 +13,31 @@ public class Showtime {
 
 	private long id;
 	private Movie movie;
-	private int hall;
+	private CinemaHall hall;
 	private String date;
 	private String time;
+	private int auditors;
 	
 	public Showtime() {
 		
 	}
 	
-	public Showtime(long i, Movie m, int h, String d, String t) {
+	public Showtime(long i, Movie m, CinemaHall h, String d, String t) {
 		id = i;
 		movie = m;
 		hall = h;
 		date = d;
 		time = t;
+		auditors = 0;
+	}
+	
+	public Showtime(long i, Movie m, CinemaHall h, String d, String t, int a) {
+		id = i;
+		movie = m;
+		hall = h;
+		date = d;
+		time = t;
+		auditors = a;
 	}
 	
 	public long getId() {
@@ -45,11 +56,11 @@ public class Showtime {
 		this.movie = movie;
 	}
 
-	public int getHall() {
+	public CinemaHall getHall() {
 		return hall;
 	}
 
-	public void setHall(int hall) {
+	public void setHall(CinemaHall hall) {
 		this.hall = hall;
 	}
 
@@ -67,6 +78,14 @@ public class Showtime {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public int getAuditors() {
+		return auditors;
+	}
+
+	public void setAuditors(int auditors) {
+		this.auditors = auditors;
 	}
 
 	public boolean equals(Showtime s) {
