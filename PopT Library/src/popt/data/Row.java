@@ -11,6 +11,7 @@ package popt.data;
 
 public class Row {
 	
+	private int number;
 	private int seats;
 	private Seat[] status;
 	
@@ -18,22 +19,31 @@ public class Row {
 		
 	}
 	
-	public Row(int  n) {
-		seats = n;
+	public Row(int n, int s) {
+		number = n;
+		seats = s;
 		status = new Seat[seats];
-		for (int s = 0; s < status.length; s++) {
-			status[s] = Seat.LIBERO;
+		for (int k = 0; k < status.length; k++) {
+			status[k] = Seat.LIBERO;
 		}
 	}
 	
-	public Row(int n, Seat[] s) {
-
-		seats = n;
+	public Row(int n, int s, Seat[] p) {
+		number = n;
+		seats = s;
 		status = new Seat[seats];
-		if (s.length == n) {
+		if (p.length == n) {
 			for (int i = 0; i < status.length; i++)
-				status[i] = s[i];
+				status[i] = p[i];
 		}
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 	public int getSeats() {
