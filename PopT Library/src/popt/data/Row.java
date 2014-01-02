@@ -58,8 +58,8 @@ public class Row {
 		return status;
 	}
 
-	public void setStatus(Seat[] status) {
-		this.status = status;
+	public void setStatus(int seat, Seat status) {
+		this.status[seat] = status;
 	}
 
 }
