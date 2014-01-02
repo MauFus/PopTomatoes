@@ -18,19 +18,27 @@ import popt.data.Showtime;
 import popt.dbaccess.MySQLAccess;
 
 public class ShowtimesManager {
+	
+	private LinkedList<Showtime> comingShowtimes;
+	private LinkedList<ShowtimeTicketing> ticketSelling;
 
 	public ShowtimesManager() {
+		comingShowtimes = new LinkedList<>();
+		ticketSelling = new LinkedList<>();
 		
+		// initialize comingShowtimes
+		generateShowtimesList();
 	}
 	
-	public void generateShowtimesList() {
+	/**
+	 * Crea la lista degli spettacoli dei 3 giorni successivi
+	 */
+	private void generateShowtimesList() {
 		
 		DateFormat onlyDate = new SimpleDateFormat("dd-MM-yyyy");
 		Date today = new Date();
 		Date tomorrow = new Date(today.getTime() + 86400000);
 		Date afterTomorrow = new Date(tomorrow.getTime() + 86400000);
-		
-		LinkedList<Showtime> comingShowtimes = new LinkedList<>();
 		
 		MySQLAccess dba = new MySQLAccess();
 		try {
@@ -45,10 +53,26 @@ public class ShowtimesManager {
 			e.printStackTrace();
 		}
 		
+		// update ticketSelling w/ new showtimes
+		instantiateTicketSelling();
 	}
 	
-	public static void main(String[] args) {
-		ShowtimesManager sh = new ShowtimesManager();
-		sh.generateShowtimesList();
+	/**
+	 * Crea, se necessario, le liste dei posti venduti per ogni proiezione
+	 */
+	private void instantiateTicketSelling() {
+		for (Showtime show : comingShowtimes) {
+			boolean isShowtimeAlreadyProcessed = false;
+			for (ShowtimeTicketing ticketing : ticketSelling) {
+				if (show.equals(ticketing.getShow())) {
+					isShowtimeAlreadyProcessed = true;
+					break;
+				}
+			}
+			// if not already processed, create a ShowtimeTicketing object for the new Showtime
+			if (!isShowtimeAlreadyProcessed) {
+				ticketSelling.add(new ShowtimeTicketing(show));
+			}
+		}
 	}
 }
