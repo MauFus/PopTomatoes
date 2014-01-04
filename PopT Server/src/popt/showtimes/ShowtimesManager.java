@@ -75,4 +75,18 @@ public class ShowtimesManager {
 			}
 		}
 	}
+
+	/**
+	 * Seleziona l'oggetto ShowtimeTicketing richiesto
+	 * @param show - Proiezione di cui si vogliono trovare i dati di vendita
+	 * @return i dati di vendita posti della proiezione (oggetto ShowtimeTicketing)
+	 */
+	public ShowtimeTicketing getTicketSelling(Showtime show) {
+		ShowtimeTicketing selected = null;
+		for (ShowtimeTicketing st : ticketSelling) {
+			if (st.getShow().equals(show));
+				selected = st;
+		}
+		return selected;
+	}
 }
