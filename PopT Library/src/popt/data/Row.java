@@ -13,7 +13,7 @@ public class Row {
 	
 	private int number;
 	private int seats;
-	private Seat[] status;
+	private SeatStatus[] status;
 	
 	public Row() {
 		
@@ -22,16 +22,16 @@ public class Row {
 	public Row(int n, int s) {
 		number = n;
 		seats = s;
-		status = new Seat[seats];
+		status = new SeatStatus[seats];
 		for (int k = 0; k < status.length; k++) {
-			status[k] = Seat.LIBERO;
+			status[k] = SeatStatus.LIBERO;
 		}
 	}
 	
-	public Row(int n, int s, Seat[] p) {
+	public Row(int n, int s, SeatStatus[] p) {
 		number = n;
 		seats = s;
-		status = new Seat[seats];
+		status = new SeatStatus[seats];
 		if (p.length == n) {
 			for (int i = 0; i < status.length; i++)
 				status[i] = p[i];
@@ -54,11 +54,11 @@ public class Row {
 		this.seats = seats;
 	}
 
-	public Seat[] getStatus() {
+	public SeatStatus[] getStatus() {
 		return status;
 	}
 
-	public void setStatus(int seat, Seat status) {
+	public void setStatus(int seat, SeatStatus status) {
 		this.status[seat] = status;
 	}
 

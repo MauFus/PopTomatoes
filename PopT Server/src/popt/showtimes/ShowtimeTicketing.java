@@ -12,7 +12,7 @@ package popt.showtimes;
 import java.util.LinkedList;
 
 import popt.data.Row;
-import popt.data.Seat;
+import popt.data.SeatStatus;
 import popt.data.Showtime;
 import popt.dbaccess.MySQLAccess;
 
@@ -47,7 +47,7 @@ public class ShowtimeTicketing {
 			setSeatsStatus(foundRows);
 			for (Row row : seatsStatus) {
 				for (int r = 0; r < row.getSeats(); r++)
-					row.setStatus(r, Seat.LIBERO);
+					row.setStatus(r, SeatStatus.LIBERO);
 			}
 			
 		} catch (Exception e) {
@@ -100,7 +100,7 @@ public class ShowtimeTicketing {
 	 * @param seat - posto
 	 * @param status - stato da settare
 	 */
-	public void setSeat(int row, int seat, Seat status) {
+	public void setSeat(int row, int seat, SeatStatus status) {
 		for (Row r : seatsStatus) {
 			if (r.getNumber() == row && seat < r.getSeats()) {
 				r.setStatus(seat, status);
