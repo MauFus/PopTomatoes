@@ -43,7 +43,7 @@ public class SeatsAllocator {
 	 */
 	public void sellSeat(Showtime show, Seat[] seats) {
 		for (Seat s : seats) {
-			manager.getTicketSelling(show).setSeat(s.getRow(), s.getSeat(), SeatStatus.OCCUPATO);
+			manager.getTicketSelling(show).setSeat(s.getRow(), s.getSeat()-1, SeatStatus.OCCUPATO);
 		}
 	}
 	
@@ -54,7 +54,7 @@ public class SeatsAllocator {
 	 */
 	public void reserveSeat(Showtime show, Seat[] seats) {
 		for (Seat s : seats) {
-			manager.getTicketSelling(show).setSeat(s.getRow(), s.getSeat(), SeatStatus.PRENOTATO);
+			manager.getTicketSelling(show).setSeat(s.getRow(), s.getSeat()-1, SeatStatus.PRENOTATO);
 		}
 	}
 	
@@ -65,8 +65,8 @@ public class SeatsAllocator {
 	 */
 	public void withdrawSeat(Showtime show, Seat[] seats) {
 		for (Seat s : seats) {
-			if (manager.getTicketSelling(show).getSeatsRow(s.getRow()).getStatus()[s.getSeat()].equals(SeatStatus.PRENOTATO))
-				manager.getTicketSelling(show).setSeat(s.getRow(), s.getSeat(), SeatStatus.OCCUPATO);
+			if (manager.getTicketSelling(show).getSeatsRow(s.getRow()).getStatus()[s.getSeat()-1].equals(SeatStatus.PRENOTATO))
+				manager.getTicketSelling(show).setSeat(s.getRow(), s.getSeat()-1, SeatStatus.OCCUPATO);
 		}
 	}
 	
