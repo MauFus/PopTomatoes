@@ -14,9 +14,13 @@ import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -29,6 +33,7 @@ public class MainView {
 	// View per il modulo InsertMovie
 	InsertMovieView imv;
 	MovieListView mlv;
+	SchedulingView schv;
 
 	public static void main(String[] args) {
 
@@ -45,6 +50,15 @@ public class MainView {
 
 	public MainView() {
 		guiFrame = new JFrame();
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		SwingUtilities.updateComponentTreeUI(guiFrame);
+		guiFrame.pack();
 
 		// make sure the program exits when the frame closes
 		guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,7 +104,7 @@ public class MainView {
 		});
 		
 		JButton schedulingButt = new JButton("Scheduling");
-		schedulingButt.setBackground(new Color(0,200,0));
+		schedulingButt.setBackground(Color.GREEN);
 		schedulingButt.setFocusable(false);
 		schedulingButt.setBorderPainted(false);
 		schedulingButt.setActionCommand("Switch Card");
@@ -99,7 +113,7 @@ public class MainView {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				//cards.next(cardPanel);
-				cards.show(cardPanel, "Fruits");
+				cards.show(cardPanel, "SCH");
 			}
 		});
 		
@@ -117,24 +131,14 @@ public class MainView {
 		
 		mlv = new MovieListView();
 		mlv.setBackground(new Color(100,100,100));
-
-		JPanel firstCard = new JPanel();
-		firstCard.setBackground(Color.GREEN);
-		addButton(firstCard, "APPLES");
-		addButton(firstCard, "ORANGES");
-		addButton(firstCard, "BANANAS");
-
-		JPanel secondCard = new JPanel();
-		secondCard.setBackground(Color.BLUE);
-		addButton(secondCard, "LEEKS");
-		addButton(secondCard, "TOMATOES");
-		addButton(secondCard, "PEAS");
+		
+		schv = new SchedulingView();
+		schv.setBackground(new Color(100,100,100));
 
 		cardPanel.add(mainCard, "Main");
 		cardPanel.add(imv,"IM");
 		cardPanel.add(mlv,"ML");
-		cardPanel.add(firstCard, "Fruits");
-		cardPanel.add(secondCard, "Veggies");
+		cardPanel.add(schv,"SCH");
 
 		guiFrame.getContentPane().add(tabsPanel, BorderLayout.NORTH);
 		GroupLayout gl_tabsPanel = new GroupLayout(tabsPanel);
@@ -179,14 +183,23 @@ public class MainView {
 	public MovieListView getMovieListView() {
 		return mlv;
 	}
+	
+	/**
+	 * Getter per lo SchedulingView
+	 * @return il riferimento alla view
+	 */
+	public SchedulingView getSchedulingView() {
+		return schv;
+	}
 
 	// All the buttons are following the same pattern
 	// so create them all in one place.
-	private void addButton(JPanel parent, String name) {
+	//TODO risolvere warning
+	/*private void addButton(JPanel parent, String name) {
 		JButton but = new JButton(name);
 		but.setActionCommand(name);
 		parent.add(but);
-	}
+	}*/
 	
 	public static JFrame getGuiFrame() {
 		return guiFrame;
