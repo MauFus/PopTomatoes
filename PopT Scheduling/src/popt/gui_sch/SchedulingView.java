@@ -3,6 +3,7 @@ package popt.gui_sch;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
@@ -11,8 +12,11 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+
 import java.awt.SystemColor;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SchedulingView extends JPanel {
 
@@ -24,6 +28,18 @@ public class SchedulingView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
+	private JPanel SchContainer;
+	private JPanel SchContainerTh;
+	private JPanel SchContainerFr; 
+	private JPanel SchContainerSa;
+	private JPanel SchContainerSu;
+	private JPanel SchContainerMo;
+	private JPanel SchContainerTu;
+	private JPanel SchContainerWe;
+	
+	CardLayout cards;
+	
 	public SchedulingView() {
 		
 		JTextPane txtpnWeekScheduling = new JTextPane();
@@ -37,7 +53,7 @@ public class SchedulingView extends JPanel {
 		
 		//TODO prelevare dinamicamente il numero delle sale
 		//int nHall = 5;
-		JPanel SchContainer = new JPanel();
+		
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(1000,50));
@@ -47,6 +63,13 @@ public class SchedulingView extends JPanel {
 		button.setFocusable(false);
 		button.setBackground(Color.DARK_GRAY);
 		button.setActionCommand("Switch Card");
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				//cards.next(cardPanel);
+				cards.show(SchContainer, "TH");
+			}
+		});
 		
 		JButton button_1 = new JButton("Friday");
 		button_1.setFocusable(false);
@@ -84,6 +107,23 @@ public class SchedulingView extends JPanel {
 		button_6.setBackground(Color.DARK_GRAY);
 		button_6.setActionCommand("Switch Card");
 		
+		JButton btnAccept = new JButton("Accept");
+		btnAccept.setFocusable(false);
+		btnAccept.setBorderPainted(false);
+		btnAccept.setBackground(Color.GREEN);
+		btnAccept.setActionCommand("Switch Card");
+		
+		cards = new CardLayout();
+		SchContainer = new JPanel();
+		SchContainer.setLayout(cards);
+		cards.show(SchContainer, "TH");
+
+		SchContainerTh = new JPanel();
+		SchContainerTh.setBackground(Color.BLUE);
+
+		SchContainer.add(SchContainerTh, "TH");
+		
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.CENTER)
@@ -101,19 +141,20 @@ public class SchedulingView extends JPanel {
 					.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
 					.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addGap(138)
+					.addComponent(btnAccept, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					)
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.CENTER)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.CENTER)
-							.addComponent(button, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-							.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-							.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-							.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-							.addComponent(button_4, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-							.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-							.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+				.addComponent(button, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(button_4, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(btnAccept, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 		);
 		panel.setLayout(gl_panel);
 		
@@ -138,5 +179,33 @@ public class SchedulingView extends JPanel {
 					.addContainerGap())
 		);
 		setLayout(groupLayout);
+	}
+
+	public JPanel getSchContainerTh() {
+		return SchContainerTh;
+	}
+
+	public JPanel getSchContainerFr() {
+		return SchContainerFr;
+	}
+
+	public JPanel getSchContainerSa() {
+		return SchContainerSa;
+	}
+
+	public JPanel getSchContainerSu() {
+		return SchContainerSu;
+	}
+
+	public JPanel getSchContainerMo() {
+		return SchContainerMo;
+	}
+
+	public JPanel getSchContainerTu() {
+		return SchContainerTu;
+	}
+
+	public JPanel getSchContainerWe() {
+		return SchContainerWe;
 	}
 }
