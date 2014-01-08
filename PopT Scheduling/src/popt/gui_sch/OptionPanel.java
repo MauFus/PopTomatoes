@@ -19,9 +19,10 @@ public class OptionPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = -8730974701730714361L;
 	
-	private JTextField txtOpengingTime;
+	private JTextField txtOpeningTime;
 	private JTextField txtClosingTime;
 	private JTextField txtGap;
+	private JTextPane txtBarMessage;
 	
 	private JButton btnValidate;
 	private JButton btnReset;
@@ -49,11 +50,11 @@ public class OptionPanel extends JPanel {
 		txtpnGap.setText("Gap:");
 		txtpnGap.setEditable(false);
 		
-		txtOpengingTime = new JTextField();
-		txtOpengingTime.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtOpengingTime.setText("hh.mm");
-		txtOpengingTime.setHorizontalAlignment(SwingConstants.CENTER);
-		txtOpengingTime.setColumns(10);
+		txtOpeningTime = new JTextField();
+		txtOpeningTime.setFont(new Font("Calibri", Font.PLAIN, 14));
+		txtOpeningTime.setText("hh.mm");
+		txtOpeningTime.setHorizontalAlignment(SwingConstants.CENTER);
+		txtOpeningTime.setColumns(10);
 		
 		txtClosingTime = new JTextField();
 		txtClosingTime.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -75,9 +76,9 @@ public class OptionPanel extends JPanel {
 		btnReset.setBackground(Color.RED);
 		btnReset.setFont(new Font("Calibri", Font.PLAIN, 14));
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setBackground(SystemColor.controlHighlight);
+		txtBarMessage = new JTextPane();
+		txtBarMessage.setEditable(false);
+		txtBarMessage.setBackground(SystemColor.controlHighlight);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -91,9 +92,9 @@ public class OptionPanel extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(txtClosingTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtGap, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtOpengingTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtOpeningTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-					.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE)
+					.addComponent(txtBarMessage, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE)
 					.addGap(45)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(btnReset, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -106,7 +107,7 @@ public class OptionPanel extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(txtOpengingTime, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+							.addComponent(txtOpeningTime, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
 							.addComponent(btnValidate))
 						.addComponent(txtpnOpening, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
 					.addGap(18)
@@ -119,15 +120,15 @@ public class OptionPanel extends JPanel {
 							.addComponent(txtGap, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnReset))
 						.addComponent(txtpnGap, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtBarMessage, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(17, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 
 	}
 
-	public JTextField getTxtOpengingTime() {
-		return txtOpengingTime;
+	public JTextField getTxtOpeningTime() {
+		return txtOpeningTime;
 	}
 
 	public JTextField getTxtClosingTime() {
@@ -136,6 +137,10 @@ public class OptionPanel extends JPanel {
 
 	public JTextField getTxtGap() {
 		return txtGap;
+	}
+
+	public JTextPane getTxtBarMessage() {
+		return txtBarMessage;
 	}
 
 	public JButton getBtnValidate() {
