@@ -150,6 +150,46 @@ public class MySQLAccess {
 			throw e;
 		}
 	}
+	
+	/**
+	 * Inserimento in DB di una nuova proiezione
+	 * @param id
+	 * @param movie
+	 * @param hall
+	 * @param date
+	 * @param time
+	 * @throws Exception
+	 */
+	public void insertShowtime(long id, Movie movie, CinemaHall hall, String date, 
+			String time) throws Exception {
+		try {
+			preparedStatement = connect.prepareStatement("insert into POPTOMATOESDB.SHOWTIME values (ID,?,?,?,?,?)");
+			preparedStatement.setInt(1, (int) id);
+			preparedStatement.setInt(2, movie.getID());
+			preparedStatement.setInt(3, hall.getId());
+			preparedStatement.setString(4, date);
+			preparedStatement.setString(5, time);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/**
+	 * Find the Cinema Hall that fits the passed ID
+	 * @param ch_id
+	 * @return
+	 * @throws Exception
+	 */
+	public CinemaHall searchHall(char ch_id) throws Exception {
+		String query = "SELECT * FROM POPTOMATOESDB.CINEMAHALL WHERE ID = " + (int)ch_id + ";";
+		Statement statement = connect.createStatement();
+		ResultSet result = statement.executeQuery(query);
+		if (result.first())
+			return new CinemaHall(ch_id, result.getString("Name"), result.getInt("Rows"), result.getInt("Seats"), result.getInt("SpecialSeats"));
+		else
+			return null;
+	}
 
 	public LinkedList<Movie> searchMovie(int mv_id, String mv_title, int mv_duration,
 			String mv_date, Genre mv_genre, boolean mv_pg) throws Exception {
@@ -189,6 +229,71 @@ public class MySQLAccess {
 				} while (result.next());
 			}
 			return selectedMovies;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/**
+	 * Find Showtimes that fit parameters (no parameter is mandatory)
+	 * @param id
+	 * @param movie
+	 * @param hall
+	 * @param date
+	 * @param time
+	 * @return
+	 * @throws Exception
+	 */
+	public LinkedList<Showtime> searchShowtimes(long id, Movie movie, int hall,
+			String date, String time) throws Exception {
+
+		LinkedList<Showtime> selectedShowtimes = new LinkedList<>();
+		
+		try {
+			String query = "SELECT * FROM POPTOMATOESDB.SHOWTIME WHERE";
+			if (id > 0)
+				query = query.concat(" ID = " + id);
+			
+			if (movie != null) {
+				if (!query.endsWith("WHERE"))
+					query = query.concat(" AND");
+				query = query.concat(" Movie_ID = " + movie.getID());
+			}
+			
+			if (hall > 0) {
+				if (!query.endsWith("WHERE"))
+					query = query.concat(" AND");
+				query = query.concat(" Cinemahall_ID = " + hall);
+			}
+			
+			if (!date.equals("")) {
+				if (!query.endsWith("WHERE"))
+					query = query.concat(" AND");
+				query = query.concat(" lower(Date) LIKE lower('" + date + "')");
+			}
+			
+			if (!time.equals("")) {
+				if (!query.endsWith("WHERE"))
+					query = query.concat(" AND");
+				// TODO Controllare se questa istruzione è corretta
+				query = query.concat(" lower(Time) LIKE lower('" + time + "')");
+			}
+
+			if (!query.endsWith("WHERE")) {
+				query = query.concat(";");
+				Statement statement = connect.createStatement();
+				ResultSet result = statement.executeQuery(query);
+				if (result.first()) {
+					do {
+						LinkedList<Movie> sh_movie = searchMovie(result.getInt("Movie_ID"), "", 0, "", null, false);
+						CinemaHall sh_hall = searchHall((char)result.getInt("Cinemahall_ID"));
+						Showtime sh = new Showtime((long) result.getInt("ID"),sh_movie.getFirst(), sh_hall, 
+								result.getString("Date"), result.getTime("Time").toString(), result.getInt("Auditors"));
+						selectedShowtimes.push(sh);
+					} while (result.next());
+				}
+			}
+			return selectedShowtimes;
 		} catch (Exception e) {
 			throw e;
 		}
