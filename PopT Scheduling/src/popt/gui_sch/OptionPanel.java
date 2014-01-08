@@ -18,26 +18,30 @@ public class OptionPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -8730974701730714361L;
-	private JTextField txtHhmm;
-	private JTextField txtHhmm_1;
-	private JTextField txtMm;
+	
+	private JTextField txtOpengingTime;
+	private JTextField txtClosingTime;
+	private JTextField txtGap;
+	
+	private JButton btnValidate;
+	private JButton btnReset;
 
 	/**
 	 * Create the panel.
 	 */
 	public OptionPanel() {
 		
-		JTextPane txtpnApertura = new JTextPane();
-		txtpnApertura.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtpnApertura.setBackground(new Color(240,240,240));
-		txtpnApertura.setEditable(false);
-		txtpnApertura.setText("Opening Time:");
+		JTextPane txtpnOpening = new JTextPane();
+		txtpnOpening.setFont(new Font("Calibri", Font.PLAIN, 14));
+		txtpnOpening.setBackground(new Color(240,240,240));
+		txtpnOpening.setEditable(false);
+		txtpnOpening.setText("Opening Time:");
 		
-		JTextPane txtpnChiusura = new JTextPane();
-		txtpnChiusura.setBackground(new Color(240,240,240));
-		txtpnChiusura.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtpnChiusura.setText("Closing Time:");
-		txtpnChiusura.setEditable(false);
+		JTextPane txtpnClosing = new JTextPane();
+		txtpnClosing.setBackground(new Color(240,240,240));
+		txtpnClosing.setFont(new Font("Calibri", Font.PLAIN, 14));
+		txtpnClosing.setText("Closing Time:");
+		txtpnClosing.setEditable(false);
 		
 		JTextPane txtpnGap = new JTextPane();
 		txtpnGap.setBackground(new Color(240,240,240));
@@ -45,33 +49,34 @@ public class OptionPanel extends JPanel {
 		txtpnGap.setText("Gap:");
 		txtpnGap.setEditable(false);
 		
-		txtHhmm = new JTextField();
-		txtHhmm.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtHhmm.setText("hh.mm");
-		txtHhmm.setHorizontalAlignment(SwingConstants.CENTER);
-		txtHhmm.setColumns(10);
+		txtOpengingTime = new JTextField();
+		txtOpengingTime.setFont(new Font("Calibri", Font.PLAIN, 14));
+		txtOpengingTime.setText("hh.mm");
+		txtOpengingTime.setHorizontalAlignment(SwingConstants.CENTER);
+		txtOpengingTime.setColumns(10);
 		
-		txtHhmm_1 = new JTextField();
-		txtHhmm_1.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtHhmm_1.setText("hh.mm");
-		txtHhmm_1.setHorizontalAlignment(SwingConstants.CENTER);
-		txtHhmm_1.setColumns(10);
+		txtClosingTime = new JTextField();
+		txtClosingTime.setFont(new Font("Calibri", Font.PLAIN, 14));
+		txtClosingTime.setText("hh.mm");
+		txtClosingTime.setHorizontalAlignment(SwingConstants.CENTER);
+		txtClosingTime.setColumns(10);
 		
-		txtMm = new JTextField();
-		txtMm.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtMm.setText("mm");
-		txtMm.setHorizontalAlignment(SwingConstants.CENTER);
-		txtMm.setColumns(10);
+		txtGap = new JTextField();
+		txtGap.setFont(new Font("Calibri", Font.PLAIN, 14));
+		txtGap.setText("mm");
+		txtGap.setHorizontalAlignment(SwingConstants.CENTER);
+		txtGap.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Validate");
-		btnNewButton.setBackground(Color.ORANGE);
-		btnNewButton.setFont(new Font("Calibri", Font.PLAIN, 14));
+		btnValidate = new JButton("Validate");
+		btnValidate.setBackground(Color.ORANGE);
+		btnValidate.setFont(new Font("Calibri", Font.PLAIN, 14));
 		
-		JButton btnReset = new JButton("Reset");
+		btnReset = new JButton("Reset");
 		btnReset.setBackground(Color.RED);
 		btnReset.setFont(new Font("Calibri", Font.PLAIN, 14));
 		
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setBackground(SystemColor.controlHighlight);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -80,19 +85,19 @@ public class OptionPanel extends JPanel {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(txtpnGap, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtpnChiusura, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtpnApertura, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtpnClosing, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtpnOpening, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtHhmm_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtMm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtHhmm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtClosingTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtGap, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtOpengingTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
 					.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE)
 					.addGap(45)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(btnReset, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(btnValidate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -101,17 +106,17 @@ public class OptionPanel extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(txtHhmm, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-							.addComponent(btnNewButton))
-						.addComponent(txtpnApertura, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+							.addComponent(txtOpengingTime, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+							.addComponent(btnValidate))
+						.addComponent(txtpnOpening, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtpnChiusura, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtHhmm_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtpnClosing, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtClosingTime, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(txtMm, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addComponent(txtGap, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnReset))
 						.addComponent(txtpnGap, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
@@ -120,4 +125,25 @@ public class OptionPanel extends JPanel {
 		setLayout(groupLayout);
 
 	}
+
+	public JTextField getTxtOpengingTime() {
+		return txtOpengingTime;
+	}
+
+	public JTextField getTxtClosingTime() {
+		return txtClosingTime;
+	}
+
+	public JTextField getTxtGap() {
+		return txtGap;
+	}
+
+	public JButton getBtnValidate() {
+		return btnValidate;
+	}
+
+	public JButton getBtnReset() {
+		return btnReset;
+	}
+	
 }

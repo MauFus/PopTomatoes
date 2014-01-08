@@ -30,13 +30,13 @@ public class SchedulingView extends JPanel {
 	 */
 	
 	private JPanel SchContainer;
-	private JPanel SchContainerTh;
-	private JPanel SchContainerFr; 
-	private JPanel SchContainerSa;
-	private JPanel SchContainerSu;
-	private JPanel SchContainerMo;
-	private JPanel SchContainerTu;
-	private JPanel SchContainerWe;
+	private DailyCard SchContainerTh;
+	private DailyCard SchContainerFr; 
+	private DailyCard SchContainerSa;
+	private DailyCard SchContainerSu;
+	private DailyCard SchContainerMo;
+	private DailyCard SchContainerTu;
+	private DailyCard SchContainerWe;
 	
 	CardLayout cards;
 	
@@ -59,11 +59,11 @@ public class SchedulingView extends JPanel {
 		panel.setPreferredSize(new Dimension(1000,50));
 		panel.setBackground(SystemColor.windowBorder);
 		
-		JButton button = new JButton("Thursday");
-		button.setFocusable(false);
-		button.setBackground(Color.DARK_GRAY);
-		button.setActionCommand("Switch Card");
-		button.addActionListener(new ActionListener() {
+		JButton buttonTh = new JButton("Thursday");
+		buttonTh.setFocusable(false);
+		buttonTh.setBackground(Color.DARK_GRAY);
+		buttonTh.setActionCommand("Switch Card");
+		buttonTh.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				//cards.next(cardPanel);
@@ -71,89 +71,149 @@ public class SchedulingView extends JPanel {
 			}
 		});
 		
-		JButton button_1 = new JButton("Friday");
-		button_1.setFocusable(false);
-		button_1.setBorderPainted(false);
-		button_1.setBackground(Color.DARK_GRAY);
-		button_1.setActionCommand("Switch Card");
+		JButton buttonFr = new JButton("Friday");
+		buttonFr.setFocusable(false);
+		buttonFr.setBorderPainted(false);
+		buttonFr.setBackground(Color.DARK_GRAY);
+		buttonFr.setActionCommand("Switch Card");
+		buttonFr.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				//cards.next(cardPanel);
+				cards.show(SchContainer, "FR");
+			}
+		});
 		
-		JButton button_2 = new JButton("Saturday");
-		button_2.setFocusable(false);
-		button_2.setBorderPainted(false);
-		button_2.setBackground(Color.DARK_GRAY);
-		button_2.setActionCommand("Switch Card");
+		JButton buttonSa = new JButton("Saturday");
+		buttonSa.setFocusable(false);
+		buttonSa.setBorderPainted(false);
+		buttonSa.setBackground(Color.DARK_GRAY);
+		buttonSa.setActionCommand("Switch Card");
+		buttonSa.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				//cards.next(cardPanel);
+				cards.show(SchContainer, "SA");
+			}
+		});
 		
-		JButton button_3 = new JButton("Sunday");
-		button_3.setFocusable(false);
-		button_3.setBorderPainted(false);
-		button_3.setBackground(Color.DARK_GRAY);
-		button_3.setActionCommand("Switch Card");
+		JButton buttonSu = new JButton("Sunday");
+		buttonSu.setFocusable(false);
+		buttonSu.setBorderPainted(false);
+		buttonSu.setBackground(Color.DARK_GRAY);
+		buttonSu.setActionCommand("Switch Card");
+		buttonSu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				//cards.next(cardPanel);
+				cards.show(SchContainer, "SU");
+			}
+		});
 		
-		JButton button_4 = new JButton("Monday");
-		button_4.setFocusable(false);
-		button_4.setBorderPainted(false);
-		button_4.setBackground(Color.DARK_GRAY);
-		button_4.setActionCommand("Switch Card");
+		JButton buttonMo = new JButton("Monday");
+		buttonMo.setFocusable(false);
+		buttonMo.setBorderPainted(false);
+		buttonMo.setBackground(Color.DARK_GRAY);
+		buttonMo.setActionCommand("Switch Card");
+		buttonMo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				//cards.next(cardPanel);
+				cards.show(SchContainer, "MO");
+			}
+		});
 		
-		JButton button_5 = new JButton("Tuesday");
-		button_5.setFocusable(false);
-		button_5.setBorderPainted(false);
-		button_5.setBackground(Color.DARK_GRAY);
-		button_5.setActionCommand("Switch Card");
+		JButton buttonTu = new JButton("Tuesday");
+		buttonTu.setFocusable(false);
+		buttonTu.setBorderPainted(false);
+		buttonTu.setBackground(Color.DARK_GRAY);
+		buttonTu.setActionCommand("Switch Card");
+		buttonTu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				//cards.next(cardPanel);
+				cards.show(SchContainer, "TU");
+			}
+		});
 		
-		JButton button_6 = new JButton("Wednesday");
-		button_6.setFocusable(false);
-		button_6.setBorderPainted(false);
-		button_6.setBackground(Color.DARK_GRAY);
-		button_6.setActionCommand("Switch Card");
+		JButton buttonWe = new JButton("Wednesday");
+		buttonWe.setFocusable(false);
+		buttonWe.setBorderPainted(false);
+		buttonWe.setBackground(Color.DARK_GRAY);
+		buttonWe.setActionCommand("Switch Card");
+		buttonWe.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				//cards.next(cardPanel);
+				cards.show(SchContainer, "WE");
+			}
+		});
 		
 		JButton btnAccept = new JButton("Accept");
 		btnAccept.setFocusable(false);
 		btnAccept.setBorderPainted(false);
 		btnAccept.setBackground(Color.GREEN);
-		btnAccept.setActionCommand("Switch Card");
+		//btnAccept.setActionCommand("Switch Card");
 		
 		cards = new CardLayout();
 		SchContainer = new JPanel();
 		SchContainer.setLayout(cards);
 		cards.show(SchContainer, "TH");
 
-		SchContainerTh = new JPanel();
-		SchContainerTh.setBackground(Color.BLUE);
+		SchContainerTh = new DailyCard();
+		SchContainerTh.setBackground(new Color(100,100,100));
+		SchContainerFr = new DailyCard();
+		SchContainerFr.setBackground(new Color(100,100,100));
+		SchContainerSa = new DailyCard();
+		SchContainerSa.setBackground(new Color(100,100,100));
+		SchContainerSu = new DailyCard();
+		SchContainerSu.setBackground(new Color(100,100,100));
+		SchContainerMo = new DailyCard();
+		SchContainerMo.setBackground(new Color(100,100,100));
+		SchContainerTu = new DailyCard();
+		SchContainerTu.setBackground(new Color(100,100,100));
+		SchContainerWe = new DailyCard();
+		SchContainerWe.setBackground(new Color(100,100,100));
 
 		SchContainer.add(SchContainerTh, "TH");
+		SchContainer.add(SchContainerFr, "FR");
+		SchContainer.add(SchContainerSa, "SA");
+		SchContainer.add(SchContainerSu, "SU");
+		SchContainer.add(SchContainerMo, "MO");
+		SchContainer.add(SchContainerTu, "TU");
+		SchContainer.add(SchContainerWe, "WE");
 		
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.CENTER)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(button, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addComponent(buttonTh, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addComponent(buttonFr, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addComponent(buttonSa, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addComponent(buttonSu, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(button_4, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addComponent(buttonMo, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addComponent(buttonTu, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addComponent(buttonWe, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addGap(138)
 					.addComponent(btnAccept, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					)
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.CENTER)
-				.addComponent(button, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-				.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-				.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-				.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-				.addComponent(button_4, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-				.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-				.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(buttonTh, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(buttonFr, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(buttonSa, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(buttonSu, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(buttonMo, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(buttonTu, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+				.addComponent(buttonWe, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 				.addComponent(btnAccept, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 		);
 		panel.setLayout(gl_panel);
@@ -181,31 +241,31 @@ public class SchedulingView extends JPanel {
 		setLayout(groupLayout);
 	}
 
-	public JPanel getSchContainerTh() {
+	public DailyCard getSchContainerTh() {
 		return SchContainerTh;
 	}
 
-	public JPanel getSchContainerFr() {
+	public DailyCard getSchContainerFr() {
 		return SchContainerFr;
 	}
 
-	public JPanel getSchContainerSa() {
+	public DailyCard getSchContainerSa() {
 		return SchContainerSa;
 	}
 
-	public JPanel getSchContainerSu() {
+	public DailyCard getSchContainerSu() {
 		return SchContainerSu;
 	}
 
-	public JPanel getSchContainerMo() {
+	public DailyCard getSchContainerMo() {
 		return SchContainerMo;
 	}
 
-	public JPanel getSchContainerTu() {
+	public DailyCard getSchContainerTu() {
 		return SchContainerTu;
 	}
 
-	public JPanel getSchContainerWe() {
+	public DailyCard getSchContainerWe() {
 		return SchContainerWe;
 	}
 }
