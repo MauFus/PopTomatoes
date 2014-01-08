@@ -33,7 +33,7 @@ public class TimeBar extends JPanel {
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 0, 5);
+		gbc_panel.insets = new Insets(0, 0, 0, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 1;
 		gbc_panel.gridy = 0;
@@ -47,6 +47,7 @@ public class TimeBar extends JPanel {
 		panel.setLayout(gbl_panel);
 		
 		JTextPane txtpnA = new JTextPane();
+		txtpnA.setEditable(false);
 		txtpnA.setBackground(SystemColor.controlHighlight);
 		txtpnA.setFont(new Font("Calibri", Font.PLAIN, 12));
 		txtpnA.setText("14.00");
@@ -59,6 +60,7 @@ public class TimeBar extends JPanel {
 		panel.add(txtpnA, gbc_txtpnA);
 		
 		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setEditable(false);
 		textPane_1.setBackground(SystemColor.controlHighlight);
 		textPane_1.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_1.setText("15.00");
@@ -71,6 +73,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_1, gbc_textPane_1);
 		
 		JTextPane textPane_2 = new JTextPane();
+		textPane_2.setEditable(false);
 		textPane_2.setBackground(SystemColor.controlHighlight);
 		textPane_2.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_2.setText("16.00");
@@ -83,6 +86,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_2, gbc_textPane_2);
 		
 		JTextPane textPane_3 = new JTextPane();
+		textPane_3.setEditable(false);
 		textPane_3.setBackground(SystemColor.controlHighlight);
 		textPane_3.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_3.setText("17.00");
@@ -95,6 +99,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_3, gbc_textPane_3);
 		
 		JTextPane textPane_4 = new JTextPane();
+		textPane_4.setEditable(false);
 		textPane_4.setBackground(SystemColor.controlHighlight);
 		textPane_4.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_4.setText("18.00");
@@ -107,6 +112,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_4, gbc_textPane_4);
 		
 		JTextPane textPane_5 = new JTextPane();
+		textPane_5.setEditable(false);
 		textPane_5.setBackground(SystemColor.controlHighlight);
 		textPane_5.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_5.setText("19.00");
@@ -119,6 +125,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_5, gbc_textPane_5);
 		
 		JTextPane textPane_6 = new JTextPane();
+		textPane_6.setEditable(false);
 		textPane_6.setBackground(SystemColor.controlHighlight);
 		textPane_6.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_6.setText("20.00");
@@ -131,6 +138,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_6, gbc_textPane_6);
 		
 		JTextPane textPane_7 = new JTextPane();
+		textPane_7.setEditable(false);
 		textPane_7.setBackground(SystemColor.controlHighlight);
 		textPane_7.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_7.setText("21.00");
@@ -143,6 +151,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_7, gbc_textPane_7);
 		
 		JTextPane textPane_8 = new JTextPane();
+		textPane_8.setEditable(false);
 		textPane_8.setBackground(SystemColor.controlHighlight);
 		textPane_8.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_8.setText("22.00");
@@ -155,6 +164,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_8, gbc_textPane_8);
 		
 		JTextPane textPane_9 = new JTextPane();
+		textPane_9.setEditable(false);
 		textPane_9.setBackground(SystemColor.controlHighlight);
 		textPane_9.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_9.setText("23.00");
@@ -167,6 +177,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_9, gbc_textPane_9);
 		
 		JTextPane textPane_10 = new JTextPane();
+		textPane_10.setEditable(false);
 		textPane_10.setBackground(SystemColor.controlHighlight);
 		textPane_10.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_10.setText("00.00");
@@ -179,6 +190,7 @@ public class TimeBar extends JPanel {
 		panel.add(textPane_10, gbc_textPane_10);
 		
 		JTextPane textPane_11 = new JTextPane();
+		textPane_11.setEditable(false);
 		textPane_11.setBackground(SystemColor.controlHighlight);
 		textPane_11.setFont(new Font("Calibri", Font.PLAIN, 12));
 		textPane_11.setText("01.00");
