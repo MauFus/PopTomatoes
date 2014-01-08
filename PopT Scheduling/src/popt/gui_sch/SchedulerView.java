@@ -18,7 +18,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SchedulingView extends JPanel {
+public class SchedulerView extends JPanel {
 
 	/**
 	 * 
@@ -37,10 +37,11 @@ public class SchedulingView extends JPanel {
 	private DailyCard SchContainerMo;
 	private DailyCard SchContainerTu;
 	private DailyCard SchContainerWe;
+	private JButton btnAccept;
 	
 	CardLayout cards;
 	
-	public SchedulingView() {
+	public SchedulerView() {
 		
 		JTextPane txtpnWeekScheduling = new JTextPane();
 		txtpnWeekScheduling.setText("Week Scheduling");
@@ -149,7 +150,7 @@ public class SchedulingView extends JPanel {
 			}
 		});
 		
-		JButton btnAccept = new JButton("Accept");
+		btnAccept = new JButton("Accept");
 		btnAccept.setFocusable(false);
 		btnAccept.setBorderPainted(false);
 		btnAccept.setBackground(Color.GREEN);
@@ -267,5 +268,9 @@ public class SchedulingView extends JPanel {
 
 	public DailyCard getSchContainerWe() {
 		return SchContainerWe;
+	}
+
+	public JButton getBtnAccept() {
+		return btnAccept;
 	}
 }

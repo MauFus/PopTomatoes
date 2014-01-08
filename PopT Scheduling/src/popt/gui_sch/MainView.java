@@ -33,7 +33,7 @@ public class MainView {
 	// View per il modulo InsertMovie
 	InsertMovieView imv;
 	MovieListView mlv;
-	SchedulingView schv;
+	SchedulerView schv;
 
 	public static void main(String[] args) {
 
@@ -132,7 +132,7 @@ public class MainView {
 		mlv = new MovieListView();
 		mlv.setBackground(new Color(100,100,100));
 		
-		schv = new SchedulingView();
+		schv = new SchedulerView();
 		schv.setBackground(new Color(100,100,100));
 
 		cardPanel.add(mainCard, "Main");
@@ -185,10 +185,10 @@ public class MainView {
 	}
 	
 	/**
-	 * Getter per lo SchedulingView
+	 * Getter per lo SchedulerView
 	 * @return il riferimento alla view
 	 */
-	public SchedulingView getSchedulingView() {
+	public SchedulerView getSchedulingView() {
 		return schv;
 	}
 
