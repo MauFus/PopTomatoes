@@ -10,10 +10,12 @@ import java.util.LinkedList;
 
 import popt.ctrl_sch.InsertMovieController;
 import popt.ctrl_sch.MovieListController;
+import popt.ctrl_sch.SchedulerController;
 import popt.data.Movie;
 import popt.gui_sch.*;
 import popt.model_sch.InsertMovieModel;
 import popt.model_sch.MovieListModel;
+import popt.model_sch.SchedulerModel;
 import popt.rmi.DBReceiver;
 
 public class Main {
@@ -30,10 +32,12 @@ public class Main {
 		// Create the models
 		InsertMovieModel im_model = new InsertMovieModel();
 		MovieListModel ml_model = new MovieListModel();
+		SchedulerModel sc_model = new SchedulerModel();
 
 		// Create the Controllers
 		new InsertMovieController(mainView.getInsertMovieView(), im_model);
 		new MovieListController(mainView.getMovieListView(), ml_model);
+		new SchedulerController(mainView.getSchedulingView(), sc_model);
 		
 		initRmiConnection();
 	}
