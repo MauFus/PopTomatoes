@@ -1,6 +1,10 @@
 package popt.gui_sch;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class DailyCard extends JPanel {
 
@@ -21,9 +25,13 @@ public class DailyCard extends JPanel {
 		optPanel = new OptionPanel();
 		timeBar = new TimeBar();
 		hallPCont = new HallPanelContainer();
+		JScrollPane scrb = new JScrollPane(hallPCont);
+		scrb.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrb.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrb.setSize(new Dimension(1000, 510));
 		this.add(optPanel);
 		this.add(timeBar);
-		this.add(hallPCont);
+		this.add(scrb);
 	}
 
 	public OptionPanel getOptPanel() {
