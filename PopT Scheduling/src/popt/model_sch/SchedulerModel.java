@@ -9,87 +9,51 @@
 
 package popt.model_sch;
 
-import java.util.LinkedList;
-
-import popt.data.Showtime;
-
 public class SchedulerModel {
 	
-	private int[] gap;
-	private int[] aperture;
-	private int[] closure;
-	private LinkedList<Showtime> thurdayShows;
-	private LinkedList<Showtime> fridayShows;
-	private LinkedList<Showtime> saturdayShows;
-	private LinkedList<Showtime> sundayShows;
-	private LinkedList<Showtime> mondayShows;
-	private LinkedList<Showtime> tuesdayShows;
-	private LinkedList<Showtime> wednesdayShows;
+	private DailyCardModel thursdaySchedule;
+	private DailyCardModel fridaySchedule;
+	private DailyCardModel saturdaySchedule;
+	private DailyCardModel sundaySchedule;
+	private DailyCardModel mondaySchedule;
+	private DailyCardModel tuesdaySchedule;
+	private DailyCardModel wednesdaySchedule;
 	
 	public SchedulerModel() {
-		for (int i = 0; i < 7; i++) {
-			gap[i] = 45;
-			aperture[i] = 14;
-			closure[i] = 22;
-			thurdayShows = new LinkedList<Showtime>();
-			fridayShows = new LinkedList<Showtime>();
-			saturdayShows = new LinkedList<Showtime>();
-			sundayShows = new LinkedList<Showtime>();
-			mondayShows = new LinkedList<Showtime>();
-			tuesdayShows = new LinkedList<Showtime>();
-			wednesdayShows = new LinkedList<Showtime>();
-		}
+		thursdaySchedule = new DailyCardModel();
+		fridaySchedule = new DailyCardModel();
+		saturdaySchedule = new DailyCardModel();
+		sundaySchedule = new DailyCardModel();
+		mondaySchedule = new DailyCardModel();
+		tuesdaySchedule = new DailyCardModel();
+		wednesdaySchedule = new DailyCardModel();
 	}
 
-	public int getGap(int day) {
-		return gap[day];
+	public DailyCardModel getThursdaySchedule() {
+		return thursdaySchedule;
 	}
 
-	public void setGap(int day, int gap) {
-		this.gap[day] = gap;
+	public DailyCardModel getFridaySchedule() {
+		return fridaySchedule;
 	}
 
-	public int getAperture(int day) {
-		return aperture[day];
+	public DailyCardModel getSaturdaySchedule() {
+		return saturdaySchedule;
 	}
 
-	public void setAperture(int day, int aperture) {
-		this.aperture[day] = aperture;
+	public DailyCardModel getSundaySchedule() {
+		return sundaySchedule;
 	}
 
-	public int getClosure(int day) {
-		return closure[day];
+	public DailyCardModel getMondaySchedule() {
+		return mondaySchedule;
 	}
 
-	public void setClosure(int day, int closure) {
-		this.closure[day] = closure;
+	public DailyCardModel getTuesdaySchedule() {
+		return tuesdaySchedule;
 	}
 
-	public LinkedList<Showtime> getThurdayShows() {
-		return thurdayShows;
-	}
-
-	public LinkedList<Showtime> getFridayShows() {
-		return fridayShows;
-	}
-
-	public LinkedList<Showtime> getSaturdayShows() {
-		return saturdayShows;
-	}
-
-	public LinkedList<Showtime> getSundayShows() {
-		return sundayShows;
-	}
-
-	public LinkedList<Showtime> getMondayShows() {
-		return mondayShows;
-	}
-
-	public LinkedList<Showtime> getTuesdayShows() {
-		return tuesdayShows;
-	}
-
-	public LinkedList<Showtime> getWednesdayShows() {
-		return wednesdayShows;
+	public DailyCardModel getWednesdaySchedule() {
+		return wednesdaySchedule;
 	}
 }
