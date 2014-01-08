@@ -13,7 +13,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 
-import popt.data.Movie;
+import popt.data.*;
 
 public interface DBReceiver extends Remote {
 
@@ -35,6 +35,22 @@ public interface DBReceiver extends Remote {
 	 */
 	public LinkedList<Movie> searchMovie(Movie movie) throws RemoteException;
 
+	/**
+	 * Invoca l'inserimento di una proiezione in DB
+	 * @param show
+	 * @return il successo o meno dell'azione
+	 * @throws RemoteException
+	 */
+	public boolean insertShowtime(Showtime show) throws RemoteException;
+	
+	/**
+	 * Avvia la ricerca in DB di proiezioni, dati certi dati
+	 * @param show
+	 * @return una lista di proiezioni compatibili con la ricerca
+	 * @throws RemoteException
+	 */
+	public LinkedList<Showtime> searchShowtime(Showtime show) throws RemoteException;
+	
 	/**
 	 * Comunica se il DBReceiver è occupato o disponibile
 	 * @return lo stato occupato o meno
