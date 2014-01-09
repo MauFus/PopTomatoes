@@ -190,6 +190,31 @@ public class MySQLAccess {
 		else
 			return null;
 	}
+	
+	/**
+	 * Find all Cinema Halls that fit the passed ID
+	 * @param ch_id
+	 * @return
+	 * @throws Exception
+	 */
+	public LinkedList<CinemaHall> searchHalls() throws Exception {
+		try {
+			String query = "SELECT * FROM POPTOMATOESDB.CINEMAHALL;";
+			Statement statement = connect.createStatement();
+			ResultSet result = statement.executeQuery(query);
+			LinkedList<CinemaHall> selectedHalls = new LinkedList<>();
+			if (result.first()) {
+				do {
+					CinemaHall ch = new CinemaHall((char) result.getInt("ID"), result.getString("Name"), 
+							result.getInt("Rows"), result.getInt("Seats"), result.getInt("SpecialSeats"));
+					selectedHalls.add(ch);
+				} while (result.next());
+			}
+			return selectedHalls;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 
 	public LinkedList<Movie> searchMovie(int mv_id, String mv_title, int mv_duration,
 			String mv_date, Genre mv_genre, boolean mv_pg) throws Exception {

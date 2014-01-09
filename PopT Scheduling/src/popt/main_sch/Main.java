@@ -126,8 +126,7 @@ public class Main {
 			if (!dbr.isAvailable())
 				return null;
 			else {
-				// TODO ritornare la lista di cinemaHall
-				return null /*dbr.searchMovie(m)*/;
+				return dbr.searchCinemaHalls();
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();

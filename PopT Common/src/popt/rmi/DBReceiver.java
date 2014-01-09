@@ -52,6 +52,13 @@ public interface DBReceiver extends Remote {
 	public LinkedList<Showtime> searchShowtime(Showtime show) throws RemoteException;
 	
 	/**
+	 * Avvia la ricerca in DB di tutte le sale
+	 * @return una lista di tutte le sale del cinema
+	 * @throws RemoteException
+	 */
+	public LinkedList<CinemaHall> searchCinemaHalls() throws RemoteException;
+	
+	/**
 	 * Comunica se il DBReceiver è occupato o disponibile
 	 * @return lo stato occupato o meno
 	 * @throws RemoteException

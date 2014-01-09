@@ -132,6 +132,31 @@ public class DBReceiverImpl extends UnicastRemoteObject implements DBReceiver {
 	}
 
 	@Override
+	public LinkedList<CinemaHall> searchCinemaHalls() throws RemoteException {
+		MySQLAccess dba = new MySQLAccess();
+		try {
+			isWorking = true;
+			statusMessage = "Ricerca in DB in corso...";
+			LinkedList<CinemaHall> result = new LinkedList<>();
+
+			dba.readDB();
+			result = dba.searchHalls();
+			dba.closeDB();
+			
+			statusMessage = "Ricerca in DB eseguita con successo!\n";
+			isWorking = false;
+			return result;
+			
+		} catch (Exception e) {
+			dba.closeDB();
+			
+			statusMessage = "Errore: Ricerca in DB fallita\n";
+			isWorking = false;
+			return null;
+		}
+	}
+
+	@Override
 	public boolean isAvailable() throws RemoteException {
 		return !(isWorking);
 	}
