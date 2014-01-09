@@ -2,6 +2,8 @@ package popt.model_sch;
 
 import java.util.LinkedList;
 
+import popt.data.CinemaHall;
+import popt.data.Movie;
 import popt.data.Showtime;
 
 public class DailyCardModel {
@@ -10,14 +12,18 @@ public class DailyCardModel {
 	private int gap;
 	private int opening;
 	private int closing;
+	private LinkedList<Movie> movieList;
+	private LinkedList<CinemaHall> hallList;
 	private LinkedList<Showtime> showList;
 	
 	public DailyCardModel() {
 		isValidated = false;
 		gap = 45;
 		opening = 14;
-		closing = 02;
-		showList = new LinkedList<Showtime>();
+		closing = 2;
+		movieList = new LinkedList<>();
+		hallList = new LinkedList<>();
+		showList = new LinkedList<>();
 	}
 
 	public boolean isValidated() {
@@ -53,7 +59,27 @@ public class DailyCardModel {
 			this.closing = closing;
 	}
 
+	public LinkedList<Movie> getMovieList() {
+		return movieList;
+	}
+
+	public void setMovieList(LinkedList<Movie> movieList) {
+		this.movieList = movieList;
+	}
+
+	public LinkedList<CinemaHall> getHallList() {
+		return hallList;
+	}
+
+	public void setHallList(LinkedList<CinemaHall> hallList) {
+		this.hallList = hallList;
+	}
+
 	public LinkedList<Showtime> getShowList() {
 		return showList;
+	}
+
+	public void setShowList(LinkedList<Showtime> showList) {
+		this.showList = showList;
 	}
 }
