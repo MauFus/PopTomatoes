@@ -9,8 +9,14 @@
 
 package popt.data;
 
-public class Showtime {
+import java.io.Serializable;
 
+public class Showtime implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5018646995249032776L;
 	private long id;
 	private Movie movie;
 	private CinemaHall hall;

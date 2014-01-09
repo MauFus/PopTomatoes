@@ -9,8 +9,14 @@
 
 package popt.data;
 
-public class CinemaHall {
+import java.io.Serializable;
 
+public class CinemaHall implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8750252276735629975L;
 	private char id;
 	private String name;
 	private int nRows;
