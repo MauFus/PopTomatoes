@@ -115,7 +115,7 @@ public class DBReceiverImpl extends UnicastRemoteObject implements DBReceiver {
 
 			dba.readDB();
 			result = dba.searchShowtimes(show.getId(), show.getMovie(), 
-					(int)show.getHall().getId(), show.getDate(), show.getTime());
+					show.getHall() == null? 0 : (int)show.getHall().getId(), show.getDate(), show.getTime());
 			dba.closeDB();
 			
 			statusMessage = "Ricerca in DB eseguita con successo!\n";

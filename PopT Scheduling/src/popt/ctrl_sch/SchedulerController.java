@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,9 +18,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import popt.data.Genre;
-import popt.data.Movie;
+import popt.data.*;
 import popt.gui_sch.SchedulerView;
+import popt.main_sch.Main;
 import popt.model_sch.SchedulerModel;
 
 public class SchedulerController {
@@ -54,14 +57,46 @@ public class SchedulerController {
 		});
 	}
 
+	/**
+	 * Update CinemaHall list for each DailyCard
+	 */
 	private void uploadCinemaHallList() {
-		// TODO Auto-generated method stub
-		
+		LinkedList<CinemaHall> hallList = Main.searchCinemaHalls();
+
+		model.getThursdaySchedule().setHallList(hallList);
+		model.getFridaySchedule().setHallList(hallList);
+		model.getSaturdaySchedule().setHallList(hallList);
+		model.getSundaySchedule().setHallList(hallList);
+		model.getMondaySchedule().setHallList(hallList);
+		model.getTuesdaySchedule().setHallList(hallList);
+		model.getWednesdaySchedule().setHallList(hallList);
 	}
 
+	/**
+	 * Load Showtimes already scheduled
+	 */
 	private void uploadScheduledShowtimes() {
-		// TODO Auto-generated method stub
-		
+		DateFormat onlyDate = new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat weekDay = new SimpleDateFormat("u");
+        Date today = new Date();
+        int delay = (11 - Integer.parseInt(weekDay.format(today))) % 7;
+        if (delay == 0)
+        	delay = 7;
+        Date thu = new Date(today.getTime() + 8640000*delay);
+        Date fri = new Date(thu.getTime() + 8640000);
+        Date sat = new Date(fri.getTime() + 8640000);
+        Date sun = new Date(sat.getTime() + 8640000);
+        Date mon = new Date(sun.getTime() + 8640000);
+        Date tue = new Date(mon.getTime() + 8640000);
+        Date wed = new Date(tue.getTime() + 8640000);
+        
+        model.getThursdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(thu), "")));
+        model.getFridaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(fri), "")));
+        model.getSaturdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(sat), "")));
+        model.getSundaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(sun), "")));
+        model.getMondaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(mon), "")));
+        model.getTuesdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(tue), "")));
+        model.getWednesdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(wed), "")));
 	}
 
 	/**

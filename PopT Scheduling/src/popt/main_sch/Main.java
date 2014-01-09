@@ -102,12 +102,12 @@ public class Main {
 	public static LinkedList<Movie> searchMovie(Movie m) {
 		
 		try {
-			// Se il server sta processando altre richieste: abort
-			if (!dbr.isAvailable())
-				return null;
-			else {
-				return dbr.searchMovie(m);
+			// Se il server sta processando altre richieste: wait
+			while (!dbr.isAvailable()) {
+				
 			}
+			return dbr.searchMovie(m);
+				
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -119,15 +119,15 @@ public class Main {
 	 * @param hall
 	 * @return lista di sale compatibili
 	 */
-	public static LinkedList<CinemaHall> searchCinemaHall(CinemaHall hall) {
+	public static LinkedList<CinemaHall> searchCinemaHalls() {
 		
 		try {
-			// Se il server sta processando altre richieste: abort
-			if (!dbr.isAvailable())
-				return null;
-			else {
-				return dbr.searchCinemaHalls();
+			// Se il server sta processando altre richieste: wait
+			while (!dbr.isAvailable()) {
+				
 			}
+			return dbr.searchCinemaHalls();
+			
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -142,12 +142,12 @@ public class Main {
 	public static LinkedList<Showtime> searchShowtimes(Showtime show) {
 		
 		try {
-			// Se il server sta processando altre richieste: abort
-			if (!dbr.isAvailable())
-				return null;
-			else {
-				return dbr.searchShowtime(show);
+			// Se il server sta processando altre richieste: wait
+			while (!dbr.isAvailable()) {
+				
 			}
+			return dbr.searchShowtime(show);
+			
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
