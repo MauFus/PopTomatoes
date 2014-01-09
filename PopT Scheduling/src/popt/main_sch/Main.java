@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import popt.ctrl_sch.InsertMovieController;
 import popt.ctrl_sch.MovieListController;
 import popt.ctrl_sch.SchedulerController;
-import popt.data.Movie;
+import popt.data.*;
 import popt.gui_sch.*;
 import popt.model_sch.InsertMovieModel;
 import popt.model_sch.MovieListModel;
@@ -94,6 +94,11 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Invoca la ricerca di film nel DB (tramite RMI)
+	 * @param m
+	 * @return lista dei film compatibili
+	 */
 	public static LinkedList<Movie> searchMovie(Movie m) {
 		
 		try {
@@ -102,6 +107,47 @@ public class Main {
 				return null;
 			else {
 				return dbr.searchMovie(m);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * Invoca la ricerca di sale nel DB (tramite RMI)
+	 * @param hall
+	 * @return lista di sale compatibili
+	 */
+	public static LinkedList<CinemaHall> searchCinemaHall(CinemaHall hall) {
+		
+		try {
+			// Se il server sta processando altre richieste: abort
+			if (!dbr.isAvailable())
+				return null;
+			else {
+				// TODO ritornare la lista di cinemaHall
+				return null /*dbr.searchMovie(m)*/;
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * Invoca la ricerca di proiezioni nel DB (tramite RMI)
+	 * @param show
+	 * @return lista di proiezioni compatibili
+	 */
+	public static LinkedList<Showtime> searchShowtimes(Showtime show) {
+		
+		try {
+			// Se il server sta processando altre richieste: abort
+			if (!dbr.isAvailable())
+				return null;
+			else {
+				return dbr.searchShowtime(show);
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
