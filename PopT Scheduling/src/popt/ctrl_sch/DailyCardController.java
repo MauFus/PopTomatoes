@@ -4,8 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 
+import popt.data.CinemaHall;
+import popt.data.Movie;
 import popt.gui_sch.DailyCard;
+import popt.gui_sch.HallPanel;
+import popt.gui_sch.HallPanelContainer;
 import popt.gui_sch.OptionPanel;
 import popt.model_sch.DailyCardModel;
 
@@ -19,8 +25,13 @@ public class DailyCardController {
 		model = dailyModel;
 		
 		initOptionsPanelListeners(card.getOptPanel());
+		addHallPanels(card.getHallPCont());
 	}
 
+	/**
+	 * Inizializza tutti i listener per i vari componenti dell'OptionPanel
+	 * @param optPanel
+	 */
 	private void initOptionsPanelListeners(final OptionPanel optPanel) {
 		optPanel.getTxtGap().addFocusListener(new FocusListener() {
 			
@@ -116,5 +127,27 @@ public class DailyCardController {
 				// TODO implementare reset
 			}
 		});
+	}
+
+	/**
+	 * Aggiunge un HallPanel per ogni sala del cinema
+	 * @param hallPCont
+	 */
+	private void addHallPanels(HallPanelContainer hallPCont) {
+		if (model.getHallList() != null) {
+			for (CinemaHall hall : model.getHallList()) {
+				HallPanel newPanel = new HallPanel();
+				newPanel.setCinemaHallID(hall.getId());
+				newPanel.getTxtpnHall().setText(hall.getName());
+				
+				Vector<String> comboBoxList = new Vector<>();
+				for (Movie m : model.getMovieList()) {
+					comboBoxList.add(m.getTitle());
+				}
+				newPanel.getComboBoxMovie().setModel(new DefaultComboBoxModel<>(comboBoxList));
+				hallPCont.add(newPanel);
+			}
+			// TODO aggiungere i film al MovieLine
+		}
 	}
 }
