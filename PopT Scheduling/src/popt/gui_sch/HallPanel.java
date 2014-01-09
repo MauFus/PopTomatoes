@@ -22,6 +22,7 @@ public class HallPanel extends JPanel {
 	private MovieLine movieLine;
 	private JTextPane txtpnHall;
 	private JComboBox<String> comboBoxMovie;
+	private char cinemaHallID;
 
 	/**
 	 * Create the panel.
@@ -68,6 +69,14 @@ public class HallPanel extends JPanel {
 
 	public JComboBox<String> getComboBoxMovie() {
 		return comboBoxMovie;
+	}
+
+	public char getCinemaHallID() {
+		return cinemaHallID;
+	}
+
+	public void setCinemaHallID(char cinemaHallID) {
+		this.cinemaHallID = cinemaHallID;
 	}
 
 }
