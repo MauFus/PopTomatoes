@@ -25,6 +25,8 @@ public class Main {
 	private static DBReceiver dbr;
 
 	public static void main(String[] args) {
+		
+		initRmiConnection();
 
 		// Create the view
 		MainView mainView = new MainView();
@@ -38,8 +40,6 @@ public class Main {
 		new InsertMovieController(mainView.getInsertMovieView(), im_model);
 		new MovieListController(mainView.getMovieListView(), ml_model);
 		new SchedulerController(mainView.getSchedulingView(), sc_model);
-		
-		initRmiConnection();
 	}
 	
 	/**
