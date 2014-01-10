@@ -142,7 +142,10 @@ public class DailyCardController {
 				
 				Vector<String> comboBoxList = new Vector<>();
 				for (Movie m : model.getMovieList()) {
-					comboBoxList.add(m.getTitle());
+					String title = m.getTitle() + " (" + m.getDuration() + "')";
+					if (title.length() > 24)
+						title = title.substring(0, 23) + "...";
+					comboBoxList.add(title);
 				}
 				newPanel.getComboBoxMovie().setModel(new DefaultComboBoxModel<>(comboBoxList));
 				hallPCont.add(newPanel);

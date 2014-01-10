@@ -6,10 +6,12 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JTextPane;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.JComboBox;
+
 import java.awt.Color;
 
 public class HallPanel extends JPanel {
@@ -52,6 +54,7 @@ public class HallPanel extends JPanel {
 		add(movieLine, gbc_movieLine);
 
 		comboBoxMovie = new JComboBox<String>();
+		comboBoxMovie.setPreferredSize(new Dimension(132, 30));
 		GridBagConstraints gbc_comboBoxMovie = new GridBagConstraints();
 		gbc_comboBoxMovie.gridx = 2;
 		gbc_comboBoxMovie.gridy = 0;
