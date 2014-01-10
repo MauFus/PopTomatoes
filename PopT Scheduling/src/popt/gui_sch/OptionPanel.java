@@ -52,19 +52,19 @@ public class OptionPanel extends JPanel {
 		
 		txtOpeningTime = new JTextField();
 		txtOpeningTime.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtOpeningTime.setText("hh.mm");
+		txtOpeningTime.setText("14:00");
 		txtOpeningTime.setHorizontalAlignment(SwingConstants.CENTER);
 		txtOpeningTime.setColumns(10);
 		
 		txtClosingTime = new JTextField();
 		txtClosingTime.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtClosingTime.setText("hh.mm");
+		txtClosingTime.setText("02:00");
 		txtClosingTime.setHorizontalAlignment(SwingConstants.CENTER);
 		txtClosingTime.setColumns(10);
 		
 		txtGap = new JTextField();
 		txtGap.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtGap.setText("mm");
+		txtGap.setText("45min");
 		txtGap.setHorizontalAlignment(SwingConstants.CENTER);
 		txtGap.setColumns(10);
 		

@@ -41,14 +41,15 @@ public class DailyCardController {
 					int gap = Integer.parseInt(optPanel.getTxtGap().getText());
 					if (gap > 0) {
 						model.setGap(gap);
+						optPanel.getTxtGap().setText(gap + " min");
 						optPanel.getTxtBarMessage().setText("");
 					} else {
 						optPanel.getTxtBarMessage().setText("Errore - Il Gap deve avere un valore intero positivo");
-						optPanel.getTxtGap().setText("45");
+						optPanel.getTxtGap().setText("45 min");
 					}
 				} catch (NumberFormatException nfe) {
 					optPanel.getTxtBarMessage().setText("Errore - Valore di Gap non nel formato corretto");
-					optPanel.getTxtGap().setText("45");
+					optPanel.getTxtGap().setText("45 min");
 				}
 			}
 			
@@ -68,14 +69,15 @@ public class DailyCardController {
 					if (opening < 0 || opening > 23 || (closing > 14 && opening > closing) 
 							|| (closing <= 2 && opening > closing && opening < 14) ) {
 						optPanel.getTxtBarMessage().setText("Errore - L'Orario di Apertura non è nel range corretto");
-						optPanel.getTxtOpeningTime().setText("14");
+						optPanel.getTxtOpeningTime().setText("14:00");
 					} else {
 						model.setOpening(opening);
 						optPanel.getTxtBarMessage().setText("");
+						optPanel.getTxtOpeningTime().setText(opening + ":00");
 					}
 				} catch (NumberFormatException nfe) {
 					optPanel.getTxtBarMessage().setText("Errore - Valore di Orario di Apertura non nel formato corretto");
-					optPanel.getTxtOpeningTime().setText("14");
+					optPanel.getTxtOpeningTime().setText("14:00");
 				}
 			}
 			
@@ -95,14 +97,15 @@ public class DailyCardController {
 					if (closing < 0 || closing > 23 || (closing < opening && opening <= 2) 
 							|| (closing < opening && closing >= 14)) {
 						optPanel.getTxtBarMessage().setText("Errore - L'Orario di Chiusura non è nel range corretto");
-						optPanel.getTxtClosingTime().setText("2");
+						optPanel.getTxtClosingTime().setText("2:00");
 					} else {
 						model.setClosing(closing);
 						optPanel.getTxtBarMessage().setText("");
+						optPanel.getTxtClosingTime().setText(closing + ":00");
 					}
 				} catch (NumberFormatException nfe) {
 					optPanel.getTxtBarMessage().setText("Errore - Valore di Orario di Chiusura non nel formato corretto");
-					optPanel.getTxtClosingTime().setText("2");
+					optPanel.getTxtClosingTime().setText("2:00");
 				}
 			}
 			
