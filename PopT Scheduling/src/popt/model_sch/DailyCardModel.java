@@ -12,6 +12,7 @@ public class DailyCardModel {
 	private int gap;
 	private int opening;
 	private int closing;
+	private String date;
 	private LinkedList<Movie> movieList;
 	private LinkedList<CinemaHall> hallList;
 	private LinkedList<Showtime> showList;
@@ -57,6 +58,14 @@ public class DailyCardModel {
 	public void setClosing(int closing) {
 		if (closing < 22 && closing > opening)
 			this.closing = closing;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public LinkedList<Movie> getMovieList() {

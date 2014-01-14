@@ -82,13 +82,13 @@ public class SchedulerController {
         int delay = (11 - Integer.parseInt(weekDay.format(today))) % 7;
         if (delay == 0)
         	delay = 7;
-        Date thu = new Date(today.getTime() + 8640000*delay);
-        Date fri = new Date(thu.getTime() + 8640000);
-        Date sat = new Date(fri.getTime() + 8640000);
-        Date sun = new Date(sat.getTime() + 8640000);
-        Date mon = new Date(sun.getTime() + 8640000);
-        Date tue = new Date(mon.getTime() + 8640000);
-        Date wed = new Date(tue.getTime() + 8640000);
+        Date thu = new Date(today.getTime() + 86400000*delay);
+        Date fri = new Date(thu.getTime() + 86400000);
+        Date sat = new Date(fri.getTime() + 86400000);
+        Date sun = new Date(sat.getTime() + 86400000);
+        Date mon = new Date(sun.getTime() + 86400000);
+        Date tue = new Date(mon.getTime() + 86400000);
+        Date wed = new Date(tue.getTime() + 86400000);
         
         model.getThursdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(thu), "")));
         model.getFridaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(fri), "")));
@@ -97,6 +97,14 @@ public class SchedulerController {
         model.getMondaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(mon), "")));
         model.getTuesdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(tue), "")));
         model.getWednesdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, onlyDate.format(wed), "")));
+
+		model.getThursdaySchedule().setDate(onlyDate.format(thu));
+		model.getFridaySchedule().setDate(onlyDate.format(fri));
+		model.getSaturdaySchedule().setDate(onlyDate.format(sat));
+		model.getSundaySchedule().setDate(onlyDate.format(sun));
+		model.getMondaySchedule().setDate(onlyDate.format(mon));
+		model.getTuesdaySchedule().setDate(onlyDate.format(tue));
+		model.getWednesdaySchedule().setDate(onlyDate.format(wed));
 	}
 
 	/**
