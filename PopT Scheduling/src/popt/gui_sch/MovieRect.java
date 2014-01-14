@@ -8,9 +8,12 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JTextPane;
 
+import popt.data.Showtime;
+
 public class MovieRect extends JTextPane {
 
 	private static final long serialVersionUID = -1214497401382184679L;
+	private Showtime movieRectModel;
 	private int xOld;
 	private Dimension size;
 	private Color color;
@@ -32,6 +35,8 @@ public class MovieRect extends JTextPane {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				setBounds(getX(), getY(), getWidth(), getHeight());
+				// setta l'orario di inizio nell'oggetto showtime
+				movieRectModel.setTime((14 + getX() / 60) + ":" + (getX() % 60));
 			}
 
 			@Override
@@ -77,6 +82,14 @@ public class MovieRect extends JTextPane {
 
 	public int getFinishTime() {
 		return getX() + size.width;
+	}
+
+	public Showtime getMovieRectModel() {
+		return movieRectModel;
+	}
+
+	public void setMovieRectModel(Showtime movieRectModel) {
+		this.movieRectModel = movieRectModel;
 	}
 	
 }
