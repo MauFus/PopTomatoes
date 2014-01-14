@@ -26,15 +26,13 @@ public class MovieRect extends JTextPane {
 		color = c;
 		this.setBackground(color);
 		this.setFocusable(false);
-		// this.setToolTipText("Movie Title");
-		this.setText("Il lato...Oscuro");
 		this.setDragEnabled(true);
 
 		this.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				setText("Il lato...Oscuro");
+				setText(movieRectModel.getMovie().getTitle());
 				setBounds(getX(), getY(), getWidth(), getHeight());
 				// setta l'orario di inizio nell'oggetto showtime
 				movieRectModel
