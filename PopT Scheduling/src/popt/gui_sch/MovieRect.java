@@ -17,31 +17,39 @@ public class MovieRect extends JTextPane {
 	private int xOld;
 	private Dimension size;
 	private Color color;
-	
+
 	public MovieRect(int w, int h, Color c) {
 
-		size = new Dimension(w,h);
+		size = new Dimension(w, h);
 		setPreferredSize(size);
 		this.setEditable(false);
 		color = c;
 		this.setBackground(color);
 		this.setFocusable(false);
-		this.setToolTipText("Movie Title");
-		this.setText("Moviaamoawbdj");
+		// this.setToolTipText("Movie Title");
+		this.setText("Il lato...Oscuro");
 		this.setDragEnabled(true);
-		
+
 		this.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				setText("Il lato...Oscuro");
 				setBounds(getX(), getY(), getWidth(), getHeight());
 				// setta l'orario di inizio nell'oggetto showtime
-				movieRectModel.setTime((14 + getX() / 60) + ":" + (getX() % 60));
+				movieRectModel
+						.setTime((14 + getX() / 60) + ":" + (getX() % 60));
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				xOld = e.getX();
+				setText(((14 + getX() / 60) % 24) + ":"
+						+ (getX() % 60 < 10 ? "0" : "") + (getX() % 60) + "   "
+						+ ((14 + getFinishTime() / 60) % 24) + ":"
+						+ (getFinishTime() % 60 < 10 ? "0" : "")
+						+ (getFinishTime() % 60));
 			}
 
 			@Override
@@ -51,7 +59,8 @@ public class MovieRect extends JTextPane {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				setBackground(new Color(color.getRed()+100,color.getGreen()+100,color.getBlue()+100));
+				setBackground(new Color(color.getRed() + 100,
+						color.getGreen() + 100, color.getBlue() + 100));
 			}
 
 			@Override
@@ -64,13 +73,25 @@ public class MovieRect extends JTextPane {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				int xNew = e.getX();
+				int xRectOld = getStartTime();
+
+				if (xNew < xOld - xRectOld)
+					xNew = xOld - xRectOld;
+				else if (xNew > 720 - (xRectOld + size.width - xOld))
+					xNew = 720 - (xRectOld + size.width - xOld);
+
 				setLocation(getX() + xNew - xOld, getY());
+				setText(((14 + getX() / 60) % 24) + ":"
+						+ (getX() % 60 < 10 ? "0" : "") + (getX() % 60) + "   "
+						+ ((14 + getFinishTime() / 60) % 24) + ":"
+						+ (getFinishTime() % 60 < 10 ? "0" : "")
+						+ (getFinishTime() % 60));
 				repaint();
 			}
 		});
@@ -90,6 +111,7 @@ public class MovieRect extends JTextPane {
 
 	public void setMovieRectModel(Showtime movieRectModel) {
 		this.movieRectModel = movieRectModel;
+		this.setText(this.movieRectModel.getMovie().getTitle());
 	}
-	
+
 }
