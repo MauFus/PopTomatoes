@@ -5,10 +5,14 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JTextPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.SystemColor;
@@ -24,22 +28,10 @@ public class MovieInfoDialog extends JDialog {
 	private JButton cancelButton;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			MovieInfoDialog dialog = new MovieInfoDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
-	public MovieInfoDialog() {
+	public MovieInfoDialog(JFrame parent) {
+		super(parent,true);
 		setBounds(100, 100, 320, 240);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
