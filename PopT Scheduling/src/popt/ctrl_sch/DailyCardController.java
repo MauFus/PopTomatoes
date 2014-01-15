@@ -181,7 +181,7 @@ public class DailyCardController {
 							}
 						}
 						newShow.setDate(model.getDate());
-						newShow.setTime("18:00");
+						newShow.setTime(((int)((720-newShow.getMovie().getDuration()) / 60)+14) + ":00");
 						newShow.setAuditors(0);
 						model.getShowList().add(newShow);
 
