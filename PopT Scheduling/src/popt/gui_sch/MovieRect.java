@@ -27,72 +27,6 @@ public class MovieRect extends JTextPane {
 		this.setBackground(color);
 		this.setFocusable(false);
 		this.setDragEnabled(true);
-
-		this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				setText(movieRectModel.getMovie().getTitle());
-				setBounds(getX(), getY(), getWidth(), getHeight());
-				// setta l'orario di inizio nell'oggetto showtime
-				movieRectModel
-						.setTime((14 + getX() / 60) + ":" + (getX() % 60));
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				xOld = e.getX();
-				setText(((14 + getX() / 60) % 24) + ":"
-						+ (getX() % 60 < 10 ? "0" : "") + (getX() % 60) + "   "
-						+ ((14 + getFinishTime() / 60) % 24) + ":"
-						+ (getFinishTime() % 60 < 10 ? "0" : "")
-						+ (getFinishTime() % 60));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				setBackground(color);
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				setBackground(new Color(color.getRed() + 100,
-						color.getGreen() + 100, color.getBlue() + 100));
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-			}
-		});
-
-		this.addMouseMotionListener(new MouseMotionListener() {
-
-			@Override
-			public void mouseMoved(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				int xNew = e.getX();
-				int xRectOld = getStartTime();
-
-				if (xNew < xOld - xRectOld)
-					xNew = xOld - xRectOld;
-				else if (xNew > 720 - (xRectOld + size.width - xOld))
-					xNew = 720 - (xRectOld + size.width - xOld);
-
-				setLocation(getX() + xNew - xOld, getY());
-				setText(((14 + getX() / 60) % 24) + ":"
-						+ (getX() % 60 < 10 ? "0" : "") + (getX() % 60) + "   "
-						+ ((14 + getFinishTime() / 60) % 24) + ":"
-						+ (getFinishTime() % 60 < 10 ? "0" : "")
-						+ (getFinishTime() % 60));
-				repaint();
-			}
-		});
 	}
 
 	public int getStartTime() {
@@ -112,4 +46,21 @@ public class MovieRect extends JTextPane {
 		this.setText(this.movieRectModel.getMovie().getTitle());
 	}
 
+	public int getxOld() {
+		return xOld;
+	}
+
+	public Dimension getSize() {
+		return size;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setxOld(int xOld) {
+		this.xOld = xOld;
+	}
+	
+	
 }

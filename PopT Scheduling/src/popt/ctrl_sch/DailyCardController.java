@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -16,6 +19,8 @@ import popt.data.Showtime;
 import popt.gui_sch.DailyCard;
 import popt.gui_sch.HallPanel;
 import popt.gui_sch.HallPanelContainer;
+import popt.gui_sch.MainView;
+import popt.gui_sch.MovieInfoDialog;
 import popt.gui_sch.MovieLine;
 import popt.gui_sch.MovieRect;
 import popt.gui_sch.OptionPanel;
@@ -204,9 +209,85 @@ public class DailyCardController {
 		
 		line.removeAll();
 		for (Showtime show : selectHallShowtimes(hall.getId())) {
-			MovieRect rect = new MovieRect(show.getMovie().getDuration(), 50, Color.DARK_GRAY);
+			final MovieRect rect = new MovieRect(show.getMovie().getDuration(), 50, Color.DARK_GRAY);
 			rect.setMovieRectModel(show);
 			rect.setBounds(calculateXPos(show.getTime()), 25, show.getMovie().getDuration(), 50);
+			
+			rect.addMouseListener(new MouseListener() {
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					rect.setText(rect.getMovieRectModel().getMovie().getTitle());
+					rect.setBounds(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+					// setta l'orario di inizio nell'oggetto showtime
+					rect.getMovieRectModel()
+							.setTime((14 + rect.getX() / 60) + ":" + (rect.getX() % 60));
+
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					
+					if(e.getButton() == MouseEvent.BUTTON1)
+				    {
+						rect.setxOld(e.getX());
+						rect.setText(((14 + rect.getX() / 60) % 24) + ":"
+								+ (rect.getX() % 60 < 10 ? "0" : "") + (rect.getX() % 60) + "   "
+								+ ((14 + rect.getFinishTime() / 60) % 24) + ":"
+								+ (rect.getFinishTime() % 60 < 10 ? "0" : "")
+								+ (rect.getFinishTime() % 60));
+				    }	    
+				    else if(e.getButton() == MouseEvent.BUTTON3)
+				    {
+				    	MovieInfoDialog mid = new MovieInfoDialog(MainView.getGuiFrame());
+				    	mid.setVisible(true);
+				    }					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					rect.setBackground(rect.getColor());
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					rect.setBackground(new Color(rect.getColor().getRed() + 100,
+							rect.getColor().getGreen() + 100, rect.getColor().getBlue() + 100));
+				}
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+
+				}
+			});
+
+			rect.addMouseMotionListener(new MouseMotionListener() {
+
+				@Override
+				public void mouseMoved(MouseEvent e) {
+
+				}
+
+				@Override
+				public void mouseDragged(MouseEvent e) {
+					int xNew = e.getX();
+					int xRectOld = rect.getStartTime();
+
+					if (xNew < rect.getxOld() - xRectOld)
+						xNew = rect.getxOld() - xRectOld;
+					else if (xNew > 720 - (xRectOld + rect.getSize().width - rect.getxOld()))
+						xNew = 720 - (xRectOld + rect.getSize().width - rect.getxOld());
+
+					rect.setLocation(rect.getX() + xNew - rect.getxOld(), rect.getY());
+					rect.setText(((14 + rect.getX() / 60) % 24) + ":"
+							+ (rect.getX() % 60 < 10 ? "0" : "") + (rect.getX() % 60) + "   "
+							+ ((14 + rect.getFinishTime() / 60) % 24) + ":"
+							+ (rect.getFinishTime() % 60 < 10 ? "0" : "")
+							+ (rect.getFinishTime() % 60));
+					rect.repaint();
+				}
+			});
+			
 			line.add(rect);
 		}
 	}
