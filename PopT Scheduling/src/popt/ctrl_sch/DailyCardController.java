@@ -138,7 +138,16 @@ public class DailyCardController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO implementare reset
+				int iterator = 0;
+				while (iterator < model.getShowList().size()) {
+					if (model.getShowList().get(iterator).getId() == -1)
+						model.getShowList().remove(iterator);
+					else
+						iterator++;
+				}
+				
+				card.getHallPCont().removeAll();
+				addHallPanels(card.getHallPCont());
 			}
 		});
 	}
