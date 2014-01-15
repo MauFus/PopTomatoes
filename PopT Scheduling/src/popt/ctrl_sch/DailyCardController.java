@@ -157,7 +157,16 @@ public class DailyCardController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO implementare reset
+				int iterator = 0;
+				while (iterator < model.getShowList().size()) {
+					if (model.getShowList().get(iterator).getId() == -1)
+						model.getShowList().remove(iterator);
+					else
+						iterator++;
+				}
+				
+				card.getHallPCont().removeAll();
+				addHallPanels(card.getHallPCont());
 			}
 		});
 	}
@@ -212,7 +221,7 @@ public class DailyCardController {
 									}
 								}
 								newShow.setDate(model.getDate());
-								newShow.setTime("18:00");
+						newShow.setTime(((int)((720-newShow.getMovie().getDuration()) / 60)+14) + ":00");
 								newShow.setAuditors(0);
 								model.getShowList().add(newShow);
 
