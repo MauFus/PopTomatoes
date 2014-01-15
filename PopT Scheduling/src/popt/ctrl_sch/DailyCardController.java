@@ -60,12 +60,12 @@ public class DailyCardController {
 						optPanel.getTxtBarMessage()
 								.setText(
 										"Errore - Il Gap deve avere un valore intero positivo");
-						optPanel.getTxtGap().setText("45 min");
+						optPanel.getTxtGap().setText(model.getGap() + " min");
 					}
 				} catch (NumberFormatException nfe) {
 					optPanel.getTxtBarMessage().setText(
 							"Errore - Valore di Gap non nel formato corretto");
-					optPanel.getTxtGap().setText("45 min");
+					optPanel.getTxtGap().setText(model.getGap() + " min");
 				}
 			}
 
@@ -80,28 +80,21 @@ public class DailyCardController {
 			@Override
 			public void focusLost(FocusEvent e) {
 				try {
-					int opening = Integer.parseInt(optPanel.getTxtOpeningTime()
-							.getText());
-					int closing = Integer.parseInt(optPanel.getTxtClosingTime()
-							.getText());
+					int opening = Integer.parseInt(optPanel.getTxtOpeningTime().getText());
 					if (opening < 0
 							|| opening > 23
-							|| (closing > 14 && opening > closing)
-							|| (closing <= 2 && opening > closing && opening < 14)) {
-						optPanel.getTxtBarMessage()
-								.setText(
-										"Errore - L'Orario di Apertura non è nel range corretto");
-						optPanel.getTxtOpeningTime().setText("14:00");
+							|| (model.getClosing() > 14 && opening > model.getClosing())
+							|| (model.getClosing() <= 2 && opening > model.getClosing() && opening < 14)) {
+						optPanel.getTxtBarMessage()	.setText("Errore - L'Orario di Apertura non è nel range corretto");
+						optPanel.getTxtOpeningTime().setText(model.getOpening() + ":00");
 					} else {
 						model.setOpening(opening);
 						optPanel.getTxtBarMessage().setText("");
 						optPanel.getTxtOpeningTime().setText(opening + ":00");
 					}
 				} catch (NumberFormatException nfe) {
-					optPanel.getTxtBarMessage()
-							.setText(
-									"Errore - Valore di Orario di Apertura non nel formato corretto");
-					optPanel.getTxtOpeningTime().setText("14:00");
+					optPanel.getTxtBarMessage().setText("Errore - Valore di Orario di Apertura non nel formato corretto");
+					optPanel.getTxtOpeningTime().setText(model.getOpening() + ":00");
 				}
 			}
 
@@ -116,27 +109,20 @@ public class DailyCardController {
 			@Override
 			public void focusLost(FocusEvent e) {
 				try {
-					int opening = Integer.parseInt(optPanel.getTxtOpeningTime()
-							.getText());
-					int closing = Integer.parseInt(optPanel.getTxtClosingTime()
-							.getText());
+					int closing = Integer.parseInt(optPanel.getTxtClosingTime().getText());
 					if (closing < 0 || closing > 23
-							|| (closing < opening && opening <= 2)
-							|| (closing < opening && closing >= 14)) {
-						optPanel.getTxtBarMessage()
-								.setText(
-										"Errore - L'Orario di Chiusura non è nel range corretto");
-						optPanel.getTxtClosingTime().setText("2:00");
+							|| (closing < model.getOpening() && model.getOpening() <= 2)
+							|| (closing < model.getOpening() && closing >= 14)) {
+						optPanel.getTxtBarMessage().setText("Errore - L'Orario di Chiusura non è nel range corretto");
+						optPanel.getTxtClosingTime().setText(model.getClosing() + ":00");
 					} else {
 						model.setClosing(closing);
 						optPanel.getTxtBarMessage().setText("");
 						optPanel.getTxtClosingTime().setText(closing + ":00");
 					}
 				} catch (NumberFormatException nfe) {
-					optPanel.getTxtBarMessage()
-							.setText(
-									"Errore - Valore di Orario di Chiusura non nel formato corretto");
-					optPanel.getTxtClosingTime().setText("2:00");
+					optPanel.getTxtBarMessage().setText("Errore - Valore di Orario di Chiusura non nel formato corretto");
+					optPanel.getTxtClosingTime().setText(model.getClosing() + ":00");
 				}
 			}
 
@@ -178,49 +164,49 @@ public class DailyCardController {
 				newPanel.getTxtpnHall().setText(hall.getName());
 
 				Vector<String> comboBoxList = new Vector<>();
+				comboBoxList.add("Insert a showtime...");
 				for (Movie m : model.getMovieList()) {
 					String title = m.getTitle() + " (" + m.getDuration() + "')";
 					if (title.length() > 24)
 						title = title.substring(0, 23) + "...";
 					comboBoxList.add(title);
 				}
-				newPanel.getComboBoxMovie().setModel(
-						new DefaultComboBoxModel<>(comboBoxList));
+				newPanel.getComboBoxMovie().setModel(new DefaultComboBoxModel<>(comboBoxList));
 				newPanel.getComboBoxMovie().addActionListener(
 						new ActionListener() {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								String selected = newPanel.getComboBoxMovie()
-										.getItemAt(
-												newPanel.getComboBoxMovie()
-														.getSelectedIndex());
-								if (selected.contains("("))
-									selected = selected.split("\\(")[0].trim();
-								Showtime newShow = new Showtime();
-								newShow.setId(-1);
-								for (Movie movie : model.getMovieList()) {
-									if (movie.getTitle().startsWith(selected)) {
-										newShow.setMovie(movie);
-										break;
+								if (newPanel.getComboBoxMovie().getSelectedIndex() > 0) {
+									String selected = newPanel.getComboBoxMovie()
+											.getItemAt(newPanel.getComboBoxMovie().getSelectedIndex());
+									if (selected.contains("("))
+										selected = selected.split("\\(")[0].trim();
+									else if (selected.endsWith("..."))
+										selected = selected.substring(0, selected.indexOf(".")-1);
+									Showtime newShow = new Showtime();
+									newShow.setId(-1);
+									for (Movie movie : model.getMovieList()) {
+										if (movie.getTitle().startsWith(selected)) {
+											newShow.setMovie(movie);
+											break;
+										}
 									}
-								}
-								CinemaHall currentHall = null;
-								for (CinemaHall hall : model.getHallList()) {
-									if (hall.getId() == newPanel
-											.getCinemaHallID()) {
-										currentHall = hall;
-										newShow.setHall(hall);
-										break;
+									CinemaHall currentHall = null;
+									for (CinemaHall hall : model.getHallList()) {
+										if (hall.getId() == newPanel.getCinemaHallID()) {
+											currentHall = hall;
+											newShow.setHall(hall);
+											break;
+										}
 									}
-								}
-								newShow.setDate(model.getDate());
-						newShow.setTime(((int)((720-newShow.getMovie().getDuration()) / 60)+14) + ":00");
-								newShow.setAuditors(0);
-								model.getShowList().add(newShow);
+									newShow.setDate(model.getDate());
+									newShow.setTime(((int)((720-newShow.getMovie().getDuration()) / 60)+14) + ":00");
+									newShow.setAuditors(0);
+									model.getShowList().add(newShow);
 
-								addMovieRect(currentHall,
-										newPanel.getMovieLine());
+									addMovieRect(currentHall,newPanel.getMovieLine());
+								}
 							}
 						});
 
