@@ -25,6 +25,7 @@ import popt.gui_sch.MovieLine;
 import popt.gui_sch.MovieRect;
 import popt.gui_sch.OptionPanel;
 import popt.model_sch.DailyCardModel;
+import sun.org.mozilla.javascript.internal.ast.SwitchCase;
 
 public class DailyCardController {
 
@@ -246,8 +247,76 @@ public class DailyCardController {
 
 		line.removeAll();
 		for (Showtime show : selectHallShowtimes(hall.getId())) {
+			int a = show.getMovie().getGenre().ordinal();
+			Color col=null;
+			switch (a) {
+			case 0:
+				col = new Color(100, 0, 0);
+				break;
+			case 1:
+				col = new Color(0, 100, 0);
+				break;
+			case 2:
+				col = new Color(0, 0, 100);
+				break;
+			case 3:
+				col = new Color(100, 100, 0);
+				break;
+			case 4:
+				col = new Color(100, 0, 100);
+				break;
+			case 5:
+				col = new Color(0, 100, 100);
+				break;
+			case 6:
+				col = new Color(50, 0, 0);
+				break;
+			case 7:
+				col = new Color(0, 50, 0);
+				break;
+			case 8:
+				col = new Color(0, 0, 50);
+				break;
+			case 9:
+				col = new Color(50, 50, 0);
+				break;
+			case 10:
+				col = new Color(50, 0, 50);
+				break;
+			case 11:
+				col = new Color(0, 50, 50);
+				break;
+			case 12:
+				col = new Color(100, 50, 0);
+				break;
+			case 13:
+				col = new Color(100, 0, 50);
+				break;
+			case 14:
+				col = new Color(0, 100, 50);
+				break;
+			case 15:
+				col = new Color(0, 50, 100);
+				break;
+			case 16:
+				col = new Color(50, 100, 0);
+				break;
+			case 17:
+				col = new Color(50, 0, 100);
+				break;
+			case 18:
+				col = new Color(100, 100, 50);
+				break;
+			case 19:
+				col = new Color(100, 50, 50);
+				break;
+
+			default:
+				break;
+			}
 			final MovieRect rect = new MovieRect(show.getMovie().getDuration(),
-					50, Color.DARK_GRAY);
+					50, col);
+			
 			rect.setMovieRectModel(show);
 			rect.setBounds(calculateXPos(show.getTime()), 25, show.getMovie()
 					.getDuration(), 50);
