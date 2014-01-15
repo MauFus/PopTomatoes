@@ -5,10 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.LinkedList;
 import java.util.Vector;
+
 import javax.swing.DefaultComboBoxModel;
 
 import popt.data.CinemaHall;
@@ -17,6 +16,7 @@ import popt.data.Showtime;
 import popt.gui_sch.DailyCard;
 import popt.gui_sch.HallPanel;
 import popt.gui_sch.HallPanelContainer;
+import popt.gui_sch.MovieLine;
 import popt.gui_sch.MovieRect;
 import popt.gui_sch.OptionPanel;
 import popt.model_sch.DailyCardModel;
@@ -157,10 +157,10 @@ public class DailyCardController {
 					comboBoxList.add(title);
 				}
 				newPanel.getComboBoxMovie().setModel(new DefaultComboBoxModel<>(comboBoxList));
-				newPanel.getComboBoxMovie().addItemListener(new ItemListener() {
+				newPanel.getComboBoxMovie().addActionListener(new ActionListener() {
 					
 					@Override
-					public void itemStateChanged(ItemEvent e) {
+					public void actionPerformed(ActionEvent e) {
 						String selected = newPanel.getComboBoxMovie().getItemAt(newPanel.getComboBoxMovie().getSelectedIndex());
 						if (selected.contains("("))
 							selected = selected.split("\\(")[0].trim();
@@ -172,8 +172,10 @@ public class DailyCardController {
 								break;
 							}
 						}
+						CinemaHall currentHall = null;
 						for (CinemaHall hall : model.getHallList()) {
 							if (hall.getId() == newPanel.getCinemaHallID()) {
+								currentHall = hall;
 								newShow.setHall(hall);
 								break;
 							}
@@ -181,23 +183,31 @@ public class DailyCardController {
 						newShow.setDate(model.getDate());
 						newShow.setTime("18:00");
 						newShow.setAuditors(0);
-						MovieRect r = new MovieRect(newShow.getMovie().getDuration(), 
-								50, Color.DARK_GRAY);
-						
-						newPanel.getMovieLine().add(r);
-						r.repaint();
+						model.getShowList().add(newShow);
+
+						addMovieRect(currentHall, newPanel.getMovieLine());
 					}
 				});
 				
-				for (Showtime show : selectHallShowtimes(hall.getId())) {
-					MovieRect rect = new MovieRect(show.getMovie().getDuration(), 50, Color.DARK_GRAY);
-					rect.setMovieRectModel(show);
-					rect.setBounds(calculateXPos(show.getTime()), 25, show.getMovie().getDuration(), 50);
-					newPanel.getMovieLine().add(rect);
-				}
-				
+				addMovieRect(hall, newPanel.getMovieLine());
 				hallPCont.add(newPanel);
 			}
+		}
+	}
+	
+	/**
+	 * Aggiunge le proiezioni di un giorno-sala alla linea temporale
+	 * @param hall
+	 * @param line
+	 */
+	private void addMovieRect(CinemaHall hall, MovieLine line) {
+		
+		line.removeAll();
+		for (Showtime show : selectHallShowtimes(hall.getId())) {
+			MovieRect rect = new MovieRect(show.getMovie().getDuration(), 50, Color.DARK_GRAY);
+			rect.setMovieRectModel(show);
+			rect.setBounds(calculateXPos(show.getTime()), 25, show.getMovie().getDuration(), 50);
+			line.add(rect);
 		}
 	}
 	
