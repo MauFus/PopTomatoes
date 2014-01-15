@@ -24,6 +24,7 @@ import popt.gui_sch.MovieInfoDialog;
 import popt.gui_sch.MovieLine;
 import popt.gui_sch.MovieRect;
 import popt.gui_sch.OptionPanel;
+import popt.main_sch.Main;
 import popt.model_sch.DailyCardModel;
 
 public class DailyCardController {
@@ -157,14 +158,7 @@ public class DailyCardController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int iterator = 0;
-				while (iterator < model.getShowList().size()) {
-					if (model.getShowList().get(iterator).getId() == -1)
-						model.getShowList().remove(iterator);
-					else
-						iterator++;
-				}
-				
+		        model.setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getDate(), "")));
 				card.getHallPCont().removeAll();
 				addHallPanels(card.getHallPCont());
 			}
@@ -299,8 +293,7 @@ public class DailyCardController {
 							
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								mid.setEnabled(false);
-								//mid.setVisible(false); ---verifica---
+								mid.setVisible(false);
 							}
 						});
 						
@@ -308,7 +301,11 @@ public class DailyCardController {
 							
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								model.getShowList().remove(rect.getMovieRectModel());							
+								model.getShowList().remove(rect.getMovieRectModel());
+								mid.setVisible(false);
+								
+								card.getHallPCont().removeAll();
+								addHallPanels(card.getHallPCont());			
 							}
 						});
 						
