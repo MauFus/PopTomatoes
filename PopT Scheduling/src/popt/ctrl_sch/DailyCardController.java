@@ -231,64 +231,64 @@ public class DailyCardController {
 			Color col=null;
 			switch (a) {
 			case 0:
-				col = new Color(100, 0, 0);
+				col = new Color(255, 153, 0);//arancione fiamma
 				break;
 			case 1:
-				col = new Color(0, 100, 0);
+				col = new Color(150, 0, 24);//carminio
 				break;
 			case 2:
-				col = new Color(0, 0, 100);
+				col = new Color(34, 139, 34);//verde foresta
 				break;
 			case 3:
-				col = new Color(100, 100, 0);
+				col = new Color(79, 79, 79);//grigio
 				break;
 			case 4:
-				col = new Color(100, 0, 100);
+				col = new Color(21, 96, 189);//denim
 				break;
 			case 5:
-				col = new Color(0, 100, 100);
+				col = new Color(229, 43, 80);//amaranto
 				break;
 			case 6:
-				col = new Color(50, 0, 0);
+				col = new Color(0, 168, 107);//giada
 				break;
 			case 7:
-				col = new Color(0, 50, 0);
+				col = new Color(47, 79, 79);//grigio ardesia
 				break;
 			case 8:
-				col = new Color(0, 0, 50);
+				col = new Color(58, 117, 196);//blu klein
 				break;
 			case 9:
-				col = new Color(50, 50, 0);
+				col = new Color(65, 0, 18);//rubino
 				break;
 			case 10:
-				col = new Color(50, 0, 50);
+				col = new Color(184, 134, 11);//oro vivo
 				break;
 			case 11:
-				col = new Color(0, 50, 50);
+				col = new Color(5, 4, 2);//carbone
 				break;
 			case 12:
-				col = new Color(100, 50, 0);
+				col = new Color(143, 0, 255);//viola
 				break;
 			case 13:
-				col = new Color(100, 0, 50);
+				col = new Color(1, 50, 32);//verde scuro
 				break;
 			case 14:
-				col = new Color(0, 100, 50);
+				col = new Color(200, 8, 21);//rosso veneziano
 				break;
 			case 15:
-				col = new Color(0, 50, 100);
+				col = new Color(17, 96, 98);//turchese scuro
 				break;
 			case 16:
-				col = new Color(50, 100, 0);
+				col = new Color(255, 215, 0);//oro
 				break;
 			case 17:
-				col = new Color(50, 0, 100);
+				col = new Color(255, 36, 0);//scarlatto
 				break;
 			case 18:
-				col = new Color(100, 100, 50);
+				col = new Color(70, 89, 69);//grigio asparago
 				break;
 			case 19:
-				col = new Color(100, 50, 50);
+				col = new Color(255, 216, 0);//giallo scuolabus
 				break;
 
 			default:
