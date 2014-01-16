@@ -160,15 +160,23 @@ public class MySQLAccess {
 	 * @param time
 	 * @throws Exception
 	 */
-	public void insertShowtime(long id, Movie movie, CinemaHall hall, String date, 
-			String time) throws Exception {
+	public void insertShowtime(Movie movie, CinemaHall hall, String date, String time) throws Exception {
 		try {
-			preparedStatement = connect.prepareStatement("insert into POPTOMATOESDB.SHOWTIME values (ID,?,?,?,?,?)");
-			preparedStatement.setInt(1, (int) id);
-			preparedStatement.setInt(2, movie.getID());
-			preparedStatement.setInt(3, hall.getId());
-			preparedStatement.setString(4, date);
-			preparedStatement.setString(5, time);
+			preparedStatement = connect.prepareStatement("insert into POPTOMATOESDB.SHOWTIME values (ID,?,?,?,?,0,false,false)");
+			preparedStatement.setInt(1, movie.getID());
+			preparedStatement.setInt(2, hall.getId());
+			preparedStatement.setString(3, date);
+			preparedStatement.setString(4, time);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void deleteShowtimes(String date) throws Exception {
+		try {
+			preparedStatement = connect.prepareStatement("DELETE from POPTOMATOESDB.SHOWTIME where lower(Date) LIKE lower(?)");
+			preparedStatement.setString(1, date);
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			throw e;

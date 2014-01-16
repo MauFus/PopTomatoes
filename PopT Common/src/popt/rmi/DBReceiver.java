@@ -44,6 +44,14 @@ public interface DBReceiver extends Remote {
 	public boolean insertShowtime(Showtime show) throws RemoteException;
 	
 	/**
+	 * Elimina tutti le proiezioni di una determinata data
+	 * @param date
+	 * @return il successo o meno dell'azione
+	 * @throws RemoteException
+	 */
+	public boolean deleteShowtimes(String date) throws RemoteException;
+	
+	/**
 	 * Avvia la ricerca in DB di proiezioni, dati certi dati
 	 * @param show
 	 * @return una lista di proiezioni compatibili con la ricerca

@@ -88,7 +88,7 @@ public class DBReceiverImpl extends UnicastRemoteObject implements DBReceiver {
 			statusMessage = "Inserimento in DB in corso...";
 			
 			dba.readDB();
-			dba.insertShowtime(show.getId(), show.getMovie(), show.getHall(), show.getDate(), show.getTime());
+			dba.insertShowtime(show.getMovie(), show.getHall(), show.getDate(), show.getTime());
 			dba.closeDB();
 			
 			statusMessage = "Inserimento in DB eseguito con successo!\n";
@@ -100,6 +100,31 @@ public class DBReceiverImpl extends UnicastRemoteObject implements DBReceiver {
 			dba.closeDB();
 			
 			statusMessage = "Errore: inserimento in DB non riuscito\n";
+			isWorking = false;
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteShowtimes(String date) throws RemoteException {
+		MySQLAccess dba = new MySQLAccess();
+		try {
+			isWorking = true;
+			statusMessage = "Cancellazione da DB in corso...";
+
+			dba.readDB();
+			dba.deleteShowtimes(date);
+			dba.closeDB();
+
+			statusMessage = "cancellazione da DB eseguita con successo!\n";
+			isWorking = false;
+			return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			dba.closeDB();
+			
+			statusMessage = "Errore: Cancellazione in DB non riuscita\n";
 			isWorking = false;
 			return false;
 		}
