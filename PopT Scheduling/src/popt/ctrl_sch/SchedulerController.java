@@ -1,5 +1,6 @@
 package popt.ctrl_sch;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -9,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
+import javax.swing.BorderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,8 +27,8 @@ import popt.model_sch.SchedulerModel;
 
 public class SchedulerController {
 	
-	private SchedulerModel model;
-	private SchedulerView view;
+	private static SchedulerModel model;
+	private static SchedulerView view;
 
 	public static final String MOVIE_LIST = "movielist.xml";
 
@@ -39,22 +41,110 @@ public class SchedulerController {
 		uploadScheduledShowtimes();
 		
 		// Instantiate all DailyCardController
-		new DailyCardController(view.getSchContainerTh(), model.getThursdaySchedule());
-		new DailyCardController(view.getSchContainerFr(), model.getFridaySchedule());
-		new DailyCardController(view.getSchContainerSa(), model.getSaturdaySchedule());
-		new DailyCardController(view.getSchContainerSu(), model.getSundaySchedule());
-		new DailyCardController(view.getSchContainerMo(), model.getMondaySchedule());
-		new DailyCardController(view.getSchContainerTu(), model.getTuesdaySchedule());
-		new DailyCardController(view.getSchContainerWe(), model.getWednesdaySchedule());
+		final DailyCardController ctrlTh = new DailyCardController(view.getSchContainerTh(), model.getThursdaySchedule());
+		final DailyCardController ctrlFr = new DailyCardController(view.getSchContainerFr(), model.getFridaySchedule());
+		final DailyCardController ctrlSa = new DailyCardController(view.getSchContainerSa(), model.getSaturdaySchedule());
+		final DailyCardController ctrlSu = new DailyCardController(view.getSchContainerSu(), model.getSundaySchedule());
+		final DailyCardController ctrlMo = new DailyCardController(view.getSchContainerMo(), model.getMondaySchedule());
+		final DailyCardController ctrlTu = new DailyCardController(view.getSchContainerTu(), model.getTuesdaySchedule());
+		final DailyCardController ctrlWe = new DailyCardController(view.getSchContainerWe(), model.getWednesdaySchedule());
 		
 		view.getBtnAccept().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Gestire il pulsante accept
+				boolean allCardsValidated = ctrlTh.validateCard();
+				allCardsValidated &= ctrlFr.validateCard();
+				allCardsValidated &= ctrlSa.validateCard();
+				allCardsValidated &= ctrlSu.validateCard();
+				allCardsValidated &= ctrlMo.validateCard();
+				allCardsValidated &= ctrlTu.validateCard();
+				allCardsValidated &= ctrlWe.validateCard();
 				
+				if (allCardsValidated) {
+					Main.deleteShowtimes(model.getThursdaySchedule().getDate());
+					for (Showtime showtime : model.getThursdaySchedule().getShowList()) {
+						Main.insertShowtime(showtime);
+					}
+
+					Main.deleteShowtimes(model.getFridaySchedule().getDate());
+					for (Showtime showtime : model.getFridaySchedule().getShowList()) {
+						Main.insertShowtime(showtime);
+					}
+
+					Main.deleteShowtimes(model.getSaturdaySchedule().getDate());
+					for (Showtime showtime : model.getSaturdaySchedule().getShowList()) {
+						Main.insertShowtime(showtime);
+					}
+
+					Main.deleteShowtimes(model.getSundaySchedule().getDate());
+					for (Showtime showtime : model.getSundaySchedule().getShowList()) {
+						Main.insertShowtime(showtime);
+					}
+
+					Main.deleteShowtimes(model.getMondaySchedule().getDate());
+					for (Showtime showtime : model.getMondaySchedule().getShowList()) {
+						Main.insertShowtime(showtime);
+					}
+
+					Main.deleteShowtimes(model.getTuesdaySchedule().getDate());
+					for (Showtime showtime : model.getTuesdaySchedule().getShowList()) {
+						Main.insertShowtime(showtime);
+					}
+
+					Main.deleteShowtimes(model.getWednesdaySchedule().getDate());
+					for (Showtime showtime : model.getThursdaySchedule().getShowList()) {
+						Main.insertShowtime(showtime);
+					}
+					resetButtonColors();
+				}
 			}
 		});
+	}
+	
+	private static void resetButtonColors() {
+		view.getButtonTh().setBorder(BorderFactory.createEmptyBorder());
+		view.getButtonFr().setBorder(BorderFactory.createEmptyBorder());
+		view.getButtonSa().setBorder(BorderFactory.createEmptyBorder());
+		view.getButtonSu().setBorder(BorderFactory.createEmptyBorder());
+		view.getButtonMo().setBorder(BorderFactory.createEmptyBorder());
+		view.getButtonTu().setBorder(BorderFactory.createEmptyBorder());
+		view.getButtonWe().setBorder(BorderFactory.createEmptyBorder());
+	}
+	
+	/**
+	 * Colora i bordi dei pulsanti dei giorni in base allo stato di validazione
+	 */
+	public static void markupValuatedStatus() {
+		resetButtonColors();
+		view.getButtonTh().setBorder(model.getThursdaySchedule().getValidated() > 0 ? 
+				(BorderFactory.createLineBorder((model.getThursdaySchedule().getValidated() > 1 ? 
+						Color.GREEN : Color.RED),2)) : BorderFactory.createEmptyBorder());
+
+		view.getButtonFr().setBorder(model.getFridaySchedule().getValidated() > 0 ? 
+				(BorderFactory.createLineBorder((model.getFridaySchedule().getValidated() > 1 ? 
+						Color.GREEN : Color.RED),2)) : BorderFactory.createEmptyBorder());
+
+		view.getButtonSa().setBorder(model.getSaturdaySchedule().getValidated() > 0 ? 
+				(BorderFactory.createLineBorder((model.getSaturdaySchedule().getValidated() > 1 ? 
+						Color.GREEN : Color.RED),2)) : BorderFactory.createEmptyBorder());
+
+		view.getButtonSu().setBorder(model.getSundaySchedule().getValidated() > 0 ? 
+				(BorderFactory.createLineBorder((model.getSundaySchedule().getValidated() > 1 ? 
+						Color.GREEN : Color.RED),2)) : BorderFactory.createEmptyBorder());
+
+		view.getButtonMo().setBorder(model.getMondaySchedule().getValidated() > 0 ? 
+				(BorderFactory.createLineBorder((model.getMondaySchedule().getValidated() > 1 ? 
+						Color.GREEN : Color.RED),2)) : BorderFactory.createEmptyBorder());
+
+		view.getButtonTu().setBorder(model.getTuesdaySchedule().getValidated() > 0 ? 
+				(BorderFactory.createLineBorder((model.getTuesdaySchedule().getValidated() > 1 ? 
+						Color.GREEN : Color.RED),2)) : BorderFactory.createEmptyBorder());
+
+		view.getButtonWe().setBorder(model.getWednesdaySchedule().getValidated() > 0 ? 
+				(BorderFactory.createLineBorder((model.getWednesdaySchedule().getValidated() > 1 ? 
+						Color.GREEN : Color.RED),2)) : BorderFactory.createEmptyBorder());
+		
 	}
 
 	/**

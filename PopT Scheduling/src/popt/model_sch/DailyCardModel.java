@@ -8,7 +8,8 @@ import popt.data.Showtime;
 
 public class DailyCardModel {
 
-	private boolean isValidated;
+	/* 0 - non valutato, 1 - valutato (con errori), 2 - corretto */
+	private int validate;
 	private int gap;
 	private int opening;
 	private int closing;
@@ -18,7 +19,7 @@ public class DailyCardModel {
 	private LinkedList<Showtime> showList;
 	
 	public DailyCardModel() {
-		isValidated = false;
+		validate = 0;
 		gap = 45;
 		opening = 14;
 		closing = 2;
@@ -27,12 +28,12 @@ public class DailyCardModel {
 		showList = new LinkedList<>();
 	}
 
-	public boolean isValidated() {
-		return isValidated;
+	public int getValidated() {
+		return validate;
 	}
 
-	public void setValidated(boolean isValidated) {
-		this.isValidated = isValidated;
+	public void setValidated(int validated) {
+		this.validate = validated;
 	}
 
 	public int getGap() {

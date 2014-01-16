@@ -155,6 +155,46 @@ public class Main {
 	}
 	
 	/**
+	 * Invoca l'inserimento in DB di una proiezione
+	 * @param show
+	 * @return
+	 */
+	public static boolean insertShowtime(Showtime show) {
+
+		try {
+			// Se il server sta processando altre richieste: abort
+			if (!dbr.isAvailable())
+				return false;
+			else {
+				return dbr.insertShowtime(show);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
+	 * richiede il delete da DB delle proiezioni di una giornata
+	 * @param date
+	 * @return
+	 */
+	public static boolean deleteShowtimes(String date) {
+
+		try {
+			// Se il server sta processando altre richieste: abort
+			if (!dbr.isAvailable())
+				return false;
+			else {
+				return dbr.deleteShowtimes(date);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
 	 * Chiede al server il suo stato corrente
 	 * @return un messaggio sullo stato del server
 	 */

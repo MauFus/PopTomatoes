@@ -139,79 +139,7 @@ public class DailyCardController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				card.getOptPanel().getTxtBarMessage().setText("");
-				
-				// itera il validate su ciascuna sala
-				for (CinemaHall cinemaHall : model.getHallList()) {
-					
-					boolean isValidated = true;
-					
-					// seleziona le proiezioni relative alla sala
-					LinkedList<Showtime> hallShowtimes = selectHallShowtimes(cinemaHall.getId());
-					
-					// Controllo sull'ora di inizio
-					for (Showtime show : hallShowtimes) {
-						if (calculateXPos(show.getTime()) < (model.getOpening() > 13? model.getOpening()-14 : model.getOpening()+10)*60) {
-							isValidated = false;
-							break;
-						}
-					}
-					
-					// Controllo sull'ora di fine
-					if (isValidated) {
-						for (Showtime show : hallShowtimes) {
-							System.out.println(model.getClosing());
-							System.out.println("Upper bound " + (model.getClosing() < 3? model.getClosing()+10 : model.getClosing()-14)*60);
-							if (calculateXPos(show.getTime())+show.getMovie().getDuration() > 
-									(model.getClosing() < 3? model.getClosing()+10 : model.getClosing()-14)*60) {
-								isValidated = false;
-								break;
-							}
-						}
-					}
-					
-					// Controllo su gap e sovrapposizioni
-					if (isValidated && hallShowtimes.size() > 1) {
-						for (int i = 0; i < hallShowtimes.size()-1; i++) {
-							for (int j = i+1; j < hallShowtimes.size(); j++) {
-								int start1 = calculateXPos(hallShowtimes.get(i).getTime());
-								int start2 = calculateXPos(hallShowtimes.get(j).getTime());
-								int finish1 = calculateXPos(hallShowtimes.get(i).getTime()) + hallShowtimes.get(i).getMovie().getDuration();
-								int finish2 = calculateXPos(hallShowtimes.get(j).getTime()) + hallShowtimes.get(j).getMovie().getDuration();
-								
-								// caso: sovrapposizione
-								if ((start1 < start2 && finish1 > start2) || (start2 < start1 && finish2 > start1)) {
-									isValidated = false;
-									System.out.println("A - Sala " + cinemaHall.getId() + " - isValidated " + isValidated);
-									break;
-								}
-								
-								//caso: gap non rispettato
-								if ((start1 > finish2 && (start1 - finish2 < model.getGap())) 
-										|| (start2 > finish1 && (start2 - finish1 < model.getGap()))) {
-									isValidated = false;
-									System.out.println("C - Sala " + cinemaHall.getId() + " - isValidated " + isValidated);
-									break;
-								}
-							}
-							
-							if (!isValidated)
-								break;
-						}
-					}
-
-					System.out.println("Sala " + cinemaHall.getId() + " - isValidated " + isValidated);
-					for (int h = 0; h < card.getHallPCont().getComponentCount(); h++) {
-						if (((HallPanel)card.getHallPCont().getComponent(h)).getCinemaHallID() == cinemaHall.getId())
-							if (!isValidated)
-								((HallPanel)card.getHallPCont().getComponent(h)).getTxtpnHall().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-							else
-								((HallPanel)card.getHallPCont().getComponent(h)).getTxtpnHall().setBorder(BorderFactory.createEmptyBorder());
-					}
-					if (!isValidated)
-						card.getOptPanel().getTxtBarMessage().setText("Sono stati riscontrati errori in fase di validazione");
-				}
+				validateCard();
 			}
 		});
 
@@ -223,6 +151,8 @@ public class DailyCardController {
 		        model.setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getDate(), "")));
 				card.getHallPCont().removeAll();
 				addHallPanels(card.getHallPCont());
+				model.setValidated(0);
+				SchedulerController.markupValuatedStatus();
 			}
 		});
 	}
@@ -408,9 +338,9 @@ public class DailyCardController {
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					rect.setBackground(new Color(
-							rect.getColor().getRed() + 100, rect.getColor()
-									.getGreen() + 100, rect.getColor()
-									.getBlue() + 100));
+							rect.getColor().getRed() /*+ 100*/, rect.getColor()
+									.getGreen() /*+ 100*/, rect.getColor()
+									.getBlue() /*+ 100*/));
 				}
 
 				@Override
@@ -510,9 +440,98 @@ public class DailyCardController {
 		return result;
 	}
 
+	/**
+	 * Calcola la posizione sulla linea temporale in pixel, dato un orario
+	 * @param time
+	 * @return Numero di Pixel dall'inizio del panel MovieLine
+	 */
 	private int calculateXPos(String time) {
 		String[] splitted = time.split(":");
 		return (Integer.parseInt(splitted[0].trim()) - 14) * 60
 				+ Integer.parseInt(splitted[1].trim());
+	}
+	
+	/**
+	 * Convalida la posizione dei rettangoli corrispondenti alle proiezioni
+	 * @return 
+	 */
+	protected boolean validateCard() {
+
+		boolean cardValidated = true;
+		
+		card.getOptPanel().getTxtBarMessage().setText("");
+		// itera il validate su ciascuna sala
+		for (CinemaHall cinemaHall : model.getHallList()) {
+			
+			boolean isValidated = true;
+			
+			// seleziona le proiezioni relative alla sala
+			LinkedList<Showtime> hallShowtimes = selectHallShowtimes(cinemaHall.getId());
+			
+			// Controllo sull'ora di inizio
+			for (Showtime show : hallShowtimes) {
+				if (calculateXPos(show.getTime()) < (model.getOpening() > 13? model.getOpening()-14 : model.getOpening()+10)*60) {
+					isValidated = false;
+					break;
+				}
+			}
+			
+			// Controllo sull'ora di fine
+			if (isValidated) {
+				for (Showtime show : hallShowtimes) {
+					if (calculateXPos(show.getTime())+show.getMovie().getDuration() > 
+							(model.getClosing() < 3? model.getClosing()+10 : model.getClosing()-14)*60) {
+						isValidated = false;
+						break;
+					}
+				}
+			}
+			
+			// Controllo su gap e sovrapposizioni
+			if (isValidated && hallShowtimes.size() > 1) {
+				for (int i = 0; i < hallShowtimes.size()-1; i++) {
+					for (int j = i+1; j < hallShowtimes.size(); j++) {
+						int start1 = calculateXPos(hallShowtimes.get(i).getTime());
+						int start2 = calculateXPos(hallShowtimes.get(j).getTime());
+						int finish1 = calculateXPos(hallShowtimes.get(i).getTime()) + hallShowtimes.get(i).getMovie().getDuration();
+						int finish2 = calculateXPos(hallShowtimes.get(j).getTime()) + hallShowtimes.get(j).getMovie().getDuration();
+						
+						// caso: sovrapposizione
+						if ((start1 < start2 && finish1 > start2) || (start2 < start1 && finish2 > start1)) {
+							isValidated = false;
+							break;
+						}
+						
+						//caso: gap non rispettato
+						if ((start1 > finish2 && (start1 - finish2 < model.getGap())) 
+								|| (start2 > finish1 && (start2 - finish1 < model.getGap()))) {
+							isValidated = false;
+							break;
+						}
+					}
+					
+					if (!isValidated)
+						break;
+				}
+			}
+
+			for (int h = 0; h < card.getHallPCont().getComponentCount(); h++) {
+				if (((HallPanel)card.getHallPCont().getComponent(h)).getCinemaHallID() == cinemaHall.getId())
+					if (!isValidated)
+						((HallPanel)card.getHallPCont().getComponent(h)).getTxtpnHall().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+					else
+						((HallPanel)card.getHallPCont().getComponent(h)).getTxtpnHall().setBorder(BorderFactory.createEmptyBorder());
+			}
+			if (!isValidated)
+				card.getOptPanel().getTxtBarMessage().setText("Sono stati riscontrati errori in fase di validazione");
+			
+			cardValidated = cardValidated && isValidated;
+			if (cardValidated)
+				model.setValidated(2);
+			else
+				model.setValidated(1);
+		}
+		SchedulerController.markupValuatedStatus();
+		return cardValidated;
 	}
 }

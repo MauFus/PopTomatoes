@@ -38,6 +38,13 @@ public class SchedulerView extends JPanel {
 	private DailyCard SchContainerTu;
 	private DailyCard SchContainerWe;
 	private JButton btnAccept;
+	private JButton buttonTh;
+	private JButton buttonFr;
+	private JButton buttonSa;
+	private JButton buttonSu;
+	private JButton buttonMo;
+	private JButton buttonTu;
+	private JButton buttonWe;
 	
 	CardLayout cards;
 	
@@ -60,7 +67,7 @@ public class SchedulerView extends JPanel {
 		panel.setPreferredSize(new Dimension(1000,50));
 		panel.setBackground(SystemColor.windowBorder);
 		
-		JButton buttonTh = new JButton("Thursday");
+		buttonTh = new JButton("Thursday");
 		buttonTh.setFocusable(false);
 		buttonTh.setBackground(Color.DARK_GRAY);
 		buttonTh.setActionCommand("Switch Card");
@@ -72,9 +79,8 @@ public class SchedulerView extends JPanel {
 			}
 		});
 		
-		JButton buttonFr = new JButton("Friday");
+		buttonFr = new JButton("Friday");
 		buttonFr.setFocusable(false);
-		buttonFr.setBorderPainted(false);
 		buttonFr.setBackground(Color.DARK_GRAY);
 		buttonFr.setActionCommand("Switch Card");
 		buttonFr.addActionListener(new ActionListener() {
@@ -85,9 +91,8 @@ public class SchedulerView extends JPanel {
 			}
 		});
 		
-		JButton buttonSa = new JButton("Saturday");
+		buttonSa = new JButton("Saturday");
 		buttonSa.setFocusable(false);
-		buttonSa.setBorderPainted(false);
 		buttonSa.setBackground(Color.DARK_GRAY);
 		buttonSa.setActionCommand("Switch Card");
 		buttonSa.addActionListener(new ActionListener() {
@@ -98,9 +103,8 @@ public class SchedulerView extends JPanel {
 			}
 		});
 		
-		JButton buttonSu = new JButton("Sunday");
+		buttonSu = new JButton("Sunday");
 		buttonSu.setFocusable(false);
-		buttonSu.setBorderPainted(false);
 		buttonSu.setBackground(Color.DARK_GRAY);
 		buttonSu.setActionCommand("Switch Card");
 		buttonSu.addActionListener(new ActionListener() {
@@ -111,9 +115,8 @@ public class SchedulerView extends JPanel {
 			}
 		});
 		
-		JButton buttonMo = new JButton("Monday");
+		buttonMo = new JButton("Monday");
 		buttonMo.setFocusable(false);
-		buttonMo.setBorderPainted(false);
 		buttonMo.setBackground(Color.DARK_GRAY);
 		buttonMo.setActionCommand("Switch Card");
 		buttonMo.addActionListener(new ActionListener() {
@@ -124,9 +127,8 @@ public class SchedulerView extends JPanel {
 			}
 		});
 		
-		JButton buttonTu = new JButton("Tuesday");
+		buttonTu = new JButton("Tuesday");
 		buttonTu.setFocusable(false);
-		buttonTu.setBorderPainted(false);
 		buttonTu.setBackground(Color.DARK_GRAY);
 		buttonTu.setActionCommand("Switch Card");
 		buttonTu.addActionListener(new ActionListener() {
@@ -137,9 +139,8 @@ public class SchedulerView extends JPanel {
 			}
 		});
 		
-		JButton buttonWe = new JButton("Wednesday");
+		buttonWe = new JButton("Wednesday");
 		buttonWe.setFocusable(false);
-		buttonWe.setBorderPainted(false);
 		buttonWe.setBackground(Color.DARK_GRAY);
 		buttonWe.setActionCommand("Switch Card");
 		buttonWe.addActionListener(new ActionListener() {
@@ -272,5 +273,33 @@ public class SchedulerView extends JPanel {
 
 	public JButton getBtnAccept() {
 		return btnAccept;
+	}
+
+	public JButton getButtonTh() {
+		return buttonTh;
+	}
+
+	public JButton getButtonFr() {
+		return buttonFr;
+	}
+
+	public JButton getButtonSa() {
+		return buttonSa;
+	}
+
+	public JButton getButtonSu() {
+		return buttonSu;
+	}
+
+	public JButton getButtonMo() {
+		return buttonMo;
+	}
+
+	public JButton getButtonTu() {
+		return buttonTu;
+	}
+
+	public JButton getButtonWe() {
+		return buttonWe;
 	}
 }
