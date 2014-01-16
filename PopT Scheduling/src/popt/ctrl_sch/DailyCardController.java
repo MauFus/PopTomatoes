@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 
 import popt.data.CinemaHall;
@@ -26,7 +27,6 @@ import popt.gui_sch.MovieRect;
 import popt.gui_sch.OptionPanel;
 import popt.main_sch.Main;
 import popt.model_sch.DailyCardModel;
-import sun.org.mozilla.javascript.internal.ast.SwitchCase;
 
 public class DailyCardController {
 
@@ -82,16 +82,16 @@ public class DailyCardController {
 			public void focusLost(FocusEvent e) {
 				try {
 					int opening = Integer.parseInt(optPanel.getTxtOpeningTime().getText());
-					if (opening < 0
-							|| opening > 23
-							|| (model.getClosing() > 14 && opening > model.getClosing())
-							|| (model.getClosing() <= 2 && opening > model.getClosing() && opening < 14)) {
+					if (opening < 3)
+						opening += 24; // Per evitare di ragionare con ore 00:00 - 02:00
+					int closing = model.getClosing() < 3? model.getClosing()+24 : model.getClosing();
+					if (opening < 14 || opening > 26 || opening >= closing) {
 						optPanel.getTxtBarMessage()	.setText("Errore - L'Orario di Apertura non è nel range corretto");
 						optPanel.getTxtOpeningTime().setText(model.getOpening() + ":00");
 					} else {
-						model.setOpening(opening);
+						model.setOpening(opening % 24);
 						optPanel.getTxtBarMessage().setText("");
-						optPanel.getTxtOpeningTime().setText(opening + ":00");
+						optPanel.getTxtOpeningTime().setText((opening % 24) + ":00");
 					}
 				} catch (NumberFormatException nfe) {
 					optPanel.getTxtBarMessage().setText("Errore - Valore di Orario di Apertura non nel formato corretto");
@@ -111,15 +111,17 @@ public class DailyCardController {
 			public void focusLost(FocusEvent e) {
 				try {
 					int closing = Integer.parseInt(optPanel.getTxtClosingTime().getText());
-					if (closing < 0 || closing > 23
-							|| (closing < model.getOpening() && model.getOpening() <= 2)
-							|| (closing < model.getOpening() && closing >= 14)) {
+					if (closing < 3)
+						closing += 24; // Per evitare di ragionare con ore 00:00 - 02:00
+					int opening = model.getOpening() < 3? model.getOpening()+24 : model.getOpening();
+					if (closing < 14 || closing > 26 || closing <= opening) {
 						optPanel.getTxtBarMessage().setText("Errore - L'Orario di Chiusura non è nel range corretto");
 						optPanel.getTxtClosingTime().setText(model.getClosing() + ":00");
 					} else {
-						model.setClosing(closing);
+						model.setClosing(closing % 24);
+						System.out.println("settato - " + closing % 24);
 						optPanel.getTxtBarMessage().setText("");
-						optPanel.getTxtClosingTime().setText(closing + ":00");
+						optPanel.getTxtClosingTime().setText((closing % 24) + ":00");
 					}
 				} catch (NumberFormatException nfe) {
 					optPanel.getTxtBarMessage().setText("Errore - Valore di Orario di Chiusura non nel formato corretto");
@@ -134,10 +136,82 @@ public class DailyCardController {
 		});
 
 		optPanel.getBtnValidate().addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO implementare validazione
+
+				card.getOptPanel().getTxtBarMessage().setText("");
+				
+				// itera il validate su ciascuna sala
+				for (CinemaHall cinemaHall : model.getHallList()) {
+					
+					boolean isValidated = true;
+					
+					// seleziona le proiezioni relative alla sala
+					LinkedList<Showtime> hallShowtimes = selectHallShowtimes(cinemaHall.getId());
+					
+					// Controllo sull'ora di inizio
+					for (Showtime show : hallShowtimes) {
+						if (calculateXPos(show.getTime()) < (model.getOpening() > 13? model.getOpening()-14 : model.getOpening()+10)*60) {
+							isValidated = false;
+							break;
+						}
+					}
+					
+					// Controllo sull'ora di fine
+					if (isValidated) {
+						for (Showtime show : hallShowtimes) {
+							System.out.println(model.getClosing());
+							System.out.println("Upper bound " + (model.getClosing() < 3? model.getClosing()+10 : model.getClosing()-14)*60);
+							if (calculateXPos(show.getTime())+show.getMovie().getDuration() > 
+									(model.getClosing() < 3? model.getClosing()+10 : model.getClosing()-14)*60) {
+								isValidated = false;
+								break;
+							}
+						}
+					}
+					
+					// Controllo su gap e sovrapposizioni
+					if (isValidated && hallShowtimes.size() > 1) {
+						for (int i = 0; i < hallShowtimes.size()-1; i++) {
+							for (int j = i+1; j < hallShowtimes.size(); j++) {
+								int start1 = calculateXPos(hallShowtimes.get(i).getTime());
+								int start2 = calculateXPos(hallShowtimes.get(j).getTime());
+								int finish1 = calculateXPos(hallShowtimes.get(i).getTime()) + hallShowtimes.get(i).getMovie().getDuration();
+								int finish2 = calculateXPos(hallShowtimes.get(j).getTime()) + hallShowtimes.get(j).getMovie().getDuration();
+								
+								// caso: sovrapposizione
+								if ((start1 < start2 && finish1 > start2) || (start2 < start1 && finish2 > start1)) {
+									isValidated = false;
+									System.out.println("A - Sala " + cinemaHall.getId() + " - isValidated " + isValidated);
+									break;
+								}
+								
+								//caso: gap non rispettato
+								if ((start1 > finish2 && (start1 - finish2 < model.getGap())) 
+										|| (start2 > finish1 && (start2 - finish1 < model.getGap()))) {
+									isValidated = false;
+									System.out.println("C - Sala " + cinemaHall.getId() + " - isValidated " + isValidated);
+									break;
+								}
+							}
+							
+							if (!isValidated)
+								break;
+						}
+					}
+
+					System.out.println("Sala " + cinemaHall.getId() + " - isValidated " + isValidated);
+					for (int h = 0; h < card.getHallPCont().getComponentCount(); h++) {
+						if (((HallPanel)card.getHallPCont().getComponent(h)).getCinemaHallID() == cinemaHall.getId())
+							if (!isValidated)
+								((HallPanel)card.getHallPCont().getComponent(h)).getTxtpnHall().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+							else
+								((HallPanel)card.getHallPCont().getComponent(h)).getTxtpnHall().setBorder(BorderFactory.createEmptyBorder());
+					}
+					if (!isValidated)
+						card.getOptPanel().getTxtBarMessage().setText("Sono stati riscontrati errori in fase di validazione");
+				}
 			}
 		});
 
@@ -145,6 +219,7 @@ public class DailyCardController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				card.getOptPanel().getTxtBarMessage().setText("");
 		        model.setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getDate(), "")));
 				card.getHallPCont().removeAll();
 				addHallPanels(card.getHallPCont());
@@ -316,16 +391,31 @@ public class DailyCardController {
 
 				@Override
 				public void mousePressed(MouseEvent e) {
+					rect.setxOld(e.getX());
+					rect.setText(((14 + rect.getX() / 60) % 24) + ":"
+							+ (rect.getX() % 60 < 10 ? "0" : "")
+							+ (rect.getX() % 60) + "   "
+							+ ((14 + rect.getFinishTime() / 60) % 24) + ":"
+							+ (rect.getFinishTime() % 60 < 10 ? "0" : "")
+							+ (rect.getFinishTime() % 60));
+				}
 
-					if (e.getButton() == MouseEvent.BUTTON1) {
-						rect.setxOld(e.getX());
-						rect.setText(((14 + rect.getX() / 60) % 24) + ":"
-								+ (rect.getX() % 60 < 10 ? "0" : "")
-								+ (rect.getX() % 60) + "   "
-								+ ((14 + rect.getFinishTime() / 60) % 24) + ":"
-								+ (rect.getFinishTime() % 60 < 10 ? "0" : "")
-								+ (rect.getFinishTime() % 60));
-					} else if (e.getButton() == MouseEvent.BUTTON3) {
+				@Override
+				public void mouseExited(MouseEvent e) {
+					rect.setBackground(rect.getColor());
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					rect.setBackground(new Color(
+							rect.getColor().getRed() + 100, rect.getColor()
+									.getGreen() + 100, rect.getColor()
+									.getBlue() + 100));
+				}
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (e.getButton() == MouseEvent.BUTTON3) {
 						final MovieInfoDialog mid = new MovieInfoDialog(MainView
 								.getGuiFrame());
 						mid.setVisible(true);
@@ -365,24 +455,6 @@ public class DailyCardController {
 						});
 						
 					}
-				}
-
-				@Override
-				public void mouseExited(MouseEvent e) {
-					rect.setBackground(rect.getColor());
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					rect.setBackground(new Color(
-							rect.getColor().getRed() + 100, rect.getColor()
-									.getGreen() + 100, rect.getColor()
-									.getBlue() + 100));
-				}
-
-				@Override
-				public void mouseClicked(MouseEvent e) {
-
 				}
 			});
 

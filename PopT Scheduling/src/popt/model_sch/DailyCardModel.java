@@ -56,7 +56,6 @@ public class DailyCardModel {
 	}
 
 	public void setClosing(int closing) {
-		if (closing < 22 && closing > opening)
 			this.closing = closing;
 	}
 
