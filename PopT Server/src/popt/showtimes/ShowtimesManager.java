@@ -44,12 +44,11 @@ public class ShowtimesManager {
 		try {
 			dba.readDB();
 			// add to the list all the showtimes scheduled in the next 3 days
-			comingShowtimes.addAll(dba.searchShowtimes(0, null, 0, onlyDate.format(today), ""));
-			comingShowtimes.addAll(dba.searchShowtimes(0, null, 0, onlyDate.format(tomorrow), ""));
-			comingShowtimes.addAll(dba.searchShowtimes(0, null, 0, onlyDate.format(afterTomorrow), ""));
+			comingShowtimes.addAll(dba.searchShowtimes(0, null, null, onlyDate.format(today), ""));
+			comingShowtimes.addAll(dba.searchShowtimes(0, null, null, onlyDate.format(tomorrow), ""));
+			comingShowtimes.addAll(dba.searchShowtimes(0, null, null, onlyDate.format(afterTomorrow), ""));
 			dba.closeDB();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
