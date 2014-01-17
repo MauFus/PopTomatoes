@@ -1,6 +1,7 @@
 package popt.ctrl_sch;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -233,75 +234,76 @@ public class DailyCardController {
 		line.removeAll();
 		for (Showtime show : selectHallShowtimes(hall.getId())) {
 			int a = show.getMovie().getGenre().ordinal();
-			Color col=null;
+			Color col = Color.DARK_GRAY;
+			final MovieRect rect = new MovieRect(show.getMovie().getDuration(),
+					50, col);
+			rect.setFont(new Font("Calibri", Font.BOLD, 12));
+			rect.setForeground(Color.WHITE);
 			switch (a) {
 			case 0:
-				col = new Color(255, 153, 0);//arancione fiamma
+				rect.setColor(new Color(255, 153, 0));//arancione fiamma
 				break;
 			case 1:
-				col = new Color(150, 0, 24);//carminio
+				rect.setColor(new Color(150, 0, 24)); //carminio
 				break;
 			case 2:
-				col = new Color(34, 139, 34);//verde foresta
+				rect.setColor(new Color(34, 139, 34));//verde foresta
 				break;
 			case 3:
-				col = new Color(79, 79, 79);//grigio
+				rect.setColor(new Color(79, 79, 79));//grigio
 				break;
 			case 4:
-				col = new Color(21, 96, 189);//denim
+				rect.setColor(new Color(21, 96, 189));//denim
 				break;
 			case 5:
-				col = new Color(229, 43, 80);//amaranto
+				rect.setColor(new Color(229, 43, 80));//amaranto
 				break;
 			case 6:
-				col = new Color(0, 168, 107);//giada
+				rect.setColor(new Color(0, 168, 107));//giada
 				break;
 			case 7:
-				col = new Color(47, 79, 79);//grigio ardesia
+				rect.setColor(new Color(47, 79, 79));//grigio ardesia
 				break;
 			case 8:
-				col = new Color(58, 117, 196);//blu klein
+				rect.setColor(new Color(58, 117, 196));//blu klein
 				break;
 			case 9:
-				col = new Color(65, 0, 18);//rubino
+				rect.setColor(new Color(65, 0, 18));//rubino
 				break;
 			case 10:
-				col = new Color(184, 134, 11);//oro vivo
+				rect.setColor(new Color(184, 134, 11));//oro vivo
 				break;
 			case 11:
-				col = new Color(5, 4, 2);//carbone
+				rect.setColor(new Color(5, 4, 2));//carbone
 				break;
 			case 12:
-				col = new Color(143, 0, 255);//viola
+				rect.setColor(new Color(143, 0, 255));//viola
 				break;
 			case 13:
-				col = new Color(1, 50, 32);//verde scuro
+				rect.setColor(new Color(1, 50, 32));//verde scuro
 				break;
 			case 14:
-				col = new Color(200, 8, 21);//rosso veneziano
+				rect.setColor(new Color(200, 8, 21));//rosso veneziano
 				break;
 			case 15:
-				col = new Color(17, 96, 98);//turchese scuro
+				rect.setColor(new Color(17, 96, 98));//turchese scuro
 				break;
 			case 16:
-				col = new Color(255, 215, 0);//oro
+				rect.setColor(new Color(255, 215, 0));//oro
 				break;
 			case 17:
-				col = new Color(255, 36, 0);//scarlatto
+				rect.setColor(new Color(255, 36, 0));//scarlatto
 				break;
 			case 18:
-				col = new Color(70, 89, 69);//grigio asparago
+				rect.setColor(new Color(70, 89, 69));//grigio asparago
 				break;
 			case 19:
-				col = new Color(255, 216, 0);//giallo scuolabus
+				rect.setColor(new Color(255, 216, 0));//giallo scuolabus
 				break;
 
 			default:
 				break;
 			}
-			final MovieRect rect = new MovieRect(show.getMovie().getDuration(),
-					50, col);
-			
 			rect.setMovieRectModel(show);
 			rect.setBounds(calculateXPos(show.getTime()), 25, show.getMovie()
 					.getDuration(), 50);
@@ -321,6 +323,7 @@ public class DailyCardController {
 
 				@Override
 				public void mousePressed(MouseEvent e) {
+					rect.setForeground(Color.BLACK);
 					rect.setxOld(e.getX());
 					rect.setText(((14 + rect.getX() / 60) % 24) + ":"
 							+ (rect.getX() % 60 < 10 ? "0" : "")
