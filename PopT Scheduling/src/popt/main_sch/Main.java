@@ -37,7 +37,6 @@ public class Main {
 		
 		initRmiConnection();
 	}
-	
 	/**
 	 * Inizializza RMI lato Client ed istanzia DBReceiver
 	 */

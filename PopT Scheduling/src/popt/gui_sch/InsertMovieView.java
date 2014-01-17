@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
@@ -89,7 +91,10 @@ public class InsertMovieView extends JPanel {
 		textTitle.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textTitle.setBorder(null);
 		textTitle.setHorizontalAlignment(JTextField.RIGHT);
-		textTitle.setText("Insert here your movie title  ");
+		textTitle.setBorder(BorderFactory.createCompoundBorder(
+		        textTitle.getBorder(), 
+		        BorderFactory.createEmptyBorder(0,0,0,10)));
+		textTitle.setText("Insert here your movie title");
 		textTitle.setForeground(Color.GRAY);
 		textTitle.setColumns(10);
 		
@@ -97,7 +102,10 @@ public class InsertMovieView extends JPanel {
 		textDuration.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textDuration.setBorder(null);
 		textDuration.setHorizontalAlignment(JTextField.RIGHT);
-		textDuration.setText("minutes  ");
+		textDuration.setBorder(BorderFactory.createCompoundBorder(
+		        textDuration.getBorder(), 
+		        BorderFactory.createEmptyBorder(0,0,0,10)));
+		textDuration.setText("minutes");
 		textDuration.setForeground(Color.GRAY);
 		textDuration.setColumns(10);
 		
@@ -108,7 +116,14 @@ public class InsertMovieView extends JPanel {
 		checkPG.setBackground(Color.ORANGE);
 		
 		comboBoxGenre = new JComboBox<Genre>();
+		comboBoxGenre.setFont(new Font("Calibri", Font.PLAIN, 15));
+		comboBoxGenre.setBorder(null);
+			DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
+			dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+			comboBoxGenre.setRenderer(dlcr);
+		comboBoxGenre.setBackground(Color.WHITE);
 		comboBoxGenre.setModel(new DefaultComboBoxModel<Genre>(Genre.values()));
+		
 		
 		buttonInsert = new JButton("Insert!");
 		buttonInsert.setForeground(new Color(255, 255, 255));
@@ -126,7 +141,10 @@ public class InsertMovieView extends JPanel {
 		textDate.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textDate.setBorder(null);
 		textDate.setHorizontalAlignment(JTextField.RIGHT);
-		textDate.setText("gg-mm-aaaa  ");
+		textDate.setBorder(BorderFactory.createCompoundBorder(
+		        textDate.getBorder(), 
+		        BorderFactory.createEmptyBorder(0,0,0,10)));
+		textDate.setText("gg-mm-aaaa");
 		textDate.setForeground(Color.GRAY);
 		textDate.setColumns(10);
 		
@@ -152,16 +170,14 @@ public class InsertMovieView extends JPanel {
 											.addComponent(txtpnDuration, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
 										.addComponent(txtpnPg, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
 									.addGap(205))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(txtpnTitle, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)))
+								.addComponent(txtpnTitle, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(checkPG)
-								.addComponent(textDate, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
 								.addComponent(textTitle, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textDate, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
 								.addComponent(textDuration, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBoxGenre, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(comboBoxGenre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap(131, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
