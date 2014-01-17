@@ -31,21 +31,23 @@ public class OptionPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public OptionPanel() {
+		setBackground(new Color(102, 204, 0));
+		setBorder(null);
 		
 		JTextPane txtpnOpening = new JTextPane();
 		txtpnOpening.setFont(new Font("Calibri", Font.PLAIN, 14));
-		txtpnOpening.setBackground(new Color(240,240,240));
+		txtpnOpening.setBackground(new Color(102, 204, 0));
 		txtpnOpening.setEditable(false);
 		txtpnOpening.setText("Opening Time:");
 		
 		JTextPane txtpnClosing = new JTextPane();
-		txtpnClosing.setBackground(new Color(240,240,240));
+		txtpnClosing.setBackground(new Color(102, 204, 0));
 		txtpnClosing.setFont(new Font("Calibri", Font.PLAIN, 14));
 		txtpnClosing.setText("Closing Time:");
 		txtpnClosing.setEditable(false);
 		
 		JTextPane txtpnGap = new JTextPane();
-		txtpnGap.setBackground(new Color(240,240,240));
+		txtpnGap.setBackground(new Color(102, 204, 0));
 		txtpnGap.setFont(new Font("Calibri", Font.PLAIN, 14));
 		txtpnGap.setText("Gap:");
 		txtpnGap.setEditable(false);
@@ -78,7 +80,7 @@ public class OptionPanel extends JPanel {
 		
 		txtBarMessage = new JTextPane();
 		txtBarMessage.setEditable(false);
-		txtBarMessage.setBackground(SystemColor.controlHighlight);
+		txtBarMessage.setBackground(new Color(132, 234, 0));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

@@ -24,8 +24,9 @@ public class TimeBar extends JPanel {
 	 * Create the panel.
 	 */
 	public TimeBar() {
+		setBackground(new Color(102, 204, 0));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {100, 720, 170};
+		gridBagLayout.columnWidths = new int[] {100, 720, 178};
 		gridBagLayout.rowHeights = new int[] {30};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0};
 		gridBagLayout.rowWeights = new double[]{1.0};

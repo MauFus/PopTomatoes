@@ -30,6 +30,8 @@ public class HallPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public HallPanel() {
+		setBackground(new Color(132, 234, 0));
+		setBorder(null);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 100, 720, 154 };
 		gridBagLayout.rowHeights = new int[] { 100, 0 };
@@ -39,6 +41,10 @@ public class HallPanel extends JPanel {
 
 		txtpnHall = new JTextPane();
 		txtpnHall.setEditable(false);
+		txtpnHall.setBackground(new Color(132,234,0));
+		Insets m = new Insets(0, 5, 0, 5);
+		txtpnHall.setMargin(m);
+		txtpnHall.setPreferredSize(new Dimension(80, 30));
 		GridBagConstraints gbc_txtpnHall = new GridBagConstraints();
 		gbc_txtpnHall.insets = new Insets(0, 0, 0, 0);
 		gbc_txtpnHall.gridx = 0;
@@ -46,7 +52,8 @@ public class HallPanel extends JPanel {
 		add(txtpnHall, gbc_txtpnHall);
 
 		movieLine = new MovieLine();
-		movieLine.setBackground(Color.LIGHT_GRAY);
+		movieLine.setBackground(new Color(100,100,100));
+		movieLine.setBorder(null);
 		GridBagConstraints gbc_movieLine = new GridBagConstraints();
 		gbc_movieLine.fill = GridBagConstraints.BOTH;
 		gbc_movieLine.gridx = 1;

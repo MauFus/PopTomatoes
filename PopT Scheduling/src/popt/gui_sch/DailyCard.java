@@ -28,6 +28,7 @@ public class DailyCard extends JPanel {
 		JScrollPane scrb = new JScrollPane(hallPCont);
 		scrb.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrb.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrb.setBorder(null);
 		scrb.setPreferredSize(new Dimension(1000, 310));
 		this.add(optPanel);
 		this.add(timeBar);
