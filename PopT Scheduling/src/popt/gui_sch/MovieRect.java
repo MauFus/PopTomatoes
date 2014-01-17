@@ -55,6 +55,10 @@ public class MovieRect extends JTextPane {
 		return color;
 	}
 
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	public void setxOld(int xOld) {
 		this.xOld = xOld;
 	}
