@@ -66,8 +66,7 @@ public class InsertMovieController {
 			public void focusLost(FocusEvent e) {
 				try {
 					if (Integer.parseInt(view.getTextDuration().getText()) <= 0) {
-						view.getTextDuration().setText(
-								"Not Positive");
+						view.getTextDuration().setText("Not Positive");
 						view.getTextDuration().setForeground(Color.RED);
 					}
 				} catch (NumberFormatException nfe) {
@@ -112,7 +111,8 @@ public class InsertMovieController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if ((!view.getTextTitle().getText().isEmpty() && view.getTextTitle().getForeground() != Color.GRAY)
+					if ((!view.getTextTitle().getText().isEmpty() && view
+							.getTextTitle().getForeground() != Color.GRAY)
 							&& (!view.getTextDuration().getText().isEmpty() && Integer
 									.parseInt(view.getTextDuration().getText()) > 0)
 							&& (!view.getTextDate().getText().isEmpty() && isDate(view
@@ -124,7 +124,6 @@ public class InsertMovieController {
 								Integer.parseInt(view.getTextDuration()
 										.getText()));
 						model.getMovie().setDate(view.getTextDate().getText());
-						// TODO controllare se Genere funziona correttamente
 						model.getMovie().setGenre(
 								(Genre) view.getComboBoxGenre()
 										.getSelectedItem());
@@ -141,13 +140,16 @@ public class InsertMovieController {
 						}
 						view.getTextAlert().setText(Main.getServerStatus());
 					} else {
-						view.getTextAlert().setText("Errore: Alcuni campi non sono completati correttamente!");
+						view.getTextAlert()
+								.setText(
+										"Errore: Alcuni campi non sono completati correttamente!");
 					}
 
 				} catch (NumberFormatException nfe) {
-					view.getTextAlert().setText("ERRORE - Non tutti i campi sono stati inseriti");
+					view.getTextAlert().setText(
+							"ERRORE - Non tutti i campi sono stati inseriti");
 				}
-				view.getButtonInsert().setBackground(new Color(255,0,0));
+				view.getButtonInsert().setBackground(new Color(255, 0, 0));
 			}
 		});
 	}
@@ -158,17 +160,17 @@ public class InsertMovieController {
 			int g = Integer.parseInt(tokens[0]);
 			int m = Integer.parseInt(tokens[1]);
 			int a = Integer.parseInt(tokens[2]);
-			
-			//check su mese, anno e giorno
+
+			// check su mese, anno e giorno
 			if (g < 1 || g > 31 || m < 1 || m > 12 || a < 1900)
 				return false;
 			if ((m == 4 || m == 6 || m == 9 || m == 11) && g > 30)
 				return false;
-			if (m == 2 && g >29)
+			if (m == 2 && g > 29)
 				return false;
-			
+
 			return true;
-			
+
 		} catch (Exception e) {
 			return false;
 		}

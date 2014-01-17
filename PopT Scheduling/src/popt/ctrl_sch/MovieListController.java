@@ -124,6 +124,7 @@ public class MovieListController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				searchDialog.setVisible(false);
+				searchDialog.dispose();
 				searchDialog = null;
 			}
 		});
@@ -173,6 +174,7 @@ public class MovieListController {
 						JRadioButton resultRadio = new JRadioButton("ID: " + m.getID()
 								+ " : " + m.getTitle() + " (" + m.getDate().split("-")[2] + ")");
 						resultRadio.setBackground(Color.ORANGE);
+						searchDialog.getRadioGroup().add(resultRadio);
 						searchDialog.getPnQueryResults().add(resultRadio);
 					}
 					searchDialog.getPnQueryResults().revalidate();
@@ -186,12 +188,16 @@ public class MovieListController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String ID = null;
-				for (int k = 0;	k < searchDialog.getPnQueryResults().getComponentCount(); k++) {
+				
+				/*for (int k = 0;	k < searchDialog.getPnQueryResults().getComponentCount(); k++) {
 					if (((JRadioButton) searchDialog.getPnQueryResults().getComponent(k)).isSelected()) {
 						ID = ((JRadioButton) searchDialog.getPnQueryResults().getComponent(k)).getText().split(":")[1].trim();
 						break;
 					}
-				}
+				}*/
+				
+				if (searchDialog.getRadioGroup().isSelected(searchDialog.getRadioGroup().getSelection()))
+					ID = searchDialog.getRadioGroup().getSelection().toString().split(":")[1].trim();
 
 				if (ID != null && model.getSearchList() != null) {
 					Movie selected = null;

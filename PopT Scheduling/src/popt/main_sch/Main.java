@@ -41,7 +41,6 @@ public class Main {
 		new MovieListController(mainView.getMovieListView(), ml_model);
 		new SchedulerController(mainView.getSchedulingView(), sc_model);
 	}
-	
 	/**
 	 * Inizializza RMI lato Client ed istanzia DBReceiver
 	 */

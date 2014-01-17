@@ -23,9 +23,6 @@ import javax.swing.JCheckBox;
 
 import popt.data.Genre;
 
-import javax.swing.border.LineBorder;
-import javax.swing.ScrollPaneConstants;
-
 public class SearchMovieDialog extends JDialog {
 
 	/**
@@ -50,7 +47,7 @@ public class SearchMovieDialog extends JDialog {
 	 */
 	
 	public SearchMovieDialog (JFrame parent) {
-		super(parent,true);
+		//super(parent,true);
 		setTitle("Movie Search");
 		setBounds(100, 100, 600, 500);
 		getContentPane().setLayout(new BorderLayout());
