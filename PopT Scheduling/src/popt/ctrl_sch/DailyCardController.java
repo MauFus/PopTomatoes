@@ -302,7 +302,7 @@ public class DailyCardController {
 			}
 			final MovieRect rect = new MovieRect(show.getMovie().getDuration(),
 					50, col);
-			rect.setFont(new Font("Calibri", Font.BOLD, 12));
+			rect.setFont(new Font("Calibri", Font.BOLD, 15));
 			rect.setForeground(Color.WHITE);
 			rect.setMovieRectModel(show);
 			rect.setBounds(calculateXPos(show.getTime()), 25, show.getMovie()

@@ -93,7 +93,7 @@ public class SchedulerController {
 					}
 
 					Main.deleteShowtimes(model.getWednesdaySchedule().getDate());
-					for (Showtime showtime : model.getThursdaySchedule().getShowList()) {
+					for (Showtime showtime : model.getWednesdaySchedule().getShowList()) {
 						Main.insertShowtime(showtime);
 					}
 				}
