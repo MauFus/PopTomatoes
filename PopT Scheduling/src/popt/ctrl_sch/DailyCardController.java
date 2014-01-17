@@ -316,8 +316,8 @@ public class DailyCardController {
 					rect.setBounds(rect.getX(), rect.getY(), rect.getWidth(),
 							rect.getHeight());
 					// setta l'orario di inizio nell'oggetto showtime
-					rect.getMovieRectModel().setTime(
-							(14 + rect.getX() / 60) + ":" + (rect.getX() % 60));
+					rect.getMovieRectModel().setTime(((14 + rect.getX()/60) % 24) + ":" 
+							+ ((rect.getX() % 60) > 9 ? "" : "0") + rect.getX() % 60);
 
 				}
 
