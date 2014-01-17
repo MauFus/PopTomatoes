@@ -96,12 +96,14 @@ public class SchedulerController {
 					for (Showtime showtime : model.getThursdaySchedule().getShowList()) {
 						Main.insertShowtime(showtime);
 					}
-					resetButtonColors();
 				}
 			}
 		});
 	}
 	
+	/**
+	 * Resetta i colori di feedback sui bottoni dei giorni
+	 */
 	private static void resetButtonColors() {
 		view.getButtonTh().setBorder(BorderFactory.createEmptyBorder());
 		view.getButtonFr().setBorder(BorderFactory.createEmptyBorder());

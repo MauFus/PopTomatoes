@@ -308,7 +308,6 @@ public class MySQLAccess {
 			if (!time.equals("")) {
 				if (!query.endsWith("WHERE"))
 					query = query.concat(" AND");
-				// TODO Controllare se questa istruzione è corretta
 				query = query.concat(" lower(Time) LIKE lower('" + time + "')");
 			}
 
@@ -322,7 +321,7 @@ public class MySQLAccess {
 						LinkedList<Movie> sh_movie = searchMovie(result.getInt("Movie_ID"), "", 0, "", null, false);
 						CinemaHall sh_hall = searchHall((char)result.getInt("Cinemahall_ID"));
 						Showtime sh = new Showtime((long) result.getInt("ID"),sh_movie.getFirst(), sh_hall, 
-								result.getString("Date"), result.getTime("Time").toString(), result.getInt("Auditors"));
+								result.getString("Date"), result.getString("Time"), result.getInt("Auditors"));
 						selectedShowtimes.push(sh);
 					} while (result.next());
 				}
