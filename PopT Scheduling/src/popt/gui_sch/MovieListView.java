@@ -1,6 +1,5 @@
 package popt.gui_sch;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
@@ -14,8 +13,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
-import javax.swing.plaf.ComponentUI;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
