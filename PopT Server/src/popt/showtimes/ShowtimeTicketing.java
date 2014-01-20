@@ -11,6 +11,9 @@ package popt.showtimes;
 
 import java.util.LinkedList;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import popt.data.Row;
 import popt.data.SeatStatus;
 import popt.data.Showtime;
@@ -31,7 +34,7 @@ public class ShowtimeTicketing {
 		findAvailableSeats();
 		seatsValue = new int[show.getHall().getnRows()][maxSeatsPerRow(seatsStatus)];
 	}
-	
+
 	/**
 	 * Trova informazioni su disposizione dei posti nella sala (file, etc.)
 	 */
@@ -51,7 +54,6 @@ public class ShowtimeTicketing {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -116,5 +118,29 @@ public class ShowtimeTicketing {
 	
 	public void setSeatValue(int row, int seat, int value) {
 		seatsValue[row][seat] = value;
+	}
+
+	/**
+	 * Crea un elemento DOM dell'oggetto, per essere inserito in un file XML
+	 * @param document - il documento dom in cui viene costruito l'oggetto DOM
+	 * @return l'elemento generato
+	 */
+	public Element getXMLform(Document document) {
+		Element showTickets = document.createElement("ShowtimeTickets");
+		showTickets.appendChild(document.createElement("Showtime")).setTextContent(Long.toString(show.getId()));
+		
+		Element rowList = document.createElement("RowList");
+		for (Row row : seatsStatus) {
+			Element rowElement = document.createElement("Row");
+			rowElement.setAttribute("number", Integer.toString(row.getNumber()));
+			rowElement.setAttribute("seats", Integer.toString(row.getSeats()));
+			for (int i = 0; i < row.getSeats(); i++)
+				rowElement.appendChild(document.createElement("Seat")).setTextContent(row.getStatus()[i].toString());
+			
+			rowList.appendChild(rowElement);
+		}
+		showTickets.appendChild(rowList);
+		
+		return showTickets;
 	}
 }
