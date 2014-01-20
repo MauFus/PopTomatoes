@@ -52,14 +52,16 @@ public class ShowtimesManager {
 	 * Crea la lista degli spettacoli dei 3 giorni successivi
 	 */
 	private void updateComingShowtimes() {
+		MySQLAccess dba = new MySQLAccess();
 		
 		DateFormat onlyDate = new SimpleDateFormat("dd-MM-yyyy");
 		Date today = new Date();
 		Date tomorrow = new Date(today.getTime() + 86400000);
 		Date afterTomorrow = new Date(tomorrow.getTime() + 86400000);
+		
+		// Azzera la lista
 		comingShowtimes = new LinkedList<>();
 		
-		MySQLAccess dba = new MySQLAccess();
 		try {
 			dba.readDB();
 			// add to the list all the showtimes scheduled in the next 3 days
@@ -76,9 +78,10 @@ public class ShowtimesManager {
 	}
 	
 	/**
-	 * Crea, se necessario, le liste dei posti venduti per ogni proiezione
+	 * Aggiorna la lista delle tabelle di ticketing per le prossime proiezioni
 	 */
-	private void updateSellingList() {
+	public void updateSellingList() {
+		// Crea, se necessario, le liste dei posti venduti per ogni proiezione
 		for (Showtime show : comingShowtimes) {
 			boolean isShowtimeAlreadyProcessed = false;
 			for (ShowtimeTicketing ticketing : ticketSelling) {
@@ -88,10 +91,33 @@ public class ShowtimesManager {
 				}
 			}
 			// if not already processed, create a ShowtimeTicketing object for the new Showtime
-			if (!isShowtimeAlreadyProcessed) {
+			if (!isShowtimeAlreadyProcessed)
 				ticketSelling.add(new ShowtimeTicketing(show));
+		}
+		
+		// Elimina le liste non più necessarie
+		for (ShowtimeTicketing iterator : ticketSelling) {
+			boolean isComingShow = false;
+			for (Showtime show : comingShowtimes) {
+				if (show.equals(iterator.getShow())) {
+					isComingShow = true;
+					break;
+				}
+			}
+			if (!isComingShow) {
+				MySQLAccess dba = new MySQLAccess();
+				try {
+					dba.readDB();
+					dba.updateShowtimeAuditors(iterator.getShow().getId(), iterator.getAuditors());
+					dba.closeDB();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				ticketSelling.remove(iterator);
 			}
 		}
+		
+		// Fa backup su file XML delle liste
 		saveTicketingList();
 	}
 	

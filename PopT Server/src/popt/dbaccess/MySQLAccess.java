@@ -183,6 +183,17 @@ public class MySQLAccess {
 		}
 	}
 	
+	public void updateShowtimeAuditors(long id, int auditors) throws Exception {
+		try {
+			preparedStatement = connect.prepareStatement("UPDATE POPTOMATOESDB.SHOWTIME set Auditors = (?) where ID = (?)");
+			preparedStatement.setInt(1, auditors);
+			preparedStatement.setInt(2, (int)id);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	/**
 	 * Find the Cinema Hall that fits the passed ID
 	 * @param ch_id

@@ -143,4 +143,19 @@ public class ShowtimeTicketing {
 		
 		return showTickets;
 	}
+	
+	/**
+	 * Calculate the number of occupied seats
+	 * @return that number
+	 */
+	public int getAuditors() {
+		int auditors = 0;
+		for (Row row : seatsStatus) {
+			for (int i = 0; i < row.getStatus().length; i++) {
+				if (row.getStatus()[i].equals(SeatStatus.OCCUPATO))
+					auditors++;
+			}
+		}
+		return auditors;
+	}
 }
