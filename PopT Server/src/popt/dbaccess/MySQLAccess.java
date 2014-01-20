@@ -96,8 +96,8 @@ public class MySQLAccess {
 					.prepareStatement("insert into POPTOMATOESDB.ROW values (?,?,?)");
 			// "IdCinemaHall, Numbers, Seats from POPTOMATOESDB.ROW");
 			// Parameters start with 1
-			preparedStatement.setInt(1, idCinemaHall);
-			preparedStatement.setInt(2, r_number);
+			preparedStatement.setInt(1, r_number);
+			preparedStatement.setInt(2, idCinemaHall);
 			preparedStatement.setInt(3, r_seats);
 			preparedStatement.executeUpdate();
 
