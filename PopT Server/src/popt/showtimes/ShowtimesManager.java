@@ -82,38 +82,46 @@ public class ShowtimesManager {
 	 */
 	public void updateSellingList() {
 		// Crea, se necessario, le liste dei posti venduti per ogni proiezione
-		for (Showtime show : comingShowtimes) {
-			boolean isShowtimeAlreadyProcessed = false;
-			for (ShowtimeTicketing ticketing : ticketSelling) {
-				if (show.equals(ticketing.getShow())) {
-					isShowtimeAlreadyProcessed = true;
-					break;
+		if (!comingShowtimes.isEmpty()) {
+			for (Showtime show : comingShowtimes) {
+				boolean isShowtimeAlreadyProcessed = false;
+				if (!ticketSelling.isEmpty()) {
+					for (ShowtimeTicketing ticketing : ticketSelling) {
+						if (show.equals(ticketing.getShow())) {
+							isShowtimeAlreadyProcessed = true;
+							break;
+						}
+					}
 				}
+				// if not already processed, create a ShowtimeTicketing object for the new Showtime
+				if (!isShowtimeAlreadyProcessed)
+					ticketSelling.add(new ShowtimeTicketing(show));
 			}
-			// if not already processed, create a ShowtimeTicketing object for the new Showtime
-			if (!isShowtimeAlreadyProcessed)
-				ticketSelling.add(new ShowtimeTicketing(show));
 		}
 		
 		// Elimina le liste non più necessarie
-		for (ShowtimeTicketing iterator : ticketSelling) {
-			boolean isComingShow = false;
-			for (Showtime show : comingShowtimes) {
-				if (show.equals(iterator.getShow())) {
-					isComingShow = true;
-					break;
+		if (!ticketSelling.isEmpty()) {
+			for (ShowtimeTicketing iterator : ticketSelling) {
+				boolean isComingShow = false;
+				if (!comingShowtimes.isEmpty()) {
+					for (Showtime show : comingShowtimes) {
+						if (show.equals(iterator.getShow())) {
+							isComingShow = true;
+							break;
+						}
+					}
 				}
-			}
-			if (!isComingShow) {
-				MySQLAccess dba = new MySQLAccess();
-				try {
-					dba.readDB();
-					dba.updateShowtimeAuditors(iterator.getShow().getId(), iterator.getAuditors());
-					dba.closeDB();
-				} catch (Exception e) {
-					e.printStackTrace();
+				if (!isComingShow) {
+					MySQLAccess dba = new MySQLAccess();
+					try {
+						dba.readDB();
+						dba.updateShowtimeAuditors(iterator.getShow().getId(), iterator.getAuditors());
+						dba.closeDB();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					ticketSelling.remove(iterator);
 				}
-				ticketSelling.remove(iterator);
 			}
 		}
 		
@@ -136,8 +144,10 @@ public class ShowtimesManager {
 			Document document = db.newDocument();
 			Element radix = document.createElement("Ticketing");
 			
-			for (ShowtimeTicketing show : ticketSelling) {
-				radix.appendChild(show.getXMLform(document));
+			if (!ticketSelling.isEmpty()) {
+				for (ShowtimeTicketing show : ticketSelling) {
+					radix.appendChild(show.getXMLform(document));
+				}
 			}
 			document.appendChild(radix);
 			
@@ -219,9 +229,11 @@ public class ShowtimesManager {
 	 */
 	public ShowtimeTicketing getTicketSelling(Showtime show) {
 		ShowtimeTicketing selected = null;
-		for (ShowtimeTicketing st : ticketSelling) {
-			if (st.getShow().equals(show));
+		if (!ticketSelling.isEmpty()) {
+			for (ShowtimeTicketing st : ticketSelling) {
+				if (st.getShow().equals(show));
 				selected = st;
+			}
 		}
 		return selected;
 	}

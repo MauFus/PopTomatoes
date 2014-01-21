@@ -34,6 +34,8 @@ public class ShowtimeTicketing {
 		show = showtime;
 		seatsValue = new int[show.getHall().getnRows()][maxSeatsPerRow(seatsStatus)];
 		specialSeatsStatus = new SeatStatus[show.getHall().getSpecialSeats()];
+		for (int s = 0; s < specialSeatsStatus.length; s++)
+			specialSeatsStatus[s] = SeatStatus.LIBERO;
 		findAvailableSeats();
 	}
 
@@ -50,13 +52,12 @@ public class ShowtimeTicketing {
 			
 			// save available seats found
 			setSeatsStatus(foundRows);
-			for (Row row : seatsStatus) {
-				for (int r = 0; r < row.getSeats(); r++)
-					row.setStatus(r, SeatStatus.LIBERO);
+			if (!seatsStatus.isEmpty()) {
+				for (Row row : seatsStatus) {
+					for (int r = 0; r < row.getSeats(); r++)
+						row.setStatus(r, SeatStatus.LIBERO);
+				}
 			}
-			
-			for (int s = 0; s < specialSeatsStatus.length; s++)
-				specialSeatsStatus[s] = SeatStatus.LIBERO;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,9 +71,11 @@ public class ShowtimeTicketing {
 	 */
 	private int maxSeatsPerRow(LinkedList<Row> rows) {
 		int max = 0;
-		for (Row row : rows) {
-			if (row.getSeats() > max)
-				max = row.getSeats();
+		if (!rows.isEmpty()) {
+			for (Row row : rows) {
+				if (row.getSeats() > max)
+					max = row.getSeats();
+			}
 		}
 		return max;
 	}
@@ -94,9 +97,11 @@ public class ShowtimeTicketing {
 	}
 	
 	public Row getSeatsRow(int number) {
-		for (Row row : seatsStatus) {
-			if (row.getNumber() == number)
-				return row;
+		if (!seatsStatus.isEmpty()) {
+			for (Row row : seatsStatus) {
+				if (row.getNumber() == number)
+					return row;
+			}
 		}
 		return null;
 	}
@@ -116,10 +121,12 @@ public class ShowtimeTicketing {
 	 * @param status - stato da settare
 	 */
 	public void setSeat(int row, int seat, SeatStatus status) {
-		for (Row r : seatsStatus) {
-			if (r.getNumber() == row && seat < r.getSeats()) {
-				r.setStatus(seat, status);
-				return;
+		if (!seatsStatus.isEmpty()) {
+			for (Row r : seatsStatus) {
+				if (r.getNumber() == row && seat < r.getSeats()) {
+					r.setStatus(seat, status);
+					return;
+				}
 			}
 		}
 		System.out.println("Errore: Posto non trovato");
@@ -139,15 +146,19 @@ public class ShowtimeTicketing {
 	 */
 	public int getAuditors() {
 		int auditors = 0;
-		for (Row row : seatsStatus) {
-			for (int i = 0; i < row.getStatus().length; i++) {
-				if (row.getStatus()[i].equals(SeatStatus.OCCUPATO))
-					auditors++;
+		if (!seatsStatus.isEmpty()) {
+			for (Row row : seatsStatus) {
+				for (int i = 0; i < row.getStatus().length; i++) {
+					if (row.getStatus()[i].equals(SeatStatus.OCCUPATO))
+						auditors++;
+				}
 			}
 		}
-		for (int j = 0; j < specialSeatsStatus.length; j++) {
-			if (specialSeatsStatus[j].equals(SeatStatus.OCCUPATO))
-				auditors++;
+		if (specialSeatsStatus.length > 0) {
+			for (int j = 0; j < specialSeatsStatus.length; j++) {
+				if (specialSeatsStatus[j].equals(SeatStatus.OCCUPATO))
+					auditors++;
+			}
 		}
 		return auditors;
 	}
@@ -162,20 +173,24 @@ public class ShowtimeTicketing {
 		showTickets.appendChild(document.createElement("Showtime")).setTextContent(Long.toString(show.getId()));
 		
 		Element rowList = document.createElement("RowList");
-		for (Row row : seatsStatus) {
-			Element rowElement = document.createElement("Row");
-			rowElement.setAttribute("number", Integer.toString(row.getNumber()));
-			rowElement.setAttribute("seats", Integer.toString(row.getSeats()));
-			for (int i = 0; i < row.getSeats(); i++)
-				rowElement.appendChild(document.createElement("Seat")).setTextContent(row.getStatus()[i].toString());
-			
-			rowList.appendChild(rowElement);
+		if (!seatsStatus.isEmpty()) {
+			for (Row row : seatsStatus) {
+				Element rowElement = document.createElement("Row");
+				rowElement.setAttribute("number", Integer.toString(row.getNumber()));
+				rowElement.setAttribute("seats", Integer.toString(row.getSeats()));
+				for (int i = 0; i < row.getSeats(); i++)
+					rowElement.appendChild(document.createElement("Seat")).setTextContent(row.getStatus()[i].toString());
+
+				rowList.appendChild(rowElement);
+			}
 		}
 		showTickets.appendChild(rowList);
 		
 		Element specialSeats = document.createElement("SpecialList");
-		for (int i = 0; i < specialSeatsStatus.length; i++)
-			specialSeats.appendChild(document.createElement("SpecialSeat")).setTextContent(specialSeatsStatus[i].toString());
+		if (specialSeatsStatus.length > 0) {
+			for (int i = 0; i < specialSeatsStatus.length; i++)
+				specialSeats.appendChild(document.createElement("SpecialSeat")).setTextContent(specialSeatsStatus[i].toString());
+		}
 		showTickets.appendChild(specialSeats);
 		
 		return showTickets;
