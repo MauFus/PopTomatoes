@@ -24,6 +24,7 @@ public class ShowtimeTicketing {
 	private Showtime show;
 	private LinkedList<Row> seatsStatus;
 	private int seatsValue[][];
+	private SeatStatus[] specialSeatsStatus;
 	
 	public ShowtimeTicketing() {
 		
@@ -31,8 +32,9 @@ public class ShowtimeTicketing {
 	
 	public ShowtimeTicketing(Showtime showtime) {
 		show = showtime;
-		findAvailableSeats();
 		seatsValue = new int[show.getHall().getnRows()][maxSeatsPerRow(seatsStatus)];
+		specialSeatsStatus = new SeatStatus[show.getHall().getSpecialSeats()];
+		findAvailableSeats();
 	}
 
 	/**
@@ -52,6 +54,9 @@ public class ShowtimeTicketing {
 				for (int r = 0; r < row.getSeats(); r++)
 					row.setStatus(r, SeatStatus.LIBERO);
 			}
+			
+			for (int s = 0; s < specialSeatsStatus.length; s++)
+				specialSeatsStatus[s] = SeatStatus.LIBERO;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,6 +101,14 @@ public class ShowtimeTicketing {
 		return null;
 	}
 	
+	public SeatStatus[] getSpecialSeatsStatus() {
+		return specialSeatsStatus;
+	}
+
+	public void setSpecialSeatsStatus(int specialSeat, SeatStatus status) {
+		this.specialSeatsStatus[specialSeat] = status;
+	}
+
 	/**
 	 * setta lo stato di un posto particolare
 	 * @param row - fila
@@ -119,6 +132,25 @@ public class ShowtimeTicketing {
 	public void setSeatValue(int row, int seat, int value) {
 		seatsValue[row][seat] = value;
 	}
+	
+	/**
+	 * Calculate the number of occupied seats
+	 * @return that number
+	 */
+	public int getAuditors() {
+		int auditors = 0;
+		for (Row row : seatsStatus) {
+			for (int i = 0; i < row.getStatus().length; i++) {
+				if (row.getStatus()[i].equals(SeatStatus.OCCUPATO))
+					auditors++;
+			}
+		}
+		for (int j = 0; j < specialSeatsStatus.length; j++) {
+			if (specialSeatsStatus[j].equals(SeatStatus.OCCUPATO))
+				auditors++;
+		}
+		return auditors;
+	}
 
 	/**
 	 * Crea un elemento DOM dell'oggetto, per essere inserito in un file XML
@@ -141,21 +173,11 @@ public class ShowtimeTicketing {
 		}
 		showTickets.appendChild(rowList);
 		
+		Element specialSeats = document.createElement("SpecialList");
+		for (int i = 0; i < specialSeatsStatus.length; i++)
+			specialSeats.appendChild(document.createElement("SpecialSeat")).setTextContent(specialSeatsStatus[i].toString());
+		showTickets.appendChild(specialSeats);
+		
 		return showTickets;
-	}
-	
-	/**
-	 * Calculate the number of occupied seats
-	 * @return that number
-	 */
-	public int getAuditors() {
-		int auditors = 0;
-		for (Row row : seatsStatus) {
-			for (int i = 0; i < row.getStatus().length; i++) {
-				if (row.getStatus()[i].equals(SeatStatus.OCCUPATO))
-					auditors++;
-			}
-		}
-		return auditors;
 	}
 }

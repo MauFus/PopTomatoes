@@ -34,4 +34,11 @@ public interface SeatsAllocator extends Remote {
 	 */
 	public void sellSeat(Showtime show, Seat[] seats) throws RemoteException;
 
+	/**
+	 * registra la vendita di un posto riservato a portatori di handicap
+	 * @param show
+	 * @param seats
+	 */
+	public void sellSpecialSeat(Showtime show, int seat) throws RemoteException;
+
 }

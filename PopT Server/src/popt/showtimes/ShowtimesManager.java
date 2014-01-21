@@ -193,6 +193,12 @@ public class ShowtimesManager {
 						}
 						ticketing.getSeatsStatus().add(newRow);
 					}
+					
+					NodeList specials = ((Element)temp.item(j)).getElementsByTagName("SpecialList");
+					SeatStatus[] specialStatus = new SeatStatus[ticketing.getShow().getHall().getSpecialSeats()];
+					for (int s = 0; s < specialStatus.length; s++)
+						ticketing.setSpecialSeatsStatus(s, SeatStatus.valueOf(((Element)specials.item(s)).getTextContent()));
+					
 					ticketSelling.add(ticketing);
 				} catch (Exception e) {
 					e.printStackTrace();
