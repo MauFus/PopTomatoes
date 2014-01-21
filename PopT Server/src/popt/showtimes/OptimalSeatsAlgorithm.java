@@ -29,6 +29,7 @@ public class OptimalSeatsAlgorithm {
 		int[][] seatMatrix = valueMatrix;
 		float[] rowValue = calcAvgValue(seatMatrix);
 		int counter = target;
+		int requestedSolutions = 2;
 		LinkedList<Seat> solution = new LinkedList<>();
 		
 		/* 
@@ -83,6 +84,7 @@ public class OptimalSeatsAlgorithm {
 					}
 					
 					if (counter == 0) {
+						requestedSolutions--;
 						for (Integer seat : tempSolution)
 							solution.add(new Seat(bestRow +1, seat + 1));
 						break;
@@ -91,6 +93,10 @@ public class OptimalSeatsAlgorithm {
 						counter = target;
 					}
 				}
+				
+				if (requestedSolutions == 0)
+					// Se sono già state trovate 2 soluzioni, finisce
+					break;
 				
 			} else
 				// se non esiste una file con posti disponibili si esce dal Main Loop

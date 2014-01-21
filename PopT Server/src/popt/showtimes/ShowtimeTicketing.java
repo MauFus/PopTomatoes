@@ -110,6 +110,11 @@ public class ShowtimeTicketing {
 		return specialSeatsStatus;
 	}
 
+	/**
+	 * Setta lo stato di uno dei posti speciali
+	 * @param specialSeat - indice del posto nel vettore (Numero Posto -1)
+	 * @param status - stato LIBERO o OCCUPATO
+	 */
 	public void setSpecialSeatsStatus(int specialSeat, SeatStatus status) {
 		this.specialSeatsStatus[specialSeat] = status;
 	}
@@ -117,7 +122,7 @@ public class ShowtimeTicketing {
 	/**
 	 * setta lo stato di un posto particolare
 	 * @param row - fila
-	 * @param seat - posto
+	 * @param seat - posto (indice all'interno del vettore = Numero di Posto -1)
 	 * @param status - stato da settare
 	 */
 	public void setSeat(int row, int seat, SeatStatus status) {

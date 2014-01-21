@@ -41,13 +41,13 @@ public class SeatsAllocatorImpl extends UnicastRemoteObject implements SeatsAllo
 	@Override
 	public void sellSeat(Showtime show, Seat[] seats) throws RemoteException {
 		for (Seat s : seats) {
-			manager.getTicketSelling(show).setSeat(s.getRow(), s.getSeat()-1, SeatStatus.OCCUPATO);
+			manager.getTicketSelling(show).setSeat(s.getRow(), s.getSeat() - 1, SeatStatus.OCCUPATO);
 		}
 	}
 
 	@Override
 	public void sellSpecialSeat(Showtime show, int seat) throws RemoteException {
 		if (seat < show.getHall().getSpecialSeats()+1)
-			manager.getTicketSelling(show).setSpecialSeatsStatus(seat, SeatStatus.OCCUPATO);
+			manager.getTicketSelling(show).setSpecialSeatsStatus(seat - 1, SeatStatus.OCCUPATO);
 	}
 }
