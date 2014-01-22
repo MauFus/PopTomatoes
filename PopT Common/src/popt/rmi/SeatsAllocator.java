@@ -11,7 +11,9 @@ package popt.rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.LinkedList;
 
+import popt.data.Row;
 import popt.data.Seat;
 import popt.data.Showtime;
 
@@ -28,17 +30,31 @@ public interface SeatsAllocator extends Remote {
 	public Seat[] searchAvailableSeats(Showtime show, int qta) throws RemoteException;
 	
 	/**
-	 * registra la vendita di una serie di posto
+	 * Registra la vendita di una serie di posto
 	 * @param show
 	 * @param seats
 	 */
 	public void sellSeat(Showtime show, Seat[] seats) throws RemoteException;
 
 	/**
-	 * registra la vendita di un posto riservato a portatori di handicap
+	 * Registra la vendita di un posto riservato a portatori di handicap
 	 * @param show
 	 * @param seats
 	 */
 	public void sellSpecialSeat(Showtime show, int seat) throws RemoteException;
 
+	/**
+	 * Richiede la lista delle proiezioni di cui è aperta la vendita dei biglietti
+	 * @return una lista di oggetti SHowtime
+	 * @throws RemoteException
+	 */
+	public LinkedList<Showtime> getComingShowtimesList() throws RemoteException;
+	
+	/**
+	 * Richiede lo stato della vendita dei biglietti per una data proiezione
+	 * @param showtime - La proiezione in questione
+	 * @return una lista di Row, che rappresentano lo stato della vendita per tutti i posti della sala
+	 * @throws RemoteException
+	 */
+	public LinkedList<Row> getTicketingStatus(Showtime showtime) throws RemoteException;
 }

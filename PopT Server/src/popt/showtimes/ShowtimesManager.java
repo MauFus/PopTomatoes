@@ -134,7 +134,7 @@ public class ShowtimesManager {
 	 * la cui vendita dei biglietti è attivata
 	 * @return true se l'operazione ha successo, false altrimenti
 	 */
-	private boolean saveTicketingList() {
+	public boolean saveTicketingList() {
 		try {
 			// create a new xml document
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -236,5 +236,12 @@ public class ShowtimesManager {
 			}
 		}
 		return selected;
+	}
+
+	/**
+	 * @return the comingShowtimes
+	 */
+	public LinkedList<Showtime> getComingShowtimes() {
+		return comingShowtimes;
 	}
 }

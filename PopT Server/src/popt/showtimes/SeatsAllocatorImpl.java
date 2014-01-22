@@ -13,6 +13,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.LinkedList;
 
+import popt.data.Row;
 import popt.data.Seat;
 import popt.data.SeatStatus;
 import popt.data.Showtime;
@@ -43,11 +44,24 @@ public class SeatsAllocatorImpl extends UnicastRemoteObject implements SeatsAllo
 		for (Seat s : seats) {
 			manager.getTicketSelling(show).setSeat(s.getRow(), s.getSeat() - 1, SeatStatus.OCCUPATO);
 		}
+		manager.saveTicketingList();
 	}
 
 	@Override
 	public void sellSpecialSeat(Showtime show, int seat) throws RemoteException {
 		if (seat < show.getHall().getSpecialSeats()+1)
 			manager.getTicketSelling(show).setSpecialSeatsStatus(seat - 1, SeatStatus.OCCUPATO);
+		manager.saveTicketingList();
+	}
+
+	@Override
+	public LinkedList<Showtime> getComingShowtimesList() throws RemoteException {
+		return manager.getComingShowtimes();
+	}
+
+	@Override
+	public LinkedList<Row> getTicketingStatus(Showtime showtime)
+			throws RemoteException {
+		return manager.getTicketSelling(showtime).getSellingStatus();
 	}
 }
