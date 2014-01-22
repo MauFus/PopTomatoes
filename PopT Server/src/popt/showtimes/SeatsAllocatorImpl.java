@@ -31,7 +31,7 @@ public class SeatsAllocatorImpl extends UnicastRemoteObject implements SeatsAllo
 	@Override
 	public Seat[] searchAvailableSeats(Showtime show, int qta) throws RemoteException{
 		
-		LinkedList<Seat> result = OptimalSeatsAlgorithm.execute(manager.getTicketSelling(show).getSeatsValue(), qta);
+		LinkedList<Seat> result = OptimalSeatsAlgorithm.execute(manager.getTicketSelling(show).getValueMatrix(), qta);
 		Seat[] seatList = new Seat[result.size()];
 		for (int i = 0; i < result.size(); i++)
 			seatList[i] = result.get(i);

@@ -201,7 +201,7 @@ public class ShowtimesManager {
 						for (int s = 0; s < seats.getLength(); s++) {
 							newRow.setStatus(s, SeatStatus.valueOf(((Element)seats.item(s)).getTextContent()));
 						}
-						ticketing.getSeatsStatus().add(newRow);
+						ticketing.getSellingStatus().add(newRow);
 					}
 					
 					NodeList specials = ((Element)temp.item(j)).getElementsByTagName("SpecialList");
