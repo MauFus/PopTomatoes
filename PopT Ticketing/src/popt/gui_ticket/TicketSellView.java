@@ -5,18 +5,26 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.SwingConstants;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+
 import javax.swing.JComboBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.text.StyleConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 public class TicketSellView extends JPanel {
 
@@ -27,6 +35,7 @@ public class TicketSellView extends JPanel {
 
 	private JPanel ticketSellContainer;
 	private JTextField editNumberOfTickets;
+	private SeatRect aSeat;
 	
 	/**
 	 * Create the panel.
@@ -53,7 +62,7 @@ public class TicketSellView extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
 						.addGroup(Alignment.CENTER, groupLayout.createSequentialGroup()
 							.addGap(10)
-							.addComponent(ticketSellContainer, GroupLayout.PREFERRED_SIZE, 990, GroupLayout.PREFERRED_SIZE)
+							.addComponent(ticketSellContainer, GroupLayout.PREFERRED_SIZE, 1000, GroupLayout.PREFERRED_SIZE)
 							.addGap(10))
 						.addComponent(txtPnTicketSell))
 					.addGap(0))
@@ -122,8 +131,6 @@ public class TicketSellView extends JPanel {
 		manualButt.setFont(new Font("Calibri", Font.PLAIN, 18));
 		manualButt.setBackground(new Color(0,150,0));
 		
-		
-		
 		GroupLayout gl_searchPanel = new GroupLayout(searchPanel);
 		gl_searchPanel.setHorizontalGroup(
 			gl_searchPanel.createParallelGroup(Alignment.LEADING)
@@ -168,11 +175,111 @@ public class TicketSellView extends JPanel {
 		JPanel hallPanel = new JPanel();
 		hallPanel.setBackground(new Color(159,182,205));
 		GridBagConstraints gbc_hallPanel = new GridBagConstraints();
+		gbc_hallPanel.fill = GridBagConstraints.VERTICAL;
+		gbc_hallPanel.anchor = GridBagConstraints.WEST;
 		gbc_hallPanel.insets = new Insets(0, 0, 0, 5);
-		gbc_hallPanel.fill = GridBagConstraints.BOTH;
 		gbc_hallPanel.gridx = 1;
 		gbc_hallPanel.gridy = 0;
+		
 		ticketSellContainer.add(hallPanel, gbc_hallPanel);
+		
+		JPanel headerPanel = new JPanel();
+		headerPanel.setBackground(new Color(159,182,205));
+		
+		JPanel HallViewer = new JPanel();
+		HallViewer.setBackground(Color.LIGHT_GRAY);
+		
+		GroupLayout gl_hallPanel = new GroupLayout(hallPanel);
+		gl_hallPanel.setHorizontalGroup(
+			gl_hallPanel.createParallelGroup(Alignment.LEADING)
+				.addComponent(headerPanel, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+				.addComponent(HallViewer, GroupLayout.PREFERRED_SIZE, 595, Short.MAX_VALUE)
+		);
+		gl_hallPanel.setVerticalGroup(
+			gl_hallPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_hallPanel.createSequentialGroup()
+					.addComponent(headerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(HallViewer, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+		);
+		GridBagLayout gbl_HallViewer = new GridBagLayout();
+		gbl_HallViewer.columnWidths = new int[]{30, 570};
+		gbl_HallViewer.rowHeights = new int[]{22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22};
+		gbl_HallViewer.columnWeights = new double[]{0.0, 0.0};
+		gbl_HallViewer.rowWeights = new double[]{0.0};
+		HallViewer.setLayout(gbl_HallViewer);
+		
+		for (int i = 0; i < 20; i++) {
+		JTextPane txtpnRowNumber = new JTextPane();
+		//txtpnRowNumber.setBorder(null);
+		txtpnRowNumber.setBackground(new Color(100+5*i,0,0));
+		GridBagConstraints gbc_txtpnRowNumber = new GridBagConstraints();
+		gbc_txtpnRowNumber.insets = new Insets(0, 0, 0, 0);
+		gbc_txtpnRowNumber.fill = GridBagConstraints.BOTH;
+		gbc_txtpnRowNumber.gridx = 0;
+		gbc_txtpnRowNumber.gridy = i;
+		HallViewer.add(txtpnRowNumber, gbc_txtpnRowNumber);
+		}
+		
+		for (int i = 0; i < 20; i++) {
+			RowPanel panel = new RowPanel();
+			for(int j = 0; j < 20; j++)
+			{
+				SeatRect sr = new SeatRect();
+				panel.add(sr);
+			}
+			//panel.setBorder(null);
+			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+			flowLayout.setVgap(0);
+			flowLayout.setHgap(0);
+			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.fill = GridBagConstraints.BOTH;
+			gbc_panel.gridx = 1;
+			gbc_panel.gridy = i;
+			HallViewer.add(panel, gbc_panel);
+		}
+		
+		headerPanel.setLayout(new GridLayout(2, 1, 0, 0));
+		
+		JLabel textHeader = new JLabel("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", SwingConstants.CENTER);
+		textHeader.setFont(new Font("Calibri", Font.PLAIN, 15));
+		textHeader.setBorder(null);
+		headerPanel.add(textHeader);
+		
+		JPanel screenPanel = new JPanel();
+		screenPanel.setBackground(Color.DARK_GRAY);
+		headerPanel.add(screenPanel);
+		GridBagLayout gbl_screenPanel = new GridBagLayout();
+		gbl_screenPanel.columnWidths = new int[]{30, 570, 0};
+		gbl_screenPanel.rowHeights = new int[]{40, 0};
+		gbl_screenPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_screenPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		screenPanel.setLayout(gbl_screenPanel);
+		
+		JPanel panel = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel.getLayout();
+		flowLayout_1.setVgap(0);
+		flowLayout_1.setHgap(0);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 0, 0);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 0;
+		screenPanel.add(panel, gbc_panel);
+		
+		JPanel panel_1 = new JPanel();
+		SeatRect screen = new SeatRect();
+		screen.setPreferredSize(new Dimension(300, 30));
+		panel_1.add(screen);
+		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+		flowLayout.setVgap(10);
+		flowLayout.setHgap(0);
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 1;
+		gbc_panel_1.gridy = 0;
+		screenPanel.add(panel_1, gbc_panel_1);
+		
+		hallPanel.setLayout(gl_hallPanel);
 		
 		JPanel acceptPanel = new JPanel();
 		acceptPanel.setBackground(new Color(159,182,205));
@@ -213,7 +320,8 @@ public class TicketSellView extends JPanel {
 					.addComponent(cancelButt, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(txtpnErrors, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(138, Short.MAX_VALUE))
+					.addGap(18)
+						)
 		);
 		acceptPanel.setLayout(gl_acceptPanel);
 		setLayout(groupLayout);
