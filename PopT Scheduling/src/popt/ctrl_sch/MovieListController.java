@@ -189,16 +189,13 @@ public class MovieListController {
 			public void actionPerformed(ActionEvent e) {
 				String ID = null;
 				
-				/*for (int k = 0;	k < searchDialog.getPnQueryResults().getComponentCount(); k++) {
+				for (int k = 0;	k < searchDialog.getPnQueryResults().getComponentCount(); k++) {
 					if (((JRadioButton) searchDialog.getPnQueryResults().getComponent(k)).isSelected()) {
 						ID = ((JRadioButton) searchDialog.getPnQueryResults().getComponent(k)).getText().split(":")[1].trim();
 						break;
 					}
-				}*/
+				}
 				
-				if (searchDialog.getRadioGroup().isSelected(searchDialog.getRadioGroup().getSelection()))
-					ID = searchDialog.getRadioGroup().getSelection().toString().split(":")[1].trim();
-
 				if (ID != null && model.getSearchList() != null) {
 					Movie selected = null;
 					for (Movie m : model.getSearchList()) {
