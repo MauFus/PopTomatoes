@@ -15,6 +15,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -50,6 +52,8 @@ public class ShowtimesManager {
 	
 	/**
 	 * Crea la lista degli spettacoli dei 3 giorni successivi
+	 * ed invoca l'aggiornamento delle tabelle di vendita dei biglietti
+	 * per i singoli spettacoli
 	 */
 	private void updateComingShowtimes() {
 		MySQLAccess dba = new MySQLAccess();
@@ -75,6 +79,17 @@ public class ShowtimesManager {
 		
 		// update ticketSelling w/ new showtimes
 		updateSellingList();
+		
+		// Delay corrisponde al tempo mancante alle ore 3:00 del giorno successivo
+		long delay = 86400000 - (today.getTime() % 86400000) + 1080000;
+		// Rischedula l'update per il giorno successivo alla 3:00
+		new Timer().schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				updateComingShowtimes();
+			}
+		}, delay);
 	}
 	
 	/**
@@ -82,38 +97,46 @@ public class ShowtimesManager {
 	 */
 	public void updateSellingList() {
 		// Crea, se necessario, le liste dei posti venduti per ogni proiezione
-		for (Showtime show : comingShowtimes) {
-			boolean isShowtimeAlreadyProcessed = false;
-			for (ShowtimeTicketing ticketing : ticketSelling) {
-				if (show.equals(ticketing.getShow())) {
-					isShowtimeAlreadyProcessed = true;
-					break;
+		if (!comingShowtimes.isEmpty()) {
+			for (Showtime show : comingShowtimes) {
+				boolean isShowtimeAlreadyProcessed = false;
+				if (!ticketSelling.isEmpty()) {
+					for (ShowtimeTicketing ticketing : ticketSelling) {
+						if (show.equals(ticketing.getShow())) {
+							isShowtimeAlreadyProcessed = true;
+							break;
+						}
+					}
 				}
+				// if not already processed, create a ShowtimeTicketing object for the new Showtime
+				if (!isShowtimeAlreadyProcessed)
+					ticketSelling.add(new ShowtimeTicketing(show));
 			}
-			// if not already processed, create a ShowtimeTicketing object for the new Showtime
-			if (!isShowtimeAlreadyProcessed)
-				ticketSelling.add(new ShowtimeTicketing(show));
 		}
 		
 		// Elimina le liste non più necessarie
-		for (ShowtimeTicketing iterator : ticketSelling) {
-			boolean isComingShow = false;
-			for (Showtime show : comingShowtimes) {
-				if (show.equals(iterator.getShow())) {
-					isComingShow = true;
-					break;
+		if (!ticketSelling.isEmpty()) {
+			for (ShowtimeTicketing iterator : ticketSelling) {
+				boolean isComingShow = false;
+				if (!comingShowtimes.isEmpty()) {
+					for (Showtime show : comingShowtimes) {
+						if (show.equals(iterator.getShow())) {
+							isComingShow = true;
+							break;
+						}
+					}
 				}
-			}
-			if (!isComingShow) {
-				MySQLAccess dba = new MySQLAccess();
-				try {
-					dba.readDB();
-					dba.updateShowtimeAuditors(iterator.getShow().getId(), iterator.getAuditors());
-					dba.closeDB();
-				} catch (Exception e) {
-					e.printStackTrace();
+				if (!isComingShow) {
+					MySQLAccess dba = new MySQLAccess();
+					try {
+						dba.readDB();
+						dba.updateShowtimeAuditors(iterator.getShow().getId(), iterator.getAuditors());
+						dba.closeDB();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					ticketSelling.remove(iterator);
 				}
-				ticketSelling.remove(iterator);
 			}
 		}
 		
@@ -126,7 +149,7 @@ public class ShowtimesManager {
 	 * la cui vendita dei biglietti è attivata
 	 * @return true se l'operazione ha successo, false altrimenti
 	 */
-	private boolean saveTicketingList() {
+	public boolean saveTicketingList() {
 		try {
 			// create a new xml document
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -136,8 +159,10 @@ public class ShowtimesManager {
 			Document document = db.newDocument();
 			Element radix = document.createElement("Ticketing");
 			
-			for (ShowtimeTicketing show : ticketSelling) {
-				radix.appendChild(show.getXMLform(document));
+			if (!ticketSelling.isEmpty()) {
+				for (ShowtimeTicketing show : ticketSelling) {
+					radix.appendChild(show.getXMLform(document));
+				}
 			}
 			document.appendChild(radix);
 			
@@ -191,8 +216,14 @@ public class ShowtimesManager {
 						for (int s = 0; s < seats.getLength(); s++) {
 							newRow.setStatus(s, SeatStatus.valueOf(((Element)seats.item(s)).getTextContent()));
 						}
-						ticketing.getSeatsStatus().add(newRow);
+						ticketing.getSellingStatus().add(newRow);
 					}
+					
+					NodeList specials = ((Element)temp.item(j)).getElementsByTagName("SpecialList");
+					SeatStatus[] specialStatus = new SeatStatus[ticketing.getShow().getHall().getSpecialSeats()];
+					for (int s = 0; s < specialStatus.length; s++)
+						ticketing.setSpecialSeatsStatus(s, SeatStatus.valueOf(((Element)specials.item(s)).getTextContent()));
+					
 					ticketSelling.add(ticketing);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -213,10 +244,19 @@ public class ShowtimesManager {
 	 */
 	public ShowtimeTicketing getTicketSelling(Showtime show) {
 		ShowtimeTicketing selected = null;
-		for (ShowtimeTicketing st : ticketSelling) {
-			if (st.getShow().equals(show));
+		if (!ticketSelling.isEmpty()) {
+			for (ShowtimeTicketing st : ticketSelling) {
+				if (st.getShow().equals(show));
 				selected = st;
+			}
 		}
 		return selected;
+	}
+
+	/**
+	 * @return the comingShowtimes
+	 */
+	public LinkedList<Showtime> getComingShowtimes() {
+		return comingShowtimes;
 	}
 }

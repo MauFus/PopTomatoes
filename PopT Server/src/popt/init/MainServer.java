@@ -10,7 +10,6 @@
 package popt.init;
 
 import popt.dbaccess.XMLInitialConfig;
-import popt.showtimes.ShowtimesManager;
 
 public class MainServer {
 
@@ -20,8 +19,6 @@ public class MainServer {
 			XMLInitialConfig.readInitialConfig();
 			// Start RMI services
 			RmiStarter.start();
-			// Create a new instance of Showtimes Manager 
-			new ShowtimesManager();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

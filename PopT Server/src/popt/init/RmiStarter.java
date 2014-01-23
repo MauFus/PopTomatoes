@@ -16,6 +16,9 @@ import java.rmi.registry.Registry;
 
 import popt.dbaccess.DBReceiverImpl;
 import popt.rmi.DBReceiver;
+import popt.rmi.SeatsAllocator;
+import popt.showtimes.SeatsAllocatorImpl;
+import popt.showtimes.ShowtimesManager;
 
 public class RmiStarter {
 
@@ -45,6 +48,7 @@ public class RmiStarter {
 			// Register services
 			Registry reg = LocateRegistry.createRegistry(1099);
 			reg.rebind(DBReceiver.SERVICE_NAME, new DBReceiverImpl());
+			reg.rebind(SeatsAllocator.SERVICE_NAME, new SeatsAllocatorImpl(new ShowtimesManager()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
