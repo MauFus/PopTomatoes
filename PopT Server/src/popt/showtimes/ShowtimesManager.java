@@ -15,6 +15,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -50,6 +52,8 @@ public class ShowtimesManager {
 	
 	/**
 	 * Crea la lista degli spettacoli dei 3 giorni successivi
+	 * ed invoca l'aggiornamento delle tabelle di vendita dei biglietti
+	 * per i singoli spettacoli
 	 */
 	private void updateComingShowtimes() {
 		MySQLAccess dba = new MySQLAccess();
@@ -75,6 +79,17 @@ public class ShowtimesManager {
 		
 		// update ticketSelling w/ new showtimes
 		updateSellingList();
+		
+		// Delay corrisponde al tempo mancante alle ore 3:00 del giorno successivo
+		long delay = 86400000 - (today.getTime() % 86400000) + 1080000;
+		// Rischedula l'update per il giorno successivo alla 3:00
+		new Timer().schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				updateComingShowtimes();
+			}
+		}, delay);
 	}
 	
 	/**
