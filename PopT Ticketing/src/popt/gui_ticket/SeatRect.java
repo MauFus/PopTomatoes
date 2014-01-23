@@ -34,15 +34,33 @@ public class SeatRect extends JPanel {
     /** The transparency value of shadow. ( 0 - 255) */
     protected int shadowAlpha = 150;
     
-    boolean clicked=false;
-    RectStatus status;
-	
+    boolean clicked = false;
+    boolean suggest = false;
+    boolean free = false;
+    RectStatus status = RectStatus.FREE;
 	
 	public SeatRect() {
 		super();
 		setPreferredSize(new Dimension(20, 20));
         setOpaque(false);
-        setBackground(new Color(150,150,150));
+        
+        switch (status) {
+		case FREE:
+			setBackground(new Color(200,200,200));
+			break;
+		case BUSY:
+			setBackground(new Color(100,100,100));
+			break;
+		case CHECKED:
+			setBackground(new Color(0,200,0));
+			break;
+		case SUGGESTED:
+			setBackground(new Color(200,240,0));
+			break;
+		default:
+			break;
+		}
+        
         addMouseListener(new MouseListener() {
 			
 			@Override
@@ -59,26 +77,81 @@ public class SeatRect extends JPanel {
 			
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				if (clicked == true){
-					setBackground(new Color(0,200,0));
-					clicked = false;
+				switch (status) {
+				case FREE:
+					setBackground(new Color(200,200,200));
+					break;
+				case BUSY:
+					
+					break;
+				case CHECKED:
+					
+					break;
+				case SUGGESTED:
+					
+					break;
+				default:
+					break;
 				}
-				else
-				setBackground(new Color(150,150,150));
 				
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				setBackground(new Color(200,200,200));
-				
+				switch (status) {
+				case FREE:
+					setBackground(new Color(240,240,240));
+					break;
+				case BUSY:
+					
+					break;
+				case CHECKED:
+					
+					break;
+				case SUGGESTED:
+					
+					break;
+				default:
+					break;
+				}
 			}
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				setBackground(new Color(0,200,0));
-				clicked = true;
-				
+				clicked = !clicked;
+				if(free == false && clicked == true && status==RectStatus.FREE){
+				    status = RectStatus.CHECKED;
+					free = !free;
+					}
+				else if(free == true && clicked == false && status==RectStatus.CHECKED){
+					status = RectStatus.FREE;
+					free = !free;
+				}
+				else if(status==RectStatus.BUSY)
+					status = RectStatus.BUSY;
+				else if(suggest == false && clicked == true && status==RectStatus.SUGGESTED){
+					status = RectStatus.CHECKED;
+					suggest = !suggest;
+					}
+				else if(suggest == true && clicked == false && status==RectStatus.CHECKED){
+					status = RectStatus.SUGGESTED;
+					suggest = !suggest;
+					}
+				switch (status) {
+				case FREE:
+					setBackground(new Color(200,200,200));
+					break;
+				case BUSY:
+					break;
+				case CHECKED:
+					setBackground(new Color(0,200,0));
+					break;
+				case SUGGESTED:
+					setBackground(new Color(200,240,0));
+					break;
+				default:
+					break;
+				}
 			}
 		});
 	}
