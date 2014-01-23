@@ -129,4 +129,8 @@ public class SeatRect extends JPanel {
 		return status;
 	}
 
+	public void setStatus(RectStatus status) {
+		this.status = status;
+	}
+
 }
