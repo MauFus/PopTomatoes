@@ -20,8 +20,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import popt.data.Movie;
-
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
@@ -31,7 +29,7 @@ public class TicketSellView extends JPanel {
 
 	private JTextField editNumberOfTickets;
 	private JPanel HallViewer;
-	private JComboBox<Movie> titleBox;
+	private JComboBox<String> titleBox;
 	private JComboBox<String> dateBox;
 	private JButton searchButt;
 	private JButton manualButt;
@@ -100,7 +98,7 @@ public class TicketSellView extends JPanel {
 		txtpnMovieTitle.setBackground(new Color(159,182,205));
 		txtpnMovieTitle.setText("Movie Title:");
 		
-		titleBox = new JComboBox<Movie>();
+		titleBox = new JComboBox<String>();
 		titleBox.setFont(new Font("Calibri", Font.PLAIN, 15));
 		
 		JTextPane txtpnSelectYourShowtime = new JTextPane();
@@ -343,7 +341,7 @@ public class TicketSellView extends JPanel {
 	/**
 	 * @return the titleBox
 	 */
-	public JComboBox<Movie> getTitleBox() {
+	public JComboBox<String> getTitleBox() {
 		return titleBox;
 	}
 
