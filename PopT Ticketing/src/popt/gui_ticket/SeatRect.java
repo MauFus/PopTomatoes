@@ -11,6 +11,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import popt.model_ticket.RectStatus;
+
 public class SeatRect extends JPanel {
 
 	private static final long serialVersionUID = -8502100078749938385L;
@@ -33,6 +35,7 @@ public class SeatRect extends JPanel {
     protected int shadowAlpha = 150;
     
     boolean clicked=false;
+    RectStatus status;
 	
 	
 	public SeatRect() {
@@ -121,5 +124,9 @@ public class SeatRect extends JPanel {
         //Sets strokes to default, is better.
         graphics.setStroke(new BasicStroke());
     }
+
+	public RectStatus getStatus() {
+		return status;
+	}
 
 }
