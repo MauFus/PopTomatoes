@@ -200,40 +200,10 @@ public class TicketSellView extends JPanel {
 		);
 		GridBagLayout gbl_HallViewer = new GridBagLayout();
 		gbl_HallViewer.columnWidths = new int[]{30, 570};
-		gbl_HallViewer.rowHeights = new int[]{22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22};
+		gbl_HallViewer.rowHeights = new int[]{22};
 		gbl_HallViewer.columnWeights = new double[]{0.0, 0.0};
 		gbl_HallViewer.rowWeights = new double[]{0.0};
 		HallViewer.setLayout(gbl_HallViewer);
-		
-		for (int i = 0; i < 20; i++) {
-		JTextPane txtpnRowNumber = new JTextPane();
-		//txtpnRowNumber.setBorder(null);
-		txtpnRowNumber.setBackground(new Color(100+5*i,0,0));
-		GridBagConstraints gbc_txtpnRowNumber = new GridBagConstraints();
-		gbc_txtpnRowNumber.insets = new Insets(0, 0, 0, 0);
-		gbc_txtpnRowNumber.fill = GridBagConstraints.BOTH;
-		gbc_txtpnRowNumber.gridx = 0;
-		gbc_txtpnRowNumber.gridy = i;
-		HallViewer.add(txtpnRowNumber, gbc_txtpnRowNumber);
-		}
-		
-		for (int i = 0; i < 20; i++) {
-			RowPanel panel = new RowPanel();
-			for(int j = 0; j < 20; j++)
-			{
-				SeatRect sr = new SeatRect();
-				panel.add(sr);
-			}
-			//panel.setBorder(null);
-			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-			flowLayout.setVgap(0);
-			flowLayout.setHgap(0);
-			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.fill = GridBagConstraints.BOTH;
-			gbc_panel.gridx = 1;
-			gbc_panel.gridy = i;
-			HallViewer.add(panel, gbc_panel);
-		}
 		
 		headerPanel.setLayout(new GridLayout(2, 1, 0, 0));
 		

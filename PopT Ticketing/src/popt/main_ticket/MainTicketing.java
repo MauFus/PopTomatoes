@@ -19,6 +19,7 @@ import java.util.LinkedList;
 
 import popt.ctrl_ticket.TicketSellController;
 import popt.data.Row;
+import popt.data.Seat;
 import popt.data.Showtime;
 import popt.gui_ticket.MainView;
 import popt.model_ticket.TicketSellModel;
@@ -93,6 +94,15 @@ public class MainTicketing {
 	public static LinkedList<Row> getShowtimeTicketing(Showtime show) {
 		try {
 			return allocator.getTicketingStatus(show);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static Seat[] searchRaccomendedSeats(Showtime show, int number) {
+		try {
+			return allocator.searchAvailableSeats(show, number);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

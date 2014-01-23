@@ -4,21 +4,31 @@ import java.util.LinkedList;
 
 import popt.data.Movie;
 import popt.data.Row;
+import popt.data.Seat;
 import popt.data.Showtime;
 
 public class TicketSellModel {
 	
-	LinkedList<Showtime> comingShowtimes;
-	Showtime currentShowtime;
-	LinkedList<Row> rowList;
-	LinkedList<Movie> comingMovies;
-	int totSeats;
+	private LinkedList<Showtime> comingShowtimes;
+	private Showtime currentShowtime;
+	private LinkedList<Row> rowList;
+	private LinkedList<Movie> comingMovies;
+	private int totSeats;
+	
+	private int solutionIndex; // The active solution (0 = none)
+	private Seat[] solution1;
+	private Seat[] solution2;
+	private Seat[] solutionCustom;
 	
 	public TicketSellModel() {
 		comingShowtimes = new LinkedList<>();
 		currentShowtime = null;
 		rowList = new LinkedList<>();
 		totSeats = 0;
+		solutionIndex = 0;
+		solution1 = null;
+		solution2 = null;
+		solutionCustom = null;
 	}
 	
 	public LinkedList<Movie> findCurrentMovies() {
@@ -101,5 +111,61 @@ public class TicketSellModel {
 	 */
 	public void setTotSeats(int totSeats) {
 		this.totSeats = totSeats;
+	}
+
+	/**
+	 * @return the solutionIndex
+	 */
+	public int getSolutionIndex() {
+		return solutionIndex;
+	}
+
+	/**
+	 * @param solutionIndex the solutionIndex to set
+	 */
+	public void setSolutionIndex(int solutionIndex) {
+		this.solutionIndex = solutionIndex;
+	}
+
+	/**
+	 * @return the solution1
+	 */
+	public Seat[] getSolution1() {
+		return solution1;
+	}
+
+	/**
+	 * @param solution1 the solution1 to set
+	 */
+	public void setSolution1(Seat[] solution1) {
+		this.solution1 = solution1;
+	}
+
+	/**
+	 * @return the solution2
+	 */
+	public Seat[] getSolution2() {
+		return solution2;
+	}
+
+	/**
+	 * @param solution2 the solution2 to set
+	 */
+	public void setSolution2(Seat[] solution2) {
+		this.solution2 = solution2;
+	}
+
+	/**
+	 * @return the solutionCustom
+	 */
+	public Seat[] getSolutionCustom() {
+		return solutionCustom;
+	}
+
+	/**
+	 * @param solutionCustom the solutionCustom to set
+	 */
+	public void setSolutionCustom(Seat[] solutionCustom) {
+		this.solutionCustom = solutionCustom;
 	}
 }
