@@ -1,14 +1,14 @@
 package popt.ctrl_ticket;
 
-import popt.gui_ticket.MainView;
+import popt.gui_ticket.TicketSellView;
 import popt.model_ticket.TicketSellModel;
 
 public class TicketSellController {
 	
 	private TicketSellModel model;
-	private MainView view;
+	private TicketSellView view;
 
-	public TicketSellController(TicketSellModel model, MainView view) {
+	public TicketSellController(TicketSellModel model, TicketSellView view) {
 		this.model = model;
 		this.view = view;
 	}
@@ -23,7 +23,7 @@ public class TicketSellController {
 	/**
 	 * @return the view
 	 */
-	public MainView getView() {
+	public TicketSellView getView() {
 		return view;
 	}
 }

@@ -13,9 +13,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.LinkedList;
 
 import popt.ctrl_ticket.TicketSellController;
+import popt.data.Row;
+import popt.data.Showtime;
 import popt.gui_ticket.MainView;
 import popt.model_ticket.TicketSellModel;
 import popt.rmi.SeatsAllocator;
@@ -35,9 +39,12 @@ public class MainTicketing {
 		// Create the model
 		TicketSellModel model = new TicketSellModel();
 		// Create the controller
-		new TicketSellController(model, view);
+		new TicketSellController(model, view.getTicketSellView());
 	}
 
+	/**
+	 * Inizializza la connessione con il server tramite RMI
+	 */
 	private static void initRmiConnection() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(SERVER_IP));
@@ -64,5 +71,31 @@ public class MainTicketing {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Get the Showtime List through RMI
+	 * @return a LinkedList of Showtime objects
+	 */
+	public static LinkedList<Showtime> getCurrentShowtimeList() {
+		try {
+			return allocator.getComingShowtimesList();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
+	/**
+	 * Get the ticketing status of a showtime through RMI
+	 * @param show is the showtime
+	 * @return a LinkedList of Row objects
+	 */
+	public static LinkedList<Row> getShowtimeTicketing(Showtime show) {
+		try {
+			return allocator.getTicketingStatus(show);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
