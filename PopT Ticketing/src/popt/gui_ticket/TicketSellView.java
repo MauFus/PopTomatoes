@@ -19,23 +19,26 @@ import javax.swing.JComboBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.text.StyleConstants;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import popt.data.Movie;
+
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
 public class TicketSellView extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8373517673540077922L;
 
-	private JPanel ticketSellContainer;
 	private JTextField editNumberOfTickets;
-	private SeatRect aSeat;
+	private JPanel HallViewer;
+	private JComboBox<Movie> titleBox;
+	private JComboBox<String> dateBox;
+	private JButton searchButt;
+	private JButton manualButt;
+	private JLabel textHeader;
+	private JButton acceptButt;
+	private JButton cancelButt;
+	private JTextPane txtpnErrors;
 	
 	/**
 	 * Create the panel.
@@ -51,7 +54,7 @@ public class TicketSellView extends JPanel {
 		txtPnTicketSell.setBackground(Color.GRAY);
 		txtPnTicketSell.setFocusable(false);
 		
-		ticketSellContainer = new JPanel();
+		JPanel ticketSellContainer = new JPanel();
 		ticketSellContainer.setPreferredSize(new Dimension(1000, 550));
 		ticketSellContainer.setBackground(new Color(100,100,100));
 		
@@ -97,7 +100,7 @@ public class TicketSellView extends JPanel {
 		txtpnMovieTitle.setBackground(new Color(159,182,205));
 		txtpnMovieTitle.setText("Movie Title:");
 		
-		JComboBox titleBox = new JComboBox();
+		titleBox = new JComboBox<Movie>();
 		titleBox.setFont(new Font("Calibri", Font.PLAIN, 15));
 		
 		JTextPane txtpnSelectYourShowtime = new JTextPane();
@@ -106,7 +109,7 @@ public class TicketSellView extends JPanel {
 		txtpnSelectYourShowtime.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txtpnSelectYourShowtime.setBackground(new Color(159, 182, 205));
 		
-		JComboBox dateBox = new JComboBox();
+		dateBox = new JComboBox<String>();
 		dateBox.setFont(new Font("Calibri", Font.PLAIN, 15));
 		
 		JTextPane txtpnNumberOfTickets = new JTextPane();
@@ -119,15 +122,11 @@ public class TicketSellView extends JPanel {
 		editNumberOfTickets.setFont(new Font("Calibri", Font.PLAIN, 15));
 		editNumberOfTickets.setColumns(10);
 		
-		JButton searchButt = new JButton("Search!");
+		searchButt = new JButton("Search!");
 		searchButt.setFont(new Font("Calibri", Font.PLAIN, 33));
 		searchButt.setBackground(new Color(0,200,0));
-		searchButt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		
-		JButton manualButt = new JButton("Manual Selection");
+		manualButt = new JButton("Manual Selection");
 		manualButt.setFont(new Font("Calibri", Font.PLAIN, 18));
 		manualButt.setBackground(new Color(0,150,0));
 		
@@ -186,7 +185,7 @@ public class TicketSellView extends JPanel {
 		JPanel headerPanel = new JPanel();
 		headerPanel.setBackground(new Color(159,182,205));
 		
-		JPanel HallViewer = new JPanel();
+		HallViewer = new JPanel();
 		HallViewer.setBackground(Color.LIGHT_GRAY);
 		
 		GroupLayout gl_hallPanel = new GroupLayout(hallPanel);
@@ -240,7 +239,7 @@ public class TicketSellView extends JPanel {
 		
 		headerPanel.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel textHeader = new JLabel("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", SwingConstants.CENTER);
+		textHeader = new JLabel("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", SwingConstants.CENTER);
 		textHeader.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textHeader.setBorder(null);
 		headerPanel.add(textHeader);
@@ -289,15 +288,15 @@ public class TicketSellView extends JPanel {
 		gbc_acceptPanel.gridy = 0;
 		ticketSellContainer.add(acceptPanel, gbc_acceptPanel);
 		
-		JButton acceptButt = new JButton("Accept");
+		acceptButt = new JButton("Accept");
 		acceptButt.setFont(new Font("Calibri", Font.PLAIN, 15));
 		acceptButt.setBackground(new Color(0,200,0));
 		
-		JButton cancelButt = new JButton("Cancel");
+		cancelButt = new JButton("Cancel");
 		cancelButt.setFont(new Font("Calibri", Font.PLAIN, 15));
 		cancelButt.setBackground(Color.RED);
 		
-		JTextPane txtpnErrors = new JTextPane();
+		txtpnErrors = new JTextPane();
 		txtpnErrors.setEditable(false);
 		txtpnErrors.setBackground(new Color(179,202,225));
 		GroupLayout gl_acceptPanel = new GroupLayout(acceptPanel);
@@ -325,5 +324,75 @@ public class TicketSellView extends JPanel {
 		);
 		acceptPanel.setLayout(gl_acceptPanel);
 		setLayout(groupLayout);
+	}
+
+	/**
+	 * @return the editNumberOfTickets
+	 */
+	public JTextField getEditNumberOfTickets() {
+		return editNumberOfTickets;
+	}
+
+	/**
+	 * @return the hallViewer
+	 */
+	public JPanel getHallViewer() {
+		return HallViewer;
+	}
+
+	/**
+	 * @return the titleBox
+	 */
+	public JComboBox<Movie> getTitleBox() {
+		return titleBox;
+	}
+
+	/**
+	 * @return the dateBox
+	 */
+	public JComboBox<String> getDateBox() {
+		return dateBox;
+	}
+
+	/**
+	 * @return the searchButt
+	 */
+	public JButton getSearchButt() {
+		return searchButt;
+	}
+
+	/**
+	 * @return the manualButt
+	 */
+	public JButton getManualButt() {
+		return manualButt;
+	}
+
+	/**
+	 * @return the textHeader
+	 */
+	public JLabel getTextHeader() {
+		return textHeader;
+	}
+
+	/**
+	 * @return the acceptButt
+	 */
+	public JButton getAcceptButt() {
+		return acceptButt;
+	}
+
+	/**
+	 * @return the cancelButt
+	 */
+	public JButton getCancelButt() {
+		return cancelButt;
+	}
+
+	/**
+	 * @return the txtpnErrors
+	 */
+	public JTextPane getTxtpnErrors() {
+		return txtpnErrors;
 	}
 }
