@@ -176,7 +176,7 @@ public class MainView {
 		mainCard.setBackground(Color.BLACK);
 		
 		imv = new InsertMovieView();
-		imv.setBackground(Color.ORANGE);
+		imv.setBackground(new Color(100,100,100));
 		
 		mlv = new MovieListView();
 		mlv.setBackground(new Color(100,100,100));
