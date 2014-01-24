@@ -37,6 +37,7 @@ public class TicketSellView extends JPanel {
 	private JButton acceptButt;
 	private JButton cancelButt;
 	private JTextPane txtpnErrors;
+	private JTextField editSpecialSeats;
 	
 	/**
 	 * Create the panel.
@@ -128,6 +129,16 @@ public class TicketSellView extends JPanel {
 		manualButt.setFont(new Font("Calibri", Font.PLAIN, 18));
 		manualButt.setBackground(new Color(0,150,0));
 		
+		JTextPane txtpnSpecialSeats = new JTextPane();
+		txtpnSpecialSeats.setText("Special Seats:");
+		txtpnSpecialSeats.setFont(new Font("Calibri", Font.PLAIN, 15));
+		txtpnSpecialSeats.setEditable(false);
+		txtpnSpecialSeats.setBackground(new Color(159, 182, 205));
+		
+		editSpecialSeats = new JTextField();
+		editSpecialSeats.setFont(new Font("Calibri", Font.PLAIN, 15));
+		editSpecialSeats.setColumns(10);
+		
 		GroupLayout gl_searchPanel = new GroupLayout(searchPanel);
 		gl_searchPanel.setHorizontalGroup(
 			gl_searchPanel.createParallelGroup(Alignment.LEADING)
@@ -143,7 +154,11 @@ public class TicketSellView extends JPanel {
 							.addPreferredGap(ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
 							.addComponent(editNumberOfTickets, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
 						.addComponent(searchButt, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-						.addComponent(manualButt, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))
+						.addComponent(manualButt, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+						.addGroup(Alignment.TRAILING, gl_searchPanel.createSequentialGroup()
+							.addComponent(txtpnSpecialSeats, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+							.addComponent(editSpecialSeats, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_searchPanel.setVerticalGroup(
@@ -161,7 +176,11 @@ public class TicketSellView extends JPanel {
 					.addGroup(gl_searchPanel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(txtpnNumberOfTickets, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(editNumberOfTickets, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+					.addGap(18)
+					.addGroup(gl_searchPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(editSpecialSeats, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtpnSpecialSeats, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
 					.addComponent(searchButt, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(manualButt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
@@ -299,6 +318,13 @@ public class TicketSellView extends JPanel {
 	 */
 	public JTextField getEditNumberOfTickets() {
 		return editNumberOfTickets;
+	}
+
+	/**
+	 * @return the editSpecialSeats
+	 */
+	public JTextField getEditSpecialSeats() {
+		return editSpecialSeats;
 	}
 
 	/**
