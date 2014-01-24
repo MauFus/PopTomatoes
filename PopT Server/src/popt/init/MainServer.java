@@ -16,7 +16,7 @@ public class MainServer {
 	public static void main(String[] args) {
 		try {
 			// Read the initial configuration and save it in DataBase
-			XMLInitialConfig.readInitialConfig();
+			// XMLInitialConfig.readInitialConfig();
 			// Start RMI services
 			RmiStarter.start();
 			
