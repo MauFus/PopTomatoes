@@ -1,3 +1,12 @@
+/**
+ * PopTomatoes - Progetto Informatica III B
+ * 
+ * Controller del client di Ticketing
+ * 
+ * @author Fustinoni Mauro & Matteo Ronchi
+ * @date December 2013
+ */
+
 package popt.ctrl_ticket;
 
 import java.awt.Color;
@@ -26,6 +35,7 @@ import popt.gui_ticket.RowPanel;
 import popt.gui_ticket.SeatRect;
 import popt.gui_ticket.TicketSellView;
 import popt.main_ticket.MainTicketing;
+import popt.main_ticket.TicketPrinter;
 import popt.model_ticket.RectStatus;
 import popt.model_ticket.TicketSellModel;
 
@@ -197,11 +207,15 @@ public class TicketSellController {
 					case 1 :
 						MainTicketing.sellSeats(model.getCurrentShowtime(), model.getSolution1());
 						view.getTxtpnErrors().setText("Tickets sell!");
+						for (int j = 0; j < model.getSolution1().length; j++)
+							new TicketPrinter(model.getCurrentShowtime(), model.getSolution1()[j]).print();
 						resetInterface();
 						break;
 					case 2 :
 						MainTicketing.sellSeats(model.getCurrentShowtime(), model.getSolution2());
 						view.getTxtpnErrors().setText("Tickets sell!");
+						for (int j = 0; j < model.getSolution2().length; j++)
+							new TicketPrinter(model.getCurrentShowtime(), model.getSolution2()[j]).print();
 						resetInterface();
 						break;
 					case 3 :
@@ -211,6 +225,8 @@ public class TicketSellController {
 								solution[i] = model.getSolutionCustom().get(i);
 							MainTicketing.sellSeats(model.getCurrentShowtime(), solution);
 							view.getTxtpnErrors().setText("Tickets sell!");
+							for (int j = 0; j < solution.length; j++)
+								new TicketPrinter(model.getCurrentShowtime(), solution[j]).print();
 							resetInterface();
 						} else
 							view.getTxtpnErrors().setText("Error - No solution selected!");

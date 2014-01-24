@@ -1,7 +1,7 @@
 /**
  * PopTomatoes - Progetto Informatica III B
  * 
- * Classe Main per il Clinet di Ticketing
+ * Classe Main per il Client di Ticketing
  * 
  * @author Fustinoni Mauro & Matteo Ronchi
  * @date December 2013
