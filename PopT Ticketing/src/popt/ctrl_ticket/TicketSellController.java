@@ -93,7 +93,7 @@ public class TicketSellController {
 					}
 					view.getDateBox().setModel(new DefaultComboBoxModel<>(comboBoxList2));
 				} else {
-					model.setCurrentShowtime(null);;
+					model.setCurrentShowtime(new Showtime());
 					Vector<String> comboBoxList2 = new Vector<>();
 					comboBoxList2.add("Select a Showtime!");
 					view.getDateBox().setModel(new DefaultComboBoxModel<>(comboBoxList2));

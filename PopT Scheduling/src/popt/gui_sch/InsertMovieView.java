@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
@@ -46,8 +47,6 @@ public class InsertMovieView extends JPanel {
 		JPanel insertMoviePanel = new JPanel();
 		insertMoviePanel.setBackground(Color.ORANGE);
 		insertMoviePanel.setPreferredSize(new Dimension(1000,550));
-			DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
-			dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
 		
 		textPane = new JTextPane();
 		textPane.setText("Insert Movie");
@@ -145,6 +144,10 @@ public class InsertMovieView extends JPanel {
 		comboBoxGenre.setFont(new Font("Calibri", Font.PLAIN, 15));
 		comboBoxGenre.setBorder(null);
 		comboBoxGenre.setBackground(Color.WHITE);
+		DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
+		dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+		comboBoxGenre.setRenderer(dlcr);
+		comboBoxGenre.setModel(new DefaultComboBoxModel<Genre>(Genre.values()));
 		
 		buttonInsert = new JButton("Insert!");
 		buttonInsert.setForeground(Color.WHITE);

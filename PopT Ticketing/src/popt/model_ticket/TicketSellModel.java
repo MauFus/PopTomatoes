@@ -24,7 +24,7 @@ public class TicketSellModel {
 	
 	public TicketSellModel() {
 		comingShowtimes = new LinkedList<>();
-		currentShowtime = null;
+		currentShowtime = new Showtime();
 		rowList = new LinkedList<>();
 		totSeats = 0;
 		specialSeats = 0;
