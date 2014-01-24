@@ -74,7 +74,7 @@ public class InsertMovieView extends JPanel {
 			groupLayout.createParallelGroup(Alignment.CENTER)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-					.addGap(80)
+					.addGap(90)
 					.addComponent(insertMoviePanel, GroupLayout.PREFERRED_SIZE, 418, GroupLayout.PREFERRED_SIZE)
 					)
 		);

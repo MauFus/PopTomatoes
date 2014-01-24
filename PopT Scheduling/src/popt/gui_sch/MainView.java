@@ -25,12 +25,20 @@ import java.awt.event.WindowListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
+import java.awt.GridBagLayout;
 
 public class MainView {
 	static JFrame guiFrame;
 	CardLayout cards;
 	JPanel cardPanel;
+	JPanel mainCard;
+	MissingConnectionPanel mcp;
+	MainPanel mainPanel;
+	
+	JButton schedulingButt;
+	JButton movieListButt;
+	JButton insertMovieButt;
 	
 	// View per il modulo InsertMovie
 	InsertMovieView imv;
@@ -128,7 +136,8 @@ public class MainView {
 		tabsPanel.setBackground(new Color(100, 100, 100));
 
 		
-		JButton insertMovieButt = new JButton("Insert Movie");
+		insertMovieButt = new JButton("Insert Movie");
+		insertMovieButt.setFont(new Font("Calibri", Font.PLAIN, 15));
 		insertMovieButt.setBackground(Color.ORANGE);
 		insertMovieButt.setFocusable(false);
 		insertMovieButt.setBorderPainted(false);
@@ -141,7 +150,8 @@ public class MainView {
 			}
 		});
 		
-		JButton movieListButt = new JButton("Movie List");
+		movieListButt = new JButton("Movie List");
+		movieListButt.setFont(new Font("Calibri", Font.PLAIN, 15));
 		movieListButt.setBackground(Color.BLUE);
 		movieListButt.setFocusable(false);
 		movieListButt.setBorderPainted(false);
@@ -152,7 +162,8 @@ public class MainView {
 			}
 		});
 		
-		JButton schedulingButt = new JButton("Scheduling");
+		schedulingButt = new JButton("Scheduling");
+		schedulingButt.setFont(new Font("Calibri", Font.PLAIN, 15));
 		schedulingButt.setBackground(Color.GREEN);
 		schedulingButt.setFocusable(false);
 		schedulingButt.setBorderPainted(false);
@@ -172,8 +183,18 @@ public class MainView {
 		cardPanel.setLayout(cards);
 		cards.show(cardPanel, "Main");
 
-		JPanel mainCard = new JPanel();
+		mainCard = new JPanel();
 		mainCard.setBackground(Color.BLACK);
+		
+		mcp = new MissingConnectionPanel();
+		GridBagLayout gridBagLayout = (GridBagLayout) mcp.getLayout();
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0};
+		gridBagLayout.columnWidths = new int[]{0, 700, 0};
+		
+		mainPanel = new MainPanel();
+		GridBagLayout gridBagLayout2 = (GridBagLayout) mainPanel.getLayout();
+		gridBagLayout2.columnWeights = new double[]{0.0, 1.0, 0.0};
+		gridBagLayout2.columnWidths = new int[]{0, 700, 0};
 		
 		imv = new InsertMovieView();
 		imv.setBackground(new Color(100,100,100));
@@ -190,26 +211,47 @@ public class MainView {
 		cardPanel.add(schv,"SCH");
 
 		guiFrame.getContentPane().add(tabsPanel, BorderLayout.NORTH);
+		
+		JButton exitButt = new JButton("X");
+		exitButt.setFont(new Font("Calibri", Font.BOLD, 39));
+		exitButt.setFocusable(false);
+		exitButt.setBorderPainted(false);
+		exitButt.setBackground(Color.RED);
+		exitButt.setActionCommand("Switch Card");
+		exitButt.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guiFrame.setVisible(false);
+				guiFrame.dispose();
+				
+			}
+		});
+		
 		GroupLayout gl_tabsPanel = new GroupLayout(tabsPanel);
 		gl_tabsPanel.setHorizontalGroup(
-			gl_tabsPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_tabsPanel.createSequentialGroup()
-					.addContainerGap(155, Short.MAX_VALUE)
-					.addComponent(insertMovieButt, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(movieListButt, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(schedulingButt, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+			gl_tabsPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_tabsPanel.createSequentialGroup()
+					.addContainerGap(490, Short.MAX_VALUE)
+					.addComponent(insertMovieButt)
+					.addGap(18)
+					.addComponent(movieListButt, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(schedulingButt, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(exitButt, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		gl_tabsPanel.setVerticalGroup(
-			gl_tabsPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_tabsPanel.createSequentialGroup()
+			gl_tabsPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_tabsPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_tabsPanel.createParallelGroup(Alignment.BASELINE, false)
-						.addComponent(schedulingButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-						.addComponent(movieListButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-						.addComponent(insertMovieButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_tabsPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(exitButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_tabsPanel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(schedulingButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+							.addComponent(movieListButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+							.addComponent(insertMovieButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		tabsPanel.setLayout(gl_tabsPanel);
@@ -253,5 +295,50 @@ public class MainView {
 	public static JFrame getGuiFrame() {
 		return guiFrame;
 	}
-
+	
+	public void setInterface(boolean ok) {
+		
+		GroupLayout gl_mainCard = new GroupLayout(mainCard);
+		
+		if(ok) {			
+			gl_mainCard.setHorizontalGroup(
+					gl_mainCard.createParallelGroup(Alignment.CENTER)
+						.addGroup(Alignment.CENTER, gl_mainCard.createSequentialGroup()
+							.addComponent(mainPanel, GroupLayout.PREFERRED_SIZE, 800, Short.MAX_VALUE)
+							)
+				);
+				gl_mainCard.setVerticalGroup(
+					gl_mainCard.createParallelGroup(Alignment.CENTER)
+						.addGroup(Alignment.CENTER, gl_mainCard.createSequentialGroup()
+							.addGap(100)
+							.addComponent(mainPanel, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+							)
+				);
+				guiFrame.revalidate();
+				guiFrame.repaint();
+		} else {
+			
+			insertMovieButt.setEnabled(false);
+			movieListButt.setEnabled(false);
+			schedulingButt.setEnabled(false);
+			
+			gl_mainCard.setHorizontalGroup(
+					gl_mainCard.createParallelGroup(Alignment.CENTER)
+						.addGroup(Alignment.CENTER, gl_mainCard.createSequentialGroup()
+							.addComponent(mcp, GroupLayout.PREFERRED_SIZE, 800, Short.MAX_VALUE)
+							)
+				);
+				gl_mainCard.setVerticalGroup(
+					gl_mainCard.createParallelGroup(Alignment.CENTER)
+						.addGroup(Alignment.CENTER, gl_mainCard.createSequentialGroup()
+							.addGap(100)
+							.addComponent(mcp, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+							)
+				);
+				guiFrame.revalidate();
+				guiFrame.repaint();
+		}
+		mainCard.setLayout(gl_mainCard);
+			
+	}
 }

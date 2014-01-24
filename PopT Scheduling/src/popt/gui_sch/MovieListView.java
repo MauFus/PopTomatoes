@@ -16,6 +16,7 @@ import javax.swing.ScrollPaneConstants;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 public class MovieListView extends JPanel {
 
@@ -43,6 +44,8 @@ public class MovieListView extends JPanel {
 		
 		//panel che contiene il pulsante per aprire il dialog per la ricerca dei film
 		JPanel MovieInsertControl = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) MovieInsertControl.getLayout();
+		flowLayout.setHgap(50);
 		MovieInsertControl.setBackground(new Color(100,100,100));
 		MovieListContainer = new JPanel();
 		Dimension size = new Dimension(MoviePanel.getMaxWidth()+100,MovieListContainer.getMaximumSize().height);
@@ -50,8 +53,11 @@ public class MovieListView extends JPanel {
 		JScrollPane scrb = new JScrollPane(MovieListContainer);
 		
 		MovieListContainer.setLayout(new GridLayout(0, 1, 0, 10));
+		MovieListContainer.setBackground(new Color(0,0,150));
+		MovieListContainer.setBorder(null);
 		MovieListContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 25));
 		scrb.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrb.setBorder(null);
 		System.out.println(size.height);
 		System.out.println(size.width);
 		scrb.setSize(size);
@@ -75,6 +81,7 @@ public class MovieListView extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(txtpnMovieList, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(30)
 					.addComponent(MovieInsertControl, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrb, GroupLayout.DEFAULT_SIZE, 377, GroupLayout.PREFERRED_SIZE)
@@ -83,7 +90,7 @@ public class MovieListView extends JPanel {
 		
 		btnInsert = new JButton("Insert in List!");
 		btnInsert.setFont(new Font("Calibri", Font.PLAIN, 15));
-		btnInsert.setForeground(Color.WHITE);
+		btnInsert.setForeground(Color.BLACK);
 		btnInsert.setBackground(Color.GRAY);
 		btnInsert.setBorderPainted(false);
 		btnInsert.setFocusable(false);

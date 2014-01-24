@@ -26,10 +26,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		initRmiConnection();
+		boolean ok = initRmiConnection();
 
 		// Create the view
 		MainView mainView = new MainView();
+		mainView.setInterface(ok);
 
 		// Create the models
 		InsertMovieModel im_model = new InsertMovieModel();
@@ -44,7 +45,7 @@ public class Main {
 	/**
 	 * Inizializza RMI lato Client ed istanzia DBReceiver
 	 */
-	private static void initRmiConnection() {
+	private static boolean initRmiConnection() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(SERVER_IP));
 			StringBuilder sb = new StringBuilder();
@@ -65,9 +66,10 @@ public class Main {
 			// considera solo l'IP
 			dbr = (DBReceiver) Naming.lookup("rmi://" + ipServer.substring(0, ipServer.indexOf("/")) 
 					+ "/" + DBReceiver.SERVICE_NAME);
-
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 
