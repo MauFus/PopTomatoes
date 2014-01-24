@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -24,6 +26,7 @@ import popt.gui_ticket.RowPanel;
 import popt.gui_ticket.SeatRect;
 import popt.gui_ticket.TicketSellView;
 import popt.main_ticket.MainTicketing;
+import popt.model_ticket.RectStatus;
 import popt.model_ticket.TicketSellModel;
 
 public class TicketSellController {
@@ -239,7 +242,120 @@ public class TicketSellController {
 			// Aggiunge le file con i posti
 			RowPanel panel = new RowPanel();
 			for(int j = 0; j < orderedList.get(i).getSeats(); j++){
-				panel.add(new SeatRect());
+				final SeatRect sr = new SeatRect(orderedList.get(i).getNumber(), j + 1);
+				sr.addMouseListener(new MouseListener() {
+					
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+					}
+					
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						switch (sr.getStatus()) {
+						case FREE:
+							sr.setBackground(new Color(200,200,200));
+							break;
+						default:
+							break;
+						}
+						
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						switch (sr.getStatus()) {
+						case FREE:
+							sr.setBackground(new Color(240,240,240));
+							break;
+						default:
+							break;
+						}
+					}
+					
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						sr.setClicked(!sr.isClicked());
+						if (!sr.isFree() && sr.isClicked() && sr.getStatus().equals(RectStatus.FREE)) {
+							sr.setStatus(RectStatus.CHECKED);
+							sr.setFree(!sr.isFree());
+						} else if (sr.isFree() && !sr.isClicked() && sr.getStatus().equals(RectStatus.CHECKED)) {
+							sr.setStatus(RectStatus.FREE);
+							sr.setFree(!sr.isFree());
+						} else if (sr.getStatus().equals(RectStatus.BUSY)) {
+							sr.setStatus(RectStatus.BUSY);
+						} else if (!sr.isSuggest() && sr.isClicked() && sr.getStatus().equals(RectStatus.SUGGESTED)) {
+							sr.setStatus(RectStatus.CHECKED);
+							sr.setSuggest(!sr.isSuggest());
+							
+							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
+							if (model.getSolution1().length > 0) {
+								for (int i = 0; i < model.getSolution1().length; i++) {
+									if (model.getSolution1()[i].equals(clicked)){
+										model.setSolutionIndex(1);
+										for (int j = 0; j < model.getSolution1().length; j++) {
+											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
+												.getComponent(model.getSolution1()[j].getSeat() - 1);
+											temp.setStatus(RectStatus.CHECKED);
+											temp.setSuggest(!sr.isSuggest());
+										}
+										break;
+									}
+								}
+							} else if (model.getSolution2().length > 0) {
+								for (int i = 0; i < model.getSolution2().length; i++) {
+									if (model.getSolution2()[i].equals(clicked)){
+										model.setSolutionIndex(2);
+										for (int j = 0; j < model.getSolution2().length; j++) {
+											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
+												.getComponent(model.getSolution2()[j].getSeat() - 1);
+											temp.setStatus(RectStatus.CHECKED);
+											temp.setSuggest(!sr.isSuggest());
+										}
+										break;
+									}
+								}
+							}
+						} else if (sr.isSuggest() && !sr.isClicked() && sr.getStatus().equals(RectStatus.CHECKED)) {
+							sr.setStatus(RectStatus.SUGGESTED);
+							sr.setSuggest(!sr.isSuggest());
+							
+							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
+							if (model.getSolution1().length > 0) {
+								for (int i = 0; i < model.getSolution1().length; i++) {
+									if (model.getSolution1()[i].equals(clicked)){
+										model.setSolutionIndex(0);
+										for (int j = 0; j < model.getSolution1().length; j++) {
+											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
+												.getComponent(model.getSolution1()[j].getSeat() - 1);
+											temp.setStatus(RectStatus.SUGGESTED);
+											temp.setSuggest(!sr.isSuggest());
+										}
+										break;
+									}
+								}
+							} else if (model.getSolution2().length > 0) {
+								for (int i = 0; i < model.getSolution2().length; i++) {
+									if (model.getSolution2()[i].equals(clicked)){
+										model.setSolutionIndex(0);
+										for (int j = 0; j < model.getSolution2().length; j++) {
+											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
+												.getComponent(model.getSolution2()[j].getSeat() - 1);
+											temp.setStatus(RectStatus.SUGGESTED);
+											temp.setSuggest(!sr.isSuggest());
+										}
+										break;
+									}
+								}
+							}
+						}
+					}
+				});
+				
+				panel.add(sr);
 			}
 			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 			flowLayout.setVgap(0);
@@ -249,8 +365,6 @@ public class TicketSellController {
 			gbc_panel.gridx = 1;
 			gbc_panel.gridy = i;
 			view.getHallViewer().add(panel, gbc_panel);
-			
-			// TODO assegnare uno stato a ciascun seatRect o qualcosa di simile
 		}
 	}
 

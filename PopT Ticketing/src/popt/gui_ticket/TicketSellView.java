@@ -234,7 +234,7 @@ public class TicketSellView extends JPanel {
 		screenPanel.add(panel, gbc_panel);
 		
 		JPanel panel_1 = new JPanel();
-		SeatRect screen = new SeatRect();
+		SeatRect screen = new SeatRect(-1, -1);
 		screen.setPreferredSize(new Dimension(300, 30));
 		panel_1.add(screen);
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();

@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
@@ -34,13 +32,18 @@ public class SeatRect extends JPanel {
     /** The transparency value of shadow. ( 0 - 255) */
     protected int shadowAlpha = 150;
     
-    boolean clicked = false;
-    boolean suggest = false;
-    boolean free = false;
-    RectStatus status = RectStatus.FREE;
+    private boolean clicked = false;
+    private boolean suggest = false;
+    private boolean free = false;
+    private RectStatus status = RectStatus.FREE;
+    private int rowNumber;
+    private int seatNumber;
 	
-	public SeatRect() {
+	public SeatRect(int row, int seat) {
 		super();
+		rowNumber = row;
+		seatNumber = seat;
+		
 		setPreferredSize(new Dimension(20, 20));
         setOpaque(false);
         
@@ -60,100 +63,6 @@ public class SeatRect extends JPanel {
 		default:
 			break;
 		}
-        
-        addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				switch (status) {
-				case FREE:
-					setBackground(new Color(200,200,200));
-					break;
-				case BUSY:
-					
-					break;
-				case CHECKED:
-					
-					break;
-				case SUGGESTED:
-					
-					break;
-				default:
-					break;
-				}
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				switch (status) {
-				case FREE:
-					setBackground(new Color(240,240,240));
-					break;
-				case BUSY:
-					
-					break;
-				case CHECKED:
-					
-					break;
-				case SUGGESTED:
-					
-					break;
-				default:
-					break;
-				}
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				clicked = !clicked;
-				if(free == false && clicked == true && status==RectStatus.FREE){
-				    status = RectStatus.CHECKED;
-					free = !free;
-					}
-				else if(free == true && clicked == false && status==RectStatus.CHECKED){
-					status = RectStatus.FREE;
-					free = !free;
-				}
-				else if(status==RectStatus.BUSY)
-					status = RectStatus.BUSY;
-				else if(suggest == false && clicked == true && status==RectStatus.SUGGESTED){
-					status = RectStatus.CHECKED;
-					suggest = !suggest;
-					}
-				else if(suggest == true && clicked == false && status==RectStatus.CHECKED){
-					status = RectStatus.SUGGESTED;
-					suggest = !suggest;
-					}
-				switch (status) {
-				case FREE:
-					setBackground(new Color(200,200,200));
-					break;
-				case BUSY:
-					break;
-				case CHECKED:
-					setBackground(new Color(0,200,0));
-					break;
-				case SUGGESTED:
-					setBackground(new Color(200,240,0));
-					break;
-				default:
-					break;
-				}
-			}
-		});
 	}
 	
 	@Override
@@ -204,6 +113,78 @@ public class SeatRect extends JPanel {
 
 	public void setStatus(RectStatus status) {
 		this.status = status;
+		switch (status) {
+		case FREE:
+			setBackground(new Color(200,200,200));
+			break;
+		case BUSY:
+			setBackground(new Color(100,100,100));
+			break;
+		case CHECKED:
+			setBackground(new Color(0,200,0));
+			break;
+		case SUGGESTED:
+			setBackground(new Color(200,240,0));
+			break;
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * @return the clicked
+	 */
+	public boolean isClicked() {
+		return clicked;
+	}
+
+	/**
+	 * @param clicked the clicked to set
+	 */
+	public void setClicked(boolean clicked) {
+		this.clicked = clicked;
+	}
+
+	/**
+	 * @return the suggest
+	 */
+	public boolean isSuggest() {
+		return suggest;
+	}
+
+	/**
+	 * @param suggest the suggest to set
+	 */
+	public void setSuggest(boolean suggest) {
+		this.suggest = suggest;
+	}
+
+	/**
+	 * @return the free
+	 */
+	public boolean isFree() {
+		return free;
+	}
+
+	/**
+	 * @param free the free to set
+	 */
+	public void setFree(boolean free) {
+		this.free = free;
+	}
+
+	/**
+	 * @return the rowNumber
+	 */
+	public int getRowNumber() {
+		return rowNumber;
+	}
+
+	/**
+	 * @return the seatNumber
+	 */
+	public int getSeatNumber() {
+		return seatNumber;
 	}
 
 }
