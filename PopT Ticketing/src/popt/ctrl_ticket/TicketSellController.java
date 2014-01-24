@@ -151,6 +151,33 @@ public class TicketSellController {
 			}
 		});
 		
+		view.getEditSpecialSeats().addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				try {
+					int n = Integer.parseInt(view.getEditNumberOfTickets().getText());
+					if (n > 0) {
+						model.setSpecialSeats(n);;
+						view.getTxtpnErrors().setText("");
+					} else {
+						view.getEditSpecialSeats().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+						view.getTxtpnErrors().setText("Inserted input is not valid!");
+					}
+						
+				} catch (NumberFormatException nfe) {
+					view.getEditNumberOfTickets().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+					view.getTxtpnErrors().setText("Inserted input is not valid!");
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				view.getEditNumberOfTickets().setBorder(BorderFactory.createEmptyBorder());
+				view.getTxtpnErrors().setText("");
+			}
+		});
+		
 		view.getSearchButt().addActionListener(new ActionListener() {
 			
 			@Override
@@ -179,6 +206,12 @@ public class TicketSellController {
 					if (!model.getRowList().isEmpty()) {
 						diplayTicketingStatus(model.getRowList());
 					}
+					
+					int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
+					if (special != null)
+						model.setSpecialSolution(special);
+					else
+						view.getTxtpnErrors().setText("Error - Number of special seats not available.");
 				} else
 					view.getTxtpnErrors().setText("There are some problems with the research... Check your inputs, please.");
 			}
@@ -194,6 +227,12 @@ public class TicketSellController {
 					if (!model.getRowList().isEmpty()) {
 						diplayTicketingStatus(model.getRowList());
 					}
+					
+					int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
+					if (special != null)
+						model.setSpecialSolution(special);
+					else
+						view.getTxtpnErrors().setText("Error - Number of special seats not available.");
 				} else
 					view.getTxtpnErrors().setText("There are some problems with the research... Check your inputs, please.");
 			}
@@ -234,6 +273,14 @@ public class TicketSellController {
 					default :
 						view.getTxtpnErrors().setText("Error - No solution selected!");
 						break;
+				}
+				
+				if (model.getSpecialSolution() != null) {
+					for (int i = 0; i < model.getSpecialSolution().length; i++) {
+						MainTicketing.sellSpecialSeat(model.getCurrentShowtime(), model.getSpecialSolution()[i]);
+						new TicketPrinter(model.getCurrentShowtime(), new Seat(0, model.getSpecialSolution()[i])).print();
+						resetInterface();
+					}
 				}
 			}
 		});

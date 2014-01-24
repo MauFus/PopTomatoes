@@ -30,6 +30,13 @@ public interface SeatsAllocator extends Remote {
 	public Seat[] searchAvailableSeats(Showtime show, int qta) throws RemoteException;
 	
 	/**
+	 * Ricerca il numero di posti speciali disponibili
+	 * @param show
+	 * @return
+	 * @throws RemoteException
+	 */
+	public int[] searchAvailableSpecialSeats(Showtime show, int qta) throws RemoteException;
+	/**
 	 * Registra la vendita di una serie di posto
 	 * @param show
 	 * @param seats

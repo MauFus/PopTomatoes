@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.Color;
-import java.awt.SystemColor;
 
 public class OptionPanel extends JPanel {
 

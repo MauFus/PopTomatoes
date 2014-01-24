@@ -14,21 +14,25 @@ public class TicketSellModel {
 	private LinkedList<Row> rowList;
 	private LinkedList<Movie> comingMovies;
 	private int totSeats;
+	private int specialSeats;
 	
 	private int solutionIndex; // The active solution (0 = none)
 	private Seat[] solution1;
 	private Seat[] solution2;
 	private LinkedList<Seat> solutionCustom;
+	private int[] specialSolution;
 	
 	public TicketSellModel() {
 		comingShowtimes = new LinkedList<>();
 		currentShowtime = null;
 		rowList = new LinkedList<>();
 		totSeats = 0;
+		specialSeats = 0;
 		solutionIndex = 0;
 		solution1 = null;
 		solution2 = null;
 		solutionCustom = new LinkedList<>();
+		specialSolution = null;
 	}
 	
 	public LinkedList<Movie> findCurrentMovies() {
@@ -167,5 +171,33 @@ public class TicketSellModel {
 	 */
 	public void setSolutionCustom(LinkedList<Seat> solutionCustom) {
 		this.solutionCustom = solutionCustom;
+	}
+
+	/**
+	 * @return the specialSeats
+	 */
+	public int getSpecialSeats() {
+		return specialSeats;
+	}
+
+	/**
+	 * @param specialSeats the specialSeats to set
+	 */
+	public void setSpecialSeats(int specialSeats) {
+		this.specialSeats = specialSeats;
+	}
+
+	/**
+	 * @return the specialSolution
+	 */
+	public int[] getSpecialSolution() {
+		return specialSolution;
+	}
+
+	/**
+	 * @param specialSolution the specialSolution to set
+	 */
+	public void setSpecialSolution(int[] specialSolution) {
+		this.specialSolution = specialSolution;
 	}
 }

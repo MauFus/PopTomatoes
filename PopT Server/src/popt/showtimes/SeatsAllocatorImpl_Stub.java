@@ -12,16 +12,18 @@ public final class SeatsAllocatorImpl_Stub
     private static java.lang.reflect.Method $method_getComingShowtimesList_0;
     private static java.lang.reflect.Method $method_getTicketingStatus_1;
     private static java.lang.reflect.Method $method_searchAvailableSeats_2;
-    private static java.lang.reflect.Method $method_sellSeat_3;
-    private static java.lang.reflect.Method $method_sellSpecialSeat_4;
+    private static java.lang.reflect.Method $method_searchAvailableSpecialSeats_3;
+    private static java.lang.reflect.Method $method_sellSeat_4;
+    private static java.lang.reflect.Method $method_sellSpecialSeat_5;
     
     static {
 	try {
 	    $method_getComingShowtimesList_0 = popt.rmi.SeatsAllocator.class.getMethod("getComingShowtimesList", new java.lang.Class[] {});
 	    $method_getTicketingStatus_1 = popt.rmi.SeatsAllocator.class.getMethod("getTicketingStatus", new java.lang.Class[] {popt.data.Showtime.class});
 	    $method_searchAvailableSeats_2 = popt.rmi.SeatsAllocator.class.getMethod("searchAvailableSeats", new java.lang.Class[] {popt.data.Showtime.class, int.class});
-	    $method_sellSeat_3 = popt.rmi.SeatsAllocator.class.getMethod("sellSeat", new java.lang.Class[] {popt.data.Showtime.class, popt.data.Seat[].class});
-	    $method_sellSpecialSeat_4 = popt.rmi.SeatsAllocator.class.getMethod("sellSpecialSeat", new java.lang.Class[] {popt.data.Showtime.class, int.class});
+	    $method_searchAvailableSpecialSeats_3 = popt.rmi.SeatsAllocator.class.getMethod("searchAvailableSpecialSeats", new java.lang.Class[] {popt.data.Showtime.class, int.class});
+	    $method_sellSeat_4 = popt.rmi.SeatsAllocator.class.getMethod("sellSeat", new java.lang.Class[] {popt.data.Showtime.class, popt.data.Seat[].class});
+	    $method_sellSpecialSeat_5 = popt.rmi.SeatsAllocator.class.getMethod("sellSpecialSeat", new java.lang.Class[] {popt.data.Showtime.class, int.class});
 	} catch (java.lang.NoSuchMethodException e) {
 	    throw new java.lang.NoSuchMethodError(
 		"stub class initialization failed");
@@ -83,12 +85,28 @@ public final class SeatsAllocatorImpl_Stub
 	}
     }
     
+    // implementation of searchAvailableSpecialSeats(Showtime, int)
+    public int[] searchAvailableSpecialSeats(popt.data.Showtime $param_Showtime_1, int $param_int_2)
+	throws java.rmi.RemoteException
+    {
+	try {
+	    Object $result = ref.invoke(this, $method_searchAvailableSpecialSeats_3, new java.lang.Object[] {$param_Showtime_1, new java.lang.Integer($param_int_2)}, -2718007344613818318L);
+	    return ((int[]) $result);
+	} catch (java.lang.RuntimeException e) {
+	    throw e;
+	} catch (java.rmi.RemoteException e) {
+	    throw e;
+	} catch (java.lang.Exception e) {
+	    throw new java.rmi.UnexpectedException("undeclared checked exception", e);
+	}
+    }
+    
     // implementation of sellSeat(Showtime, Seat[])
     public void sellSeat(popt.data.Showtime $param_Showtime_1, popt.data.Seat[] $param_arrayOf_Seat_2)
 	throws java.rmi.RemoteException
     {
 	try {
-	    ref.invoke(this, $method_sellSeat_3, new java.lang.Object[] {$param_Showtime_1, $param_arrayOf_Seat_2}, -8198920641952847121L);
+	    ref.invoke(this, $method_sellSeat_4, new java.lang.Object[] {$param_Showtime_1, $param_arrayOf_Seat_2}, -8198920641952847121L);
 	} catch (java.lang.RuntimeException e) {
 	    throw e;
 	} catch (java.rmi.RemoteException e) {
@@ -103,7 +121,7 @@ public final class SeatsAllocatorImpl_Stub
 	throws java.rmi.RemoteException
     {
 	try {
-	    ref.invoke(this, $method_sellSpecialSeat_4, new java.lang.Object[] {$param_Showtime_1, new java.lang.Integer($param_int_2)}, -4483055902804053159L);
+	    ref.invoke(this, $method_sellSpecialSeat_5, new java.lang.Object[] {$param_Showtime_1, new java.lang.Integer($param_int_2)}, -4483055902804053159L);
 	} catch (java.lang.RuntimeException e) {
 	    throw e;
 	} catch (java.rmi.RemoteException e) {

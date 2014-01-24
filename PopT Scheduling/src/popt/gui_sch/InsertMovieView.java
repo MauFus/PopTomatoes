@@ -10,13 +10,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 import popt.data.*;
 

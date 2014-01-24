@@ -117,6 +117,21 @@ public class MainTicketing {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param show
+	 * @param number
+	 * @return
+	 */
+	public static int[] searchSpecialSeats(Showtime show, int number) {
+		try {
+			return allocator.searchAvailableSpecialSeats(show, number);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	/** 
 	 * Ask for registration of the sell tickets
 	 * @param show
