@@ -33,10 +33,11 @@ public class MainTicketing {
 
 	public static void main(String[] args) {
 		
-		initRmiConnection();
+		boolean ok = initRmiConnection();
 		
 		// Create the view
 		MainView view = new MainView();
+		view.setInterface(ok);
 		// Create the model
 		TicketSellModel model = new TicketSellModel();
 		// Create the controller
@@ -46,7 +47,7 @@ public class MainTicketing {
 	/**
 	 * Inizializza la connessione con il server tramite RMI
 	 */
-	private static void initRmiConnection() {
+	private static boolean initRmiConnection() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(SERVER_IP));
 			StringBuilder sb = new StringBuilder();
@@ -67,9 +68,10 @@ public class MainTicketing {
 			// considera solo l'IP
 			allocator = (SeatsAllocator) Naming.lookup("rmi://" + ipServer.substring(0, ipServer.indexOf("/")) 
 					+ "/" + SeatsAllocator.SERVICE_NAME);
-
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 	
