@@ -100,12 +100,44 @@ public class MainTicketing {
 		}
 	}
 	
+	/**
+	 * Ask for a solution of OptimalSeatsAlgorithm
+	 * @param show is the showtime of which we are looking for seats
+	 * @param number is the number of seats we are looking for
+	 * @return the algorithm optimal solution
+	 */
 	public static Seat[] searchRaccomendedSeats(Showtime show, int number) {
 		try {
 			return allocator.searchAvailableSeats(show, number);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	/** 
+	 * Ask for registration of the sell tickets
+	 * @param show
+	 * @param seats
+	 */
+	public static void sellSeats(Showtime show, Seat[] seats) {
+		try {
+			allocator.sellSeat(show, seats);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Ask fo registration of sell special ticket
+	 * @param show
+	 * @param seat
+	 */
+	public static void sellSpecialSeat(Showtime show, int seat) {
+		try {
+			allocator.sellSpecialSeat(show, seat);
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
 	}
 }

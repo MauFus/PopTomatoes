@@ -18,7 +18,7 @@ public class TicketSellModel {
 	private int solutionIndex; // The active solution (0 = none)
 	private Seat[] solution1;
 	private Seat[] solution2;
-	private Seat[] solutionCustom;
+	private LinkedList<Seat> solutionCustom;
 	
 	public TicketSellModel() {
 		comingShowtimes = new LinkedList<>();
@@ -28,7 +28,7 @@ public class TicketSellModel {
 		solutionIndex = 0;
 		solution1 = null;
 		solution2 = null;
-		solutionCustom = null;
+		solutionCustom = new LinkedList<>();
 	}
 	
 	public LinkedList<Movie> findCurrentMovies() {
@@ -158,14 +158,14 @@ public class TicketSellModel {
 	/**
 	 * @return the solutionCustom
 	 */
-	public Seat[] getSolutionCustom() {
+	public LinkedList<Seat> getSolutionCustom() {
 		return solutionCustom;
 	}
 
 	/**
 	 * @param solutionCustom the solutionCustom to set
 	 */
-	public void setSolutionCustom(Seat[] solutionCustom) {
+	public void setSolutionCustom(LinkedList<Seat> solutionCustom) {
 		this.solutionCustom = solutionCustom;
 	}
 }

@@ -193,8 +193,32 @@ public class TicketSellController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				switch (model.getSolutionIndex()) {
+					case 1 :
+						MainTicketing.sellSeats(model.getCurrentShowtime(), model.getSolution1());
+						view.getTxtpnErrors().setText("Tickets sell!");
+						resetInterface();
+						break;
+					case 2 :
+						MainTicketing.sellSeats(model.getCurrentShowtime(), model.getSolution2());
+						view.getTxtpnErrors().setText("Tickets sell!");
+						resetInterface();
+						break;
+					case 3 :
+						if (!model.getSolutionCustom().isEmpty()) {
+							Seat[] solution = new Seat[model.getSolutionCustom().size()];
+							for (int i = 0; i < model.getSolutionCustom().size(); i++)
+								solution[i] = model.getSolutionCustom().get(i);
+							MainTicketing.sellSeats(model.getCurrentShowtime(), solution);
+							view.getTxtpnErrors().setText("Tickets sell!");
+							resetInterface();
+						} else
+							view.getTxtpnErrors().setText("Error - No solution selected!");
+						break;
+					default :
+						view.getTxtpnErrors().setText("Error - No solution selected!");
+						break;
+				}
 			}
 		});
 		
@@ -202,8 +226,14 @@ public class TicketSellController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				if (view.getTitleBox().getSelectedIndex() > 0 && view.getDateBox().getSelectedIndex() > 0
+						&& model.getCurrentShowtime() != null) {
+					model.setRowList(MainTicketing.getShowtimeTicketing(model.getCurrentShowtime()));
+					if (!model.getRowList().isEmpty()) {
+						diplayTicketingStatus(model.getRowList());
+					}
+				} else
+					view.getTxtpnErrors().setText("There are some problems with the research... Check your inputs, please.");
 			}
 		});
 	}
@@ -282,11 +312,45 @@ public class TicketSellController {
 						if (!sr.isFree() && sr.isClicked() && sr.getStatus().equals(RectStatus.FREE)) {
 							sr.setStatus(RectStatus.CHECKED);
 							sr.setFree(!sr.isFree());
+							
+							if (model.getSolutionIndex() == 1) {
+								if (model.getSolution1().length > 0) {
+									for (int j = 0; j < model.getSolution1().length; j++) {
+										SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
+												.getComponent(model.getSolution1()[j].getSeat() - 1);
+										temp.setStatus(RectStatus.SUGGESTED);
+										temp.setSuggest(!sr.isSuggest());
+									}
+								}
+							} else if (model.getSolutionIndex() == 2) {
+								if (model.getSolution2().length > 0) {
+									for (int j = 0; j < model.getSolution2().length; j++) {
+										SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
+												.getComponent(model.getSolution2()[j].getSeat() - 1);
+										temp.setStatus(RectStatus.SUGGESTED);
+										temp.setSuggest(!sr.isSuggest());
+									}
+								}
+							}
+							
+							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
+							model.setSolutionIndex(3);
+							model.getSolutionCustom().add(clicked);
+							
 						} else if (sr.isFree() && !sr.isClicked() && sr.getStatus().equals(RectStatus.CHECKED)) {
 							sr.setStatus(RectStatus.FREE);
 							sr.setFree(!sr.isFree());
+
+							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
+							if (model.getSolutionCustom().contains(clicked)) {
+								model.getSolutionCustom().remove(clicked);
+							}
+							if (model.getSolutionCustom().isEmpty())
+								model.setSolutionIndex(0);
+							
 						} else if (sr.getStatus().equals(RectStatus.BUSY)) {
 							sr.setStatus(RectStatus.BUSY);
+							
 						} else if (!sr.isSuggest() && sr.isClicked() && sr.getStatus().equals(RectStatus.SUGGESTED)) {
 							sr.setStatus(RectStatus.CHECKED);
 							sr.setSuggest(!sr.isSuggest());
@@ -302,6 +366,24 @@ public class TicketSellController {
 											temp.setStatus(RectStatus.CHECKED);
 											temp.setSuggest(!sr.isSuggest());
 										}
+										
+										if (!model.getSolutionCustom().isEmpty()) {
+											for (Seat s : model.getSolutionCustom()) {
+												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, s.getRow() - 1))
+														.getComponent(s.getSeat() - 1);
+												temp.setStatus(RectStatus.FREE);
+												temp.setSuggest(!sr.isSuggest());
+												model.getSolutionCustom().remove(s);
+											}
+										}
+										if (model.getSolution2().length > 0) {
+											for (int j = 0; j < model.getSolution2().length; j++) {
+												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
+														.getComponent(model.getSolution2()[j].getSeat() - 1);
+												temp.setStatus(RectStatus.SUGGESTED);
+												temp.setSuggest(!sr.isSuggest());
+											}
+										}
 										break;
 									}
 								}
@@ -315,10 +397,29 @@ public class TicketSellController {
 											temp.setStatus(RectStatus.CHECKED);
 											temp.setSuggest(!sr.isSuggest());
 										}
+
+										if (!model.getSolutionCustom().isEmpty()) {
+											for (Seat s : model.getSolutionCustom()) {
+												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, s.getRow() - 1))
+														.getComponent(s.getSeat() - 1);
+												temp.setStatus(RectStatus.FREE);
+												temp.setSuggest(!sr.isSuggest());
+												model.getSolutionCustom().remove(s);
+											}
+										}
+										if (model.getSolution1().length > 0) {
+											for (int j = 0; j < model.getSolution1().length; j++) {
+												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
+														.getComponent(model.getSolution1()[j].getSeat() - 1);
+												temp.setStatus(RectStatus.SUGGESTED);
+												temp.setSuggest(!sr.isSuggest());
+											}
+										}
 										break;
 									}
 								}
 							}
+							
 						} else if (sr.isSuggest() && !sr.isClicked() && sr.getStatus().equals(RectStatus.CHECKED)) {
 							sr.setStatus(RectStatus.SUGGESTED);
 							sr.setSuggest(!sr.isSuggest());
@@ -398,6 +499,20 @@ public class TicketSellController {
 				max = row.getNumber();
 		}
 		return max;
+	}
+
+	private void resetInterface() {
+		view.getHallViewer().removeAll();
+		view.getTitleBox().setSelectedIndex(0);
+		view.getDateBox().setSelectedIndex(0);
+		view.getEditNumberOfTickets().setText("");
+		model.setSolution1(null);
+		model.setSolution2(null);
+		model.setSolutionCustom(new LinkedList<Seat>());
+		model.setSolutionIndex(0);
+		model.setCurrentShowtime(null);
+		model.setTotSeats(0);
+		model.setRowList(new LinkedList<Row>());
 	}
 
 	/**
