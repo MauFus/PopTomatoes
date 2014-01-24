@@ -9,6 +9,8 @@
 
 package popt.data;
 
-public enum SeatStatus {
+import java.io.Serializable;
+
+public enum SeatStatus implements Serializable{
 	LIBERO, OCCUPATO, PRENOTATO
 }

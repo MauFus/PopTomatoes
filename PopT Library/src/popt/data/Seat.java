@@ -9,8 +9,11 @@
 
 package popt.data;
 
-public class Seat {
+import java.io.Serializable;
 
+public class Seat implements Serializable{
+
+	private static final long serialVersionUID = 5268790147909878835L;
 	private int row;
 	private int seat;
 	
