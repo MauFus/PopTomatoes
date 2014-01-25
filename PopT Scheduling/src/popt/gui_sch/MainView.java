@@ -4,7 +4,6 @@ package popt.gui_sch;
 //could just import javax.swing.* and java.awt.* etc..
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -45,26 +44,12 @@ public class MainView {
 	MovieListView mlv;
 	SchedulerView schv;
 
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-
-				new MainView();
-			}
-		});
-
-	}
-
 	public MainView() {
 		guiFrame = new JFrame();
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException
 				| IllegalAccessException | UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		guiFrame.setUndecorated(true);
@@ -74,8 +59,6 @@ public class MainView {
 			
 			@Override
 			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
@@ -86,32 +69,22 @@ public class MainView {
 			
 			@Override
 			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 		});
 		
@@ -142,13 +115,6 @@ public class MainView {
 		insertMovieButt.setFocusable(false);
 		insertMovieButt.setBorderPainted(false);
 		insertMovieButt.setActionCommand("Switch Card");
-		insertMovieButt.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				//cards.next(cardPanel);
-				cards.show(cardPanel, "IM");
-			}
-		});
 		
 		movieListButt = new JButton("Movie List");
 		movieListButt.setFont(new Font("Calibri", Font.PLAIN, 15));
@@ -156,27 +122,13 @@ public class MainView {
 		movieListButt.setFocusable(false);
 		movieListButt.setBorderPainted(false);
 		movieListButt.setActionCommand("Switch Card");
-		movieListButt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cards.show(cardPanel, "ML");
-			}
-		});
 		
 		schedulingButt = new JButton("Scheduling");
 		schedulingButt.setFont(new Font("Calibri", Font.PLAIN, 15));
 		schedulingButt.setBackground(Color.GREEN);
 		schedulingButt.setFocusable(false);
 		schedulingButt.setBorderPainted(false);
-		schedulingButt.setActionCommand("Switch Card");
-		// TODO spostare in un controller
-		schedulingButt.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				//cards.next(cardPanel);
-				cards.show(cardPanel, "SCH");
-			}
-		});
-		
+		schedulingButt.setActionCommand("Switch Card");		
 
 		cards = new CardLayout();
 		cardPanel = new JPanel();
@@ -282,15 +234,6 @@ public class MainView {
 	public SchedulerView getSchedulingView() {
 		return schv;
 	}
-
-	// All the buttons are following the same pattern
-	// so create them all in one place.
-	//TODO risolvere warning
-	/*private void addButton(JPanel parent, String name) {
-		JButton but = new JButton(name);
-		but.setActionCommand(name);
-		parent.add(but);
-	}*/
 	
 	public static JFrame getGuiFrame() {
 		return guiFrame;
@@ -340,5 +283,40 @@ public class MainView {
 		}
 		mainCard.setLayout(gl_mainCard);
 			
+	}
+
+	/**
+	 * @return the schedulingButt
+	 */
+	public JButton getSchedulingButt() {
+		return schedulingButt;
+	}
+
+	/**
+	 * @return the movieListButt
+	 */
+	public JButton getMovieListButt() {
+		return movieListButt;
+	}
+
+	/**
+	 * @return the insertMovieButt
+	 */
+	public JButton getInsertMovieButt() {
+		return insertMovieButt;
+	}
+
+	/**
+	 * @return the cards
+	 */
+	public CardLayout getCards() {
+		return cards;
+	}
+
+	/**
+	 * @return the cardPanel
+	 */
+	public JPanel getCardPanel() {
+		return cardPanel;
 	}
 }

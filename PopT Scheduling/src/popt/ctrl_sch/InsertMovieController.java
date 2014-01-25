@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.BorderFactory;
+
 import popt.data.Genre;
 import popt.gui_sch.InsertMovieView;
 import popt.main_sch.Main;
@@ -47,6 +49,7 @@ public class InsertMovieController {
 				if (view.getTextTitle().getText().compareTo("") == 0) {
 					view.getTextTitle().setText("No movie name inserted");
 					view.getTextTitle().setForeground(Color.RED);
+					view.getTextTitle().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 				}
 			}
 
@@ -54,6 +57,7 @@ public class InsertMovieController {
 			public void focusGained(FocusEvent e) {
 				view.getTextTitle().setText("");
 				view.getTextTitle().setForeground(Color.BLACK);
+				view.getTextTitle().setBorder(BorderFactory.createEmptyBorder());
 			}
 		});
 
@@ -68,10 +72,12 @@ public class InsertMovieController {
 					if (Integer.parseInt(view.getTextDuration().getText()) <= 0) {
 						view.getTextDuration().setText("Not Positive");
 						view.getTextDuration().setForeground(Color.RED);
+						view.getTextDuration().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 					}
 				} catch (NumberFormatException nfe) {
 					view.getTextDuration().setText("NaN");
 					view.getTextDuration().setForeground(Color.RED);
+					view.getTextDuration().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 				}
 
 			}
@@ -80,6 +86,7 @@ public class InsertMovieController {
 			public void focusGained(FocusEvent e) {
 				view.getTextDuration().setText("");
 				view.getTextDuration().setForeground(Color.BLACK);
+				view.getTextDuration().setBorder(BorderFactory.createEmptyBorder());
 			}
 		});
 
@@ -93,6 +100,7 @@ public class InsertMovieController {
 				if (!isDate(view.getTextDate().getText())) {
 					view.getTextDate().setText("Invalid Date!");
 					view.getTextDate().setForeground(Color.RED);
+					view.getTextDate().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 				}
 			}
 
@@ -100,6 +108,7 @@ public class InsertMovieController {
 			public void focusGained(FocusEvent e) {
 				view.getTextDate().setText("");
 				view.getTextDate().setForeground(Color.BLACK);
+				view.getTextDate().setBorder(BorderFactory.createEmptyBorder());
 			}
 		});
 
@@ -149,7 +158,6 @@ public class InsertMovieController {
 					view.getTextAlert().setText(
 							"ERRORE - Non tutti i campi sono stati inseriti");
 				}
-				view.getButtonInsert().setBackground(new Color(255, 0, 0));
 			}
 		});
 	}

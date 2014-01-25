@@ -1,5 +1,7 @@
 package popt.main_sch;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.rmi.Naming;
@@ -29,8 +31,28 @@ public class Main {
 		boolean ok = initRmiConnection();
 
 		// Create the view
-		MainView mainView = new MainView();
+		final MainView mainView = new MainView();
 		mainView.setInterface(ok);
+		mainView.getInsertMovieButt().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				mainView.getCards().show(mainView.getCardPanel(), "IM");
+			}
+		});
+		
+		mainView.getMovieListButt().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainView.getCards().show(mainView.getCardPanel(), "ML");
+			}
+		});
+		
+		mainView.getSchedulingButt().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				SchedulerController.uploadMovieList();
+				mainView.getCards().show(mainView.getCardPanel(), "SCH");
+			}
+		});
 
 		// Create the models
 		InsertMovieModel im_model = new InsertMovieModel();

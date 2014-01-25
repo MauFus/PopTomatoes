@@ -200,7 +200,7 @@ public class SchedulerController {
 	/**
 	 * Reads movieList.xml file
 	 */
-	private void uploadMovieList() {
+	public static void uploadMovieList() {
 		LinkedList<Movie> movies = new LinkedList<>();
 		try {
 			Document fileList;
@@ -223,6 +223,9 @@ public class SchedulerController {
 		model.getMondaySchedule().setMovieList(movies);
 		model.getTuesdaySchedule().setMovieList(movies);
 		model.getWednesdaySchedule().setMovieList(movies);
+		
+		view.revalidate();
+		view.repaint();
 	}
 
 	/**
@@ -230,7 +233,7 @@ public class SchedulerController {
 	 * @param item the element parsed from the file
 	 * @return an object movie
 	 */
-	private Movie createMovieFromFile(Element item) {
+	private static Movie createMovieFromFile(Element item) {
 		Movie e = new Movie();
 		e.setID(Integer.parseInt(item.getAttribute("id")));
 		e.setTitle(item.getElementsByTagName("title").item(0).getTextContent());

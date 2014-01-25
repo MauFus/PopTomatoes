@@ -269,7 +269,7 @@ public class MySQLAccess {
 			if (mv_pg)
 				query = query.concat(" PG = 1");
 			else
-				query = query.concat(" PG = 0");
+				query = query.concat(" (PG = 0 OR PG = 1)");
 			
 			if (mv_id > 0)
 				query = query.concat(" AND ID = " + mv_id);
