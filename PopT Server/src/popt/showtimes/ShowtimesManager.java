@@ -232,7 +232,7 @@ public class ShowtimesManager {
 			
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Loading not executed");
 			return false;
 		}
 	}

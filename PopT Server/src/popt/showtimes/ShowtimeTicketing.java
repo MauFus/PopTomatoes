@@ -32,11 +32,11 @@ public class ShowtimeTicketing {
 	
 	public ShowtimeTicketing(Showtime showtime) {
 		show = showtime;
+		findAvailableSeats();
 		valueMatrix = new int[show.getHall().getnRows()][maxSeatsPerRow(sellingStatus)];
 		specialSeatsStatus = new SeatStatus[show.getHall().getSpecialSeats()];
 		for (int s = 0; s < specialSeatsStatus.length; s++)
 			specialSeatsStatus[s] = SeatStatus.LIBERO;
-		findAvailableSeats();
 		computeValueMatrix();
 	}
 
