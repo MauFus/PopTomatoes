@@ -1,26 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <MovieList>
-	<Movie id = '205616'>
-		<title>Batman! Batman...</title>
-		<releaseDate>12-12-2012</releaseDate>
-		<duration>125</duration>
-		<genre>ACTION</genre>
-	</Movie>
-	<Movie id = '564312'>
-		<title>Te Brucio col Thè</title>
-		<releaseDate>5-3-2005</releaseDate>
-		<duration>15</duration>
-		<genre>DOCUMENTARY</genre>
-	</Movie>
-	<Movie id = '456378' pg = 'true'>
-		<title>Dafuq is dat!?</title>
-		<releaseDate>23-10-2013</releaseDate>
-		<duration>122</duration>
-		<genre>ACTION</genre>
-	</Movie>
-	<Movie id = '643455' pg = 'true'>
-		<title>Thor</title>
-		<releaseDate>22-12-2011</releaseDate>
-		<duration>98</duration>
-		<genre>HORROR</genre>
-	</Movie>
+    <Movie id="18" pg="false">
+        <title>Quella casa nel bosco</title>
+        <releaseDate>20-06-2012</releaseDate>
+        <duration>111</duration>
+        <genre>HORROR</genre>
+    </Movie>
+    <Movie id="7" pg="false">
+        <title>La tela del ragno</title>
+        <releaseDate>25-08-2002</releaseDate>
+        <duration>108</duration>
+        <genre>THRILLER</genre>
+    </Movie>
+    <Movie id="15" pg="false">
+        <title>Gattaca</title>
+        <releaseDate>25-10-2005</releaseDate>
+        <duration>125</duration>
+        <genre>SCI_FI</genre>
+    </Movie>
+    <Movie id="12" pg="false">
+        <title>Lincoln</title>
+        <releaseDate>14-05-2009</releaseDate>
+        <duration>102</duration>
+        <genre>BIOGRAPHY</genre>
+    </Movie>
+    <Movie id="20" pg="false">
+        <title>Walker Texas Ranger - The movie</title>
+        <releaseDate>02-01-2014</releaseDate>
+        <duration>156</duration>
+        <genre>ACTION</genre>
+    </Movie>
+    <Movie id="22" pg="false">
+        <title>Mangia, prega, ama</title>
+        <releaseDate>30-07-2011</releaseDate>
+        <duration>132</duration>
+        <genre>DRAMA</genre>
+    </Movie>
+    <Movie id="16" pg="false">
+        <title>Mamma mia!</title>
+        <releaseDate>05-04-2005</releaseDate>
+        <duration>124</duration>
+        <genre>MUSICAL</genre>
+    </Movie>
+    <Movie id="9" pg="false">
+        <title>Life</title>
+        <releaseDate>31-01-2006</releaseDate>
+        <duration>87</duration>
+        <genre>DOCUMENTARY</genre>
+    </Movie>
+    <Movie id="23" pg="false">
+        <title>Armageddon</title>
+        <releaseDate>05-03-2004</releaseDate>
+        <duration>114</duration>
+        <genre>ACTION</genre>
+    </Movie>
+    <Movie id="21" pg="false">
+        <title>The tree of life</title>
+        <releaseDate>18-04-2012</releaseDate>
+        <duration>164</duration>
+        <genre>DRAMA</genre>
+    </Movie>
+    <Movie id="5" pg="false">
+        <title>Il diario di Bridget Jones</title>
+        <releaseDate>02-03-2001</releaseDate>
+        <duration>120</duration>
+        <genre>COMEDY</genre>
+    </Movie>
+    <Movie id="26" pg="false">
+        <title>Now You See Me</title>
+        <releaseDate>24-11-2013</releaseDate>
+        <duration>136</duration>
+        <genre>MYSTERY</genre>
+    </Movie>
 </MovieList>

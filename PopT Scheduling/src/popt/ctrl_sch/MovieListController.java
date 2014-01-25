@@ -166,6 +166,7 @@ public class MovieListController {
 				
 				// it start the search
 				model.setSearchList(Main.searchMovie(toSearch));
+				searchDialog.getPnQueryResults().removeAll();
 				if (model.getSearchList() != null) {
 					GridLayout gl = new GridLayout(model.getSearchList().size(), 1);
 					searchDialog.getPnQueryResults().setLayout(gl);
