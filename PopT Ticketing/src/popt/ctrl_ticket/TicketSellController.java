@@ -30,6 +30,7 @@ import javax.swing.JTextPane;
 import popt.data.Movie;
 import popt.data.Row;
 import popt.data.Seat;
+import popt.data.SeatStatus;
 import popt.data.Showtime;
 import popt.gui_ticket.RowPanel;
 import popt.gui_ticket.SeatRect;
@@ -207,11 +208,13 @@ public class TicketSellController {
 						diplayTicketingStatus(model.getRowList());
 					}
 					
-					int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
-					if (special != null)
-						model.setSpecialSolution(special);
-					else
-						view.getTxtpnErrors().setText("Error - Number of special seats not available.");
+					if (model.getSpecialSeats() > 0) {
+						int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
+						if (special != null)
+							model.setSpecialSolution(special);
+						else
+							view.getTxtpnErrors().setText("Error - Number of special seats not available.");
+					}
 				} else
 					view.getTxtpnErrors().setText("There are some problems with the research... Check your inputs, please.");
 			}
@@ -223,6 +226,7 @@ public class TicketSellController {
 			public void actionPerformed(ActionEvent e) {
 				if (view.getTitleBox().getSelectedIndex() > 0 && view.getDateBox().getSelectedIndex() > 0
 						&& model.getCurrentShowtime() != null) {
+					
 					model.setRowList(MainTicketing.getShowtimeTicketing(model.getCurrentShowtime()));
 					if (!model.getRowList().isEmpty()) {
 						diplayTicketingStatus(model.getRowList());
@@ -307,6 +311,9 @@ public class TicketSellController {
 	 */
 	private void diplayTicketingStatus(LinkedList<Row> rowList) {
 		
+		view.getTextHeader().setText(model.getCurrentShowtime().getDate() + " " + model.getCurrentShowtime().getTime() + " - "
+				+ model.getCurrentShowtime().getHall().getName() + " - " + model.getCurrentShowtime().getMovie().getTitle());
+		
 		view.getHallViewer().removeAll();
 		LinkedList<Row> orderedList = orderRows(rowList);
 
@@ -334,8 +341,11 @@ public class TicketSellController {
 
 			// Aggiunge le file con i posti
 			RowPanel panel = new RowPanel();
-			for(int j = 0; j < orderedList.get(i).getSeats(); j++){
+			for (int j = 0; j < orderedList.get(i).getSeats(); j++) {
 				final SeatRect sr = new SeatRect(orderedList.get(i).getNumber(), j + 1);
+				// Se il posto non è occupato, viene marcato come assegnabile
+				if (orderedList.get(i).getStatus()[j].equals(SeatStatus.LIBERO))
+					sr.setStatus(RectStatus.FREE);
 				sr.addMouseListener(new MouseListener() {
 					
 					@Override
@@ -382,7 +392,7 @@ public class TicketSellController {
 										SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
 												.getComponent(model.getSolution1()[j].getSeat() - 1);
 										temp.setStatus(RectStatus.SUGGESTED);
-										temp.setSuggest(!sr.isSuggest());
+										temp.setSuggest(!temp.isSuggest());
 									}
 								}
 							} else if (model.getSolutionIndex() == 2) {
@@ -391,7 +401,7 @@ public class TicketSellController {
 										SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
 												.getComponent(model.getSolution2()[j].getSeat() - 1);
 										temp.setStatus(RectStatus.SUGGESTED);
-										temp.setSuggest(!sr.isSuggest());
+										temp.setSuggest(!temp.isSuggest());
 									}
 								}
 							}
@@ -427,7 +437,7 @@ public class TicketSellController {
 											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
 												.getComponent(model.getSolution1()[j].getSeat() - 1);
 											temp.setStatus(RectStatus.CHECKED);
-											temp.setSuggest(!sr.isSuggest());
+											temp.setSuggest(!temp.isSuggest());
 										}
 										
 										if (!model.getSolutionCustom().isEmpty()) {
@@ -435,7 +445,7 @@ public class TicketSellController {
 												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, s.getRow() - 1))
 														.getComponent(s.getSeat() - 1);
 												temp.setStatus(RectStatus.FREE);
-												temp.setSuggest(!sr.isSuggest());
+												temp.setSuggest(!temp.isSuggest());
 												model.getSolutionCustom().remove(s);
 											}
 										}
@@ -444,7 +454,7 @@ public class TicketSellController {
 												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
 														.getComponent(model.getSolution2()[j].getSeat() - 1);
 												temp.setStatus(RectStatus.SUGGESTED);
-												temp.setSuggest(!sr.isSuggest());
+												temp.setSuggest(!temp.isSuggest());
 											}
 										}
 										break;
@@ -458,7 +468,7 @@ public class TicketSellController {
 											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
 												.getComponent(model.getSolution2()[j].getSeat() - 1);
 											temp.setStatus(RectStatus.CHECKED);
-											temp.setSuggest(!sr.isSuggest());
+											temp.setSuggest(!temp.isSuggest());
 										}
 
 										if (!model.getSolutionCustom().isEmpty()) {
@@ -466,7 +476,7 @@ public class TicketSellController {
 												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, s.getRow() - 1))
 														.getComponent(s.getSeat() - 1);
 												temp.setStatus(RectStatus.FREE);
-												temp.setSuggest(!sr.isSuggest());
+												temp.setSuggest(!temp.isSuggest());
 												model.getSolutionCustom().remove(s);
 											}
 										}
@@ -475,7 +485,7 @@ public class TicketSellController {
 												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
 														.getComponent(model.getSolution1()[j].getSeat() - 1);
 												temp.setStatus(RectStatus.SUGGESTED);
-												temp.setSuggest(!sr.isSuggest());
+												temp.setSuggest(!temp.isSuggest());
 											}
 										}
 										break;
@@ -496,7 +506,7 @@ public class TicketSellController {
 											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
 												.getComponent(model.getSolution1()[j].getSeat() - 1);
 											temp.setStatus(RectStatus.SUGGESTED);
-											temp.setSuggest(!sr.isSuggest());
+											temp.setSuggest(!temp.isSuggest());
 										}
 										break;
 									}
@@ -509,7 +519,7 @@ public class TicketSellController {
 											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
 												.getComponent(model.getSolution2()[j].getSeat() - 1);
 											temp.setStatus(RectStatus.SUGGESTED);
-											temp.setSuggest(!sr.isSuggest());
+											temp.setSuggest(!temp.isSuggest());
 										}
 										break;
 									}
@@ -521,6 +531,24 @@ public class TicketSellController {
 				
 				panel.add(sr);
 			}
+			
+			// Assign suggested status to the seat contained in a solution
+			for (int k = 0; k < model.getTotSeats(); k++) {
+				SeatRect temp = null;
+				if (model.getSolution1().length > 0) {
+					temp =(SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[k].getRow() - 1))
+							.getComponent(model.getSolution1()[k].getSeat() - 1);
+					temp.setStatus(RectStatus.SUGGESTED);
+					temp.setSuggest(!temp.isSuggest());
+				}
+				if (model.getSolution2().length > 0) {
+					temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[k].getRow() - 1))
+							.getComponent(model.getSolution2()[k].getSeat() - 1);
+					temp.setStatus(RectStatus.SUGGESTED);
+					temp.setSuggest(!temp.isSuggest());
+				}
+			}
+			
 			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 			flowLayout.setVgap(0);
 			flowLayout.setHgap(0);
@@ -569,6 +597,7 @@ public class TicketSellController {
 		view.getTitleBox().setSelectedIndex(0);
 		view.getDateBox().setSelectedIndex(0);
 		view.getEditNumberOfTickets().setText("");
+		view.getTextHeader().setText("");
 		model.setSolution1(null);
 		model.setSolution2(null);
 		model.setSolutionCustom(new LinkedList<Seat>());
@@ -576,6 +605,9 @@ public class TicketSellController {
 		model.setCurrentShowtime(null);
 		model.setTotSeats(0);
 		model.setRowList(new LinkedList<Row>());
+		
+		view.revalidate();
+		view.repaint();
 	}
 
 	/**

@@ -87,6 +87,7 @@ public class OptimalSeatsAlgorithm {
 						requestedSolutions--;
 						for (Integer seat : tempSolution)
 							solution.add(new Seat(bestRow +1, seat + 1));
+						counter = target;
 						break;
 					} else {
 						tempSolution.clear();

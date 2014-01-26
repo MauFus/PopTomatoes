@@ -35,7 +35,7 @@ public class SeatRect extends JPanel {
     private boolean clicked = false;
     private boolean suggest = false;
     private boolean free = false;
-    private RectStatus status = RectStatus.FREE;
+    private RectStatus status = RectStatus.BUSY;
     private int rowNumber;
     private int seatNumber;
 	

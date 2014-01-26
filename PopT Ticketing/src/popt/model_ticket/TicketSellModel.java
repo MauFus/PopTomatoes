@@ -40,7 +40,14 @@ public class TicketSellModel {
 		if (!comingShowtimes.isEmpty()) {
 			for (Showtime show : comingShowtimes) {
 				Movie m = show.getMovie();
-				if (!movies.contains(m))
+				boolean alreadyInserted = false;
+				for (Movie movie : movies) {
+					if (movie.equals(m)) {
+						alreadyInserted = true;
+						break;
+					}
+				}
+				if (!alreadyInserted)
 					movies.add(m);
 			}
 		}
