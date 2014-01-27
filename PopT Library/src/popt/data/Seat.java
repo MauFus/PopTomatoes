@@ -41,4 +41,8 @@ public class Seat implements Serializable{
 	public void setSeat(int seat) {
 		this.seat = seat;
 	}
+	
+	public boolean equals(Seat a) {
+		return (this.getRow() == a.getRow() && this.getSeat() == a.getSeat());
+	}
 }
