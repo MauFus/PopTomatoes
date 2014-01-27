@@ -34,7 +34,7 @@ public class TicketPrinter {
 	}
 	
 	public void print() {
-		DateFormat timeStamp = new SimpleDateFormat("yyMMdd_HHmmssSSS");
+		DateFormat timeStamp = new SimpleDateFormat("ddMMyy_HHmmssSSS");
 		Date now = new Date();
 		
 		String output = new String("");
@@ -44,8 +44,8 @@ public class TicketPrinter {
 		output = output.concat("Data: " + showtime.getDate() + " \t Ora: " + showtime.getTime() + "\n");
 		
 		try {
-			writer = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream("/tickets/" + timeStamp.format(now) + ".txt"), "utf-8"));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(System.getProperty("user.dir") 
+					+ "/tickets/" + timeStamp.format(now) + "_" + seat.getSeat() + ".txt"), "utf-8"));
 			writer.write(output);
 		} catch (IOException ex) {
 			ex.printStackTrace();

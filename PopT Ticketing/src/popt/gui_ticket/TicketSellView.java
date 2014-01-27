@@ -226,7 +226,7 @@ public class TicketSellView extends JPanel {
 		
 		headerPanel.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		textHeader = new JLabel("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", SwingConstants.CENTER);
+		textHeader = new JLabel("", SwingConstants.CENTER);
 		textHeader.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textHeader.setBorder(null);
 		headerPanel.add(textHeader);

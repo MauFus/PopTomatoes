@@ -4,7 +4,6 @@ package popt.gui_ticket;
 //could just import javax.swing.* and java.awt.* etc..
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -40,19 +39,6 @@ public class MainView {
 	
 	// View per il modulo TicketSell
 	TicketSellView tsv;
-
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-
-				new MainView();
-			}
-		});
-
-	}
 
 	public MainView() {
 		guiFrame = new JFrame();
