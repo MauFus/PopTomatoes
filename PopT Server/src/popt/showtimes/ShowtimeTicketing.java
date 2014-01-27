@@ -38,6 +38,17 @@ public class ShowtimeTicketing {
 		for (int s = 0; s < specialSeatsStatus.length; s++)
 			specialSeatsStatus[s] = SeatStatus.LIBERO;
 		computeValueMatrix();
+		
+
+		// Test
+		for (int i = 0; i < getValueMatrix().length; i++) {
+			String s = "";
+			for (int j = 0; j < getValueMatrix()[i].length; j++) {
+				s= s.concat(" " + Integer.toString(getValueMatrix()[i][j]));
+			}
+			System.out.println(s);
+		}
+		
 	}
 
 	/**
@@ -49,6 +60,7 @@ public class ShowtimeTicketing {
 			// search in DB the rows that belong to the cinemaHall
 			dba.readDB();
 			LinkedList<Row> foundRows = dba.searchHallSeats(show.getHall().getId());
+			System.out.println("rows: " + foundRows.size());
 			dba.closeDB();
 			
 			// save available seats found
@@ -168,18 +180,20 @@ public class ShowtimeTicketing {
 	 * Il valore è calcolato secondo criteri empiri, basati sulla posizione in sala di 
 	 * ciascun posto e sulla posizione dei posti già venduti.
 	 */
-	private void computeValueMatrix() {
+	public void computeValueMatrix() {
 		// Numero di file in sala (anche righe in matrice)
 		int nRows = sellingStatus.size();
 		// Numero posti per ciascuna file (colonne utili per riga della matrice)
 		int[] seatsPerRow = new int[nRows];
-		for (int i = 0; i < nRows; i++)
+		for (int i = 0; i < nRows; i++){
 			seatsPerRow[i] = sellingStatus.get(i).getSeats();
-		
+			//System.out.println(seatsPerRow[i]);
+		}
 		// Assegnamento valore 1 a posti liberi, 0 a posti occupati (o inesistenti)
 		for (int i = 0; i < nRows; i++) {
 			for (int j = 0; j < valueMatrix[i].length; j++) {
 				if (j < seatsPerRow[i]) {
+					//System.out.println("Riga " + i + ": " +j + " < " + seatsPerRow[i]);
 					if (sellingStatus.get(i).getStatus()[j].equals(SeatStatus.LIBERO))
 						valueMatrix[i][j] = 1;
 					else
@@ -192,19 +206,12 @@ public class ShowtimeTicketing {
 		// Moltiplicazione del valore in base alla fila
 		// Utilizza la funzione y = x*sin(2.3*x)
 		for (int i = 0; i < nRows; i++) {
-			double relPos = (i + 1) / nRows;
-			int fact = (int) (20 * relPos * Math.sin(relPos * 2.3));
-			for (int j = 0; j < seatsPerRow[i]; j++)
-				valueMatrix[i][j] *= fact;
-		}
-		
-		// Moltiplicazione del valore in base alla posizione in fila (centrale ha valore maggiore)
-		// Utilizza la funzione y = sin(x)
-		for (int i = 0; i < nRows; i++) {
-			for (int j = 0; j < seatsPerRow[i]; j++) {
-				double relPos = ((Math.PI - 1) * j / (seatsPerRow[i] - 1)) + 0.5;
-				int fact = (int) (20 * Math.sin(relPos));
-				valueMatrix[i][j] *= fact;
+			double relPos_r = ((double)i + 1) / nRows;
+			double fact_r = 400 * relPos_r * Math.sin(relPos_r * 2.3);
+			for (int j = 0; j < seatsPerRow[i]; j++){
+				double relPos_s = ((Math.PI - 1) * j / (seatsPerRow[i] - 1)) + 0.5;
+				double fact_s = Math.sin(relPos_s);
+				valueMatrix[i][j] *= (fact_r * fact_s);
 			}
 		}
 		
@@ -219,9 +226,6 @@ public class ShowtimeTicketing {
 				}
 			}
 		}
-		
-		// Test
-		System.out.println(valueMatrix);
 	}
 	
 	/**

@@ -21,12 +21,12 @@ public class OptimalSeatsAlgorithm {
 		
 	}
 	
-	public static LinkedList<Seat> execute(int[][] valueMatrix, int target) {
+	public LinkedList<Seat> execute(int[][] valueMatrix, int target) {
 		
 		/* 
 		 * Inizializzazione delle variabili di supporto all'algoritmo
 		 */
-		int[][] seatMatrix = valueMatrix;
+		int[][] seatMatrix = valueMatrix.clone();
 		float[] rowValue = calcAvgValue(seatMatrix);
 		int counter = target;
 		int requestedSolutions = 2;
@@ -112,7 +112,7 @@ public class OptimalSeatsAlgorithm {
 	 * @param valueMatrix
 	 * @return
 	 */
-	private static float[] calcAvgValue(int[][] valueMatrix) {
+	private float[] calcAvgValue(int[][] valueMatrix) {
 		float[] sum = new float[valueMatrix.length];
 		for (int row = 0; row < valueMatrix.length; row++) {
 			for (int i = 0; i < valueMatrix[row].length; i++)
@@ -122,14 +122,14 @@ public class OptimalSeatsAlgorithm {
 		return sum;
 	}
 	
-	private static int sumValues(int[] array) {
+	private int sumValues(int[] array) {
 		int sum = 0;
 		for (int i = 0; i < array.length; i++)
 			sum += array[i];
 		return sum;
 	}
 	
-	private static int indexOfMaxValue(float[] vector) {
+	private int indexOfMaxValue(float[] vector) {
 		int index = -1;
 		float max = 0;
 		for (int i = 0; i < vector.length; i++) {
@@ -141,7 +141,7 @@ public class OptimalSeatsAlgorithm {
 		return index;
 	}
 	
-	private static int indexOfMaxValue(int[] vector) {
+	private int indexOfMaxValue(int[] vector) {
 		int index = -1;
 		int max = 0;
 		for (int i = 0; i < vector.length; i++) {
@@ -153,7 +153,7 @@ public class OptimalSeatsAlgorithm {
 		return index;
 	}
 	
-	private static int maximumInSolution(Vector<Integer> tempSolution) {
+	private int maximumInSolution(Vector<Integer> tempSolution) {
 		Integer max = 0;
 		for (Integer i : tempSolution) {
 			if (i > max)
@@ -162,7 +162,7 @@ public class OptimalSeatsAlgorithm {
 		return max;
 	}
 
-	private static int minimunInSolution(Vector<Integer> tempSolution) {
+	private int minimunInSolution(Vector<Integer> tempSolution) {
 		Integer min = null;
 		for (Integer i : tempSolution) {
 			if (min == null || (min != null && i < min))
