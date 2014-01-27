@@ -570,7 +570,6 @@ public class TicketSellController {
 			gbc_panel.fill = GridBagConstraints.BOTH;
 			gbc_panel.gridx = 1;
 			gbc_panel.gridy = i;
-			model.getRowPanels().add(panel);
 			view.getHallViewer().add(panel, gbc_panel);
 		}
 		
