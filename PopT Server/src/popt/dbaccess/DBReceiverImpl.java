@@ -80,6 +80,106 @@ public class DBReceiverImpl extends UnicastRemoteObject implements DBReceiver {
 		}
 	}
 
+	@Override
+	public boolean insertShowtime(Showtime show) throws RemoteException {
+		MySQLAccess dba = new MySQLAccess();
+		try {
+			isWorking = true;
+			statusMessage = "Inserimento in DB in corso...";
+			
+			dba.readDB();
+			dba.insertShowtime(show.getMovie(), show.getHall(), show.getDate(), show.getTime());
+			dba.closeDB();
+			
+			statusMessage = "Inserimento in DB eseguito con successo!\n";
+			isWorking = false;
+			return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			dba.closeDB();
+			
+			statusMessage = "Errore: inserimento in DB non riuscito\n";
+			isWorking = false;
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteShowtimes(String date) throws RemoteException {
+		MySQLAccess dba = new MySQLAccess();
+		try {
+			isWorking = true;
+			statusMessage = "Cancellazione da DB in corso...";
+
+			dba.readDB();
+			dba.deleteShowtimes(date);
+			dba.closeDB();
+
+			statusMessage = "cancellazione da DB eseguita con successo!\n";
+			isWorking = false;
+			return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			dba.closeDB();
+			
+			statusMessage = "Errore: Cancellazione in DB non riuscita\n";
+			isWorking = false;
+			return false;
+		}
+	}
+
+	@Override
+	public LinkedList<Showtime> searchShowtime(Showtime show) throws RemoteException {
+		MySQLAccess dba = new MySQLAccess();
+		try {
+			isWorking = true;
+			statusMessage = "Ricerca in DB in corso...";
+			LinkedList<Showtime> result = new LinkedList<>();
+
+			dba.readDB();
+			result = dba.searchShowtimes(show.getId(), show.getMovie(), 
+					show.getHall(), show.getDate(), show.getTime());
+			dba.closeDB();
+			
+			statusMessage = "Ricerca in DB eseguita con successo!\n";
+			isWorking = false;
+			return result;
+			
+		} catch (Exception e) {
+			dba.closeDB();
+			
+			statusMessage = "Errore: Ricerca in DB fallita\n";
+			isWorking = false;
+			return null;
+		}
+	}
+
+	@Override
+	public LinkedList<CinemaHall> searchCinemaHalls() throws RemoteException {
+		MySQLAccess dba = new MySQLAccess();
+		try {
+			isWorking = true;
+			statusMessage = "Ricerca in DB in corso...";
+			LinkedList<CinemaHall> result = new LinkedList<>();
+
+			dba.readDB();
+			result = dba.searchHalls();
+			dba.closeDB();
+			
+			statusMessage = "Ricerca in DB eseguita con successo!\n";
+			isWorking = false;
+			return result;
+			
+		} catch (Exception e) {
+			dba.closeDB();
+			
+			statusMessage = "Errore: Ricerca in DB fallita\n";
+			isWorking = false;
+			return null;
+		}
+	}
 
 	@Override
 	public boolean isAvailable() throws RemoteException {

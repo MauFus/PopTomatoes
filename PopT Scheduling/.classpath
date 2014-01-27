@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/popt-library.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PopT Common"/>
+	<classpathentry kind="lib" path="ico/popt-icons.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

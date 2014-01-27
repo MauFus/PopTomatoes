@@ -51,7 +51,7 @@ public class MoviePanel extends JPanel {
 		
 		btnCloseMovie = new JButton("X");
 		btnCloseMovie.setFont(new Font("Calibri", Font.BOLD, 36));
-		btnCloseMovie.setForeground(Color.WHITE);
+		btnCloseMovie.setForeground(Color.RED);
 		btnCloseMovie.setBackground(Color.RED);
 		btnCloseMovie.setBorderPainted(false);
 		btnCloseMovie.setFocusable(false);

@@ -9,7 +9,9 @@
 
 package popt.data;
 
-public enum Genre {
+import java.io.Serializable;
+
+public enum Genre implements Serializable{
 	ACTION, ADVENTURE, ANIMATION, BIOGRAPHY, COMEDY, CRIME, DOCUMENTARY, 
 	DRAMA, FANTASY, NOIR, HISTORY, HORROR, MUSICAL, MYSTERY, ROMANCE, 
 	SCI_FI, SPORT, THRILLER, WAR, WESTERN
