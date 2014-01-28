@@ -51,7 +51,7 @@ public class MainView {
 		guiFrame.pack();
 
 		// make sure the program exits when the frame closes
-		guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		guiFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		guiFrame.setTitle("PopTomatoes");
 		
 		guiFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);

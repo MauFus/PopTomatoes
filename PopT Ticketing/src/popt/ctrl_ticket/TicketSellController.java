@@ -495,8 +495,8 @@ public class TicketSellController {
 													SeatRect temp = (SeatRect) rowPanels.get(s.getRow() - 1).getComponent(s.getSeat()-1);
 													temp.setStatus(RectStatus.FREE);
 												}
-												model.getSolutionCustom().remove(s);
 											}
+											model.getSolutionCustom().clear();
 										}
 										break;
 									}
@@ -532,8 +532,8 @@ public class TicketSellController {
 													SeatRect temp = (SeatRect) rowPanels.get(s.getRow() - 1).getComponent(s.getSeat()-1);
 													temp.setStatus(RectStatus.FREE);
 												}
-												model.getSolutionCustom().remove(s);
 											}
+											model.getSolutionCustom().clear();
 										}
 										break;
 									}
