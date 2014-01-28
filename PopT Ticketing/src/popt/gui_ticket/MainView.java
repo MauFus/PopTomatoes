@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.Font;
 
 public class MainView {
 	static JFrame guiFrame;
@@ -66,6 +67,7 @@ public class MainView {
 
 		
 		ticketSellButt = new JButton("Sell");
+		ticketSellButt.setFont(new Font("Calibri", Font.PLAIN, 15));
 		ticketSellButt.setBackground(new Color(159, 182, 205));
 		ticketSellButt.setFocusable(false);
 		//ticketSellButt.setBorderPainted(false);
@@ -78,7 +80,8 @@ public class MainView {
 			}
 		});
 		
-		JButton exitButt = new JButton("Exit");
+		JButton exitButt = new JButton("X");
+		exitButt.setFont(new Font("Calibri", Font.BOLD, 39));
 		exitButt.setBackground(Color.RED);
 		exitButt.setFocusable(false);
 		//exitButt.setBorderPainted(false);
@@ -117,9 +120,9 @@ public class MainView {
 		guiFrame.getContentPane().add(tabsPanel, BorderLayout.NORTH);
 		GroupLayout gl_tabsPanel = new GroupLayout(tabsPanel);
 		gl_tabsPanel.setHorizontalGroup(
-			gl_tabsPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_tabsPanel.createSequentialGroup()
-					.addContainerGap(155, Short.MAX_VALUE)
+			gl_tabsPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_tabsPanel.createSequentialGroup()
+					.addContainerGap(834, Short.MAX_VALUE)
 					.addComponent(ticketSellButt, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(exitButt, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
@@ -129,7 +132,7 @@ public class MainView {
 			gl_tabsPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tabsPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_tabsPanel.createParallelGroup(Alignment.BASELINE, false)
+					.addGroup(gl_tabsPanel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(ticketSellButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
 						.addComponent(exitButt, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

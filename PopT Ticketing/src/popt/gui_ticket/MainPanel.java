@@ -29,7 +29,7 @@ public class MainPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblNewLabel_1 = new JLabel("PopTomatoes \u263A");
+		JLabel lblNewLabel_1 = new JLabel("PopTomatoes - Ticketing");
 		lblNewLabel_1.setFont(new Font("Calibri", Font.BOLD, 51));
 		lblNewLabel_1.setIcon(new ImageIcon(MissingConnectionPanel.class.getResource("/ico/LogoPopT.png")));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();

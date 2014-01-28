@@ -63,7 +63,7 @@ public class SearchMovieDialog extends JDialog {
 		txtMovieSearch.setEditable(false);
 
 		JPanel pnSearchMovie = new JPanel();
-		pnSearchMovie.setBackground(Color.ORANGE);
+		pnSearchMovie.setBackground(new Color(0,34,102));
 		
 		JTextPane txtMovieSearchResult = new JTextPane();
 		txtMovieSearchResult.setText("Query Results:");
@@ -75,8 +75,11 @@ public class SearchMovieDialog extends JDialog {
 		txtMovieSearchResult.setEditable(false);
 
 		pnQueryResults = new JPanel();
-		pnQueryResults.setBackground(Color.ORANGE);
+		pnQueryResults.setBackground(new Color(0,34,102));
+		pnQueryResults.setBorder(null);
 		JScrollPane scrb = new JScrollPane(pnQueryResults);
+		scrb.setBorder(null);
+		scrb.setBackground(new Color(0,34,102));
 		radioGroup = new ButtonGroup();		
 		
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
@@ -108,7 +111,8 @@ public class SearchMovieDialog extends JDialog {
 		
 		JTextPane txtpnId = new JTextPane();
 		txtpnId.setEditable(false);
-		txtpnId.setBackground(Color.ORANGE);
+		txtpnId.setBackground(new Color(0,34,102));
+		txtpnId.setForeground(Color.WHITE);
 		txtpnId.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txtpnId.setText("ID:");
 
@@ -118,7 +122,8 @@ public class SearchMovieDialog extends JDialog {
 		
 		JTextPane txtpnTitle = new JTextPane();
 		txtpnTitle.setEditable(false);
-		txtpnTitle.setBackground(Color.ORANGE);
+		txtpnTitle.setBackground(new Color(0,34,102));
+		txtpnTitle.setForeground(Color.WHITE);
 		txtpnTitle.setText("Title:");
 		txtpnTitle.setFont(new Font("Calibri", Font.PLAIN, 15));
 
@@ -128,7 +133,8 @@ public class SearchMovieDialog extends JDialog {
 		
 		JTextPane txtpnReleaseDate = new JTextPane();
 		txtpnReleaseDate.setEditable(false);
-		txtpnReleaseDate.setBackground(Color.ORANGE);
+		txtpnReleaseDate.setBackground(new Color(0,34,102));
+		txtpnReleaseDate.setForeground(Color.WHITE);
 		txtpnReleaseDate.setText("Year:");
 		txtpnReleaseDate.setFont(new Font("Calibri", Font.PLAIN, 15));
 
@@ -138,17 +144,19 @@ public class SearchMovieDialog extends JDialog {
 		
 		JTextPane txtpnPg = new JTextPane();
 		txtpnPg.setEditable(false);
-		txtpnPg.setBackground(Color.ORANGE);
+		txtpnPg.setBackground(new Color(0,34,102));
+		txtpnPg.setForeground(Color.WHITE);
 		txtpnPg.setText("PG:");
 		txtpnPg.setFont(new Font("Calibri", Font.PLAIN, 15));
 
 		checkBoxPG = new JCheckBox("");
-		checkBoxPG.setBackground(Color.ORANGE);
+		checkBoxPG.setBackground(new Color(0,34,102));
 		checkBoxPG.setBorder(null);
 		
 		JTextPane txtpnGenre = new JTextPane();
 		txtpnGenre.setEditable(false);
-		txtpnGenre.setBackground(Color.ORANGE);
+		txtpnGenre.setBackground(new Color(0,34,102));
+		txtpnGenre.setForeground(Color.WHITE);
 		txtpnGenre.setText("Genre:");
 		txtpnGenre.setFont(new Font("Calibri", Font.PLAIN, 15));
 
@@ -161,7 +169,8 @@ public class SearchMovieDialog extends JDialog {
 
 		JTextPane txtpnDuration = new JTextPane();
 		txtpnDuration.setEditable(false);
-		txtpnDuration.setBackground(Color.ORANGE);
+		txtpnDuration.setBackground(new Color(0,34,102));
+		txtpnDuration.setForeground(Color.WHITE);
 		txtpnDuration.setText("Duration:");
 		txtpnDuration.setFont(new Font("Calibri", Font.PLAIN, 15));
 

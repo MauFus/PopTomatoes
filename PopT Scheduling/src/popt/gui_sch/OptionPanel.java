@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.Color;
+import javax.swing.JLabel;
 
 public class OptionPanel extends JPanel {
 
@@ -22,6 +23,7 @@ public class OptionPanel extends JPanel {
 	private JTextField txtClosingTime;
 	private JTextField txtGap;
 	private JTextPane txtBarMessage;
+	private JLabel txtpnToday;
 	
 	private JButton btnValidate;
 	private JButton btnReset;
@@ -78,8 +80,18 @@ public class OptionPanel extends JPanel {
 		btnReset.setFont(new Font("Calibri", Font.PLAIN, 14));
 		
 		txtBarMessage = new JTextPane();
+		txtBarMessage.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txtBarMessage.setEditable(false);
 		txtBarMessage.setBackground(new Color(132, 234, 0));
+		
+		txtpnToday = new JLabel();
+		txtpnToday.setOpaque(true);
+		txtpnToday.setHorizontalAlignment(SwingConstants.CENTER);
+		txtpnToday.setFont(new Font("Calibri", Font.BOLD, 27));
+		txtpnToday.setForeground(Color.WHITE);
+		txtpnToday.setBackground(new Color(132, 234, 0));
+		
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -94,8 +106,10 @@ public class OptionPanel extends JPanel {
 						.addComponent(txtClosingTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtGap, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtOpeningTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-					.addComponent(txtBarMessage, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE)
+					.addGap(41)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(txtpnToday, GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+						.addComponent(txtBarMessage, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE))
 					.addGap(45)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(btnReset, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -106,23 +120,28 @@ public class OptionPanel extends JPanel {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(txtOpeningTime, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-							.addComponent(btnValidate))
-						.addComponent(txtpnOpening, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
-					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtpnClosing, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtClosingTime, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(txtOpeningTime, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+									.addComponent(btnValidate))
+								.addComponent(txtpnOpening, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtpnClosing, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtClosingTime, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+							.addGap(18))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(txtpnToday, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(txtGap, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnReset))
 						.addComponent(txtpnGap, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtBarMessage, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(17, Short.MAX_VALUE))
+					.addContainerGap(16, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 
@@ -151,5 +170,8 @@ public class OptionPanel extends JPanel {
 	public JButton getBtnReset() {
 		return btnReset;
 	}
-	
+
+	public JLabel getTxtpnToday() {
+		return txtpnToday;
+	}
 }

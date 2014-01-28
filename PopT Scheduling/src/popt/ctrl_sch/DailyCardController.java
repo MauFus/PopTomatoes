@@ -47,6 +47,8 @@ public class DailyCardController {
 	 * @param optPanel
 	 */
 	private void initOptionsPanelListeners(final OptionPanel optPanel) {
+		optPanel.getTxtpnToday().setText(model.getDate());
+		
 		optPanel.getTxtGap().addFocusListener(new FocusListener() {
 
 			@Override
@@ -341,12 +343,12 @@ public class DailyCardController {
 				public void mouseEntered(MouseEvent e) {
 					rect.setForeground(Color.BLACK);
 					rect.setBackground(new Color(
-							rect.getColor().getRed() /*+ 100*/, rect.getColor()
-									.getGreen() /*+ 100*/, rect.getColor()
-									.getBlue() /*+ 100*/));
+							(rect.getColor().getRed() + (int) ((255 - rect.getColor().getRed())*0.5)), 
+							(rect.getColor().getGreen() + (int) ((255 - rect.getColor().getGreen())*0.5)),
+							(rect.getColor().getBlue() + (int) ((255 - rect.getColor().getBlue())*0.5))));
 				}
 
-				@Override
+				@Override 
 				public void mouseClicked(MouseEvent e) {
 					if (e.getButton() == MouseEvent.BUTTON3) {
 						final MovieInfoDialog mid = new MovieInfoDialog();
@@ -355,12 +357,13 @@ public class DailyCardController {
 								rect.getMovieRectModel().getMovie().getTitle());
 						mid.getTextSFTime()
 								.setText(
-										((14 + rect.getX() / 60) % 24)
+										("From: " + (14 + rect.getX() / 60) % 24)
 												+ ":"
 												+ (rect.getX() % 60 < 10 ? "0"
 														: "")
 												+ (rect.getX() % 60)
 												+ "           "
+												+ "To: "
 												+ ((14 + rect.getFinishTime() / 60) % 24)
 												+ ":"
 												+ (rect.getFinishTime() % 60 < 10 ? "0"
