@@ -161,8 +161,8 @@ public class TicketSellController {
 			public void focusLost(FocusEvent arg0) {
 				try {
 					int n = Integer.parseInt(view.getEditNumberOfTickets().getText());
-					if (n > 0) {
-						model.setSpecialSeats(n);;
+					if (n >= 0) {
+						model.setSpecialSeats(n);
 						view.getTxtpnErrors().setText("");
 					} else {
 						view.getEditSpecialSeats().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
@@ -170,8 +170,11 @@ public class TicketSellController {
 					}
 						
 				} catch (NumberFormatException nfe) {
-					view.getEditNumberOfTickets().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-					view.getTxtpnErrors().setText("Inserted input is not valid!");
+					if (!view.getEditNumberOfTickets().getText().equals("")) {
+						view.getEditNumberOfTickets().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+						view.getTxtpnErrors().setText("Inserted input is not valid!");
+					} else
+						model.setSpecialSeats(0);
 				}
 			}
 			

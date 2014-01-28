@@ -49,7 +49,7 @@ public class SeatsAllocatorImpl extends UnicastRemoteObject implements SeatsAllo
 			if (status[i].equals(SeatStatus.LIBERO))
 				result[count] = i;
 		}
-		if (count == qta)
+		if (count == qta - 1)
 			return result;
 		else
 			return null;
