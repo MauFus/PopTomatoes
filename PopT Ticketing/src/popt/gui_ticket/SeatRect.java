@@ -33,7 +33,6 @@ public class SeatRect extends JPanel {
     protected int shadowAlpha = 150;
     
     private boolean suggest = false;
-    private boolean free = false;
     private RectStatus status = RectStatus.BUSY;
     private int rowNumber;
     private int seatNumber;
@@ -42,6 +41,7 @@ public class SeatRect extends JPanel {
 		super();
 		rowNumber = row;
 		seatNumber = seat;
+		suggest = false;
 		
 		setPreferredSize(new Dimension(20, 20));
         setOpaque(false);
@@ -128,6 +128,8 @@ public class SeatRect extends JPanel {
 		default:
 			break;
 		}
+		this.revalidate();
+		this.repaint();
 	}
 
 	/**
@@ -142,20 +144,6 @@ public class SeatRect extends JPanel {
 	 */
 	public void setSuggest(boolean suggest) {
 		this.suggest = suggest;
-	}
-
-	/**
-	 * @return the free
-	 */
-	public boolean isFree() {
-		return free;
-	}
-
-	/**
-	 * @param free the free to set
-	 */
-	public void setFree(boolean free) {
-		this.free = free;
 	}
 
 	/**

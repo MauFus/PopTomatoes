@@ -357,10 +357,11 @@ public class TicketSellController {
 			RowPanel panel = new RowPanel();
 			for (int j = 0; j < orderedList.get(i).getSeats(); j++) {
 				final SeatRect sr = new SeatRect(orderedList.get(i).getNumber(), j + 1);
+				sr.setSuggest(false);
 				// Se il posto non è occupato, viene marcato come assegnabile
 				if (orderedList.get(i).getStatus()[j].equals(SeatStatus.LIBERO)) {
 					sr.setStatus(RectStatus.FREE);
-					sr.setFree(true);
+					sr.setSuggest(false);
 				}
 
 				if (model.getSolution1() != null) {
@@ -416,12 +417,6 @@ public class TicketSellController {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
 						if (sr.getStatus().equals(RectStatus.FREE)) {
-							// Aggiunge il posto alla soluzione custom
-							sr.setStatus(RectStatus.CHECKED);
-							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
-							model.setSolutionIndex(3);
-							model.getSolutionCustom().add(clicked);
-							
 							// resetta eventuali soluzioni già selezionate
 							if (model.getSolutionIndex() == 1) {
 								if (model.getSolution1() != null) {
@@ -445,7 +440,13 @@ public class TicketSellController {
 								}
 							}
 							
-						} else if (sr.isFree() && sr.getStatus().equals(RectStatus.CHECKED)) {
+							// Aggiunge il posto alla soluzione custom
+							sr.setStatus(RectStatus.CHECKED);
+							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
+							model.getSolutionCustom().add(clicked);
+							model.setSolutionIndex(3);							
+							
+						} else if (!sr.isSuggest() && sr.getStatus().equals(RectStatus.CHECKED)) {
 							// Resetta a libero il posto selezionato
 							sr.setStatus(RectStatus.FREE);
 							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
@@ -477,7 +478,7 @@ public class TicketSellController {
 												temp.setStatus(RectStatus.CHECKED);
 											}
 										}
-										
+
 										if (model.getSolution2() != null) {
 											for (int j = 0; j < model.getSolution2().length; j++) {
 												if (rowPanels.containsKey(model.getSolution2()[j].getRow() - 1)) {
@@ -493,15 +494,16 @@ public class TicketSellController {
 												if (rowPanels.containsKey(s.getRow() - 1)) {
 													SeatRect temp = (SeatRect) rowPanels.get(s.getRow() - 1).getComponent(s.getSeat()-1);
 													temp.setStatus(RectStatus.FREE);
-													model.getSolutionCustom().remove(s);
 												}
+												model.getSolutionCustom().remove(s);
 											}
 										}
 										break;
 									}
 								}
-								
-							} else if (model.getSolution2() != null) {
+							} 
+							
+							if (model.getSolution2() != null) {
 								for (int i = 0; i < model.getSolution2().length; i++) {
 									if (model.getSolution2()[i].equals(clicked)) {
 										// Il posto selezionato fa parte della Soluzione 2
@@ -529,8 +531,8 @@ public class TicketSellController {
 												if (rowPanels.containsKey(s.getRow() - 1)) {
 													SeatRect temp = (SeatRect) rowPanels.get(s.getRow() - 1).getComponent(s.getSeat()-1);
 													temp.setStatus(RectStatus.FREE);
-													model.getSolutionCustom().remove(s);
 												}
+												model.getSolutionCustom().remove(s);
 											}
 										}
 										break;
@@ -558,7 +560,9 @@ public class TicketSellController {
 										break;
 									}
 								}
-							} else if (model.getSolution2() != null) {
+							} 
+							
+							if (model.getSolution2() != null) {
 								for (int i = 0; i < model.getSolution2().length; i++) {
 									if (model.getSolution2()[i].equals(clicked)) {
 										// Resetta soluzione scelta a nessuna

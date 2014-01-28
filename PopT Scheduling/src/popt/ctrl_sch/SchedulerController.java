@@ -112,6 +112,8 @@ public class SchedulerController {
         model.getMondaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getMondaySchedule().getDate(), "")));
         model.getTuesdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getTuesdaySchedule().getDate(), "")));
         model.getWednesdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getWednesdaySchedule().getDate(), "")));
+        view.revalidate();
+        view.repaint();
 	}
 	
 	/**

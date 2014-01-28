@@ -190,8 +190,8 @@ public class TicketSellModel {
 	/**
 	 * @param specialSeats the specialSeats to set
 	 */
-	public void setSpecialSeats(int specialSeats) {
-		this.specialSeats = specialSeats;
+	public void setSpecialSeats(int special) {
+		specialSeats = special;
 	}
 
 	/**
