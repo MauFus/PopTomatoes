@@ -20,6 +20,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -44,10 +45,12 @@ public class TicketSellController {
 	
 	private TicketSellModel model;
 	private TicketSellView view;
+	private Hashtable<Integer, RowPanel> rowPanels;
 
 	public TicketSellController(TicketSellModel model, TicketSellView view) {
 		this.model = model;
 		this.view = view;
+		this.rowPanels = new Hashtable<>();
 		
 		model.setComingShowtimes(MainTicketing.getCurrentShowtimeList());
 		model.setComingMovies(model.findCurrentMovies());
@@ -414,19 +417,23 @@ public class TicketSellController {
 							if (model.getSolutionIndex() == 1) {
 								if (model.getSolution1() != null) {
 									for (int j = 0; j < model.getSolution1().length; j++) {
-										SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
-												.getComponent(model.getSolution1()[j].getSeat() - 1);
-										temp.setStatus(RectStatus.SUGGESTED);
-										temp.setSuggest(!temp.isSuggest());
+										if (rowPanels.containsKey(model.getSolution1()[j].getRow() - 1)) {
+											SeatRect temp = (SeatRect) rowPanels.get(model.getSolution1()[j].getRow() - 1)
+													.getComponent(model.getSolution1()[j].getSeat()-1);
+											temp.setStatus(RectStatus.SUGGESTED);
+											temp.setSuggest(!temp.isSuggest());
+										}
 									}
 								}
 							} else if (model.getSolutionIndex() == 2) {
 								if (model.getSolution2() != null) {
 									for (int j = 0; j < model.getSolution2().length; j++) {
-										SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
-												.getComponent(model.getSolution2()[j].getSeat() - 1);
-										temp.setStatus(RectStatus.SUGGESTED);
-										temp.setSuggest(!temp.isSuggest());
+										if (rowPanels.containsKey(model.getSolution2()[j].getRow() - 1)) {
+											SeatRect temp = (SeatRect) rowPanels.get(model.getSolution2()[j].getRow() - 1)
+													.getComponent(model.getSolution2()[j].getSeat()-1);
+											temp.setStatus(RectStatus.SUGGESTED);
+											temp.setSuggest(!temp.isSuggest());
+										}
 									}
 								}
 							}
@@ -440,8 +447,9 @@ public class TicketSellController {
 							sr.setFree(!sr.isFree());
 
 							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
-							if (model.getSolutionCustom().contains(clicked)) {
-								model.getSolutionCustom().remove(clicked);
+							for (Seat s : model.getSolutionCustom()) {
+								if (s.equals(clicked))
+									model.getSolutionCustom().remove(s);
 							}
 							if (model.getSolutionCustom().isEmpty())
 								model.setSolutionIndex(0);
@@ -459,27 +467,32 @@ public class TicketSellController {
 									if (model.getSolution1()[i].equals(clicked)){
 										model.setSolutionIndex(1);
 										for (int j = 0; j < model.getSolution1().length; j++) {
-											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
-												.getComponent(model.getSolution1()[j].getSeat() - 1);
-											temp.setStatus(RectStatus.CHECKED);
-											temp.setSuggest(!temp.isSuggest());
+											if (rowPanels.containsKey(model.getSolution1()[j].getRow() - 1)) {
+												SeatRect temp = (SeatRect) rowPanels.get(model.getSolution1()[j].getRow() - 1)
+														.getComponent(model.getSolution1()[j].getSeat()-1);
+												temp.setStatus(RectStatus.CHECKED);
+												temp.setSuggest(!temp.isSuggest());
+											}
 										}
 										
 										if (!model.getSolutionCustom().isEmpty()) {
 											for (Seat s : model.getSolutionCustom()) {
-												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, s.getRow() - 1))
-														.getComponent(s.getSeat() - 1);
-												temp.setStatus(RectStatus.FREE);
-												temp.setSuggest(!temp.isSuggest());
-												model.getSolutionCustom().remove(s);
+												if (rowPanels.containsKey(s.getRow() - 1)) {
+													SeatRect temp = (SeatRect) rowPanels.get(s.getRow() - 1).getComponent(s.getSeat()-1);
+													temp.setStatus(RectStatus.FREE);
+													temp.setSuggest(!temp.isSuggest());
+													model.getSolutionCustom().remove(s);
+												}
 											}
 										}
 										if (model.getSolution2() != null) {
 											for (int j = 0; j < model.getSolution2().length; j++) {
-												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
-														.getComponent(model.getSolution2()[j].getSeat() - 1);
-												temp.setStatus(RectStatus.SUGGESTED);
-												temp.setSuggest(!temp.isSuggest());
+												if (rowPanels.containsKey(model.getSolution2()[j].getRow() - 1)) {
+													SeatRect temp = (SeatRect) rowPanels.get(model.getSolution2()[j].getRow() - 1)
+															.getComponent(model.getSolution2()[j].getSeat()-1);
+													temp.setStatus(RectStatus.SUGGESTED);
+													temp.setSuggest(!temp.isSuggest());
+												}
 											}
 										}
 										break;
@@ -490,27 +503,32 @@ public class TicketSellController {
 									if (model.getSolution2()[i].equals(clicked)){
 										model.setSolutionIndex(2);
 										for (int j = 0; j < model.getSolution2().length; j++) {
-											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
-												.getComponent(model.getSolution2()[j].getSeat() - 1);
-											temp.setStatus(RectStatus.CHECKED);
-											temp.setSuggest(!temp.isSuggest());
+											if (rowPanels.containsKey(model.getSolution2()[j].getRow() - 1)) {
+												SeatRect temp = (SeatRect) rowPanels.get(model.getSolution2()[j].getRow() - 1)
+														.getComponent(model.getSolution2()[j].getSeat()-1);
+												temp.setStatus(RectStatus.CHECKED);
+												temp.setSuggest(!temp.isSuggest());
+											}
 										}
 
 										if (!model.getSolutionCustom().isEmpty()) {
 											for (Seat s : model.getSolutionCustom()) {
-												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, s.getRow() - 1))
-														.getComponent(s.getSeat() - 1);
-												temp.setStatus(RectStatus.FREE);
-												temp.setSuggest(!temp.isSuggest());
-												model.getSolutionCustom().remove(s);
+												if (rowPanels.containsKey(s.getRow() - 1)) {
+													SeatRect temp = (SeatRect) rowPanels.get(s.getRow() - 1).getComponent(s.getSeat()-1);
+													temp.setStatus(RectStatus.FREE);
+													temp.setSuggest(!temp.isSuggest());
+													model.getSolutionCustom().remove(s);
+												}
 											}
 										}
 										if (model.getSolution1() != null) {
 											for (int j = 0; j < model.getSolution1().length; j++) {
-												SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
-														.getComponent(model.getSolution1()[j].getSeat() - 1);
-												temp.setStatus(RectStatus.SUGGESTED);
-												temp.setSuggest(!temp.isSuggest());
+												if (rowPanels.containsKey(model.getSolution1()[j].getRow() - 1)) {
+													SeatRect temp = (SeatRect) rowPanels.get(model.getSolution1()[j].getRow() - 1)
+															.getComponent(model.getSolution1()[j].getSeat()-1);
+													temp.setStatus(RectStatus.SUGGESTED);
+													temp.setSuggest(!temp.isSuggest());
+												}
 											}
 										}
 										break;
@@ -528,10 +546,12 @@ public class TicketSellController {
 									if (model.getSolution1()[i].equals(clicked)){
 										model.setSolutionIndex(0);
 										for (int j = 0; j < model.getSolution1().length; j++) {
-											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution1()[j].getRow() - 1))
-												.getComponent(model.getSolution1()[j].getSeat() - 1);
-											temp.setStatus(RectStatus.SUGGESTED);
-											temp.setSuggest(!temp.isSuggest());
+											if (rowPanels.containsKey(model.getSolution1()[j].getRow() - 1)) {
+												SeatRect temp = (SeatRect) rowPanels.get(model.getSolution1()[j].getRow() - 1)
+														.getComponent(model.getSolution1()[j].getSeat()-1);
+												temp.setStatus(RectStatus.SUGGESTED);
+												temp.setSuggest(!temp.isSuggest());
+											}
 										}
 										break;
 									}
@@ -541,10 +561,12 @@ public class TicketSellController {
 									if (model.getSolution2()[i].equals(clicked)){
 										model.setSolutionIndex(0);
 										for (int j = 0; j < model.getSolution2().length; j++) {
-											SeatRect temp = (SeatRect)((RowPanel)view.getHallViewer().getComponentAt(1, model.getSolution2()[j].getRow() - 1))
-												.getComponent(model.getSolution2()[j].getSeat() - 1);
-											temp.setStatus(RectStatus.SUGGESTED);
-											temp.setSuggest(!temp.isSuggest());
+											if (rowPanels.containsKey(model.getSolution2()[j].getRow() - 1)) {
+												SeatRect temp = (SeatRect) rowPanels.get(model.getSolution2()[j].getRow() - 1)
+														.getComponent(model.getSolution2()[j].getSeat()-1);
+												temp.setStatus(RectStatus.SUGGESTED);
+												temp.setSuggest(!temp.isSuggest());
+											}
 										}
 										break;
 									}
@@ -557,12 +579,6 @@ public class TicketSellController {
 				panel.add(sr);
 			}
 			
-			for (int k = 0; k < model.getTotSeats(); k++) {
-
-				//System.out.println("1: " + model.getSolution1()[i].getRow() + ", " + model.getSolution1()[i].getSeat());
-				//System.out.println("2: " + model.getSolution2()[i].getRow() + ", " + model.getSolution2()[i].getSeat());
-			}
-			
 			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 			flowLayout.setVgap(0);
 			flowLayout.setHgap(0);
@@ -571,6 +587,7 @@ public class TicketSellController {
 			gbc_panel.gridx = 1;
 			gbc_panel.gridy = i;
 			view.getHallViewer().add(panel, gbc_panel);
+			rowPanels.put(i, panel);
 		}
 		
 		view.getHallViewer().revalidate();
