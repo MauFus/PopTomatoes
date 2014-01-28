@@ -21,7 +21,6 @@ import popt.data.Showtime;
 import popt.gui_sch.DailyCard;
 import popt.gui_sch.HallPanel;
 import popt.gui_sch.HallPanelContainer;
-import popt.gui_sch.MainView;
 import popt.gui_sch.MovieInfoDialog;
 import popt.gui_sch.MovieLine;
 import popt.gui_sch.MovieRect;
@@ -350,8 +349,7 @@ public class DailyCardController {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if (e.getButton() == MouseEvent.BUTTON3) {
-						final MovieInfoDialog mid = new MovieInfoDialog(MainView
-								.getGuiFrame());
+						final MovieInfoDialog mid = new MovieInfoDialog();
 						mid.setVisible(true);
 						mid.getTextTitle().setText(
 								rect.getMovieRectModel().getMovie().getTitle());

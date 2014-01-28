@@ -7,8 +7,6 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
@@ -21,8 +19,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -49,65 +45,16 @@ public class MainView {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		guiFrame.setUndecorated(true);
 		SwingUtilities.updateComponentTreeUI(guiFrame);
-		
-		guiFrame.addWindowListener(new WindowListener() {
-			
-			@Override
-			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowIconified(WindowEvent e) {
-				guiFrame.setState(JFrame.NORMAL);
-                System.out.println("Cant Minimize");				
-			}
-			
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowClosed(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
+		guiFrame.setUndecorated(true);
 		guiFrame.pack();
 
 		// make sure the program exits when the frame closes
 		guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		guiFrame.setTitle("PopTomatoes");
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment()
-				.getDefaultScreenDevice();
-		if (gd.isFullScreenSupported()) {
-			gd.setFullScreenWindow(guiFrame);
-			guiFrame.requestFocusInWindow();
-		}
+		
+		guiFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		guiFrame.setResizable(false);
 
 		// This will center the JFrame in the middle of the screen
 		// guiFrame.setLocationRelativeTo(null);

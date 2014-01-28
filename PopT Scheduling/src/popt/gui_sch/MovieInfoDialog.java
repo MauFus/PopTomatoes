@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -33,8 +32,7 @@ public class MovieInfoDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public MovieInfoDialog(JFrame parent) {
-		super(parent,true);
+	public MovieInfoDialog() {
 		setBounds(100, 100, 320, 240);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

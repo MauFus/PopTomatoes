@@ -55,8 +55,10 @@ public class MovieListController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				searchDialog = new SearchMovieDialog(MainView.getGuiFrame());
+				searchDialog = new SearchMovieDialog();
 				searchDialog.setVisible(true);
+				searchDialog.setEnabled(true);
+				searchDialog.setAlwaysOnTop(true);
 				initDialogListeners();
 			}
 		});
@@ -125,7 +127,7 @@ public class MovieListController {
 			public void actionPerformed(ActionEvent e) {
 				searchDialog.setVisible(false);
 				searchDialog.dispose();
-				searchDialog = null;
+				//searchDialog = null;
 			}
 		});
 		

@@ -10,7 +10,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -46,8 +45,7 @@ public class SearchMovieDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	
-	public SearchMovieDialog (JFrame parent) {
-		super(parent,true);
+	public SearchMovieDialog () {
 		setTitle("Movie Search");
 		setBounds(100, 100, 600, 500);
 		getContentPane().setLayout(new BorderLayout());

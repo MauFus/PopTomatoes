@@ -58,12 +58,7 @@ public class MovieListView extends JPanel {
 		MovieListContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 25));
 		scrb.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrb.setBorder(null);
-		System.out.println(size.height);
-		System.out.println(size.width);
-		scrb.setSize(size);
-		
-		//add(scrb, BorderLayout.CENTER);
-		
+		scrb.setSize(size);		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -97,19 +92,6 @@ public class MovieListView extends JPanel {
 		
 		MovieInsertControl.add(btnInsert);
 		setLayout(groupLayout);
-		
-		
-		
-		/*JTextPane txtpnInsertMovie = new JTextPane();
-		txtpnInsertMovie.setEditable(false);
-		txtpnInsertMovie.setForeground(new Color(255, 255, 255));
-		txtpnInsertMovie.setFont(new Font("Calibri", Font.BOLD, 33));
-		txtpnInsertMovie.setBackground(new Color(128, 128, 128));
-		txtpnInsertMovie.setText("Movie List Definition");
-		Insets m = new Insets(5, 50, 0, 0);
-		txtpnInsertMovie.setMargin(m);
-		txtpnInsertMovie.setFocusable(false);*/
-
 	}
 	
 	public JButton getBtnInsert() {
