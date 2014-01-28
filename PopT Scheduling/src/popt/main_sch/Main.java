@@ -25,6 +25,7 @@ public class Main {
 	public static final String POLICY_FILE_NAME = "security.policy";
 	public static final String SERVER_IP = "server_ip.file";
 	private static DBReceiver dbr;
+	private static SchedulerController sc_ctrl;
 
 	public static void main(String[] args) {
 		
@@ -51,6 +52,8 @@ public class Main {
 			public void actionPerformed(ActionEvent event) {
 				SchedulerController.uploadMovieList();
 				mainView.getCards().show(mainView.getCardPanel(), "SCH");
+				if (sc_ctrl != null)
+					sc_ctrl.resetCardMovieList();
 			}
 		});
 
@@ -62,7 +65,7 @@ public class Main {
 		// Create the Controllers
 		new InsertMovieController(mainView.getInsertMovieView(), im_model);
 		new MovieListController(mainView.getMovieListView(), ml_model);
-		new SchedulerController(mainView.getSchedulingView(), sc_model);
+		sc_ctrl = new SchedulerController(mainView.getSchedulingView(), sc_model);
 	}
 	/**
 	 * Inizializza RMI lato Client ed istanzia DBReceiver

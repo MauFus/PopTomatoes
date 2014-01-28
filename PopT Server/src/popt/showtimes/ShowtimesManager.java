@@ -245,7 +245,6 @@ public class ShowtimesManager {
 	public ShowtimeTicketing getTicketSelling(Showtime show) {
 		ShowtimeTicketing selected = null;
 		if (!ticketSelling.isEmpty()) {
-			System.out.println("entro");
 			for (ShowtimeTicketing st : ticketSelling) {
 				if (st.getShow().equals(show)){
 				selected = st;}

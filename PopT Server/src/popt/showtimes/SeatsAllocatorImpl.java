@@ -34,7 +34,6 @@ public class SeatsAllocatorImpl extends UnicastRemoteObject implements SeatsAllo
 		OptimalSeatsAlgorithm algo = new OptimalSeatsAlgorithm();
 		LinkedList<Seat> result = algo.execute(manager.getTicketSelling(show).getValueMatrix(), qta);
 		manager.getTicketSelling(show).computeValueMatrix();
-		System.out.println("a: " + manager.getTicketSelling(show).getShow().getId());
 		Seat[] seatList = new Seat[result.size()];
 		for (int i = 0; i < result.size(); i++)
 			seatList[i] = result.get(i);

@@ -102,6 +102,19 @@ public class SchedulerController {
 	}
 	
 	/**
+	 * Ricarica le liste di film nelle combo box
+	 */
+	public void resetCardMovieList() {
+        model.getThursdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getThursdaySchedule().getDate(), "")));
+        model.getFridaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getFridaySchedule().getDate(), "")));
+        model.getSaturdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getSaturdaySchedule().getDate(), "")));
+        model.getSundaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getSundaySchedule().getDate(), "")));
+        model.getMondaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getMondaySchedule().getDate(), "")));
+        model.getTuesdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getTuesdaySchedule().getDate(), "")));
+        model.getWednesdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getWednesdaySchedule().getDate(), "")));
+	}
+	
+	/**
 	 * Resetta i colori di feedback sui bottoni dei giorni
 	 */
 	private static void resetButtonColors() {
