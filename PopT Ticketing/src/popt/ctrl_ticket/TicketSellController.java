@@ -160,7 +160,7 @@ public class TicketSellController {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				try {
-					int n = Integer.parseInt(view.getEditNumberOfTickets().getText());
+					int n = Integer.parseInt(view.getEditSpecialSeats().getText());
 					if (n >= 0) {
 						model.setSpecialSeats(n);
 						view.getTxtpnErrors().setText("");
@@ -170,8 +170,8 @@ public class TicketSellController {
 					}
 						
 				} catch (NumberFormatException nfe) {
-					if (!view.getEditNumberOfTickets().getText().equals("")) {
-						view.getEditNumberOfTickets().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+					if (!view.getEditSpecialSeats().getText().equals("")) {
+						view.getEditSpecialSeats().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 						view.getTxtpnErrors().setText("Inserted input is not valid!");
 					} else
 						model.setSpecialSeats(0);
@@ -180,7 +180,7 @@ public class TicketSellController {
 			
 			@Override
 			public void focusGained(FocusEvent arg0) {
-				view.getEditNumberOfTickets().setBorder(BorderFactory.createEmptyBorder());
+				view.getEditSpecialSeats().setBorder(BorderFactory.createEmptyBorder());
 				view.getTxtpnErrors().setText("");
 			}
 		});
@@ -209,17 +209,17 @@ public class TicketSellController {
 					} else
 						view.getTxtpnErrors().setText("No solution found! Proceed with manual selection.");
 					
-					model.setRowList(MainTicketing.getShowtimeTicketing(model.getCurrentShowtime()));
-					if (!model.getRowList().isEmpty()) {
-						diplayTicketingStatus(model.getRowList());
-					}
-					
 					if (model.getSpecialSeats() > 0) {
 						int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
 						if (special != null)
 							model.setSpecialSolution(special);
 						else
 							view.getTxtpnErrors().setText("Error - Number of special seats not available.");
+					}
+					
+					model.setRowList(MainTicketing.getShowtimeTicketing(model.getCurrentShowtime()));
+					if (!model.getRowList().isEmpty()) {
+						diplayTicketingStatus(model.getRowList());
 					}
 				} else
 					view.getTxtpnErrors().setText("There are some problems with the research... Check your inputs, please.");
@@ -232,11 +232,6 @@ public class TicketSellController {
 			public void actionPerformed(ActionEvent e) {
 				if (view.getTitleBox().getSelectedIndex() > 0 && view.getDateBox().getSelectedIndex() > 0
 						&& model.getCurrentShowtime() != null) {
-					
-					model.setRowList(MainTicketing.getShowtimeTicketing(model.getCurrentShowtime()));
-					if (!model.getRowList().isEmpty()) {
-						diplayTicketingStatus(model.getRowList());
-					}
 
 					if (model.getSpecialSeats() > 0) {
 						int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
@@ -244,6 +239,11 @@ public class TicketSellController {
 							model.setSpecialSolution(special);
 						else
 							view.getTxtpnErrors().setText("Error - Number of special seats not available.");
+					}
+					
+					model.setRowList(MainTicketing.getShowtimeTicketing(model.getCurrentShowtime()));
+					if (!model.getRowList().isEmpty()) {
+						diplayTicketingStatus(model.getRowList());
 					}
 				} else
 					view.getTxtpnErrors().setText("There are some problems with the research... Check your inputs, please.");
@@ -254,6 +254,22 @@ public class TicketSellController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(model.getSpecialSeats());
+				if (model.getSpecialSeats() > 0) {
+					int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
+					if (special != null) {
+						model.setSpecialSolution(special);
+						for (int i = 0; i < model.getSpecialSolution().length; i++) {
+							System.out.println(model.getSpecialSolution()[i]);
+							MainTicketing.sellSpecialSeat(model.getCurrentShowtime(), model.getSpecialSolution()[i]);
+							new TicketPrinter(model.getCurrentShowtime(), new Seat(0, model.getSpecialSolution()[i])).print();
+						}
+					} else {
+						view.getTxtpnErrors().setText("Error - Number of special seats not available.");
+						return;
+					}
+				}
+				
 				switch (model.getSolutionIndex()) {
 					case 1 :
 						MainTicketing.sellSeats(model.getCurrentShowtime(), model.getSolution1());
@@ -285,22 +301,6 @@ public class TicketSellController {
 					default :
 						view.getTxtpnErrors().setText("Error - No solution selected!");
 						break;
-				}
-
-				if (model.getSpecialSeats() > 0) {
-					int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
-					if (special != null)
-						model.setSpecialSolution(special);
-					else
-						view.getTxtpnErrors().setText("Error - Number of special seats not available.");
-				}
-				
-				if (model.getSpecialSolution() != null) {
-					for (int i = 0; i < model.getSpecialSolution().length; i++) {
-						MainTicketing.sellSpecialSeat(model.getCurrentShowtime(), model.getSpecialSolution()[i]);
-						new TicketPrinter(model.getCurrentShowtime(), new Seat(0, model.getSpecialSolution()[i])).print();
-						resetInterface();
-					}
 				}
 			}
 		});
@@ -640,6 +640,7 @@ public class TicketSellController {
 		view.getTitleBox().setSelectedIndex(0);
 		view.getDateBox().setSelectedIndex(0);
 		view.getEditNumberOfTickets().setText("");
+		view.getEditSpecialSeats().setText("");
 		view.getTextHeader().setText("");
 		model.setSolution1(null);
 		model.setSolution2(null);
@@ -647,6 +648,7 @@ public class TicketSellController {
 		model.setSolutionIndex(0);
 		model.setCurrentShowtime(new Showtime());
 		model.setTotSeats(0);
+		model.setSpecialSeats(0);
 		model.setRowList(new LinkedList<Row>());
 		
 		view.revalidate();
