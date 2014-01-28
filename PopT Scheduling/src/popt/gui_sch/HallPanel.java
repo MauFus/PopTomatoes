@@ -52,7 +52,7 @@ public class HallPanel extends JPanel {
 		add(txtpnHall, gbc_txtpnHall);
 
 		movieLine = new MovieLine();
-		movieLine.setBackground(new Color(100,100,100));
+		movieLine.setBackground(Color.GRAY);
 		movieLine.setBorder(null);
 		GridBagConstraints gbc_movieLine = new GridBagConstraints();
 		gbc_movieLine.fill = GridBagConstraints.BOTH;

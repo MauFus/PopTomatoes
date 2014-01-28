@@ -53,7 +53,7 @@ public class MovieListView extends JPanel {
 		JScrollPane scrb = new JScrollPane(MovieListContainer);
 		
 		MovieListContainer.setLayout(new GridLayout(0, 1, 0, 10));
-		MovieListContainer.setBackground(new Color(0,0,150));
+		MovieListContainer.setBackground(new Color(0,34,102));
 		MovieListContainer.setBorder(null);
 		MovieListContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 25));
 		scrb.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

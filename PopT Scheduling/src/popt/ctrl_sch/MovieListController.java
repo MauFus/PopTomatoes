@@ -176,7 +176,8 @@ public class MovieListController {
 					for (Movie m : model.getSearchList()) {
 						JRadioButton resultRadio = new JRadioButton("ID: " + m.getID()
 								+ " : " + m.getTitle() + " (" + m.getDate().split("-")[2] + ")");
-						resultRadio.setBackground(Color.ORANGE);
+						resultRadio.setBackground(new Color(0,34,102));
+						resultRadio.setForeground(Color.WHITE);
 						searchDialog.getRadioGroup().add(resultRadio);
 						searchDialog.getPnQueryResults().add(resultRadio);
 					}

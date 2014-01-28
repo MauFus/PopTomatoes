@@ -59,10 +59,6 @@ public class SchedulerView extends JPanel {
 		txtpnWeekScheduling.setEditable(false);
 		txtpnWeekScheduling.setBackground(Color.GRAY);
 		
-		//TODO prelevare dinamicamente il numero delle sale
-		//int nHall = 5;
-		
-		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(1000,50));
 		panel.setBackground(SystemColor.windowBorder);

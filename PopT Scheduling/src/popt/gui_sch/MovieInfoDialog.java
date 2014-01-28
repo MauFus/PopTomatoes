@@ -12,9 +12,9 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JTextPane;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.SystemColor;
 import java.awt.Font;
 
 public class MovieInfoDialog extends JDialog {
@@ -36,6 +36,7 @@ public class MovieInfoDialog extends JDialog {
 		setBounds(100, 100, 320, 240);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(new Color(102, 204, 0));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{10, 0, 20, 0};
@@ -47,7 +48,7 @@ public class MovieInfoDialog extends JDialog {
 			textTitle = new JTextPane();
 			textTitle.setFont(new Font("Calibri", Font.PLAIN, 21));
 			textTitle.setEditable(false);
-			textTitle.setBackground(SystemColor.controlHighlight);
+			textTitle.setBackground(new Color(132, 234, 0));
 			GridBagConstraints gbc_textTitle = new GridBagConstraints();
 			gbc_textTitle.insets = new Insets(0, 0, 5, 5);
 			gbc_textTitle.fill = GridBagConstraints.BOTH;
@@ -59,7 +60,7 @@ public class MovieInfoDialog extends JDialog {
 			textSFTime = new JTextPane();
 			textSFTime.setFont(new Font("Calibri", Font.PLAIN, 15));
 			textSFTime.setEditable(false);
-			textSFTime.setBackground(SystemColor.controlHighlight);
+			textSFTime.setBackground(new Color(132, 234, 0));
 			GridBagConstraints gbc_textSFTime = new GridBagConstraints();
 			gbc_textSFTime.insets = new Insets(0, 0, 5, 5);
 			gbc_textSFTime.fill = GridBagConstraints.BOTH;
@@ -70,6 +71,7 @@ public class MovieInfoDialog extends JDialog {
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			buttonPane.setBackground(new Color(100, 100, 100));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				deleteButton = new JButton("Delete");
