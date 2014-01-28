@@ -243,18 +243,14 @@ public class ShowtimesManager {
 	 * @return i dati di vendita posti della proiezione (oggetto ShowtimeTicketing)
 	 */
 	public ShowtimeTicketing getTicketSelling(Showtime show) {
-		System.out.println(show.getId() + " " + show.getMovie().getTitle());
 		ShowtimeTicketing selected = null;
 		if (!ticketSelling.isEmpty()) {
 			System.out.println("entro");
 			for (ShowtimeTicketing st : ticketSelling) {
-				System.out.println(st.getShow().getId());
 				if (st.getShow().equals(show)){
-				System.out.println("selected");
 				selected = st;}
 			}
 		}
-		System.out.println("Ticketing richiesto: " + selected.getShow().getId() + " " + selected.getShow().getMovie().getTitle());
 		return selected;
 	}
 

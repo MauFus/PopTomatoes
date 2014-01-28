@@ -32,7 +32,6 @@ public class SeatRect extends JPanel {
     /** The transparency value of shadow. ( 0 - 255) */
     protected int shadowAlpha = 150;
     
-    private boolean clicked = false;
     private boolean suggest = false;
     private boolean free = false;
     private RectStatus status = RectStatus.BUSY;
@@ -129,20 +128,6 @@ public class SeatRect extends JPanel {
 		default:
 			break;
 		}
-	}
-
-	/**
-	 * @return the clicked
-	 */
-	public boolean isClicked() {
-		return clicked;
-	}
-
-	/**
-	 * @param clicked the clicked to set
-	 */
-	public void setClicked(boolean clicked) {
-		this.clicked = clicked;
 	}
 
 	/**

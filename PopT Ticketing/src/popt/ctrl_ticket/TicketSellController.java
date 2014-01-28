@@ -358,19 +358,25 @@ public class TicketSellController {
 			for (int j = 0; j < orderedList.get(i).getSeats(); j++) {
 				final SeatRect sr = new SeatRect(orderedList.get(i).getNumber(), j + 1);
 				// Se il posto non è occupato, viene marcato come assegnabile
-				if (orderedList.get(i).getStatus()[j].equals(SeatStatus.LIBERO))
+				if (orderedList.get(i).getStatus()[j].equals(SeatStatus.LIBERO)) {
 					sr.setStatus(RectStatus.FREE);
+					sr.setFree(true);
+				}
 
 				if (model.getSolution1() != null) {
 					for (int s = 0; s < model.getSolution1().length; s++) {
-						if (new Seat(sr.getRowNumber(), sr.getSeatNumber()).equals(model.getSolution1()[s]))
+						if (new Seat(sr.getRowNumber(), sr.getSeatNumber()).equals(model.getSolution1()[s])) {
 							sr.setStatus(RectStatus.SUGGESTED);
+							sr.setSuggest(true);
+						}
 					}
 				}
 				if (model.getSolution2() != null) {
 					for (int s = 0; s < model.getSolution2().length; s++) {
-						if (new Seat(sr.getRowNumber(), sr.getSeatNumber()).equals(model.getSolution2()[s]))
+						if (new Seat(sr.getRowNumber(), sr.getSeatNumber()).equals(model.getSolution2()[s])) {
 							sr.setStatus(RectStatus.SUGGESTED);
+							sr.setSuggest(true);
+						}
 					}
 				}
 				
@@ -409,11 +415,14 @@ public class TicketSellController {
 					
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
-						sr.setClicked(!sr.isClicked());
-						if (!sr.isFree() && sr.isClicked() && sr.getStatus().equals(RectStatus.FREE)) {
+						if (sr.getStatus().equals(RectStatus.FREE)) {
+							// Aggiunge il posto alla soluzione custom
 							sr.setStatus(RectStatus.CHECKED);
-							sr.setFree(!sr.isFree());
+							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
+							model.setSolutionIndex(3);
+							model.getSolutionCustom().add(clicked);
 							
+							// resetta eventuali soluzioni già selezionate
 							if (model.getSolutionIndex() == 1) {
 								if (model.getSolution1() != null) {
 									for (int j = 0; j < model.getSolution1().length; j++) {
@@ -421,7 +430,6 @@ public class TicketSellController {
 											SeatRect temp = (SeatRect) rowPanels.get(model.getSolution1()[j].getRow() - 1)
 													.getComponent(model.getSolution1()[j].getSeat()-1);
 											temp.setStatus(RectStatus.SUGGESTED);
-											temp.setSuggest(!temp.isSuggest());
 										}
 									}
 								}
@@ -432,20 +440,14 @@ public class TicketSellController {
 											SeatRect temp = (SeatRect) rowPanels.get(model.getSolution2()[j].getRow() - 1)
 													.getComponent(model.getSolution2()[j].getSeat()-1);
 											temp.setStatus(RectStatus.SUGGESTED);
-											temp.setSuggest(!temp.isSuggest());
 										}
 									}
 								}
 							}
 							
-							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
-							model.setSolutionIndex(3);
-							model.getSolutionCustom().add(clicked);
-							
-						} else if (sr.isFree() && !sr.isClicked() && sr.getStatus().equals(RectStatus.CHECKED)) {
+						} else if (sr.isFree() && sr.getStatus().equals(RectStatus.CHECKED)) {
+							// Resetta a libero il posto selezionato
 							sr.setStatus(RectStatus.FREE);
-							sr.setFree(!sr.isFree());
-
 							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
 							for (Seat s : model.getSolutionCustom()) {
 								if (s.equals(clicked))
@@ -455,23 +457,34 @@ public class TicketSellController {
 								model.setSolutionIndex(0);
 							
 						} else if (sr.getStatus().equals(RectStatus.BUSY)) {
+							// Non fa nulla per i posti già occupati
 							sr.setStatus(RectStatus.BUSY);
 							
-						} else if (!sr.isSuggest() && sr.isClicked() && sr.getStatus().equals(RectStatus.SUGGESTED)) {
+						} else if (sr.getStatus().equals(RectStatus.SUGGESTED)) {
+							// Setta la soluzione proposta come scelta
 							sr.setStatus(RectStatus.CHECKED);
-							sr.setSuggest(!sr.isSuggest());
 							
 							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
 							if (model.getSolution1() != null) {
 								for (int i = 0; i < model.getSolution1().length; i++) {
-									if (model.getSolution1()[i].equals(clicked)){
+									if (model.getSolution1()[i].equals(clicked)) {
+										// Il posto selezionato fa parte della Soluzione 1
 										model.setSolutionIndex(1);
 										for (int j = 0; j < model.getSolution1().length; j++) {
 											if (rowPanels.containsKey(model.getSolution1()[j].getRow() - 1)) {
 												SeatRect temp = (SeatRect) rowPanels.get(model.getSolution1()[j].getRow() - 1)
 														.getComponent(model.getSolution1()[j].getSeat()-1);
 												temp.setStatus(RectStatus.CHECKED);
-												temp.setSuggest(!temp.isSuggest());
+											}
+										}
+										
+										if (model.getSolution2() != null) {
+											for (int j = 0; j < model.getSolution2().length; j++) {
+												if (rowPanels.containsKey(model.getSolution2()[j].getRow() - 1)) {
+													SeatRect temp = (SeatRect) rowPanels.get(model.getSolution2()[j].getRow() - 1)
+															.getComponent(model.getSolution2()[j].getSeat()-1);
+													temp.setStatus(RectStatus.SUGGESTED);
+												}
 											}
 										}
 										
@@ -480,54 +493,43 @@ public class TicketSellController {
 												if (rowPanels.containsKey(s.getRow() - 1)) {
 													SeatRect temp = (SeatRect) rowPanels.get(s.getRow() - 1).getComponent(s.getSeat()-1);
 													temp.setStatus(RectStatus.FREE);
-													temp.setSuggest(!temp.isSuggest());
 													model.getSolutionCustom().remove(s);
-												}
-											}
-										}
-										if (model.getSolution2() != null) {
-											for (int j = 0; j < model.getSolution2().length; j++) {
-												if (rowPanels.containsKey(model.getSolution2()[j].getRow() - 1)) {
-													SeatRect temp = (SeatRect) rowPanels.get(model.getSolution2()[j].getRow() - 1)
-															.getComponent(model.getSolution2()[j].getSeat()-1);
-													temp.setStatus(RectStatus.SUGGESTED);
-													temp.setSuggest(!temp.isSuggest());
 												}
 											}
 										}
 										break;
 									}
 								}
+								
 							} else if (model.getSolution2() != null) {
 								for (int i = 0; i < model.getSolution2().length; i++) {
-									if (model.getSolution2()[i].equals(clicked)){
+									if (model.getSolution2()[i].equals(clicked)) {
+										// Il posto selezionato fa parte della Soluzione 2
 										model.setSolutionIndex(2);
 										for (int j = 0; j < model.getSolution2().length; j++) {
 											if (rowPanels.containsKey(model.getSolution2()[j].getRow() - 1)) {
 												SeatRect temp = (SeatRect) rowPanels.get(model.getSolution2()[j].getRow() - 1)
 														.getComponent(model.getSolution2()[j].getSeat()-1);
 												temp.setStatus(RectStatus.CHECKED);
-												temp.setSuggest(!temp.isSuggest());
 											}
 										}
 
-										if (!model.getSolutionCustom().isEmpty()) {
-											for (Seat s : model.getSolutionCustom()) {
-												if (rowPanels.containsKey(s.getRow() - 1)) {
-													SeatRect temp = (SeatRect) rowPanels.get(s.getRow() - 1).getComponent(s.getSeat()-1);
-													temp.setStatus(RectStatus.FREE);
-													temp.setSuggest(!temp.isSuggest());
-													model.getSolutionCustom().remove(s);
-												}
-											}
-										}
 										if (model.getSolution1() != null) {
 											for (int j = 0; j < model.getSolution1().length; j++) {
 												if (rowPanels.containsKey(model.getSolution1()[j].getRow() - 1)) {
 													SeatRect temp = (SeatRect) rowPanels.get(model.getSolution1()[j].getRow() - 1)
 															.getComponent(model.getSolution1()[j].getSeat()-1);
 													temp.setStatus(RectStatus.SUGGESTED);
-													temp.setSuggest(!temp.isSuggest());
+												}
+											}
+										}
+										
+										if (!model.getSolutionCustom().isEmpty()) {
+											for (Seat s : model.getSolutionCustom()) {
+												if (rowPanels.containsKey(s.getRow() - 1)) {
+													SeatRect temp = (SeatRect) rowPanels.get(s.getRow() - 1).getComponent(s.getSeat()-1);
+													temp.setStatus(RectStatus.FREE);
+													model.getSolutionCustom().remove(s);
 												}
 											}
 										}
@@ -536,21 +538,21 @@ public class TicketSellController {
 								}
 							}
 							
-						} else if (sr.isSuggest() && !sr.isClicked() && sr.getStatus().equals(RectStatus.CHECKED)) {
+						} else if (sr.isSuggest() && sr.getStatus().equals(RectStatus.CHECKED)) {
+							// Resetta lo stato a Suggerito
 							sr.setStatus(RectStatus.SUGGESTED);
-							sr.setSuggest(!sr.isSuggest());
 							
 							Seat clicked = new Seat(sr.getRowNumber(), sr.getSeatNumber());
 							if (model.getSolution1() != null) {
 								for (int i = 0; i < model.getSolution1().length; i++) {
-									if (model.getSolution1()[i].equals(clicked)){
+									if (model.getSolution1()[i].equals(clicked)) {
+										// Resetta soluzione scelta a nessuna
 										model.setSolutionIndex(0);
 										for (int j = 0; j < model.getSolution1().length; j++) {
 											if (rowPanels.containsKey(model.getSolution1()[j].getRow() - 1)) {
 												SeatRect temp = (SeatRect) rowPanels.get(model.getSolution1()[j].getRow() - 1)
 														.getComponent(model.getSolution1()[j].getSeat()-1);
 												temp.setStatus(RectStatus.SUGGESTED);
-												temp.setSuggest(!temp.isSuggest());
 											}
 										}
 										break;
@@ -558,14 +560,14 @@ public class TicketSellController {
 								}
 							} else if (model.getSolution2() != null) {
 								for (int i = 0; i < model.getSolution2().length; i++) {
-									if (model.getSolution2()[i].equals(clicked)){
+									if (model.getSolution2()[i].equals(clicked)) {
+										// Resetta soluzione scelta a nessuna
 										model.setSolutionIndex(0);
 										for (int j = 0; j < model.getSolution2().length; j++) {
 											if (rowPanels.containsKey(model.getSolution2()[j].getRow() - 1)) {
 												SeatRect temp = (SeatRect) rowPanels.get(model.getSolution2()[j].getRow() - 1)
 														.getComponent(model.getSolution2()[j].getSeat()-1);
 												temp.setStatus(RectStatus.SUGGESTED);
-												temp.setSuggest(!temp.isSuggest());
 											}
 										}
 										break;
