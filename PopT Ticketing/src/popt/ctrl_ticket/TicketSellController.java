@@ -347,7 +347,7 @@ public class TicketSellController {
 			
 			// Aggiunge i numeri di fila
 			JTextPane txtpnRowNumber = new JTextPane();
-			txtpnRowNumber.setBackground(Color.LIGHT_GRAY);
+			txtpnRowNumber.setBackground(new Color(179,202,225));
 			txtpnRowNumber.setText(Integer.toString(orderedList.get(i).getNumber()));
 			GridBagConstraints gbc_txtpnRowNumber = new GridBagConstraints();
 			gbc_txtpnRowNumber.insets = new Insets(0, 0, 0, 0);

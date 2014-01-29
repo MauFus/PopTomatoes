@@ -203,7 +203,7 @@ public class TicketSellView extends JPanel {
 		headerPanel.setBackground(new Color(159,182,205));
 		
 		HallViewer = new JPanel();
-		HallViewer.setBackground(Color.LIGHT_GRAY);
+		HallViewer.setBackground(new Color(159,182,205));
 		
 		GroupLayout gl_hallPanel = new GroupLayout(hallPanel);
 		gl_hallPanel.setHorizontalGroup(
@@ -242,8 +242,13 @@ public class TicketSellView extends JPanel {
 		screenPanel.setLayout(gbl_screenPanel);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(179,202,225));
+		JTextPane scr = new JTextPane();
+		scr.setBackground(new Color(179,202,225));
+		scr.setText("Scr");
+		panel.add(scr);
 		FlowLayout flowLayout_1 = (FlowLayout) panel.getLayout();
-		flowLayout_1.setVgap(0);
+		flowLayout_1.setVgap(15);
 		flowLayout_1.setHgap(0);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 0, 0);
