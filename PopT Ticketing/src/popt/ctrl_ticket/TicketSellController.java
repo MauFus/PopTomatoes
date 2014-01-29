@@ -256,9 +256,14 @@ public class TicketSellController {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(model.getSpecialSeats());
 				if (model.getSpecialSeats() > 0) {
-					int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
-					if (special != null) {
-						model.setSpecialSolution(special);
+					if (model.getSpecialSolution() == null || model.getSpecialSolution().length != model.getSpecialSeats()) {
+						int[] special = MainTicketing.searchSpecialSeats(model.getCurrentShowtime(), model.getSpecialSeats());
+						if (special != null) {
+							model.setSpecialSolution(special);
+						}
+					}
+					
+					if (model.getSpecialSolution() != null) {
 						for (int i = 0; i < model.getSpecialSolution().length; i++) {
 							System.out.println(model.getSpecialSolution()[i]);
 							MainTicketing.sellSpecialSeat(model.getCurrentShowtime(), model.getSpecialSolution()[i]);
@@ -649,6 +654,7 @@ public class TicketSellController {
 		model.setCurrentShowtime(new Showtime());
 		model.setTotSeats(0);
 		model.setSpecialSeats(0);
+		model.setSpecialSolution(null);
 		model.setRowList(new LinkedList<Row>());
 		
 		view.revalidate();
