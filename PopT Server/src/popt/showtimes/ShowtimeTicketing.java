@@ -129,7 +129,7 @@ public class ShowtimeTicketing {
 	 * @param status - stato LIBERO o OCCUPATO
 	 */
 	public void setSpecialSeatsStatus(int specialSeat, SeatStatus status) {
-		this.specialSeatsStatus[specialSeat] = status;
+		this.specialSeatsStatus[specialSeat - 1] = status;
 	}
 
 	/**

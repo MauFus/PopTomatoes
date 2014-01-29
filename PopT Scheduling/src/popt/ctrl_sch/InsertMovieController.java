@@ -120,8 +120,9 @@ public class InsertMovieController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if ((!view.getTextTitle().getText().isEmpty() && view
-							.getTextTitle().getForeground() != Color.GRAY)
+					if ((!view.getTextTitle().getText().isEmpty() && 
+							!view.getTextTitle().getText().equals("No movie name inserted") 
+							&& view.getTextTitle().getForeground() != Color.GRAY)
 							&& (!view.getTextDuration().getText().isEmpty() && Integer
 									.parseInt(view.getTextDuration().getText()) > 0)
 							&& (!view.getTextDate().getText().isEmpty() && isDate(view
