@@ -128,8 +128,12 @@ public class ShowtimeTicketing {
 	 * @param specialSeat - indice del posto nel vettore (Numero Posto -1)
 	 * @param status - stato LIBERO o OCCUPATO
 	 */
-	public void setSpecialSeatsStatus(int specialSeat, SeatStatus status) {
-		this.specialSeatsStatus[specialSeat - 1] = status;
+	public boolean setSpecialSeatsStatus(int specialSeat, SeatStatus status) {
+		if (specialSeat < specialSeatsStatus.length + 1) {
+			this.specialSeatsStatus[specialSeat - 1] = status;
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -138,17 +142,18 @@ public class ShowtimeTicketing {
 	 * @param seat - posto (indice all'interno del vettore = Numero di Posto -1)
 	 * @param status - stato da settare
 	 */
-	public void setSeat(int row, int seat, SeatStatus status) {
+	public boolean setSeat(int row, int seat, SeatStatus status) {
 		if (!sellingStatus.isEmpty()) {
 			for (Row r : sellingStatus) {
 				if (r.getNumber() == row && seat < r.getSeats()) {
 					r.setStatus(seat, status);
 					updateSeatValue(row-1, seat, status);
-					return;
+					return true;
 				}
 			}
 		}
 		System.out.println("Errore: Posto non trovato");
+		return false;
 	}
 
 	public int[][] getValueMatrix() {

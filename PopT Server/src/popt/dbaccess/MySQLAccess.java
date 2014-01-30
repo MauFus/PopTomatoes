@@ -53,7 +53,7 @@ public class MySQLAccess {
 	 *            Cinema Hall Special Seats
 	 * @throws Exception
 	 */
-	public void insertCinemaHall(char ch_id, String ch_name, int ch_rows,
+	public boolean insertCinemaHall(char ch_id, String ch_name, int ch_rows,
 			int ch_seats, int ch_specialseats) throws Exception {
 		try {
 			preparedStatement = connect
@@ -72,7 +72,7 @@ public class MySQLAccess {
 					.executeQuery("select * from POPTOMATOESDB.CINEMAHALL");
 			writeMetaData(resultSet);
 			writeResultSetHall(resultSet);
-
+			return true;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -89,7 +89,7 @@ public class MySQLAccess {
 	 *            Seats Row
 	 * @throws Exception
 	 */
-	public void insertRow(char idCinemaHall, int r_number, int r_seats)
+	public boolean insertRow(char idCinemaHall, int r_number, int r_seats)
 			throws Exception {
 		try {
 			preparedStatement = connect
@@ -106,7 +106,7 @@ public class MySQLAccess {
 					.executeQuery("select * from POPTOMATOESDB.ROW");
 			writeMetaData(resultSet);
 			writeResultSetRow(resultSet);
-
+			return true;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -128,7 +128,7 @@ public class MySQLAccess {
 	 * @return
 	 * @throws Exception
 	 */
-	public void insertMovie(String mv_title, int mv_duration, String mv_date,
+	public boolean insertMovie(String mv_title, int mv_duration, String mv_date,
 			String mv_genre, boolean mv_pg) throws Exception {
 		try {
 			preparedStatement = connect
@@ -145,7 +145,7 @@ public class MySQLAccess {
 					.executeQuery("select * from POPTOMATOESDB.MOVIE");
 			writeMetaData(resultSet);
 			writeResultSetMovie(resultSet);
-			
+			return true;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -160,7 +160,7 @@ public class MySQLAccess {
 	 * @param time
 	 * @throws Exception
 	 */
-	public void insertShowtime(Movie movie, CinemaHall hall, String date, String time) throws Exception {
+	public boolean insertShowtime(Movie movie, CinemaHall hall, String date, String time) throws Exception {
 		try {
 			preparedStatement = connect.prepareStatement("insert into POPTOMATOESDB.SHOWTIME values (ID,?,?,?,?,0,false,false)");
 			preparedStatement.setInt(1, movie.getID());
@@ -168,27 +168,30 @@ public class MySQLAccess {
 			preparedStatement.setString(3, date);
 			preparedStatement.setString(4, time);
 			preparedStatement.executeUpdate();
+			return true;
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 	
-	public void deleteShowtimes(String date) throws Exception {
+	public boolean deleteShowtimes(String date) throws Exception {
 		try {
 			preparedStatement = connect.prepareStatement("DELETE from POPTOMATOESDB.SHOWTIME where lower(Date) LIKE lower(?)");
 			preparedStatement.setString(1, date);
 			preparedStatement.executeUpdate();
+			return true;
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 	
-	public void updateShowtimeAuditors(long id, int auditors) throws Exception {
+	public boolean updateShowtimeAuditors(long id, int auditors) throws Exception {
 		try {
 			preparedStatement = connect.prepareStatement("UPDATE POPTOMATOESDB.SHOWTIME set Auditors = (?) where ID = (?)");
 			preparedStatement.setInt(1, auditors);
 			preparedStatement.setInt(2, (int)id);
 			preparedStatement.executeUpdate();
+			return true;
 		} catch (Exception e) {
 			throw e;
 		}
