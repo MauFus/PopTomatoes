@@ -16,13 +16,13 @@ public class MainServer {
 	public static void main(String[] args) {
 		try {
 			// Read the initial configuration and save it in DataBase
-			// XMLInitialConfig.readInitialConfig();
-			// Start RMI services
-			RmiStarter.start();
-			
+			XMLInitialConfig.readInitialConfig();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Initial Config already uploaded");
 		}
+
+		// Start RMI services
+		RmiStarter.start();
 
 	}
 

@@ -27,7 +27,7 @@ public class RmiStarter {
 	/**
 	 * Start the RMI services
 	 */
-	public static void start() {
+	public static boolean start() {
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(SERVER_IP));
@@ -49,8 +49,10 @@ public class RmiStarter {
 			Registry reg = LocateRegistry.createRegistry(1099);
 			reg.rebind(DBReceiver.SERVICE_NAME, new DBReceiverImpl());
 			reg.rebind(SeatsAllocator.SERVICE_NAME, new SeatsAllocatorImpl(new ShowtimesManager()));
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 }
