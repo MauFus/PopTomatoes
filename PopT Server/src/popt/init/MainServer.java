@@ -18,7 +18,7 @@ public class MainServer {
 			// Read the initial configuration and save it in DataBase
 			XMLInitialConfig.readInitialConfig();
 		} catch (Exception e) {
-			System.out.println("Initial COnfig already uploaded");
+			System.out.println("Initial Config already uploaded");
 		}
 
 		// Start RMI services
