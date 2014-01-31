@@ -221,7 +221,7 @@ public class MovieListController {
 	 * Writes the movieList.xml file
 	 * @return success
 	 */
-	private boolean writeMovieList() {
+	protected boolean writeMovieList() {
 		try {
 			LinkedList<Movie> movies = model.getMovieList();
 			Document d;

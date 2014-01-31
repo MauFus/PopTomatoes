@@ -104,7 +104,7 @@ public class SchedulerController {
 	/**
 	 * Ricarica le liste di film nelle combo box
 	 */
-	public void resetCardMovieList() {
+	public boolean resetCardMovieList() {
         model.getThursdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getThursdaySchedule().getDate(), "")));
         model.getFridaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getFridaySchedule().getDate(), "")));
         model.getSaturdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getSaturdaySchedule().getDate(), "")));
@@ -114,12 +114,13 @@ public class SchedulerController {
         model.getWednesdaySchedule().setShowList(Main.searchShowtimes(new Showtime(0l, null, null, model.getWednesdaySchedule().getDate(), "")));
         view.revalidate();
         view.repaint();
+        return true;
 	}
 	
 	/**
 	 * Resetta i colori di feedback sui bottoni dei giorni
 	 */
-	private static void resetButtonColors() {
+	protected static boolean resetButtonColors() {
 		view.getButtonTh().setBorder(BorderFactory.createEmptyBorder());
 		view.getButtonFr().setBorder(BorderFactory.createEmptyBorder());
 		view.getButtonSa().setBorder(BorderFactory.createEmptyBorder());
@@ -127,12 +128,13 @@ public class SchedulerController {
 		view.getButtonMo().setBorder(BorderFactory.createEmptyBorder());
 		view.getButtonTu().setBorder(BorderFactory.createEmptyBorder());
 		view.getButtonWe().setBorder(BorderFactory.createEmptyBorder());
+		return true;
 	}
 	
 	/**
 	 * Colora i bordi dei pulsanti dei giorni in base allo stato di validazione
 	 */
-	public static void markupValuatedStatus() {
+	protected static boolean markupValuatedStatus() {
 		resetButtonColors();
 		view.getButtonTh().setBorder(model.getThursdaySchedule().getValidated() > 0 ? 
 				(BorderFactory.createLineBorder((model.getThursdaySchedule().getValidated() > 1 ? 
@@ -161,7 +163,7 @@ public class SchedulerController {
 		view.getButtonWe().setBorder(model.getWednesdaySchedule().getValidated() > 0 ? 
 				(BorderFactory.createLineBorder((model.getWednesdaySchedule().getValidated() > 1 ? 
 						Color.GREEN : Color.RED),2)) : BorderFactory.createEmptyBorder());
-		
+		return true;
 	}
 
 	/**
