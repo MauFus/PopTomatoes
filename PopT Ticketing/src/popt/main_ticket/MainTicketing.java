@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.LinkedList;
 
@@ -82,7 +81,7 @@ public class MainTicketing {
 	public static LinkedList<Showtime> getCurrentShowtimeList() {
 		try {
 			return allocator.getComingShowtimesList();
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -96,7 +95,7 @@ public class MainTicketing {
 	public static LinkedList<Row> getShowtimeTicketing(Showtime show) {
 		try {
 			return allocator.getTicketingStatus(show);
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -111,7 +110,7 @@ public class MainTicketing {
 	public static Seat[] searchRaccomendedSeats(Showtime show, int number) {
 		try {
 			return allocator.searchAvailableSeats(show, number);
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -126,7 +125,7 @@ public class MainTicketing {
 	public static int[] searchSpecialSeats(Showtime show, int number) {
 		try {
 			return allocator.searchAvailableSpecialSeats(show, number);
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -140,7 +139,7 @@ public class MainTicketing {
 	public static void sellSeats(Showtime show, Seat[] seats) {
 		try {
 			allocator.sellSeat(show, seats);
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -153,7 +152,7 @@ public class MainTicketing {
 	public static void sellSpecialSeat(Showtime show, int seat) {
 		try {
 			allocator.sellSpecialSeat(show, seat);
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -25,7 +25,7 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
 
 public class MainView {
-	static JFrame guiFrame;
+	JFrame guiFrame;
 	CardLayout cards;
 	JPanel cardPanel;
 	JPanel mainCard;
@@ -43,7 +43,6 @@ public class MainView {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException
 				| IllegalAccessException | UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		SwingUtilities.updateComponentTreeUI(guiFrame);
@@ -140,10 +139,6 @@ public class MainView {
 		tabsPanel.setLayout(gl_tabsPanel);
 		guiFrame.getContentPane().add(cardPanel, BorderLayout.CENTER);
 		guiFrame.setVisible(true);
-	}
-	
-	public static JFrame getGuiFrame() {
-		return guiFrame;
 	}
 	
 	public TicketSellView getTicketSellView() {

@@ -23,17 +23,17 @@ import popt.data.Showtime;
 
 public class TicketPrinter {
 	
-	private static Showtime showtime;
-	private static Seat seat;
-	private static Writer writer;
+	private Showtime showtime;
+	private Seat seat;
+	private Writer writer;
 	
 	public TicketPrinter(Showtime show, Seat seat) {
 		showtime = show;
-		TicketPrinter.seat = seat;
+		this.seat = seat;
 		writer = null;
 	}
 	
-	public void print() {
+	public boolean print() {
 		DateFormat timeStamp = new SimpleDateFormat("ddMMyy_HHmmssSSS");
 		Date now = new Date();
 		
@@ -52,10 +52,12 @@ public class TicketPrinter {
 		} finally {
 			try {
 				writer.close();
+				return true;
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 		}
+		return false;
 	}
 
 }

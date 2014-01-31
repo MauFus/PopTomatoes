@@ -52,8 +52,10 @@ public class TicketSellController {
 		this.view = view;
 		this.rowPanels = new Hashtable<>();
 		
-		model.setComingShowtimes(MainTicketing.getCurrentShowtimeList());
-		model.setComingMovies(model.findCurrentMovies());
+		if (MainTicketing.getCurrentShowtimeList()!= null)
+			model.setComingShowtimes(MainTicketing.getCurrentShowtimeList());
+		if (model.findCurrentMovies() != null)
+			model.setComingMovies(model.findCurrentMovies());
 		initInterfaceAndListeners();
 	}
 
@@ -330,10 +332,11 @@ public class TicketSellController {
 	 * genera la schermata dello stato di vendita biglietti della sala
 	 * @param rowList
 	 */
-	private void diplayTicketingStatus(LinkedList<Row> rowList) {
-		
-		view.getTextHeader().setText(model.getCurrentShowtime().getDate() + " " + model.getCurrentShowtime().getTime() + " - "
-				+ model.getCurrentShowtime().getHall().getName() + " - " + model.getCurrentShowtime().getMovie().getTitle());
+	protected boolean diplayTicketingStatus(LinkedList<Row> rowList) {
+		if (model.getCurrentShowtime() != null && model.getCurrentShowtime().getHall() != null 
+				&& model.getCurrentShowtime().getMovie() != null)
+			view.getTextHeader().setText(model.getCurrentShowtime().getDate() + " " + model.getCurrentShowtime().getTime() + " - "
+					+ model.getCurrentShowtime().getHall().getName() + " - " + model.getCurrentShowtime().getMovie().getTitle());
 		
 		view.getHallViewer().removeAll();
 		view.getHallViewer().revalidate();
@@ -367,9 +370,11 @@ public class TicketSellController {
 				final SeatRect sr = new SeatRect(orderedList.get(i).getNumber(), j + 1);
 				sr.setSuggest(false);
 				// Se il posto non è occupato, viene marcato come assegnabile
-				if (orderedList.get(i).getStatus()[j].equals(SeatStatus.LIBERO)) {
-					sr.setStatus(RectStatus.FREE);
-					sr.setSuggest(false);
+				if (orderedList.get(i).getStatus()[j] != null) {
+					if (orderedList.get(i).getStatus()[j].equals(SeatStatus.LIBERO)) {
+						sr.setStatus(RectStatus.FREE);
+						sr.setSuggest(false);
+					}
 				}
 
 				if (model.getSolution1() != null) {
@@ -606,6 +611,7 @@ public class TicketSellController {
 		
 		view.getHallViewer().revalidate();
 		view.getHallViewer().repaint();
+		return true;
 	}
 
 	/**
@@ -613,7 +619,7 @@ public class TicketSellController {
 	 * @param rowList - La lista delle file di una sala
 	 * @return un'array di row ordinato
 	 */
-	private LinkedList<Row> orderRows(LinkedList<Row> rowList) {
+	protected LinkedList<Row> orderRows(LinkedList<Row> rowList) {
 		Row[] array = new Row[maxNumber(rowList)];
 		for (Row row : rowList) {
 			array[row.getNumber()-1] = row;
@@ -631,7 +637,7 @@ public class TicketSellController {
 	 * @param rowList - lista di file in cui cercate
 	 * @return un intero corrispondente al numero di fila massimo
 	 */
-	private int maxNumber(LinkedList<Row> rowList) {
+	protected int maxNumber(LinkedList<Row> rowList) {
 		int max = 0;
 		for (Row row : rowList) {
 			if (row.getNumber() > max)
@@ -640,7 +646,7 @@ public class TicketSellController {
 		return max;
 	}
 
-	private void resetInterface() {
+	protected boolean resetInterface() {
 		view.getHallViewer().removeAll();
 		view.getTitleBox().setSelectedIndex(0);
 		view.getDateBox().setSelectedIndex(0);
@@ -659,6 +665,7 @@ public class TicketSellController {
 		
 		view.revalidate();
 		view.repaint();
+		return true;
 	}
 
 	/**
