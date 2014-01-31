@@ -137,17 +137,23 @@ public class TicketSellController {
 					if (n > 0) {
 						model.setTotSeats(n);
 						view.getTxtpnErrors().setText("");
+						view.getEditNumberOfTickets().setBorder(BorderFactory.createEmptyBorder());
 					} else {
 						view.getEditNumberOfTickets().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 						view.getTxtpnErrors().setText("Inserted input is not valid!");
 					}
-						
+
 				} catch (NumberFormatException nfe) {
-					view.getEditNumberOfTickets().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-					view.getTxtpnErrors().setText("Inserted input is not valid!");
+					if (!view.getEditNumberOfTickets().getText().equals("")) {
+						view.getEditNumberOfTickets().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+						view.getTxtpnErrors().setText("Inserted input is not valid!");
+					} else {
+						model.setTotSeats(0);
+						view.getEditNumberOfTickets().setBorder(BorderFactory.createEmptyBorder());
+					}
 				}
 			}
-			
+
 			@Override
 			public void focusGained(FocusEvent arg0) {
 				view.getEditNumberOfTickets().setBorder(BorderFactory.createEmptyBorder());
@@ -173,8 +179,10 @@ public class TicketSellController {
 					if (!view.getEditSpecialSeats().getText().equals("")) {
 						view.getEditSpecialSeats().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 						view.getTxtpnErrors().setText("Inserted input is not valid!");
-					} else
+					} else {
 						model.setSpecialSeats(0);
+						view.getEditSpecialSeats().setBorder(BorderFactory.createEmptyBorder());
+					}
 				}
 			}
 			
