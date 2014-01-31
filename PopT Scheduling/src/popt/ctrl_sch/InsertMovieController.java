@@ -127,40 +127,43 @@ public class InsertMovieController {
 									.parseInt(view.getTextDuration().getText()) > 0)
 							&& (!view.getTextDate().getText().isEmpty() && isDate(view
 									.getTextDate().getText()))) {
+						
+						insertMovie();
 
-						model.getMovie()
-								.setTitle(view.getTextTitle().getText());
-						model.getMovie().setDuration(
-								Integer.parseInt(view.getTextDuration()
-										.getText()));
-						model.getMovie().setDate(view.getTextDate().getText());
-						model.getMovie().setGenre(
-								(Genre) view.getComboBoxGenre()
-										.getSelectedItem());
-						model.getMovie().setPG(view.getCheckPG().isSelected());
-
-						// Invocazione e gestione dell'insert
-						boolean success = Main.requestInsert(model.getMovie());
-						if (success) {
-							view.getTextTitle().setText("");
-							view.getTextDuration().setText("");
-							view.getTextDate().setText("");
-							view.getComboBoxGenre().setSelectedIndex(0);
-							view.getCheckPG().setSelected(false);
-						}
 						view.getTextAlert().setText(Main.getServerStatus());
 					} else {
-						view.getTextAlert()
-								.setText(
+						view.getTextAlert().setText(
 										"Errore: Alcuni campi non sono completati correttamente!");
 					}
-
 				} catch (NumberFormatException nfe) {
 					view.getTextAlert().setText(
 							"ERRORE - Non tutti i campi sono stati inseriti");
 				}
 			}
 		});
+	}
+
+	private void insertMovie() {
+		model.getMovie()
+		.setTitle(view.getTextTitle().getText());
+		model.getMovie().setDuration(
+				Integer.parseInt(view.getTextDuration()
+						.getText()));
+		model.getMovie().setDate(view.getTextDate().getText());
+		model.getMovie().setGenre(
+				(Genre) view.getComboBoxGenre()
+				.getSelectedItem());
+		model.getMovie().setPG(view.getCheckPG().isSelected());
+
+		// Invocazione e gestione dell'insert
+		boolean success = Main.requestInsert(model.getMovie());
+		if (success) {
+			view.getTextTitle().setText("");
+			view.getTextDuration().setText("");
+			view.getTextDate().setText("");
+			view.getComboBoxGenre().setSelectedIndex(0);
+			view.getCheckPG().setSelected(false);
+		}
 	}
 
 	private boolean isDate(String d) {

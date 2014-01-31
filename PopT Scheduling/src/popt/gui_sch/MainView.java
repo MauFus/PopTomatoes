@@ -41,7 +41,6 @@ public class MainView {
 	SchedulerView schv;
 
 	public MainView() {
-		guiFrame = new JFrame();
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException

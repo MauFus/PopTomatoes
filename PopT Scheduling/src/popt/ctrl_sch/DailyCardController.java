@@ -212,7 +212,7 @@ public class DailyCardController {
 									newShow.setTime(((int)((720-newShow.getMovie().getDuration()) / 60)+14) + ":00");
 									newShow.setAuditors(0);
 									model.getShowList().add(newShow);
-
+									
 									addMovieRect(currentHall,newPanel.getMovieLine());
 								}
 							}

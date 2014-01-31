@@ -40,7 +40,6 @@ public class MovieListController {
 		try {
 			uploadListInModel();
 		} catch (Exception e) {
-			//TODO segnalare errore alla view
 			e.printStackTrace();
 		}
 		

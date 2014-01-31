@@ -187,7 +187,7 @@ public class SchedulerController {
 		DateFormat weekDay = new SimpleDateFormat("u");
         Date today = new Date();
         int delay = (11 - Integer.parseInt(weekDay.format(today)));
-        Date thu = new Date(today.getTime() + 86400000*delay);
+        Date thu = new Date(today.getTime() + 86400000l * delay);
         Date fri = new Date(thu.getTime() + 86400000);
         Date sat = new Date(fri.getTime() + 86400000);
         Date sun = new Date(sat.getTime() + 86400000);
